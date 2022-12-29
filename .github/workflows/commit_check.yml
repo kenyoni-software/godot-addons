@@ -1,0 +1,11 @@
+name: Commit Check
+on: [push, pull_request]
+
+jobs:
+  commit-check:
+    name: Commit Check
+    runs-on: [self-hosted]
+    steps:
+      - uses: IceflowRE/gitcc@v2
+        with:
+          validator: SimpleTag
