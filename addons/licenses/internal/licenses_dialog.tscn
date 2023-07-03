@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjrktrabkeadi"]
+
+[ext_resource type="Script" path="res://addons/licenses/internal/licenses_dialog.gd" id="1_0s46i"]
+[ext_resource type="PackedScene" uid="uid://dfj2mhwrs1oss" path="res://addons/licenses/internal/licenses.tscn" id="1_f3ql8"]
+
+[node name="license_dialog" type="Window"]
+disable_3d = true
+title = "Licenses"
+size = Vector2i(1920, 1080)
+visible = false
+wrap_controls = true
+transient = true
+script = ExtResource("1_0s46i")
+_licenses_path = NodePath("licenses")
+
+[node name="panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="licenses" parent="." instance=ExtResource("1_f3ql8")]
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
