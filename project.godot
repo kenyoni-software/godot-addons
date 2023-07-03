@@ -1,0 +1,25 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Godot Addons"
+config/features=PackedStringArray("4.1", "Forward Plus")
+config/icon="res://icon.svg"
+config/version="1.0.0"
+config/git_sha="5250a1bf53ddaf848cd303227c9c522e54afcb00"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/licenses/plugin.cfg")
+
+[plugins]
+
+licenses/data_file="res://examples/licenses/licenses.json"
