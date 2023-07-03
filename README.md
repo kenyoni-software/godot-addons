@@ -7,7 +7,7 @@
 Manage license and copyright for third party graphics, software or libraries.
 Group them into categories, add descriptions or web links.
 
-The data is stored inside a json file. This file is automatically added to the export, you do not need to add it yourself. (Due to a GodotIF you use the default)
+The data is stored inside a json file. This file is automatically added to the export, you do not need to add it yourself.
 
 ### Screenshot
 
