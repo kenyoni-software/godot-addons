@@ -1,0 +1,90 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbwcn30ireo62"]
+
+[ext_resource type="Script" path="res://examples/glogging/main.gd" id="1_tinti"]
+
+[node name="main" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tinti")
+_logger_options_path = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton")
+_log_level_options_path = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton2")
+_log_at_level_options_path = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton3")
+_log_text_path = NodePath("MarginContainer/VBoxContainer/TextEdit")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Logger"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Log Level"
+
+[node name="OptionButton2" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+item_count = 6
+popup/item_0/text = "NOT SET"
+popup/item_0/id = 0
+popup/item_1/text = "Debug"
+popup/item_1/id = 10
+popup/item_2/text = "Info"
+popup/item_2/id = 20
+popup/item_3/text = "Warning"
+popup/item_3/id = 30
+popup/item_4/text = "Error"
+popup/item_4/id = 40
+popup/item_5/text = "Critical"
+popup/item_5/id = 50
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Log at level"
+
+[node name="OptionButton3" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+item_count = 6
+selected = 1
+popup/item_0/text = "NOT SET"
+popup/item_0/id = 0
+popup/item_1/text = "Debug"
+popup/item_1/id = 10
+popup/item_2/text = "Info"
+popup/item_2/id = 20
+popup/item_3/text = "Warning"
+popup/item_3/id = 30
+popup/item_4/text = "Error"
+popup/item_4/id = 40
+popup/item_5/text = "Critical"
+popup/item_5/id = 50
+
+[node name="TextEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Demo Text!"
+
+[node name="log" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Log"
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/GridContainer/OptionButton" to="." method="_on_logger_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/GridContainer/OptionButton2" to="." method="_on_log_level_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/log" to="." method="_on_log_pressed"]
