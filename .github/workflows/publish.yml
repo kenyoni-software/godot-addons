@@ -1,0 +1,58 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: Update environment
+        run: |
+          sudo apt update -qq
+          sudo apt install -y golang
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Fix git ownership
+        run: |
+          # this is to fix GIT not liking owner of the checkout dir
+          chown -R $(id -u):$(id -g) $PWD
+
+      - name: Prepare release
+        working-directory: publisher
+        run: go run . ../
+
+      - name: Upload glogging
+        uses: actions/upload-artifact@v3
+        with:
+          name: glogging
+          path: release/glogging.zip
+
+      - name: Upload licenses
+        uses: actions/upload-artifact@v3
+        with:
+          name: licenses
+          path: release/licenses.zip
+
+      - name: Prepare Release
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git tag latest
+          git push -f origin tag latest
+
+      - name: Release addons
+        run: |
+          gh release delete latest -y
+          gh release create latest ./release/* -n "${{ env.NOTES }}" -t "Latest Kenyoni Godot Addons"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          NOTES: |
+            This release tag is continuously updated.
