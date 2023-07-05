@@ -25,7 +25,7 @@ jobs:
           # this is to fix GIT not liking owner of the checkout dir
           chown -R $(id -u):$(id -g) $PWD
 
-      - name: Prepare release
+      - name: Prepare artifacts
         working-directory: publisher
         run: go run . ../
 
@@ -50,7 +50,7 @@ jobs:
 
       - name: Release addons
         run: |
-          gh release delete latest -y
+          output=$(gh release delete latest -y 2>&1) || [[ "${output}" == "release not found" ]]
           gh release create latest ./release/* -n "${{ env.NOTES }}" -t "Latest Kenyoni Godot Addons"
         env:
           GITHUB_TOKEN: ${{ github.token }}
