@@ -3,11 +3,12 @@ package main
 import (
 	"archive/zip"
 	"flag"
-	"io"
-	"io/fs"
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
+
+	"github.com/pelletier/go-toml/v2"
 )
 
 func main() {
@@ -47,9 +48,15 @@ func iterDirectories(baseDir string) {
 func prepareAddon(baseDir string, addonName string) error {
 	addonDir := filepath.Join(baseDir, "addons", addonName)
 	exampleDir := filepath.Join(baseDir, "examples", addonName)
-	destDir := filepath.Join(baseDir, "release", addonName+".zip")
 
-	file, err := os.Create(destDir)
+	version, err := getAddonVersion(filepath.Join(addonDir, "plugin.cfg"))
+	if err != nil {
+		return err
+	}
+
+	destZip := filepath.Join(baseDir, "release", addonName+"-"+strings.ReplaceAll(version, ".", "_")+".zip")
+
+	file, err := os.Create(destZip)
 	if err != nil {
 		return err
 	}
@@ -82,28 +89,20 @@ func prepareAddon(baseDir string, addonName string) error {
 	return nil
 }
 
-func zipDir(zw *zip.Writer, src string, dest string) error {
-	return filepath.WalkDir(src, func(path string, d fs.DirEntry, err error) error {
-		if d.IsDir() {
-			return nil
-		}
-		rel, _ := filepath.Rel(src, path)
-		zipFile(zw, path, filepath.Join(dest, rel))
-		return nil
-	})
-}
-
-func zipFile(zw *zip.Writer, src string, dest string) error {
-	file, err := os.Open(src)
+func getAddonVersion(cfgPath string) (string, error) {
+	dat, err := os.ReadFile(cfgPath)
 	if err != nil {
-		return err
+		return "", err
 	}
-	defer file.Close()
-	zf, err := zw.Create(dest)
+	tmp := struct {
+		Plugin struct {
+			Version string `toml:"version"`
+		} `toml:"plugin"`
+	}{}
+	err = toml.Unmarshal(dat, &tmp)
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	_, err = io.Copy(zf, file)
-	return err
+	return tmp.Plugin.Version, nil
 }

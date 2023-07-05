@@ -33,13 +33,13 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: glogging
-          path: release/glogging.zip
+          path: release/glogging-*.zip
 
       - name: Upload licenses
         uses: actions/upload-artifact@v3
         with:
           name: licenses
-          path: release/licenses.zip
+          path: release/licenses-*.zip
 
       - name: Prepare Release
         run: |
