@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://df3jwwsfmx72i"]
+
+[ext_resource type="Script" path="res://examples/metadata/main.gd" id="1_gx7an"]
+
+[node name="main" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gx7an")
+_version_path = NodePath("MarginContainer/GridContainer/Label2")
+_git_sha_path = NodePath("MarginContainer/GridContainer/Label4")
+_version_complete_path = NodePath("MarginContainer/GridContainer/Label6")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Version"
+
+[node name="Label2" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Git SHA"
+
+[node name="Label4" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Version Complete"
+
+[node name="Label6" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
