@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.config.name }}
-          path: release/${{ matrix.config.id }}-*.zip
+          path: archives/${{ matrix.config.id }}-*.zip
 
       - uses: mukunku/tag-exists-action@v1.2.0
         id: checkTag
