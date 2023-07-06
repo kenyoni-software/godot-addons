@@ -8,6 +8,9 @@ const ExportPlugin := preload("export_plugin.gd")
 var export_plugin: ExportPlugin
 var licenses_dialog: Window
 
+func _get_plugin_name() -> String:
+    return "Licenses"
+
 func _enter_tree() -> void:
     self.set_project_setting(Licenses.DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
 
