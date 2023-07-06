@@ -5,9 +5,23 @@ on:
       - main
 
 jobs:
-  release:
-    name: Release
+  addon:
+    name: Publish ${{ matrix.config.name }}
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {
+            id: "glogging",
+            name: "GLogging",
+          }
+          - {
+            id: "licenses",
+            name: "Licenses",
+          }
+
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
@@ -26,33 +40,73 @@ jobs:
           chown -R $(id -u):$(id -g) $PWD
 
       - name: Prepare artifacts
+        id: "prepare-artifacts"
         working-directory: publisher
-        run: go run . ../
+        run: |
+          go run . zip ../ ${{ matrix.config.id }}
+          echo "version=$(go run . version ../ ${{ matrix.config.id }})" >> $GITHUB_OUTPUT 
 
-      - name: Upload glogging
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: glogging
-          path: release/glogging-*.zip
+          name: ${{ matrix.config.name }}
+          path: release/${{ matrix.config.id }}-*.zip
 
-      - name: Upload licenses
-        uses: actions/upload-artifact@v3
+      - uses: mukunku/tag-exists-action@v1.2.0
+        id: checkTag
         with:
-          name: licenses
-          path: release/licenses-*.zip
+          tag: ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}}
+
+      - name: Prepare Release
+        if: ${{ steps.checkTag.outputs.exists == 'false' }}
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git tag ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}}
+          git push origin tag ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}}
+
+      - name: Release addon
+        if: ${{ steps.checkTag.outputs.exists == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          NOTES: |
+            ${{ matrix.config.name }}
+            Version: ${{steps.prepare-artifacts.outputs.version}}
+        run: |
+          gh release create ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}} ./archives/* --title "${{ matrix.config.name }} ${{steps.prepare-artifacts.outputs.version}}" --notes "${{ env.NOTES }}"
+
+  combined-release:
+    name: Combined Release
+    runs-on: ubuntu-latest
+    needs:
+      - addon
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          path: archives
 
       - name: Prepare Release
         run: |
+          find archives/ -type f -print0 | xargs -0 mv -t archives
           git config user.name github-actions
           git config user.email github-actions@github.com
           git tag latest
           git push -f origin tag latest
 
-      - name: Release addons
+      - name: Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTES: |
+            Providing the latest release of all addons at one place.
+            
+            This release tag is continuously updated.
         run: |
           output=$(gh release delete latest -y 2>&1) || [[ "${output}" == "release not found" ]]
-          gh release create latest ./release/* -n "${{ env.NOTES }}" -t "Latest Kenyoni Godot Addons"
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          NOTES: |
-            This release tag is continuously updated.
+          gh release create latest ./archives/*.zip --latest --title "Latest Release" --notes "${{ env.NOTES }}" --target ${{ github.sha }}

@@ -14,8 +14,7 @@ func zipDir(zw *zip.Writer, src string, dest string) error {
 			return nil
 		}
 		rel, _ := filepath.Rel(src, path)
-		zipFile(zw, path, filepath.Join(dest, rel))
-		return nil
+		return zipFile(zw, path, filepath.Join(dest, rel))
 	})
 }
 
@@ -32,4 +31,13 @@ func zipFile(zw *zip.Writer, src string, dest string) error {
 
 	_, err = io.Copy(zf, file)
 	return err
+}
+
+func contains[T comparable](elems []T, v T) bool {
+	for _, s := range elems {
+		if v == s {
+			return true
+		}
+	}
+	return false
 }
