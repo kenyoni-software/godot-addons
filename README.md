@@ -10,6 +10,8 @@ Group them into categories, add descriptions or web links.
 
 The data is stored inside a json file. This file is automatically added to the export, you do not need to add it yourself.
 
+You can change the project license file either with a button at the upper right, in the license menu. Or inside the project settings under the menu `plugins` -> `Licenses`.
+
 ### Screenshot
 
 ![license manager screenshot](./doc/license_manager.png "License Manager")
@@ -20,7 +22,7 @@ The data is stored inside a json file. This file is automatically added to the e
 
 ### Compatibility
 
-- Godot 4.1.rc2
+- Godot 4.1
 
 ### Classes & Functions
 
@@ -63,7 +65,7 @@ Logging into a file is not supported yet. The output will be always done via pri
 
 ### Compatibility
 
-- Godot 4.1.rc2
+- Godot 4.1
 
 ### Classes & Functions
 

@@ -114,7 +114,7 @@ static func load(file_path: String) -> LoadResult:
     components = components
     return LoadResult.new(components)
 
-static func set_license_data_file(path: String) -> void:
+static func set_license_data_filepath(path: String) -> void:
     ProjectSettings.set_setting(DATA_FILE, path)
 
 static func get_license_data_filepath() -> String:
