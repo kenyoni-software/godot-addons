@@ -2,6 +2,9 @@ extends EditorExportPlugin
 
 const Licenses := preload("licenses.gd")
 
+func _get_name() -> Strinig:
+    return "kenyoni_licenses_exporter"
+
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
     var res = Licenses.load(Licenses.get_license_data_filepath())
     if res.err_msg != "":
