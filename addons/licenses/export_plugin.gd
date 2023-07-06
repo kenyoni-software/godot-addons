@@ -2,7 +2,7 @@ extends EditorExportPlugin
 
 const Licenses := preload("licenses.gd")
 
-func _get_name() -> Strinig:
+func _get_name() -> String:
     return "kenyoni_licenses_exporter"
 
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
