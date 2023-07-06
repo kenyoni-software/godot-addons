@@ -6,6 +6,10 @@ const Utils := preload("utils.gd")
 
 var export_plugin: ExportPlugin
 
+func _disable_plugin() -> void:
+    ProjectSettings.set_setting(Utils.GIT_SHA_PATH, null)
+    ProjectSettings.save()
+
 func _enter_tree() -> void:
     Utils.init_project_setting(Utils.VERSION_PATH, "", TYPE_STRING, PROPERTY_HINT_NONE)
     Utils.init_project_setting(Utils.GIT_SHA_PATH, "", TYPE_STRING, PROPERTY_HINT_NONE)
