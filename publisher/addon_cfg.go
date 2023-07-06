@@ -61,7 +61,7 @@ func (addon *addonConfig) Zip() error {
 	if err != nil {
 		return err
 	}
-	err = zipDir(zw, exampleDir, "example")
+	err = zipDir(zw, exampleDir, filepath.Join("examples", addon.Id()))
 	if err != nil {
 		return err
 	}
