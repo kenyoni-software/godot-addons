@@ -18,8 +18,16 @@ jobs:
             name: "GLogging",
           }
           - {
+            id: "icons_patcher",
+            name: "Icons Patcher",
+          }
+          - {
             id: "licenses",
             name: "Licenses",
+          }
+          - {
+            id: "metadata",
+            name: "Metadata",
           }
 
     steps:
