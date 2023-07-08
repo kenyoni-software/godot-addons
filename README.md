@@ -1,7 +1,17 @@
 # Godot Addons
 
+- [Icons Patcher](#icons-patcher)
 - [License Manager](#license-manager)
 - [Logging](#logging)
+- [Metadata](#metadata)
+
+## Icons Patcher
+
+If you use Material Design icons from [Pictogrammers](https://pictogrammers.com/library/mdi/), they come without any fill color, automatically rendered black. This is not a convenient color as it makes it impossible to modulate the color. The icon patcher provides a utility to automatically patch the icons to white color.
+
+Set the icon directory in the Project Settings under the menu `Plugins` -> `Icons Patcher`.
+
+Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 
 ## License Manager
 
@@ -10,7 +20,7 @@ Group them into categories, add descriptions or web links.
 
 The data is stored inside a json file. This file is automatically added to the export, you do not need to add it yourself.
 
-You can change the project license file either with a button at the upper right, in the license menu. Or inside the project settings under the menu `plugins` -> `Licenses`.
+You can change the project license file either with a button at the upper right, in the license menu. Or inside the project settings under the menu `Plugins` -> `Licenses`.
 
 ### Screenshot
 
@@ -95,6 +105,26 @@ If not log level is set, the log level of the parent logger will be used.
 - `error(message: Variant, values: Array[Variant] = [])` - log at error level, will also display a debug error
 - `critical(message: Variant, values: Array[Variant] = [])` - log at critical level
 - `log(level: int, message: Variant, values: Array[Variant] = [])` - log at custom level
+
+## Metadata
+
+Adds two project settings
+
+### `application/config/version`
+
+Define the version of your software.
+
+### `application/config/git_sha`
+
+This one is automatically set and updated when you run any scene or on exporting the project. The git_sha will **not** be kept in `project.godot` to not clutter any version control system.
+
+### Example
+
+[examples/metadata](./examples/metadata)
+
+### Compatibility
+
+- Godot 4.1
 
 ## License
 
