@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://rk36oo8heiwh"]
 
-[ext_resource type="Script" path="res://examples/licenses/license_selector.gd" id="1_7dbo7"]
-[ext_resource type="Script" path="res://examples/licenses/license_container.gd" id="2_nxg1q"]
+[ext_resource type="Texture2D" uid="uid://bdmlqo3lv3sl" path="res://examples/icons_patcher/home-variant.svg" id="1_vong5"]
+[ext_resource type="Texture2D" uid="uid://cdmidyrsrv42h" path="res://examples/icons_patcher/icons/home-variant.svg" id="2_mdm8t"]
 
 [node name="main" type="PanelContainer"]
 anchors_preset = 15
@@ -11,134 +11,36 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 2
 
-[node name="Tree" type="Tree" parent="HBoxContainer"]
-offset_right = 264.0
-offset_bottom = 648.0
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
-hide_root = true
-script = ExtResource("1_7dbo7")
-_license_container_path = NodePath("../PanelContainer/MarginContainer")
-
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-offset_left = 268.0
-offset_right = 1152.0
-offset_bottom = 648.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer"]
-offset_right = 884.0
-offset_bottom = 648.0
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-script = ExtResource("2_nxg1q")
-_name_path = NodePath("VBoxContainer/name")
-_version_path = NodePath("VBoxContainer/version")
-_description_path = NodePath("VBoxContainer/HBoxContainer/description")
-_contact_path = NodePath("VBoxContainer/HBoxContainer/contact")
-_web_path = NodePath("VBoxContainer/HBoxContainer/web")
-_license_path = NodePath("VBoxContainer/HBoxContainer/license")
-_license_text_path = NodePath("VBoxContainer/license_text")
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Original"
+horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer"]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 872.0
-offset_bottom = 636.0
-
-[node name="name" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-offset_right = 860.0
-offset_bottom = 34.0
-theme_override_font_sizes/font_size = 24
-
-[node name="version" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-offset_top = 38.0
-offset_right = 860.0
-offset_bottom = 58.0
-theme_override_font_sizes/font_size = 14
-
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-offset_top = 62.0
-offset_right = 860.0
-offset_bottom = 66.0
-
-[node name="HBoxContainer" type="GridContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-offset_top = 70.0
-offset_right = 860.0
-offset_bottom = 186.0
-columns = 2
-
-[node name="label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_right = 89.0
-offset_bottom = 26.0
-theme_override_font_sizes/font_size = 16
-text = "Description"
-
-[node name="description" type="RichTextLabel" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_left = 93.0
-offset_right = 860.0
-offset_bottom = 26.0
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 16
-
-[node name="label2" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_top = 30.0
-offset_right = 89.0
-offset_bottom = 56.0
-theme_override_font_sizes/font_size = 16
-text = "Contact"
-
-[node name="contact" type="RichTextLabel" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_left = 93.0
-offset_top = 30.0
-offset_right = 860.0
-offset_bottom = 56.0
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 16
-
-[node name="label3" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_top = 60.0
-offset_right = 89.0
-offset_bottom = 86.0
-theme_override_font_sizes/font_size = 16
-text = "Web"
-
-[node name="web" type="RichTextLabel" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_left = 93.0
-offset_top = 60.0
-offset_right = 860.0
-offset_bottom = 86.0
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 16
-
-[node name="label4" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_top = 90.0
-offset_right = 89.0
-offset_bottom = 116.0
-theme_override_font_sizes/font_size = 16
-text = "License"
-
-[node name="license" type="RichTextLabel" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_left = 93.0
-offset_top = 90.0
-offset_right = 860.0
-offset_bottom = 116.0
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 16
-
-[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-offset_top = 190.0
-offset_right = 860.0
-offset_bottom = 194.0
-
-[node name="license_text" type="RichTextLabel" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-offset_top = 198.0
-offset_right = 860.0
-offset_bottom = 624.0
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 16
+texture = ExtResource("1_vong5")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Converted"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_mdm8t")
+expand_mode = 1
+stretch_mode = 4
