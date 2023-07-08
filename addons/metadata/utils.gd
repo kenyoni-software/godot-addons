@@ -46,7 +46,7 @@ static func get_git_sha() -> GitResult:
     rx_sha.compile('^[0-9a-f]{5,40}$')
     var git_sha: RegExMatch = rx_sha.search(text)
     if git_sha != null:
-        return GitResult.new(git_sha.get_string(1), "")
+        return GitResult.new(git_sha.get_string(0), "")
 
     var rx: RegEx = RegEx.new()
     rx.compile('^ref:\\s(.*)$')
