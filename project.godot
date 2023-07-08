@@ -14,7 +14,6 @@ config/name="Godot Addons"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 config/version="1.0.0"
-config/git_sha="5250a1bf53ddaf848cd303227c9c522e54afcb00"
 
 [autoload]
 
@@ -22,8 +21,9 @@ GLogging="*res://addons/glogging/glogging.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/glogging/plugin.cfg", "res://addons/licenses/plugin.cfg")
+enabled=PackedStringArray("res://addons/glogging/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/metadata/plugin.cfg")
 
 [plugins]
 
 licenses/data_file="res://examples/licenses/licenses.json"
+icons_patcher/material_design_directory="res://examples/icons_patcher/icons"

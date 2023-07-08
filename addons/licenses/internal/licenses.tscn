@@ -72,7 +72,7 @@ flat = true
 [node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/toolbar"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "New Component"
+text = "Components"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -11,9 +11,6 @@ var licenses_dialog: Window
 func _get_plugin_name() -> String:
     return "Licenses"
 
-func _get_plugin_icon() -> Texture2D:
-    return self.get_editor_interface().get_base_control().get_theme_icon("File", "EditorIcons")
-
 func _enter_tree() -> void:
     self.set_project_setting(Licenses.DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
 
