@@ -21,8 +21,9 @@ GLogging="*res://addons/glogging/glogging.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/glogging/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/metadata/plugin.cfg")
+enabled=PackedStringArray("res://addons/glogging/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/metadata/plugin.cfg")
 
 [plugins]
 
 licenses/data_file="res://examples/licenses/licenses.json"
+icons_patcher/material_design_directory="res://examples/icons_patcher/icons"
