@@ -39,21 +39,26 @@ static func get_git_sha() -> GitResult:
     var file: FileAccess = FileAccess.open("res://.git/HEAD", FileAccess.READ)
     if file == null:
         return GitResult.new("", "could not open git HEAD file (" + String.num_int64(FileAccess.get_open_error()) + ")")
-    var text: String = file.get_as_text()
+    var text: String = file.get_as_text().strip_edges()
     file = null
+
+    var rx_sha: RegEx = RegEx.new()
+    rx_sha.compile('^[0-9a-f]{5,40}$')
+    var git_sha: RegExMatch = rx_sha.search(text)
+    if git_sha != null:
+        return GitResult.new(git_sha.get_string(1), "")
 
     var rx: RegEx = RegEx.new()
     rx.compile('^ref:\\s(.*)$')
     var git_head = rx.search(text)
     if git_head == null:
         return GitResult.new("", "could not parse git head file")
-
     file = FileAccess.open("res://.git/" + git_head.get_string(1), FileAccess.READ)
     if file == null:
         return GitResult.new("", "could not open git reference file (" + String.num_int64(FileAccess.get_open_error()) + ")")
 
-    var git_sha: String = file.get_as_text().strip_edges()
-    if git_sha == "":
-        return GitResult.new("", "git sha was empty")
+    var sha: String = file.get_as_text().strip_edges()
     file = null
-    return GitResult.new(git_sha, "")
+    if sha == "":
+        return GitResult.new("", "git sha was empty")
+    return GitResult.new(sha, "")
