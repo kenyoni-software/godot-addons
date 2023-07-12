@@ -21,7 +21,7 @@ GLogging="*res://addons/glogging/glogging.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/glogging/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/metadata/plugin.cfg")
+enabled=PackedStringArray("res://addons/glogging/plugin.cfg", "res://addons/hide_private_properties/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/metadata/plugin.cfg")
 
 [plugins]
 

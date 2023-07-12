@@ -6,7 +6,7 @@ on:
 
 jobs:
   addon:
-    name: Publish ${{ matrix.config.name }}
+    name: ${{ matrix.config.name }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,6 +16,10 @@ jobs:
           - {
             id: "glogging",
             name: "GLogging",
+          }
+          - {
+            id: "hide_private_properties",
+            name: "Hide Private Properties",
           }
           - {
             id: "icons_patcher",

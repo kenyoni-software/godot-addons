@@ -1,9 +1,20 @@
 # Godot Addons
 
+- [Hide Private Properties](#hide-private-properties)
 - [Icons Patcher](#icons-patcher)
 - [License Manager](#license-manager)
 - [Logging](#logging)
 - [Metadata](#metadata)
+
+## Hide Private Properties
+
+Private members (variables starting with an underscore) should not be exposed.
+
+This plugin will hide exported private properties in the inspector for instantiated child scenes.
+
+### Example
+
+[examples/hide_private_properties](./examples/hide_private_properties)
 
 ## Icons Patcher
 
