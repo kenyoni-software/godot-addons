@@ -4,7 +4,7 @@ on: [push, pull_request]
 jobs:
   commit-check:
     name: Commit Check
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - uses: IceflowRE/gitcc@v2
         with:
