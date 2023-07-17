@@ -14,6 +14,10 @@ jobs:
       matrix:
         config:
           - {
+            id: "custom_theme_overrides",
+            name: "Custom Theme Overrides",
+          }
+          - {
             id: "glogging",
             name: "GLogging",
           }

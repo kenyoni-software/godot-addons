@@ -1,10 +1,63 @@
 # Godot Addons
 
+- [Custom Theme Overrides](#custom-theme-overrides)
 - [Hide Private Properties](#hide-private-properties)
 - [Icons Patcher](#icons-patcher)
 - [License Manager](#license-manager)
 - [Logging](#logging)
 - [Metadata](#metadata)
+
+## Custom Theme Overrides
+
+This plugin will auto register (via `class_name`) the class `CustomThemeOverrides`.
+
+You should not use `@export` on your variables, as they will be exported with the `_get_property_list` method. Also setter and getter will not be called inside the editor.
+
+If everything is set up, your theme override variables can be handled like every other theme override property.
+
+### Screenshot
+
+![Custom theme overrides screenshot](./doc/custom_theme_overrides.png "Custom Theme Overrides")
+
+### Example
+
+
+```gdscript
+# declare the members
+# DO NOT
+# - use @export
+# - use setter and getter, they are NOT called in the editor
+var my_font_color: Color
+var my_border_size: int
+var my_font: Font
+var my_font_size: int
+var my_icon: Texture2D
+var my_style_box: StyleBox
+
+# declare the custom theme overrides, use the member name and the theme data type.
+var _theme_overrides = CustomThemeOverrides.new([
+    ["my_font_color", Theme.DATA_TYPE_COLOR],
+    ["my_border_size", Theme.DATA_TYPE_CONSTANT],
+    ["my_font", Theme.DATA_TYPE_FONT],
+    ["my_font_size", Theme.DATA_TYPE_FONT_SIZE],
+    ["my_icon", Theme.DATA_TYPE_ICON],
+    ["my_style_box", Theme.DATA_TYPE_STYLEBOX]
+])
+
+# required, if you have other properties use append_array
+func _get_property_list() -> Array[Dictionary]:
+    return self._theme_overrides.theme_property_list(self)
+
+# optional: if you want to use the revert function
+func _property_can_revert(property: StringName) -> bool:
+    return self._theme_overrides.can_revert(property)
+
+# optional: if you want to use the revert function, return null
+func _property_get_revert(_property: StringName) -> Variant:
+    return null
+```
+
+[examples/custom_theme_overrides](./examples/custom_theme_overrides)
 
 ## Hide Private Properties
 
