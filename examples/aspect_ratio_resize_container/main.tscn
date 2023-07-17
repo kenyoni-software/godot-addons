@@ -1,0 +1,206 @@
+[gd_scene load_steps=10 format=3 uid="uid://b88gr0ate1nhy"]
+
+[ext_resource type="Script" path="res://examples/aspect_ratio_resize_container/main.gd" id="1_xp7e6"]
+[ext_resource type="Texture2D" uid="uid://bo4ok4qv5mbsx" path="res://examples/aspect_ratio_resize_container/icon.svg" id="2_utqnv"]
+[ext_resource type="Script" path="res://addons/aspect_ratio_resize_container/aspect_ratio_resize_container.gd" id="3_mf1ua"]
+
+[sub_resource type="Gradient" id="Gradient_oyvw6"]
+colors = PackedColorArray(1, 0.490196, 0, 1, 1, 0.490196, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7q1v8"]
+gradient = SubResource("Gradient_oyvw6")
+width = 256
+height = 4
+
+[sub_resource type="Gradient" id="Gradient_n41ne"]
+colors = PackedColorArray(1, 0.490196, 0, 1, 1, 0.490196, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yrl0f"]
+gradient = SubResource("Gradient_n41ne")
+width = 4
+height = 256
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_js6yd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0, 1, 1)
+
+[sub_resource type="Theme" id="Theme_ecalg"]
+
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("aspect_ratio", "aspect_resize", "ar_height", "ar_width", "as_height", "as_width")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xp7e6")
+aspect_ratio = NodePath("main/VSplitContainer/HSplitContainer/PanelContainer/AspectRatioContainer")
+aspect_resize = NodePath("main/VSplitContainer2/HSplitContainer/PanelContainer/AspectRatioResizeContainer")
+ar_height = NodePath("main/VSplitContainer")
+ar_width = NodePath("main/VSplitContainer/HSplitContainer")
+as_height = NodePath("main/VSplitContainer2")
+as_width = NodePath("main/VSplitContainer2/HSplitContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Ratio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ratio" type="SpinBox" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.0
+value = 1.0
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Stretch Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="stretch_mode" type="OptionButton" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 4
+selected = 2
+popup/item_0/text = "STRETCH_WIDTH_CONTROLS_HEIGHT"
+popup/item_0/id = 0
+popup/item_1/text = "STRETCH_HEIGHT_CONTROLS_WIDTH"
+popup/item_1/id = 1
+popup/item_2/text = "STRETCH_FIT"
+popup/item_2/id = 2
+popup/item_3/text = "STRETCH_COVER"
+popup/item_3/id = 3
+
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Hor. Alignment"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="hor_align" type="OptionButton" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 1
+popup/item_0/text = "ALIGNMENT_BEGIN"
+popup/item_0/id = 0
+popup/item_1/text = "ALIGNMENT_CENTER"
+popup/item_1/id = 1
+popup/item_2/text = "ALIGNMENT_END"
+popup/item_2/id = 2
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Ver. Alignment"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ver_align" type="OptionButton" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 1
+popup/item_0/text = "ALIGNMENT_BEGIN"
+popup/item_0/id = 0
+popup/item_1/text = "ALIGNMENT_CENTER"
+popup/item_1/id = 1
+popup/item_2/text = "ALIGNMENT_END"
+popup/item_2/id = 2
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="main" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSplitContainer" type="VSplitContainer" parent="main"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/autohide = 0
+theme_override_icons/grabber = SubResource("GradientTexture2D_7q1v8")
+
+[node name="Container" type="Container" parent="main/VSplitContainer"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="main/VSplitContainer"]
+layout_mode = 2
+theme_override_constants/autohide = 0
+theme_override_icons/grabber = SubResource("GradientTexture2D_yrl0f")
+
+[node name="Container2" type="Container" parent="main/VSplitContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="main/VSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_js6yd")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="main/VSplitContainer/HSplitContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_ecalg")
+
+[node name="TextureRect" type="TextureRect" parent="main/VSplitContainer/HSplitContainer/PanelContainer/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("2_utqnv")
+
+[node name="VSeparator" type="VSeparator" parent="main"]
+layout_mode = 2
+
+[node name="VSplitContainer2" type="VSplitContainer" parent="main"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/autohide = 0
+theme_override_icons/grabber = SubResource("GradientTexture2D_7q1v8")
+
+[node name="Container" type="Container" parent="main/VSplitContainer2"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="main/VSplitContainer2"]
+layout_mode = 2
+theme_override_constants/autohide = 0
+theme_override_icons/grabber = SubResource("GradientTexture2D_yrl0f")
+
+[node name="Container2" type="Container" parent="main/VSplitContainer2/HSplitContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="main/VSplitContainer2/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_js6yd")
+
+[node name="AspectRatioResizeContainer" type="AspectRatioContainer" parent="main/VSplitContainer2/HSplitContainer/PanelContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+script = ExtResource("3_mf1ua")
+
+[node name="TextureRect2" type="TextureRect" parent="main/VSplitContainer2/HSplitContainer/PanelContainer/AspectRatioResizeContainer"]
+layout_mode = 2
+texture = ExtResource("2_utqnv")
+
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/ratio" to="." method="_on_ratio_value_changed"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/stretch_mode" to="." method="_on_stretch_mode_item_selected"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/hor_align" to="." method="_on_hor_align_item_selected"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/ver_align" to="." method="_on_ver_align_item_selected"]

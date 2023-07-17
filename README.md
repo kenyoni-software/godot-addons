@@ -1,11 +1,28 @@
 # Godot Addons
 
+- [Aspect Ratio Resize Container](#aspect-ratio-resize-container)
 - [Custom Theme Overrides](#custom-theme-overrides)
 - [Hide Private Properties](#hide-private-properties)
 - [Icons Patcher](#icons-patcher)
 - [License Manager](#license-manager)
 - [Logging](#logging)
 - [Metadata](#metadata)
+
+## Aspect Ratio Resize Container
+
+The AspectRatioContainer allows his own size to be smaller than the children, which causes neighboring UI elements to be covered.
+This new node type will extend the existing AspectRatioContainer and update it's own minimum size based on the children.
+This works except for `STRETCH_MODE_COVER`.
+
+You are also not able to use the property `custom_minimum_size` anymore as it is used to set the minimum size.
+
+### Compatibility
+
+- Godot 4.1
+
+### Example
+
+[examples/custom_theme_overrides](./examples/aspect_ratio_resize_container)
 
 ## Custom Theme Overrides
 
@@ -67,7 +84,7 @@ func _property_get_revert(_property: StringName) -> Variant:
 
 ## Hide Private Properties
 
-Private members (variables starting with an underscore) should not be exposed.
+Private members (names starting with an underscore) should not be exposed.
 
 This plugin will hide exported private properties in the inspector for instantiated child scenes.
 
@@ -86,6 +103,10 @@ If you use Material Design icons from [Pictogrammers](https://pictogrammers.com/
 Set the icon directory in the Project Settings under the menu `Plugins` -> `Icons Patcher`.
 
 Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
+
+### Compatibility
+
+- Godot 4.1
 
 ## License Manager
 
