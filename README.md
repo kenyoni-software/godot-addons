@@ -9,11 +9,17 @@
 
 ## Custom Theme Overrides
 
+If you have a custom theme for your own nodes or just need custom theme overrides in your node, this plugin will give you some helping utility.
+
 This plugin will auto register (via `class_name`) the class `CustomThemeOverrides`.
 
 You should not use `@export` on your variables, as they will be exported with the `_get_property_list` method. Also setter and getter will not be called inside the editor.
 
 If everything is set up, your theme override variables can be handled like every other theme override property.
+
+### Compatibility
+
+- Godot 4.1
 
 ### Screenshot
 
@@ -65,6 +71,10 @@ Private members (variables starting with an underscore) should not be exposed.
 
 This plugin will hide exported private properties in the inspector for instantiated child scenes.
 
+### Compatibility
+
+- Godot 4.1
+
 ### Example
 
 [examples/hide_private_properties](./examples/hide_private_properties)
@@ -86,6 +96,10 @@ The data is stored inside a json file. This file is automatically added to the e
 
 You can change the project license file either with a button at the upper right, in the license menu. Or inside the project settings under the menu `Plugins` -> `Licenses`.
 
+### Compatibility
+
+- Godot 4.1
+
 ### Screenshot
 
 ![license manager screenshot](./doc/license_manager.png "License Manager")
@@ -93,10 +107,6 @@ You can change the project license file either with a button at the upper right,
 ### Example
 
 [examples/licenses](./examples/licenses)
-
-### Compatibility
-
-- Godot 4.1
 
 ### Classes & Functions
 
@@ -119,7 +129,12 @@ Logging methods support formatting, values wont be stringified if they are not l
 
 Logging into a file is not supported yet. The output will be always done via print.
 
-### Output
+
+### Compatibility
+
+- Godot 4.1
+
+### Example
 
 ```
 2023-07-04 15:57:16.242 [    INFO] [      root] ready and initialize GUI
@@ -133,13 +148,7 @@ Logging into a file is not supported yet. The output will be always done via pri
 2023-07-04 15:57:50.843 [    INFO] [       gui] Demo Text!
 ```
 
-### Example
-
 [examples/glogging](./examples/glogging)
-
-### Compatibility
-
-- Godot 4.1
 
 ### Classes & Functions
 
@@ -182,13 +191,13 @@ Define the version of your software.
 
 This one is automatically set and updated when you run any scene or on exporting the project. The git_sha will **not** be kept in `project.godot` to not clutter any version control system.
 
-### Example
-
-[examples/metadata](./examples/metadata)
-
 ### Compatibility
 
 - Godot 4.1
+
+### Example
+
+[examples/metadata](./examples/metadata)
 
 ## License
 
