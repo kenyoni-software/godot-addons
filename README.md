@@ -22,7 +22,7 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 ### Example
 
-[examples/custom_theme_overrides](./examples/aspect_ratio_resize_container)
+[examples/aspect_ratio_resize_container](./examples/aspect_ratio_resize_container)
 
 ## Custom Theme Overrides
 
