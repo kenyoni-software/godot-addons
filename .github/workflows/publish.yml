@@ -15,7 +15,7 @@ jobs:
         config:
           - {
             id: "aspect_ratio_resize_container",
-            name: "Aspect Ratio Resize Container",
+            name: "AspectRatioResizeContainer",
           }
           - {
             id: "custom_theme_overrides",
@@ -40,6 +40,10 @@ jobs:
           - {
             id: "metadata",
             name: "Metadata",
+          }
+          - {
+            id: "texture_button_colored",
+            name: "TextureButtonColored",
           }
 
     steps:

@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://nrybkmxo33jk"]
+
+[ext_resource type="Texture2D" uid="uid://b88tq0lbpd3m4" path="res://examples/texture_button_colored/icon.svg" id="1_a3thv"]
+[ext_resource type="Script" path="res://addons/texture_button_colored/texture_button_colored.gd" id="1_q0uuq"]
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButtonColored" type="TextureButton" parent="CenterContainer"]
+self_modulate = Color(0.960784, 0.411765, 0.54902, 1)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+keep_pressed_outside = true
+texture_normal = ExtResource("1_a3thv")
+script = ExtResource("1_q0uuq")
+theme_override_colors/icon_normal_color = Color(0.960784, 0.411765, 0.54902, 1)
+theme_override_colors/icon_pressed_color = Color(0.541176, 1, 0.541176, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.945098, 0.419608, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 1, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0.239216, 0.239216, 0.239216, 1)

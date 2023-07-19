@@ -1,14 +1,15 @@
 # Godot Addons
 
-- [Aspect Ratio Resize Container](#aspect-ratio-resize-container)
+- [AspectRatioResizeContainer](#aspectratioresizecontainer)
 - [Custom Theme Overrides](#custom-theme-overrides)
 - [Hide Private Properties](#hide-private-properties)
 - [Icons Patcher](#icons-patcher)
 - [License Manager](#license-manager)
 - [Logging](#logging)
 - [Metadata](#metadata)
+- [TextureButtonColored](#texturebuttoncolored)
 
-## Aspect Ratio Resize Container
+## AspectRatioResizeContainer
 
 The AspectRatioContainer allows his own size to be smaller than the children, which causes neighboring UI elements to be covered.
 This new node type will extend the existing AspectRatioContainer and update it's own minimum size based on the children.
@@ -219,6 +220,19 @@ This one is automatically set and updated when you run any scene or on exporting
 ### Example
 
 [examples/metadata](./examples/metadata)
+
+## TextureButtonColored
+
+Let you apply the icon color theme properties for the texture button. Uses `self_modulate`.
+
+### Compatibility
+
+- Godot 4.1
+
+### Example
+
+[examples/texture_button_colored](./examples/texture_button_colored)
+
 
 ## License
 
