@@ -38,8 +38,8 @@ jobs:
             name: "Licenses",
           }
           - {
-            id: "git_sha",
-            name: "Git SHA Project Settings",
+            id: "git_sha_project_setting",
+            name: "Git SHA Project Setting",
           }
           - {
             id: "texture_button_colored",
