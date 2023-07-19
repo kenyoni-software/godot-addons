@@ -1,4 +1,3 @@
-const VERSION_PATH: String = "application/config/version"
 const GIT_SHA_PATH: String = "application/config/git_sha"
 
 static func init_project_setting(key: String, default_value: Variant, type: int, type_hint: int) -> void:

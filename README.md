@@ -208,17 +208,12 @@ If not log level is set, the log level of the parent logger will be used.
 - `critical(message: Variant, values: Array[Variant] = [])` - log at critical level
 - `log(level: int, message: Variant, values: Array[Variant] = [])` - log at custom level
 
-## Metadata
+## Git SHA Project Setting
 
-Adds two project settings
+Previously named `Metadata`.
 
-### `application/config/version`
-
-Define the version of your software.
-
-### `application/config/git_sha`
-
-This one is automatically set and updated when you run any scene or on exporting the project. The git_sha will **not** be kept in `project.godot` to not clutter any version control system.
+Adds the project setting `application/config/git_sha`, which contains the current Git SHA.
+This one is automatically set and updated when you run any scene or on exporting the project. The git_sha will **not** be kept in `project.godot` to not clutter any version control system. It will be removed from the settings on closing the Godot Editor.
 
 ### Compatibility
 
@@ -227,6 +222,13 @@ This one is automatically set and updated when you run any scene or on exporting
 ### Example
 
 [examples/metadata](./examples/metadata)
+
+### Changelog
+
+#### 2.0.0
+
+Added an initial Git SHA load on opening the project.
+Removed `application/config/version`, there was no need that this was part of the addon. The value can still be added manually.
 
 ## TextureButtonColored
 

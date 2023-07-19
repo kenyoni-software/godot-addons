@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://df3jwwsfmx72i"]
 
-[ext_resource type="Script" path="res://examples/metadata/main.gd" id="1_gx7an"]
+[ext_resource type="Script" path="res://examples/git_sha_project_setting/main.gd" id="1_sowp6"]
 
 [node name="main" type="PanelContainer"]
 anchors_preset = 15
@@ -8,7 +8,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gx7an")
+script = ExtResource("1_sowp6")
 _version_path = NodePath("MarginContainer/GridContainer/Label2")
 _git_sha_path = NodePath("MarginContainer/GridContainer/Label4")
 _version_complete_path = NodePath("MarginContainer/GridContainer/Label6")
@@ -40,7 +40,7 @@ layout_mode = 2
 
 [node name="Label5" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
-text = "Version Complete"
+text = "Full Version"
 
 [node name="Label6" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2

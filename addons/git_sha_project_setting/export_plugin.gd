@@ -3,7 +3,7 @@ extends EditorExportPlugin
 const Utils := preload("utils.gd")
 
 func _get_name() -> String:
-    return "kenyoni_metadata_exporter"
+    return "kenyoni_git_sha_exporter"
 
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
     Utils.update_git_sha()
