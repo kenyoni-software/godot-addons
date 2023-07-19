@@ -2,7 +2,7 @@ extends PopupMenu
 
 const Utils := preload("utils.gd")
 
-var editor_interface: EditorInterface
+var editor_filesystem: EditorFileSystem
 
 func _ready():
     self.add_item("Patch Material Design Icons")
@@ -27,13 +27,14 @@ func _on_about_to_popup() -> void:
 func _on_id_pressed(id: int) -> void:
     match id:
         0:
-            patch_icons_material_design()
+            self._patch_icons_material_design()
 
-static func patch_icons_material_design() -> void:
+func _patch_icons_material_design() -> void:
     var base_path: String = ProjectSettings.get_setting(Utils.MDI_DIRECTORY_PATH)
     print("Patching " + base_path)
 
     var rx: RegEx = RegEx.new()
     rx.compile('(" fill="#[a-fA-F0-9]{6})?">')
-    Utils.patch_icon_dir(base_path, rx, '" fill="#ffffff">')
+    var patched_icons: PackedStringArray = Utils.patch_icon_dir(base_path, rx, '" fill="#ffffff">')
+    self.editor_filesystem.reimport_files(patched_icons)
     print("Patched " + base_path)

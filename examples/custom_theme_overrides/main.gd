@@ -4,6 +4,7 @@ extends GridContainer
 # DO NOT
 # - use @export
 # - use setter and getter, they are NOT called in the editor
+# - access these variables directly
 var my_font_color: Color
 var my_border_size: int
 var my_font: Font

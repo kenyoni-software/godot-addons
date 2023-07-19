@@ -51,6 +51,7 @@ If everything is set up, your theme override variables can be handled like every
 # DO NOT
 # - use @export
 # - use setter and getter, they are NOT called in the editor
+# - access these variables directly
 var my_font_color: Color
 var my_border_size: int
 var my_font: Font
@@ -108,6 +109,12 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 ### Compatibility
 
 - Godot 4.1
+
+### Changelog
+
+#### 1.2.0
+
+- Added automatic file reimporting.
 
 ## License Manager
 
