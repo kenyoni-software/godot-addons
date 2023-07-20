@@ -15,7 +15,7 @@ func _set(property: StringName, value: Variant) -> bool:
 func _get_children_min_size() -> Vector2:
     var min_size: Vector2 = Vector2.ZERO
     for child in self.get_children():
-        if !(child is Control):
+        if !(child is Control) || !child.visible:
             continue
         var child_min: Vector2 = child.get_combined_minimum_size()
         min_size.x = max(min_size.x, child_min.x)
