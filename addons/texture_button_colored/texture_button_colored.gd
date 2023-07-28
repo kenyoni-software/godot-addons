@@ -21,6 +21,11 @@ var _theme_overrides = CustomThemeOverrides.new([
     ["icon_disabled_color", Theme.DATA_TYPE_COLOR]
 ])
 
+func get_theme_color(name: StringName, theme_type: StringName = "") -> Color:
+    if self.has_theme_color(name, theme_type):
+        return super.get_theme_color(name, theme_type)
+    return super.get_theme_color(name, "TextureButtonColored")
+
 func _get_property_list() -> Array[Dictionary]:
     return self._theme_overrides.theme_property_list(self)
 
