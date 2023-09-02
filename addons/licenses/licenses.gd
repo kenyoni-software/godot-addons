@@ -41,7 +41,7 @@ static func get_engine_component(name: String) -> Component:
 
         return component
     return null
-    
+
 static func get_engine_components() -> Array[Component]:
     # https://github.com/godotengine/godot/issues/69491
     var compare_components_ascending: Callable = func(lhs: Component, rhs: Component) -> bool:
@@ -53,7 +53,7 @@ static func get_engine_components() -> Array[Component]:
 
     for info in Engine.get_copyright_info():
         engine_components.append(get_engine_component(info["name"]))
-    
+
     engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
@@ -68,7 +68,7 @@ static func get_required_engine_components() -> Array[Component]:
 
     for name in ["Godot Engine", "ENet", "The FreeType Project", "Mbed TLS"]:
         engine_components.append(get_engine_component(name))
-    
+
     engine_components.sort_custom(compare_components_ascending)
     return engine_components
 

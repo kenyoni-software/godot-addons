@@ -12,7 +12,7 @@ func _ready():
 
 func _set_item_details(idx: int, settings_key: String, tooltip: String):
     var path: String = ProjectSettings.get_setting(settings_key)
-    var can_use: bool = path != "" and DirAccess.dir_exists_absolute(path) 
+    var can_use: bool = path != "" and DirAccess.dir_exists_absolute(path)
     self.set_item_disabled(idx, !can_use)
     if can_use:
         self.set_item_icon(idx, null)

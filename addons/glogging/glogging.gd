@@ -34,22 +34,22 @@ class Logger:
 
     func create_child(module_name: String, log_level: int = LEVEL_NOTSET) -> Logger:
         return Logger.new(module_name, log_level, self)
-    
+
     func debug(message: Variant, values: Array[Variant] = []) -> void:
         self.log(LEVEL_DEBUG, message, values)
-    
+
     func info(message: Variant, values: Array[Variant] = []) -> void:
         self.log(LEVEL_INFO, message, values)
-    
+
     func warning(message: Variant, values: Array[Variant] = []) -> void:
         self.log(LEVEL_WARNING, message, values)
-    
+
     func error(message: Variant, values: Array[Variant] = []) -> void:
         self.log(LEVEL_ERROR, message, values)
-    
+
     func critical(message: Variant, values: Array[Variant] = []) -> void:
         self.log(LEVEL_CRITICAL, message, values)
-    
+
     func log(level: int, message: Variant, values: Array[Variant] = []) -> void:
         if self.log_level() <= level:
             self._log(level, self.name, message, values)

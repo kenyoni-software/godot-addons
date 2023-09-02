@@ -24,7 +24,7 @@ class License:
             if property["name"] == "file":
                 property["hint"] = PROPERTY_HINT_FILE
         return properties
-    
+
     ## Either returns the license text or loads the text from file or a message that the text could not be loaded.
     func get_license_text() -> String:
         if self.text != "":
@@ -36,7 +36,7 @@ class License:
         var text: String = file.get_as_text()
         file = null
         return text
-    
+
     func serialize() -> Dictionary:
         return {
             "name": self.name,
@@ -45,7 +45,7 @@ class License:
             "file": self.file,
             "web": self.web,
         }
-    
+
     func deserialize(data: Dictionary):
         self.name = data.get("name", "")
         self.identifier = data.get("identifier", "")

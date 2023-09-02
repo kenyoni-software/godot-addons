@@ -65,7 +65,7 @@ func _create_engine_menu_items() -> void:
         self._add_engine_menu.add_item(info["name"])
         self._add_engine_menu.set_item_metadata(idx, info["name"])
         idx = idx + 1
-    
+
     # set max size to ~10 items
     var min_size: Vector2 = self._add_engine_menu.get_contents_minimum_size()
     min_size.y = 280
@@ -80,7 +80,7 @@ func _create_plugin_menu_items() -> void:
     var dir: DirAccess = DirAccess.open("res://addons/")
     if dir == null:
         return
-        
+
     dir.list_dir_begin()
     var elem: String = dir.get_next()
     var idx: int = 0
