@@ -5,7 +5,6 @@ class_name QRCodeRect
 
 const QRCode = preload("qr_code.gd")
 const ShiftJIS = preload("shift_jis.gd")
-const TestCls = preload("test_cls.gd")
 
 var _qr: QRCode = QRCode.new()
 
@@ -24,7 +23,8 @@ var data: Variant = "":
     get = get_data
 ## Use automatically the smallest version possible.
 var auto_version: bool = true:
-    set = set_auto_version
+    set = set_auto_version,
+    get = get_auto_version
 var version: int = 1:
     set = set_version,
     get = get_version
@@ -42,7 +42,7 @@ var dark_module_color: Color = Color.BLACK:
     set = set_dark_module_color
 ## Automatically set the module pixel size based on the size.
 ## Do not use expand mode KEEP_SIZE when using it.
-## Turn this off when the QR Code changes fast or is often resized, as it impacts the performace quite heavily.
+## Turn this off when the QR Code changes or is resized often, as it impacts the performance quite heavily.
 var auto_module_px_size: bool = true:
     set = set_auto_module_px_size
 ## Use that many pixel for one module.
@@ -110,10 +110,12 @@ func get_data() -> Variant:
     return self._qr.get_input_data()
 
 func set_auto_version(new_auto_version: bool) -> void:
-    auto_version = new_auto_version
-    # TODO: auto version calculation
+    self._qr.auto_version = new_auto_version
     self.notify_property_list_changed()
     self._update_qr()
+
+func get_auto_version() -> bool:
+    return self._qr.auto_version
 
 func set_version(new_version: int) -> void:
     self._qr.version = new_version

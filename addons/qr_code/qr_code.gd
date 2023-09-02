@@ -690,26 +690,34 @@ var _cached_qr: PackedByteArray = []
 ## this can be either a String or PackedByteArray, based on the current encoding mode
 var _input_data: Variant = "":
     get = get_input_data
-## Use automatically the smallest version
-var auto_version: bool = true
-## Version
-## Will be changed on encoding to the used version if auto_version is true
-var version: int = 1:
-    set = set_version
-## Error Correction
-var error_correction: ErrorCorrection = ErrorCorrection.LOW:
-    set = set_error_correction
 ## Encoding Mode
 var mode: Mode = Mode.NUMERIC:
     set = set_mode
+## Error Correction
+var error_correction: ErrorCorrection = ErrorCorrection.LOW:
+    set = set_error_correction
 ## Extended Channel Interpretation (ECI) Value.
 var eci_value: int = ECI.SHIFT_JIS:
     set = set_eci_value
 
-var auto_mask_pattern: bool = true
+## Use automatically the smallest version
+var auto_version: bool = true:
+    set = set_auto_version
+## Version
+## Will be changed on encoding to the used version if auto_version is true
+var version: int = 1:
+    set = set_version
+var auto_mask_pattern: bool = true:
+    set = set_auto_mask_pattern
 ## Will be changed on encoding to the used mask pattern if auto_mask_pattern is true
 var mask_pattern: int = 0:
     set = set_mask_pattern
+
+func set_auto_version(new_auto_version: bool) -> void:
+    if new_auto_version == auto_version:
+        return
+    auto_version = new_auto_version
+    self._clear_cache()
 
 func set_version(new_version: int) -> void:
     if new_version == version:
@@ -739,6 +747,12 @@ func set_eci_value(new_eci_value: int) -> void:
     if new_eci_value == eci_value:
         return
     eci_value = new_eci_value
+    self._clear_cache()
+
+func set_auto_mask_pattern(new_auto_mask_pattern: bool) -> void:
+    if new_auto_mask_pattern == auto_mask_pattern:
+        return
+    auto_mask_pattern = new_auto_mask_pattern
     self._clear_cache()
 
 func set_mask_pattern(new_mask_pattern: int) -> void:
@@ -797,7 +811,7 @@ func get_module_count() -> int:
 func calc_min_version() -> int:
     var input_size: int = self._get_input_data_size()
     for idx in range(_DATA_CAPACITY.size()):
-        var cap: int = _DATA_CAPACITY[idx][self.mode]
+        var cap: int = _DATA_CAPACITY[idx][self.error_correction][self.mode]
         if self.eci_value != ECI.SHIFT_JIS:
             # subtract roughly eci header size
             cap -= 4
@@ -884,10 +898,10 @@ func _init(error_correction_: ErrorCorrection = ErrorCorrection.LOW) -> void:
 func generate_image(module_px_size: int = 1, light_module_color: Color = Color.WHITE, dark_module_color: Color = Color.BLACK) -> Image:
     module_px_size = max(1, module_px_size)
 
+    var qr_code: PackedByteArray = self.encode()
+
     var module_count: int = self.get_module_count()
     var image: Image = Image.create(module_count * module_px_size, module_count * module_px_size, false, Image.FORMAT_RGB8)
-
-    var qr_code: PackedByteArray = self.encode()
 
     for y in range(module_count):
         for x in range(module_count):
@@ -934,6 +948,10 @@ func put_kanji(data: String) -> void:
 func encode() -> PackedByteArray:
     if !self._cached_qr.is_empty():
         return self._cached_qr.duplicate()
+
+    if self.auto_version:
+        self.version = self.calc_min_version()
+
     var data_stream: BitStream = self._encode_data()
     var err_correction: Array = self._error_correction(data_stream)
     var structured_data: BitStream = self._structure_data(data_stream, err_correction)
