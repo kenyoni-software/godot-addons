@@ -697,7 +697,7 @@ var mode: Mode = Mode.NUMERIC:
 var error_correction: ErrorCorrection = ErrorCorrection.LOW:
     set = set_error_correction
 ## Extended Channel Interpretation (ECI) Value.
-var eci_value: int = ECI.SHIFT_JIS:
+var eci_value: int = ECI.ISO_8859_1:
     set = set_eci_value
 
 ## Use automatically the smallest version
@@ -812,7 +812,7 @@ func calc_min_version() -> int:
     var input_size: int = self._get_input_data_size()
     for idx in range(_DATA_CAPACITY.size()):
         var cap: int = _DATA_CAPACITY[idx][self.error_correction][self.mode]
-        if self.eci_value != ECI.SHIFT_JIS:
+        if self.eci_value != ECI.ISO_8859_1:
             # subtract roughly eci header size
             cap -= 4
         if input_size <= cap:
@@ -966,7 +966,7 @@ func _encode_data() -> BitStream:
     var stream: BitStream = BitStream.new()
 
     # add ECI header
-    if self.eci_value != int(ECI.SHIFT_JIS):
+    if self.eci_value != int(ECI.ISO_8859_1):
         stream.append(0b0111, 4)
         if self.eci_value <= 127:
             stream.append(0, 1)

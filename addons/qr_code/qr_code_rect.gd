@@ -15,7 +15,7 @@ var _qr: QRCode = QRCode.new()
     set = set_error_correction,
     get = get_error_correction
 ## Extended Channel Interpretation (ECI) Value.
-@export var eci_value: QRCode.ECI = QRCode.ECI.SHIFT_JIS:
+@export var eci_value: QRCode.ECI:
     set = set_eci_value,
     get = get_eci_value
 var data: Variant = "":
@@ -79,6 +79,8 @@ func set_data(new_data: Variant) -> void:
             self._qr.put_alphanumeric(new_data)
         QRCode.Mode.BYTE:
             match self.eci_value:
+                QRCode.ECI.ISO_8859_1:
+                    self._qr.put_byte(new_data.to_ascii_buffer())
                 QRCode.ECI.SHIFT_JIS:
                     self._qr.put_byte(ShiftJIS.to_shift_jis_2004_buffer(new_data))
                 QRCode.ECI.UTF_8:
@@ -98,6 +100,8 @@ func get_data() -> Variant:
     var input_data: Variant = self._qr.get_input_data()
     if self.mode == QRCode.Mode.BYTE:
         match self.eci_value:
+            QRCode.ECI.ISO_8859_1:
+                return input_data.get_string_from_ascii()
             QRCode.ECI.SHIFT_JIS:
                 return ShiftJIS.get_string_from_jis_2004(input_data)
             QRCode.ECI.UTF_8:
@@ -181,7 +185,7 @@ func _get_property_list() -> Array[Dictionary]:
             data_prop["hint"] = PROPERTY_HINT_MULTILINE_TEXT
         QRCode.Mode.BYTE:
             # these encoding is nativeley supported
-            if self.eci_value in [QRCode.ECI.SHIFT_JIS, QRCode.ECI.UTF_8, QRCode.ECI.UTF_16, QRCode.ECI.US_ASCII]:
+            if self.eci_value in [QRCode.ECI.ISO_8859_1, QRCode.ECI.SHIFT_JIS, QRCode.ECI.UTF_8, QRCode.ECI.UTF_16, QRCode.ECI.US_ASCII]:
                 data_prop["type"] = TYPE_STRING
                 data_prop["hint"] = PROPERTY_HINT_MULTILINE_TEXT
             else:
