@@ -1,5 +1,7 @@
 # Godot Addons
 
+Download [here](https://github.com/kenyoni-software/godot-addons/releases/tag/latest).
+
 ## License
 
 [MIT License](./LICENSE.md)
@@ -14,7 +16,7 @@
   Extension of `TextureButton` with color options.
 - [Logging](#logging)  
   Simple logger.
-- [QR Code](#qr-code)  
+- [QR Code (beta)](#qr-code)  
   QRCodeRect and QR Code generation.
 
 ### Tools
@@ -286,7 +288,7 @@ If not log level is set, the log level of the parent logger will be used.
 
 ---
 
-## QR Code (beta)
+## QR Code
 
 > *This addon might change it's interface and available functions.  
 > Please test and report any issues.*
@@ -308,6 +310,8 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 ### Classes & Functions
 
 **QRCodeRect** - [`addons/qr_code/qr_code_rect.gd`](./addons/qr_code/qr_code_rect.gd)
+
+`TextureRect` like node. The texture is updated by itself.
 
 #### Properties
 
@@ -333,6 +337,8 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
   Use that many pixel for one module.
 
 **QRCode** - [`addons/qr_code/qr_code.gd`](./addons/qr_code/qr_code.gd)
+
+QRCode class to generate QR Codes.
 
 #### Enums
 

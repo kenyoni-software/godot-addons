@@ -3,15 +3,15 @@
 extends TextureRect
 class_name QRCodeRect
 
-const QRCode = preload("qr_code.gd")
-const ShiftJIS = preload("shift_jis.gd")
+const QRCode := preload("qr_code.gd")
+const ShiftJIS := preload("shift_jis.gd")
 
 var _qr: QRCode = QRCode.new()
 
-@export var mode: QRCode.Mode = QRCode.Mode.NUMERIC:
+@export var mode: QRCode.Mode:
     set = set_mode,
     get = get_mode
-@export var error_correction: QRCode.ErrorCorrection = QRCode.ErrorCorrection.LOW:
+@export var error_correction: QRCode.ErrorCorrection:
     set = set_error_correction,
     get = get_error_correction
 ## Extended Channel Interpretation (ECI) Value.
@@ -67,6 +67,7 @@ func get_error_correction() -> QRCode.ErrorCorrection:
 func set_eci_value(new_eci_value: int) -> void:
     self._qr.eci_value = new_eci_value
     self.notify_property_list_changed()
+    self._update_qr()
 
 func get_eci_value() -> int:
     return self._qr.eci_value

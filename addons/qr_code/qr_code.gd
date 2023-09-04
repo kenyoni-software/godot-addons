@@ -1,8 +1,8 @@
 extends RefCounted
 
-const BitStream = preload("bit_stream.gd")
-const ReedSolomon = preload("reed_solomon.gd")
-const ShiftJIS = preload("shift_jis.gd")
+const BitStream := preload("bit_stream.gd")
+const ReedSolomon := preload("reed_solomon.gd")
+const ShiftJIS := preload("shift_jis.gd")
 
 ## Encoding Mode
 enum Mode {
@@ -766,6 +766,24 @@ func get_input_data() -> Variant:
     return _input_data
 
 
+## get module count of one axis
+func get_module_count() -> int:
+    return _calc_module_count(self.version)
+
+## returns ONE minimum version which fits the data
+## the returned version is just an approach
+## returns -1 if too huge
+func calc_min_version() -> int:
+    var input_size: int = self._get_input_data_size()
+    for idx in range(_DATA_CAPACITY.size()):
+        var cap: int = _DATA_CAPACITY[idx][self.error_correction][self.mode]
+        if self.eci_value != ECI.ISO_8859_1:
+            # subtract roughly eci header size
+            cap -= 4
+        if input_size <= cap:
+            return idx + 1
+    return -1
+
 static func _get_alphanumeric_number(char: String) -> int:
     return _ALPHANUMERIC_CHARACTERS[char]
 
@@ -800,24 +818,6 @@ func _get_ec_block_codeword_count(group: int) -> int:
 
 static func _calc_module_count(version: int) -> int:
     return 21 + 4 * (version - 1)
-
-## get module count of one axis
-func get_module_count() -> int:
-    return _calc_module_count(self.version)
-
-## returns ONE minimum version which fits the data
-## the returned version is just an approach
-## returns -1 if too huge
-func calc_min_version() -> int:
-    var input_size: int = self._get_input_data_size()
-    for idx in range(_DATA_CAPACITY.size()):
-        var cap: int = _DATA_CAPACITY[idx][self.error_correction][self.mode]
-        if self.eci_value != ECI.ISO_8859_1:
-            # subtract roughly eci header size
-            cap -= 4
-        if input_size <= cap:
-            return idx + 1
-    return -1
 
 func _get_allignment_pattern_positions() -> Array[Vector2i]:
     var module_count: int = self.get_module_count()
