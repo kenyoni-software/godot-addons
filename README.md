@@ -1,18 +1,46 @@
 # Godot Addons
 
-- [AspectRatioResizeContainer](#aspectratioresizecontainer)
-- [Custom Theme Overrides](#custom-theme-overrides)
-- [Hide Private Properties](#hide-private-properties)
-- [Icons Patcher](#icons-patcher)
-- [License Manager](#license-manager)
-- [Logging](#logging)
-- [Metadata](#metadata)
-- [TextureButtonColored](#texturebuttoncolored)
+Download [here](https://github.com/kenyoni-software/godot-addons/releases/tag/latest).
+
+## License
+
+[MIT License](./LICENSE.md)
+
+## Overview
+
+### Nodes
+
+- [AspectRatioResizeContainer](#aspectratioresizecontainer)  
+  Extension of `AspectRatioContainer` to update it's own size.
+- [TextureButtonColored](#texturebuttoncolored)  
+  Extension of `TextureButton` with color options.
+- [Logging](#logging)  
+  Simple logger.
+- [QR Code (beta)](#qr-code)  
+  QRCodeRect and QR Code generation.
+
+### Tools
+
+- [Git SHA Project Setting](#git-sha-project-setting)  
+  Add Git SHA as project setting.
+- [Hide Private Properties](#hide-private-properties)  
+  Hide private properties of instantiated child scenes.
+- [Icons Patcher](#icons-patcher)  
+  Patch Pictogrammers icons to white.
+- [License Manager](#license-manager)  
+  Manage license and copyright for third party graphics, software or libraries.
+
+### Utility
+
+- [Custom Theme Overrides](#custom-theme-overrides)  
+  Utility to provide custom theme overrides for any node.
+
+---
 
 ## AspectRatioResizeContainer
 
-The AspectRatioContainer allows his own size to be smaller than the children, which causes neighboring UI elements to be covered.
-This new node type will extend the existing AspectRatioContainer and update it's own minimum size based on the children.
+The `AspectRatioContainer` allows his own size to be smaller than the children, which causes neighboring UI elements to be covered.
+This new node type will extend the existing `AspectRatioContainer` and update it's own minimum size based on the children.
 This works except for `STRETCH_MODE_COVER`.
 
 You are also not able to use the property `custom_minimum_size` anymore as it is used to set the minimum size.
@@ -24,6 +52,8 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 ### Example
 
 [examples/aspect_ratio_resize_container](./examples/aspect_ratio_resize_container)
+
+---
 
 ## Custom Theme Overrides
 
@@ -45,7 +75,6 @@ If everything is set up, your theme override variables can be handled like every
 
 ### Example
 
-
 ```gdscript
 # declare the members
 # DO NOT
@@ -61,28 +90,54 @@ var my_style_box: StyleBox
 
 # declare the custom theme overrides, use the member name and the theme data type.
 var _theme_overrides = CustomThemeOverrides.new([
-    ["my_font_color", Theme.DATA_TYPE_COLOR],
-    ["my_border_size", Theme.DATA_TYPE_CONSTANT],
-    ["my_font", Theme.DATA_TYPE_FONT],
-    ["my_font_size", Theme.DATA_TYPE_FONT_SIZE],
-    ["my_icon", Theme.DATA_TYPE_ICON],
-    ["my_style_box", Theme.DATA_TYPE_STYLEBOX]
+	["my_font_color", Theme.DATA_TYPE_COLOR],
+	["my_border_size", Theme.DATA_TYPE_CONSTANT],
+	["my_font", Theme.DATA_TYPE_FONT],
+	["my_font_size", Theme.DATA_TYPE_FONT_SIZE],
+	["my_icon", Theme.DATA_TYPE_ICON],
+	["my_style_box", Theme.DATA_TYPE_STYLEBOX]
 ])
 
 # required, if you have other properties use append_array
 func _get_property_list() -> Array[Dictionary]:
-    return self._theme_overrides.theme_property_list(self)
+	return self._theme_overrides.theme_property_list(self)
 
 # optional: if you want to use the revert function
 func _property_can_revert(property: StringName) -> bool:
-    return self._theme_overrides.can_revert(property)
+	return self._theme_overrides.can_revert(property)
 
 # optional: if you want to use the revert function, return null
 func _property_get_revert(_property: StringName) -> Variant:
-    return null
+	return null
 ```
 
 [examples/custom_theme_overrides](./examples/custom_theme_overrides)
+
+---
+
+## Git SHA Project Setting
+
+Previously named `Metadata`.
+
+Adds the project setting `application/config/git_sha`, which contains the current Git SHA.
+This one is automatically set and updated when you run any scene or on exporting the project. The git_sha will **not** be kept in `project.godot` to not clutter any version control system. It will be removed from the settings on closing the Godot Editor.
+
+### Compatibility
+
+- Godot 4.1
+
+### Example
+
+[examples/metadata](./examples/metadata)
+
+### Changelog
+
+#### 2.0.0
+
+Added an initial Git SHA load on opening the project.
+Removed `application/config/version`, there was no need that this was part of the addon. The value can still be added manually.
+
+---
 
 ## Hide Private Properties
 
@@ -97,6 +152,8 @@ This plugin will hide exported private properties in the inspector for instantia
 ### Example
 
 [examples/hide_private_properties](./examples/hide_private_properties)
+
+---
 
 ## Icons Patcher
 
@@ -115,6 +172,8 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 #### 1.2.0
 
 - Added automatic file reimporting.
+
+---
 
 ## License Manager
 
@@ -151,6 +210,8 @@ Component class, data wrapper for all  information regarding one license item.
 
 License class.
 
+---
+
 ## Logging
 
 Simple logger. An autoload `GLogging` will be created at installation.
@@ -185,50 +246,161 @@ Logging into a file is not supported yet. The output will be always done via pri
 
 Logging base class. Provides helper methods.
 
-- `root_logger` - root logger object
-- `debug(message: Variant, values: Array[Variant] = [])` - log with root logger at debug level
-- `info(message: Variant, values: Array[Variant] = [])` - log with root logger at info level
-- `warning(message: Variant, values: Array[Variant] = [])` - log with root logger at warning level, will also display a debug warning
-- `error(message: Variant, values: Array[Variant] = [])` - log with root logger at error level, will also display a debug error
-- `critical(message: Variant, values: Array[Variant] = [])` - log with root logger at critical level
-- `log(level: int, message: Variant, values: Array[Variant] = [])` - log at custom level
+- `root_logger: Logger`  
+  root logger object
+- `debug(message: Variant, values: Array[Variant] = []) -> void`  
+  log with root logger at debug level
+- `info(message: Variant, values: Array[Variant] = []) -> void`  
+  log with root logger at info level
+- `warning(message: Variant, values: Array[Variant] = []) -> void`  
+  log with root logger at warning level, will also display a debug warning
+- `error(message: Variant, values: Array[Variant] = []) -> void`  
+  log with root logger at error level, will also display a debug error
+- `critical(message: Variant, values: Array[Variant] = []) -> void`  
+  log with root logger at critical level
+- `log(level: int, message: Variant, values: Array[Variant] = []) -> void`  
+  log at custom level
 
 **GLogging.Logger** - [`addons/glogging/glogging.gd`](./addons/glogging/glogging.gd)
 
 Logger class.
 If not log level is set, the log level of the parent logger will be used.
 
-- `create_child(module_name: String, log_level: int = LEVEL_NOTSET)` - create a child logger
-- `set_log_level(level: int)` - set the log level
-- `log_level() -> int` - get log level
-- `debug(message: Variant, values: Array[Variant] = [])` - log at debug level
-- `info(message: Variant, values: Array[Variant] = [])` - log at info level
-- `warning(message: Variant, values: Array[Variant] = [])` - log at warning level, will also display a debug warning
-- `error(message: Variant, values: Array[Variant] = [])` - log at error level, will also display a debug error
-- `critical(message: Variant, values: Array[Variant] = [])` - log at critical level
-- `log(level: int, message: Variant, values: Array[Variant] = [])` - log at custom level
+- `create_child(module_name: String, log_level: int = LEVEL_NOTSET) -> Logger`  
+  create a child logger
+- `set_log_level(level: int) -> void`  
+  set the log level
+- `log_level() -> int`  
+  get log level
+- `debug(message: Variant, values: Array[Variant] = []) -> void`  
+  log at debug level
+- `info(message: Variant, values: Array[Variant] = []) -> void`  
+  log at info level
+- `warning(message: Variant, values: Array[Variant] = []) -> void`  
+  log at warning level, will also display a debug warning
+- `error(message: Variant, values: Array[Variant] = []) -> void`  
+  log at error level, will also display a debug error
+- `critical(message: Variant, values: Array[Variant] = []) -> void`  
+  log at critical level
+- `log(level: int, message: Variant, values: Array[Variant] = []) -> void`  
+  log at custom level
 
-## Git SHA Project Setting
 
-Previously named `Metadata`.
+---
 
-Adds the project setting `application/config/git_sha`, which contains the current Git SHA.
-This one is automatically set and updated when you run any scene or on exporting the project. The git_sha will **not** be kept in `project.godot` to not clutter any version control system. It will be removed from the settings on closing the Godot Editor.
+## QR Code
+
+> *This addon might change it's interface and available functions.  
+> Please test and report any issues.*
+
+QR Code generation either with the included `QRCodeRect` node or use the encoding result of the `QRCode` class.
 
 ### Compatibility
 
 - Godot 4.1
 
+### Screenshot
+
+![QRCodeRect node inspector screenshot](./doc/qr_code.png "QRCodeRect in inspector")
+
 ### Example
 
-[examples/metadata](./examples/metadata)
+[examples/qr_code](./examples/qr_code)
 
-### Changelog
+### Classes & Functions
 
-#### 2.0.0
+**QRCodeRect** - [`addons/qr_code/qr_code_rect.gd`](./addons/qr_code/qr_code_rect.gd)
 
-Added an initial Git SHA load on opening the project.
-Removed `application/config/version`, there was no need that this was part of the addon. The value can still be added manually.
+`TextureRect` like node. The texture is updated by itself.
+
+#### Properties
+
+- `mode: QRCode.Mode`
+- `error_correction: QRCode.ErrorCorrection`
+- `eci_value: int`  
+  Extended Channel Interpretation (ECI) Value
+- `data: Variant`  
+  Type varies based on the encoding mode.
+- `auto_version: bool`  
+  Use automatically the smallest QR Code version.
+- `version: int`
+- `auto_mask_pattern: bool`  
+  Use automatically the best mask pattern.
+- `mask_pattern: int`
+- `light_module_color: Color`
+- `dark_module_color: Color`
+- `auto_module_px_size: bool`  
+  Automatically set the module pixel size based on the size.  
+  Do not use expand mode KEEP_SIZE when using it.  
+  Turn this off when the QR Code changes or is resized often, as it impacts the performance quite heavily.
+- `module_px_size: int`  
+  Use that many pixel for one module.
+
+**QRCode** - [`addons/qr_code/qr_code.gd`](./addons/qr_code/qr_code.gd)
+
+QRCode class to generate QR Codes.
+
+#### Enums
+
+- `Mode`  
+  Encoding mode enum.
+  - `NUMERIC = 1`
+  - `ALPHANUMERIC = 2`
+  - `BYTE = 4`
+  - `KANJI = 8`
+- `ErrorCorrection`  
+  Error correction enum.
+  - `LOW = 1`
+  - `MEDIUM = 0`
+  - `QUARTILE = 3`
+  - `HIGH = 2`
+- `ECI`  
+  Extended Channel Interpretation enum. Provides some values by name.
+
+#### Properties
+
+- `mode: Mode`
+- `error_correction: ErrorCorrection`
+- `eci_value: int`  
+  Extended Channel Interpretation (ECI) Value
+- `auto_version: bool`  
+  Use automatically the smallest QR Code version.
+- `version: int`
+- `auto_mask_pattern: bool`  
+  Use automatically the best mask pattern.
+- `mask_pattern: int`
+
+#### Methods
+
+- `get_module_count() -> int`  
+  Get the module count per side.
+- `calc_min_version() -> int`  
+  Get the minimal version required to encode the data.
+- `generate_image(module_px_size: int = 1, light_module_color: Color = Color.WHITE, dark_module_color: Color = Color.BLACK) -> Image`  
+  Generate an image. This method can be called repeatedly, as encoding will only happens once and be cached.
+- `put_numeric(number: String) -> void`  
+  Put a numeric text as data. Invalid characters are removed. Will change the encoding mode to `Mode.NUMERIC`.
+- `put_alphanumeric(text: String) -> void`  
+  Put a alphanumeric text as data. Invalid characters are removed. Will change the encoding mode to `Mode.ALPHANUMERIC`.
+- `put_byte(data: PackedByteArray) -> void`  
+  Put a byte data. Will change the encoding mode to `Mode.BYTE`.
+- `put_numeric(number: String) -> void`  
+  Put a numeric text as data. Invalid characters are removed. Will change the encoding mode to `Mode.KANJI`.
+- `encode() -> PackedByteArray`  
+  Get the QR Code row by row in one array. To get the row size use `get_module_count`.
+
+**ShiftJIS** - [`addons/qr_code/shift_jis.gd`](./addons/qr_code/shift_jis.gd)
+
+Shift JIS encoding utility.
+
+### Functions
+
+- `static func to_shift_jis_2004_buffer(text: String) -> PackedByteArray`
+- `static func get_string_from_jis_2004(arr: PackedByteArray) -> String`
+- `static func to_jis_8_buffer(text: String) -> PackedByteArray`
+- `static func get_string_from_jis_8(arr: PackedByteArray) -> String`
+
+---
 
 ## TextureButtonColored
 
@@ -241,8 +413,3 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 ### Example
 
 [examples/texture_button_colored](./examples/texture_button_colored)
-
-
-## License
-
-[MIT License](./LICENSE.md)

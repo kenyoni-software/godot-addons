@@ -22,6 +22,10 @@ jobs:
             name: "Custom Theme Overrides",
           }
           - {
+            id: "git_sha_project_setting",
+            name: "Git SHA Project Setting",
+          }
+          - {
             id: "glogging",
             name: "GLogging",
           }
@@ -38,8 +42,8 @@ jobs:
             name: "Licenses",
           }
           - {
-            id: "git_sha_project_setting",
-            name: "Git SHA Project Setting",
+            id: "qr_code",
+            name: "QR Code",
           }
           - {
             id: "texture_button_colored",
