@@ -66,15 +66,13 @@ func (addon *addonConfig) Zip() error {
 		return err
 	}
 
-	for _, val := range []string{
-		".gitignore",
-		"LICENSE.md",
-		"README.md",
-	} {
-		err = zipFile(zw, filepath.Join(addon.ProjectPath(), val), val)
-		if err != nil {
-			return err
-		}
+	err = zipFile(zw, filepath.Join(addon.ProjectPath(), "LICENSE.md"), filepath.Join("addons", addon.Id(), "LICENSE.md"))
+	if err != nil {
+		return err
+	}
+	err = zipFile(zw, filepath.Join(addon.ProjectPath(), "README.md"), filepath.Join("examples", addon.Id(), "README.md"))
+	if err != nil {
+		return err
 	}
 
 	return nil
