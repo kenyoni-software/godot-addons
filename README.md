@@ -57,11 +57,11 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 ## Custom Theme Overrides
 
-If you have a custom theme for your own nodes or just need custom theme overrides in your node, this plugin will give you some helping utility.
+Utility to make custom theme overrides for any node possible.
 
 This plugin will auto register (via `class_name`) the class `CustomThemeOverrides`.
 
-You should not use `@export` on your variables, as they will be exported with the `_get_property_list` method. Also setter and getter will not be called inside the editor.
+You should not use `@export` on your custom theme variables, as they will be exported with the `_get_property_list` method. Also setter and getter will not be called inside the editor.
 
 If everything is set up, your theme override variables can be handled like every other theme override property.
 
