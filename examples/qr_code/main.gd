@@ -14,6 +14,7 @@ const QRCode = preload("res://addons/qr_code/qr_code.gd")
 @export var _dark_module_color: ColorPickerButton
 @export var _auto_module_px_size: CheckBox
 @export var _module_px_size: SpinBox
+@export var _quiet_zone_size: SpinBox
 
 @export var _qr_rect: QRCodeRect
 
@@ -80,4 +81,8 @@ func _on_auto_module_px_size_toggled(button_pressed: bool) -> void:
 
 func _on_module_px_size_value_changed(value: float) -> void:
 	self._qr_rect.module_px_size = int(value)
+	self._update_values()
+
+func _on_quiet_zone_size_value_changed(value: float):
+	self._qr_rect.quiet_zone_size = int(value)
 	self._update_values()
