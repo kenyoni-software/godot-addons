@@ -48,6 +48,9 @@ var auto_module_px_size: bool = true:
 ## Use that many pixel for one module.
 var module_px_size: int = 1:
     set = set_module_px_size
+## Use that many modules for the quite zone. A value of 4 is recommend.
+var quiet_zone_size: int = 4:
+    set = set_quiet_zone_size
 
 func set_mode(new_mode: QRCode.Mode) -> void:
     self._qr.mode = new_mode
@@ -163,6 +166,10 @@ func set_module_px_size(new_module_px_size: int) -> void:
     if !self.auto_module_px_size:
         self._update_qr()
 
+func set_quiet_zone_size(new_quiet_zone_size: int) -> void:
+    quiet_zone_size = max(0, new_quiet_zone_size)
+    self._update_qr()
+
 func _init() -> void:
     if self.texture != null:
         self._update_qr()
@@ -219,8 +226,6 @@ func _get_property_list() -> Array[Dictionary]:
         "hint": PROPERTY_HINT_RANGE,
         "hint_string": "1,1,or_greater"
     }
-    if self.auto_module_px_size:
-        module_px_size_prop["usage"] = (module_px_size_prop["usage"] | PROPERTY_USAGE_READ_ONLY) & ~PROPERTY_USAGE_STORAGE
 
     return [
         data_prop,
@@ -256,11 +261,17 @@ func _get_property_list() -> Array[Dictionary]:
             "type": TYPE_BOOL,
             "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
         },
-        module_px_size_prop
+        module_px_size_prop,
+        {
+            "name": "quiet_zone_size",
+            "type": TYPE_INT,
+            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
+            "hint_string": "0,1,or_greater",
+        },
     ]
 
 func _property_can_revert(property: StringName) -> bool:
-    return property in ["auto_version", "auto_mask_pattern", "light_module_color", "dark_module_color", "auto_module_px_size"]
+    return property in ["auto_version", "auto_mask_pattern", "light_module_color", "dark_module_color", "auto_module_px_size", "quiet_zone_size"]
 
 func _property_get_revert(property: StringName) -> Variant:
     match property:
@@ -274,6 +285,8 @@ func _property_get_revert(property: StringName) -> Variant:
             return Color.BLACK
         "auto_module_px_size":
             return true
+        "quiet_zone_size":
+            return 4
         _:
             return null
 
@@ -291,4 +304,4 @@ func _notification(what: int) -> void:
 func _update_qr() -> void:
     if self.auto_module_px_size:
         self.module_px_size = mini(self.size.x, self.size.y) / self._qr.get_module_count()
-    self.texture = ImageTexture.create_from_image(self._qr.generate_image(self.module_px_size, self.light_module_color, self.dark_module_color))
+    self.texture = ImageTexture.create_from_image(self._qr.generate_image(self.module_px_size, self.light_module_color, self.dark_module_color, self.quiet_zone_size))
