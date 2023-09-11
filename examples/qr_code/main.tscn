@@ -190,6 +190,20 @@ allow_greater = true
 alignment = 1
 editable = false
 
+[node name="QuietZoneSizeLabel" type="Label" parent="MarginContainer2/VBoxContainer/options"]
+layout_mode = 2
+text = "Quiet Zone Size"
+
+[node name="Control6" type="Control" parent="MarginContainer2/VBoxContainer/options"]
+layout_mode = 2
+
+[node name="QuietZoneSize" type="SpinBox" parent="MarginContainer2/VBoxContainer/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 4.0
+allow_greater = true
+alignment = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -213,6 +227,7 @@ auto_mask_pattern = true
 light_module_color = Color(1, 1, 1, 1)
 dark_module_color = Color(0, 0, 0, 1)
 auto_module_px_size = true
+quiet_zone_size = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
@@ -229,3 +244,4 @@ layout_mode = 2
 [connection signal="color_changed" from="MarginContainer2/VBoxContainer/options/DarkModuleColor" to="." method="_on_dark_module_color_color_changed"]
 [connection signal="toggled" from="MarginContainer2/VBoxContainer/options/AutoModulePxSize" to="." method="_on_auto_module_px_size_toggled"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/options/ModulePxSize" to="." method="_on_module_px_size_value_changed"]
+[connection signal="value_changed" from="MarginContainer2/VBoxContainer/options/QuietZoneSize" to="." method="_on_quiet_zone_size_value_changed"]

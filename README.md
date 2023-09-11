@@ -335,6 +335,8 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
   Turn this off when the QR Code changes or is resized often, as it impacts the performance quite heavily.
 - `module_px_size: int`  
   Use that many pixel for one module.
+- `quiet_zone_size: int`  
+  Use that many modules for the quiet zone. A value of 4 is recommended.
 
 **QRCode** - [`addons/qr_code/qr_code.gd`](./addons/qr_code/qr_code.gd)
 
@@ -399,6 +401,12 @@ Shift JIS encoding utility.
 - `static func get_string_from_jis_2004(arr: PackedByteArray) -> String`
 - `static func to_jis_8_buffer(text: String) -> PackedByteArray`
 - `static func get_string_from_jis_8(arr: PackedByteArray) -> String`
+
+### Changelog
+
+#### 0.2.0
+
+- Added quiet zone size property
 
 ---
 
