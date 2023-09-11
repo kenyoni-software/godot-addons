@@ -402,6 +402,12 @@ Shift JIS encoding utility.
 - `static func to_jis_8_buffer(text: String) -> PackedByteArray`
 - `static func get_string_from_jis_8(arr: PackedByteArray) -> String`
 
+### Changelog
+
+#### 0.2.0
+
+- Added quiet zone size property
+
 ---
 
 ## TextureButtonColored
