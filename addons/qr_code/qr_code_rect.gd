@@ -226,6 +226,8 @@ func _get_property_list() -> Array[Dictionary]:
         "hint": PROPERTY_HINT_RANGE,
         "hint_string": "1,1,or_greater"
     }
+    if self.auto_module_px_size:
+        module_px_size_prop["usage"] = (module_px_size_prop["usage"] | PROPERTY_USAGE_READ_ONLY) & ~PROPERTY_USAGE_STORAGE
 
     return [
         data_prop,
