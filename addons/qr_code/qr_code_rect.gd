@@ -48,7 +48,7 @@ var auto_module_px_size: bool = true:
 ## Use that many pixel for one module.
 var module_px_size: int = 1:
     set = set_module_px_size
-## Use that many modules for the quite zone. A value of 4 is recommend.
+## Use that many modules for the quiet zone. A value of 4 is recommended.
 var quiet_zone_size: int = 4:
     set = set_quiet_zone_size
 
@@ -305,5 +305,5 @@ func _notification(what: int) -> void:
 
 func _update_qr() -> void:
     if self.auto_module_px_size:
-        self.module_px_size = mini(self.size.x, self.size.y) / self._qr.get_module_count()
+        self.module_px_size = mini(self.size.x, self.size.y) / (self._qr.get_module_count() + 2 * self.quiet_zone_size)
     self.texture = ImageTexture.create_from_image(self._qr.generate_image(self.module_px_size, self.light_module_color, self.dark_module_color, self.quiet_zone_size))
