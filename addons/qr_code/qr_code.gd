@@ -696,10 +696,12 @@ var mode: Mode = Mode.NUMERIC:
 ## Error Correction
 var error_correction: ErrorCorrection = ErrorCorrection.LOW:
     set = set_error_correction
-## Extended Channel Interpretation (ECI) Value.
+## Set to true if you want to specify an ECI value.
+var use_eci: bool = false:
+    set = set_use_eci
+## Extended Channel Interpretation (ECI) Value. Is only used if `use_eci` is true.
 var eci_value: int = ECI.ISO_8859_1:
     set = set_eci_value
-
 ## Use automatically the smallest version
 var auto_version: bool = true:
     set = set_auto_version
@@ -741,6 +743,12 @@ func set_mode(new_mode: Mode) -> void:
             self._input_data = ""
         Mode.BYTE:
             self._input_data = PackedByteArray()
+    self._clear_cache()
+
+func set_use_eci(new_use_eci: bool) -> void:
+    if new_use_eci == use_eci:
+        return
+    use_eci = new_use_eci
     self._clear_cache()
 
 func set_eci_value(new_eci_value: int) -> void:
@@ -967,7 +975,7 @@ func _encode_data() -> BitStream:
     var stream: BitStream = BitStream.new()
 
     # add ECI header
-    if self.eci_value != int(ECI.ISO_8859_1):
+    if self.use_eci:
         stream.append(0b0111, 4)
         if self.eci_value <= 127:
             stream.append(0, 1)

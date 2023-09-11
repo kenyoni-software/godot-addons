@@ -14,8 +14,12 @@ var _qr: QRCode = QRCode.new()
 @export var error_correction: QRCode.ErrorCorrection:
     set = set_error_correction,
     get = get_error_correction
+## Use Extended Channel Interpretation (ECI).
+var use_eci: bool:
+    set = set_use_eci,
+    get = get_use_eci
 ## Extended Channel Interpretation (ECI) Value.
-@export var eci_value: QRCode.ECI:
+var eci_value: int:
     set = set_eci_value,
     get = get_eci_value
 var data: Variant = "":
@@ -66,6 +70,14 @@ func set_error_correction(new_error_correction: QRCode.ErrorCorrection) -> void:
 
 func get_error_correction() -> QRCode.ErrorCorrection:
     return self._qr.error_correction
+
+func set_use_eci(new_use_eci: bool) -> void:
+    self._qr.use_eci = new_use_eci
+    self.notify_property_list_changed()
+    self._update_qr()
+
+func get_use_eci() -> bool:
+    return self._qr.use_eci
 
 func set_eci_value(new_eci_value: int) -> void:
     self._qr.eci_value = new_eci_value
@@ -181,6 +193,16 @@ func _set(property: StringName, value: Variant) -> bool:
     return false
 
 func _get_property_list() -> Array[Dictionary]:
+    var eci_value_prop: Dictionary = {
+        "name": "eci_value",
+        "type": TYPE_INT,
+        "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
+        "hint": PROPERTY_HINT_ENUM,
+        "hint_string": "Code Page 437:2,ISO 8859-1:3,ISO 8859-2:4,ISO 8859-3:5,ISO 8859-4:6,ISO 8859-5:7,ISO 8859-6:8,ISO 8859-7:9,ISO 8859-8:10,ISO 8859-9:11,ISO 8859-10:12,ISO 8859-11:13,ISO 8859-12:14,ISO 8859-13:15,ISO 8859-14:16,ISO 8859-15:17,ISO 8859-16:18,Shift JIS:20,Windows 1250:21,Windows 1251:22,Windows 1252:23,Windows 1256:24,UTF-16:25,UTF-8:26,US ASCII:27,BIG 5:28,GB 18030:29,EUC KR:30"
+    }
+    if !self.use_eci:
+        eci_value_prop["usage"] = (eci_value_prop["usage"] | PROPERTY_USAGE_READ_ONLY) & ~PROPERTY_USAGE_STORAGE
+
     var data_prop: Dictionary = {
         "name": "data",
         "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
@@ -230,6 +252,12 @@ func _get_property_list() -> Array[Dictionary]:
         module_px_size_prop["usage"] = (module_px_size_prop["usage"] | PROPERTY_USAGE_READ_ONLY) & ~PROPERTY_USAGE_STORAGE
 
     return [
+        {
+            "name": "use_eci",
+            "type": TYPE_BOOL,
+            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
+        },
+        eci_value_prop,
         data_prop,
         {
             "name": "auto_version",
@@ -273,10 +301,12 @@ func _get_property_list() -> Array[Dictionary]:
     ]
 
 func _property_can_revert(property: StringName) -> bool:
-    return property in ["auto_version", "auto_mask_pattern", "light_module_color", "dark_module_color", "auto_module_px_size", "quiet_zone_size"]
+    return property in ["eci_value", "auto_version", "auto_mask_pattern", "light_module_color", "dark_module_color", "auto_module_px_size", "quiet_zone_size"]
 
 func _property_get_revert(property: StringName) -> Variant:
     match property:
+        "eci_value":
+            return QRCode.ECI.ISO_8859_1
         "auto_version":
             return true
         "auto_mask_pattern":

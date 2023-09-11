@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://examples/qr_code/main.gd" id="1_55tdt"]
 [ext_resource type="Script" path="res://addons/qr_code/qr_code_rect.gd" id="1_t1m1p"]
 
-[node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("_input_data_text", "_encoding", "_error_correction", "_eci_indicator", "_auto_version", "_version", "_auto_mask_pattern", "_mask_pattern", "_light_module_color", "_dark_module_color", "_auto_module_px_size", "_module_px_size", "_qr_rect")]
+[node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("_input_data_text", "_encoding", "_error_correction", "_eci_value", "_version", "_mask_pattern", "_module_px_size", "_qr_rect")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,14 +13,9 @@ script = ExtResource("1_55tdt")
 _input_data_text = NodePath("MarginContainer2/VBoxContainer/InputDataText")
 _encoding = NodePath("MarginContainer2/VBoxContainer/options/Encoding")
 _error_correction = NodePath("MarginContainer2/VBoxContainer/options/ErrorCorrection")
-_eci_indicator = NodePath("MarginContainer2/VBoxContainer/options/ECIIndicator")
-_auto_version = NodePath("MarginContainer2/VBoxContainer/options/AutoVersion")
+_eci_value = NodePath("MarginContainer2/VBoxContainer/options/ECIValue")
 _version = NodePath("MarginContainer2/VBoxContainer/options/Version")
-_auto_mask_pattern = NodePath("MarginContainer2/VBoxContainer/options/AutoMaskPattern")
 _mask_pattern = NodePath("MarginContainer2/VBoxContainer/options/MaskPattern")
-_light_module_color = NodePath("MarginContainer2/VBoxContainer/options/LightModuleColor")
-_dark_module_color = NodePath("MarginContainer2/VBoxContainer/options/DarkModuleColor")
-_auto_module_px_size = NodePath("MarginContainer2/VBoxContainer/options/AutoModulePxSize")
 _module_px_size = NodePath("MarginContainer2/VBoxContainer/options/ModulePxSize")
 _qr_rect = NodePath("MarginContainer/QRCodeRect")
 
@@ -93,17 +88,14 @@ popup/item_3/id = 2
 
 [node name="ECIModeLabel" type="Label" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
-text = "ECI Indicator"
+text = "ECI Value"
 
-[node name="ECIModeLabelTip" type="Label" parent="MarginContainer2/VBoxContainer/options"]
+[node name="UseECI" type="CheckBox" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
-tooltip_text = "For ECI other than ISO 8859-1, choose BYTE encoding."
-mouse_filter = 0
-text = "*"
-horizontal_alignment = 1
 
-[node name="ECIIndicator" type="OptionButton" parent="MarginContainer2/VBoxContainer/options"]
+[node name="ECIValue" type="OptionButton" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
+disabled = true
 alignment = 1
 item_count = 5
 selected = 0
@@ -220,7 +212,7 @@ stretch_mode = 5
 script = ExtResource("1_t1m1p")
 mode = 1
 error_correction = 1
-eci_value = 3
+use_eci = false
 data = ""
 auto_version = true
 auto_mask_pattern = true
@@ -235,7 +227,8 @@ layout_mode = 2
 [connection signal="text_changed" from="MarginContainer2/VBoxContainer/InputDataText" to="." method="_on_input_data_text_text_changed"]
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/options/Encoding" to="." method="_on_encoding_item_selected"]
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/options/ErrorCorrection" to="." method="_on_error_correction_item_selected"]
-[connection signal="item_selected" from="MarginContainer2/VBoxContainer/options/ECIIndicator" to="." method="_on_eci_indicator_item_selected"]
+[connection signal="toggled" from="MarginContainer2/VBoxContainer/options/UseECI" to="." method="_on_use_eci_toggled"]
+[connection signal="item_selected" from="MarginContainer2/VBoxContainer/options/ECIValue" to="." method="_on_eci_value_item_selected"]
 [connection signal="toggled" from="MarginContainer2/VBoxContainer/options/AutoVersion" to="." method="_on_auto_version_toggled"]
 [connection signal="value_changed" from="MarginContainer2/VBoxContainer/options/Version" to="." method="_on_version_value_changed"]
 [connection signal="toggled" from="MarginContainer2/VBoxContainer/options/AutoMaskPattern" to="." method="_on_auto_mask_pattern_toggled"]

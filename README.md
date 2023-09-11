@@ -317,6 +317,8 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 
 - `mode: QRCode.Mode`
 - `error_correction: QRCode.ErrorCorrection`
+- `use_eci: bool`  
+  Use Extended Channel Interpretation (ECI)
 - `eci_value: int`  
   Extended Channel Interpretation (ECI) Value
 - `data: Variant`  
@@ -363,6 +365,8 @@ QRCode class to generate QR Codes.
 
 - `mode: Mode`
 - `error_correction: ErrorCorrection`
+- `use_eci: bool`  
+  Use Extended Channel Interpretation (ECI)
 - `eci_value: int`  
   Extended Channel Interpretation (ECI) Value
 - `auto_version: bool`  
@@ -403,6 +407,10 @@ Shift JIS encoding utility.
 - `static func get_string_from_jis_8(arr: PackedByteArray) -> String`
 
 ### Changelog
+
+#### 0.3.0
+
+- Make ECI value optional
 
 #### 0.2.0
 
