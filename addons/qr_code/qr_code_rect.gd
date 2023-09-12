@@ -8,10 +8,10 @@ const ShiftJIS := preload("shift_jis.gd")
 
 var _qr: QRCode = QRCode.new()
 
-@export var mode: QRCode.Mode:
+var mode: QRCode.Mode:
     set = set_mode,
     get = get_mode
-@export var error_correction: QRCode.ErrorCorrection:
+var error_correction: QRCode.ErrorCorrection:
     set = set_error_correction,
     get = get_error_correction
 ## Use Extended Channel Interpretation (ECI).
@@ -255,6 +255,20 @@ func _get_property_list() -> Array[Dictionary]:
         module_px_size_prop["usage"] = (module_px_size_prop["usage"] | PROPERTY_USAGE_READ_ONLY) & ~PROPERTY_USAGE_STORAGE
 
     return [
+        {
+            "name": "mode",
+            "type": TYPE_INT,
+            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
+            "hint": PROPERTY_HINT_ENUM,
+            "hint_string": "Numeric:1,Alphanumeric:2,Byte:4,Kanji:8"
+        },
+        {
+            "name": "error_correction",
+            "type": TYPE_INT,
+            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
+            "hint": PROPERTY_HINT_ENUM,
+            "hint_string": "Low:1,Medium:0,Quartile:3,High:2"
+        },
         {
             "name": "use_eci",
             "type": TYPE_BOOL,

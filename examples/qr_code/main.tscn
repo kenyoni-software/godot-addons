@@ -88,8 +88,8 @@ popup/item_3/id = 2
 
 [node name="ECIModeLabel" type="Label" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
-tooltip_text = "Using BYTE encoding will force an ECI value. This is only in this example the case, to properly encode the text.
-You can still pass an byte array."
+tooltip_text = "Using BYTE encoding will force an ECI value. Because only for the specific ECI values is text to byte conversion available.
+You can always pass an byte array as data in your scripts."
 mouse_filter = 0
 text = "ECI Value *"
 
