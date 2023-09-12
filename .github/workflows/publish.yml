@@ -93,6 +93,11 @@ jobs:
           git tag ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}}
           git push origin tag ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}}
 
+      # wait 5s that the pushed tag is available in the next step, sometimes the next step saw only the local tag
+      - name: Wait 5s
+        run: sleep 5s
+        shell: bash
+
       - name: Release addon
         if: ${{ steps.checkTag.outputs.exists == 'false' }}
         env:
