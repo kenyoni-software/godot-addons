@@ -426,6 +426,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 - Godot 4.1
 
+### Dependencies
+
+- [Custom Theme Properties](#custom-theme-overrides)
+
 ### Example
 
 [examples/texture_button_colored](./examples/texture_button_colored)
