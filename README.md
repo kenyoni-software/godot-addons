@@ -312,6 +312,7 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 **QRCodeRect** - [`addons/qr_code/qr_code_rect.gd`](./addons/qr_code/qr_code_rect.gd)
 
 `TextureRect` like node. The texture is updated by itself.
+When using byte encoding you can also pass strings for specific ECI values (ISO 8859-1, Shift JIS, UTF-8, UTF-16, US ASCII), the input string will be automatically converted to an byte array.
 
 #### Properties
 
@@ -407,6 +408,11 @@ Shift JIS encoding utility.
 - `static func get_string_from_jis_8(arr: PackedByteArray) -> String`
 
 ### Changelog
+
+#### 0.3.1
+
+- Improve inspector properties
+- Improve input handling of byte data based on ECI usage
 
 #### 0.3.0
 
