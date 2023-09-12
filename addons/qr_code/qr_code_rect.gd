@@ -94,6 +94,9 @@ func set_data(new_data: Variant) -> void:
         QRCode.Mode.ALPHANUMERIC:
             self._qr.put_alphanumeric(new_data)
         QRCode.Mode.BYTE:
+            if typeof(new_data) == TYPE_PACKED_BYTE_ARRAY || !self.use_eci:
+                self._qr.put_byte(new_data)
+                return
             match self.eci_value:
                 QRCode.ECI.ISO_8859_1:
                     self._qr.put_byte(new_data.to_ascii_buffer())
@@ -114,7 +117,7 @@ func set_data(new_data: Variant) -> void:
 
 func get_data() -> Variant:
     var input_data: Variant = self._qr.get_input_data()
-    if self.mode == QRCode.Mode.BYTE:
+    if self.mode == QRCode.Mode.BYTE && self.use_eci:
         match self.eci_value:
             QRCode.ECI.ISO_8859_1:
                 return input_data.get_string_from_ascii()
@@ -215,7 +218,7 @@ func _get_property_list() -> Array[Dictionary]:
             data_prop["hint"] = PROPERTY_HINT_MULTILINE_TEXT
         QRCode.Mode.BYTE:
             # these encoding is nativeley supported
-            if self.eci_value in [QRCode.ECI.ISO_8859_1, QRCode.ECI.SHIFT_JIS, QRCode.ECI.UTF_8, QRCode.ECI.UTF_16, QRCode.ECI.US_ASCII]:
+            if self.use_eci && self.eci_value in [QRCode.ECI.ISO_8859_1, QRCode.ECI.SHIFT_JIS, QRCode.ECI.UTF_8, QRCode.ECI.UTF_16, QRCode.ECI.US_ASCII]:
                 data_prop["type"] = TYPE_STRING
                 data_prop["hint"] = PROPERTY_HINT_MULTILINE_TEXT
             else:

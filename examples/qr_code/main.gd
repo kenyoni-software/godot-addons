@@ -5,6 +5,7 @@ const QRCode = preload("res://addons/qr_code/qr_code.gd")
 @export var _input_data_text: TextEdit
 @export var _encoding: OptionButton
 @export var _error_correction: OptionButton
+@export var _use_eci: CheckBox
 @export var _eci_value: OptionButton
 @export var _version: SpinBox
 @export var _mask_pattern: SpinBox
@@ -32,6 +33,11 @@ func _on_input_data_text_text_changed() -> void:
 
 func _on_encoding_item_selected(_index: int) -> void:
 	self._qr_rect.mode = self._encoding.get_selected_id() as QRCode.Mode
+	if self._qr_rect.mode == QRCode.Mode.BYTE && !self._qr_rect.use_eci:
+		self._use_eci.button_pressed = true
+		self._use_eci.disabled = true
+	else:
+		self._use_eci.disabled = false
 	self._update_values()
 
 func _on_error_correction_item_selected(_index: int) -> void:
@@ -39,6 +45,8 @@ func _on_error_correction_item_selected(_index: int) -> void:
 	self._update_values()
 
 func _on_use_eci_toggled(button_pressed: bool) -> void:
+	if !button_pressed && self._qr_rect.mode == QRCode.Mode.BYTE:
+		return
 	self._qr_rect.use_eci = button_pressed
 	self._eci_value.disabled = !button_pressed
 	self._update_values()

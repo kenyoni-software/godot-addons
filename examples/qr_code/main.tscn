@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://examples/qr_code/main.gd" id="1_55tdt"]
 [ext_resource type="Script" path="res://addons/qr_code/qr_code_rect.gd" id="1_t1m1p"]
 
-[node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("_input_data_text", "_encoding", "_error_correction", "_eci_value", "_version", "_mask_pattern", "_module_px_size", "_qr_rect")]
+[node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("_input_data_text", "_encoding", "_error_correction", "_use_eci", "_eci_value", "_version", "_mask_pattern", "_module_px_size", "_qr_rect")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,6 +13,7 @@ script = ExtResource("1_55tdt")
 _input_data_text = NodePath("MarginContainer2/VBoxContainer/InputDataText")
 _encoding = NodePath("MarginContainer2/VBoxContainer/options/Encoding")
 _error_correction = NodePath("MarginContainer2/VBoxContainer/options/ErrorCorrection")
+_use_eci = NodePath("MarginContainer2/VBoxContainer/options/UseECI")
 _eci_value = NodePath("MarginContainer2/VBoxContainer/options/ECIValue")
 _version = NodePath("MarginContainer2/VBoxContainer/options/Version")
 _mask_pattern = NodePath("MarginContainer2/VBoxContainer/options/MaskPattern")
@@ -46,9 +47,8 @@ columns = 3
 layout_mode = 2
 text = "Encoding"
 
-[node name="AutoEncoding" type="CheckBox" parent="MarginContainer2/VBoxContainer/options"]
+[node name="Control2" type="Control" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
-disabled = true
 
 [node name="Encoding" type="OptionButton" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
@@ -69,7 +69,7 @@ popup/item_3/id = 8
 layout_mode = 2
 text = "Error Correction"
 
-[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer/options"]
+[node name="Control" type="Label" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
 
 [node name="ErrorCorrection" type="OptionButton" parent="MarginContainer2/VBoxContainer/options"]
@@ -88,7 +88,10 @@ popup/item_3/id = 2
 
 [node name="ECIModeLabel" type="Label" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
-text = "ECI Value"
+tooltip_text = "Using BYTE encoding will force an ECI value. This is only in this example the case, to properly encode the text.
+You can still pass an byte array."
+mouse_filter = 0
+text = "ECI Value *"
 
 [node name="UseECI" type="CheckBox" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
