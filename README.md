@@ -434,7 +434,7 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 ### Dependencies
 
-- [Custom Theme Properties](#custom-theme-overrides)
+- [Custom Theme Overrides](#custom-theme-overrides)
 
 ### Example
 
