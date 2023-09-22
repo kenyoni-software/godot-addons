@@ -904,8 +904,8 @@ func _init(error_correction_: ErrorCorrection = ErrorCorrection.LOW) -> void:
 
 ## generate an QR code image
 func generate_image(module_px_size: int = 1, light_module_color: Color = Color.WHITE, dark_module_color: Color = Color.BLACK, quiet_zone_size: int = 4) -> Image:
-    module_px_size = max(1, module_px_size)
-    quiet_zone_size = max(0, quiet_zone_size)
+    module_px_size = maxi(1, module_px_size)
+    quiet_zone_size = maxi(0, quiet_zone_size)
 
     var qr_code: PackedByteArray = self.encode()
 
@@ -1006,7 +1006,7 @@ func _encode_data() -> BitStream:
 
     # add terminator
     var required_bytes: int = self._get_data_codeword_count()
-    var terminator_size: int = min(8 * required_bytes - stream.size(), 4)
+    var terminator_size: int = mini(8 * required_bytes - stream.size(), 4)
     stream.append(0, terminator_size)
 
     # add bits to multiple of 8

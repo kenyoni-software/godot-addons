@@ -182,7 +182,7 @@ func set_module_px_size(new_module_px_size: int) -> void:
         self._update_qr()
 
 func set_quiet_zone_size(new_quiet_zone_size: int) -> void:
-    quiet_zone_size = max(0, new_quiet_zone_size)
+    quiet_zone_size = maxi(0, new_quiet_zone_size)
     self._update_qr()
 
 func _init() -> void:
