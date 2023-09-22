@@ -6,11 +6,13 @@ func _get_name() -> String:
     return "kenyoni_licenses_exporter"
 
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
+    if not FileAccess.file_exists(Licenses.get_license_data_filepath()):
+        return
+    self._add_file(Licenses.get_license_data_filepath())
     var res = Licenses.load(Licenses.get_license_data_filepath())
     if res.err_msg != "":
         push_error("Failed to export license files: " + res.err_msg)
         return
-    self._add_file(Licenses.get_license_data_filepath())
     for component in res.components:
         for license in component.licenses:
             if license.file != "":
