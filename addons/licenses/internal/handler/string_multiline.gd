@@ -6,7 +6,7 @@ func _init(tree_: Tree, item_: TreeItem, value_: Variant, property_: Dictionary)
     super._init(tree_, item_, value_, property_)
     self.item.set_text(0, self.property["name"].capitalize())
     self.item.set_text(1, self.value)
-    self.item.set_tooltip_text(1, self.value.substr(0, min(len(self.value), 512)) + "...")
+    self.item.set_tooltip_text(1, self.value.substr(0, mini(self.value.length(), 512)) + "...")
     self._update_reset_button()
     self.item.add_button(1, self.tree.get_theme_icon("DistractionFree", "EditorIcons"), 1)
 
