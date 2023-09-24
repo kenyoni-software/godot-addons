@@ -138,7 +138,6 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
     if cur_component.category == category:
         return
     cur_component.category = category
-    Licenses.sort_components()
     self.licenses.sort_custom(Licenses.new().compare_components_ascending)
     self.reload(cur_component)
 
