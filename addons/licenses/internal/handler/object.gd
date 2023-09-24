@@ -1,11 +1,14 @@
 extends "base.gd"
 
+const Utils := preload("../utils.gd")
+
 func _init(tree_: Tree, item_: TreeItem, value_: Variant, property_: Dictionary) -> void:
     super._init(tree_, item_, value_, property_)
     self.item.set_text(0, self.property["name"].capitalize())
     self.item.set_selectable(1, false)
-    for prop in self.value.get_property_list():
-        # ignore private variables and ignore non supported types
+
+    for prop in Utils.get_updated_property_list(self.value):
+        # ignore private variables and ignore non supported types and already added items
         if prop["name"].begins_with("_"):
             continue
         self.tree._add_item(self.item, self.value.get(prop["name"]), prop)
