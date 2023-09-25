@@ -4,13 +4,13 @@ const Utils := preload("utils.gd")
 
 var editor_filesystem: EditorFileSystem
 
-func _ready():
+func _ready() -> void:
     self.add_item("Patch Material Design Icons")
 
     self.id_pressed.connect(self._on_id_pressed)
     self.about_to_popup.connect(self._on_about_to_popup)
 
-func _set_item_details(idx: int, settings_key: String, tooltip: String):
+func _set_item_details(idx: int, settings_key: String, tooltip: String) -> void:
     var path: String = ProjectSettings.get_setting(settings_key)
     var can_use: bool = path != "" and DirAccess.dir_exists_absolute(path)
     self.set_item_disabled(idx, !can_use)
