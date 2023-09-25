@@ -123,6 +123,7 @@ func _on_plugin_add_id_pressed(id: int) -> void:
     component.description = cfg["plugin"].get("description", "")
     component.copyright.append(cfg["plugin"].get("author", ""))
     component.version = cfg["plugin"].get("version", "")
+    component.paths.append(self._add_plugin_menu.get_item_metadata(id).get_base_dir())
     self._components_tree.licenses.append(component)
     self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
     self._components_tree.reload(component)
