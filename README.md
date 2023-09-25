@@ -449,3 +449,9 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 ### Example
 
 [examples/texture_button_colored](./examples/texture_button_colored)
+
+### Changelog
+
+#### 1.2.3
+
+- Rename method `get_theme_color` to `get_theme_coloring`, this function was never called by the engine anyway and should not be overridden
