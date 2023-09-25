@@ -6,4 +6,3 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
     self.remove_custom_type("QRCodeRect")
-    self.get_editor_interface().get_inspector().property_toggled.disconnect(self._test)
