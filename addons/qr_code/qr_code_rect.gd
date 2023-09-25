@@ -339,7 +339,7 @@ func _property_get_revert(property: StringName) -> Variant:
         _:
             return null
 
-func _get_configuration_warnings():
+func _get_configuration_warnings() -> PackedStringArray:
     if self.auto_module_px_size && self.expand_mode == EXPAND_KEEP_SIZE:
         return ["Do not use auto module px size AND keep size expand mode."]
     return []
