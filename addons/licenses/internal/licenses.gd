@@ -5,9 +5,9 @@ const Licenses := preload("../licenses.gd")
 const ComponentsTree := preload("components_tree.gd")
 
 @export_node_path("Tree") var _components_tree_path; @onready var _components_tree: ComponentsTree = self.get_node(self._components_tree_path)
-@export_node_path("LineEdit") var _license_file_edit_path; @onready var _license_file_edit: LineEdit = self.get_node(self._license_file_edit_path)
-@export_node_path("Button") var _license_file_load_button_path; @onready var _license_file_load_button: Button = self.get_node(self._license_file_load_button_path)
-@export_node_path("Button") var _set_license_filepath_button_path; @onready var _set_license_filepath_button: Button = self.get_node(self._set_license_filepath_button_path)
+@export var _license_file_edit: LineEdit = null
+@export var _license_file_load_button: Button = null
+@export var _set_license_filepath_button: Button = null
 
 func _ready() -> void:
     self._license_file_load_button.icon = self.get_theme_icon("Load", "EditorIcons")

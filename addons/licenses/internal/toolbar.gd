@@ -5,8 +5,8 @@ const Licenses := preload("../licenses.gd")
 const Component := preload("../component.gd")
 const ComponentTree := preload("components_tree.gd")
 
-@export_node_path("Button") var _menu_button_path; @onready var _menu_button: Button = self.get_node(_menu_button_path)
-@export_node_path("Button") var _add_button_path; @onready var _add_button: Button = self.get_node(_add_button_path)
+@export var _menu_button: Button = null
+@export var _add_button: Button = null
 @export_node_path("Tree") var _components_tree_path; @onready var _components_tree: ComponentTree = self.get_node(_components_tree_path)
 
 var _menu: PopupMenu
