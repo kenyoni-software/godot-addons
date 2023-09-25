@@ -6,7 +6,10 @@ func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, propert
     super._init(tree_, item_, value_, property_)
     self.item.set_text(0, self.property["name"].capitalize())
     self.item.set_text(1, self.value)
-    self.item.set_tooltip_text(1, self.value.substr(0, mini(self.value.length(), 512)) + "...")
+    var tooltip_text: String = self.value.substr(0, mini(self.value.length(), 512))
+    if self.value.length() > 512:
+        tooltip_text += "..."
+    self.item.set_tooltip_text(1, tooltip_text)
     self._update_reset_button()
     self.item.add_button(1, self.tree.get_theme_icon("DistractionFree", "EditorIcons"), 1)
 
