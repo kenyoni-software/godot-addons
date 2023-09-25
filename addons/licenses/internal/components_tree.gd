@@ -70,22 +70,9 @@ func _add_tree_item(component: Component, idx: int, parent: TreeItem) -> TreeIte
     if not component.readonly:
         item.add_button(0, self.get_theme_icon("Remove", "EditorIcons"), _BTN_ID_REMOVE)
     var tooltip = component.name
-    if component.name == "":
-        tooltip += "\n- no name"
-    if component.licenses.is_empty():
-        tooltip += "\n- no license"
-    if component.copyright.is_empty():
-        tooltip += "\n- no copyright"
-    var path_missing: bool = false
-    for path in component.paths:
-        if FileAccess.file_exists(path) || DirAccess.dir_exists_absolute(path):
-            continue
-        if !path_missing:
-            tooltip += "\n- referenced path do not exist"
-        tooltip += "\n    - " + path
-        path_missing = true
-
-    if tooltip != component.name:
+    var comp_warnings: PackedStringArray = component.get_warnings()
+    if comp_warnings.size() != 0:
+        tooltip += "\n- " + "\n - ".join(comp_warnings)
         item.set_icon(0, self.get_theme_icon("NodeWarning", "EditorIcons"))
     item.set_tooltip_text(0, tooltip)
     return item

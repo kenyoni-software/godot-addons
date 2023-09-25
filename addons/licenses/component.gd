@@ -100,6 +100,21 @@ func _get_property_list() -> Array:
         },
     ]
 
+func get_warnings() -> PackedStringArray:
+    var res: PackedStringArray = []
+    if self.name == "":
+        res.append("no name")
+    if self.licenses.is_empty():
+        res.append("no license")
+    if self.copyright.is_empty():
+        res.append("no copyright")
+    var path_missing: bool = false
+    for path in self.paths:
+        if FileAccess.file_exists(path) || DirAccess.dir_exists_absolute(path):
+            continue
+        res.append("path '" + path + "' does not exst")
+    return res
+
 func serialize() -> Dictionary:
     var licenses: Array[Dictionary] = []
     for license in self.licenses:
