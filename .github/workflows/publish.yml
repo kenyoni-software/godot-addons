@@ -39,7 +39,7 @@ jobs:
           }
           - {
             id: "licenses",
-            name: "Licenses",
+            name: "License Manager",
           }
           - {
             id: "qr_code",
