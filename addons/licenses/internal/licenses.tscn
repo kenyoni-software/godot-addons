@@ -7,7 +7,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cx7n"]
 
-[node name="licenses" type="MarginContainer"]
+[node name="licenses" type="MarginContainer" node_paths=PackedStringArray("_license_file_edit", "_license_file_load_button", "_set_license_filepath_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,9 +21,9 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 script = ExtResource("3")
 _components_tree_path = NodePath("VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components")
-_license_file_edit_path = NodePath("VBoxContainer/license_file_config/edit")
-_license_file_load_button_path = NodePath("VBoxContainer/license_file_config/file_button")
-_set_license_filepath_button_path = NodePath("VBoxContainer/license_file_config/set_license_filepath_button")
+_license_file_edit = NodePath("VBoxContainer/license_file_config/edit")
+_license_file_load_button = NodePath("VBoxContainer/license_file_config/file_button")
+_set_license_filepath_button = NodePath("VBoxContainer/license_file_config/set_license_filepath_button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -58,11 +58,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="toolbar" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer"]
+[node name="toolbar" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer" node_paths=PackedStringArray("_menu_button", "_add_button")]
 layout_mode = 2
 script = ExtResource("2_a8iu8")
-_menu_button_path = NodePath("menu")
-_add_button_path = NodePath("add")
+_menu_button = NodePath("menu")
+_add_button = NodePath("add")
 _components_tree_path = NodePath("../components")
 
 [node name="menu" type="Button" parent="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/toolbar"]
@@ -99,6 +99,7 @@ hide_root = true
 script = ExtResource("1")
 
 [connection signal="button_clicked" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" method="_on_button_clicked"]
+[connection signal="components_changed" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="." method="_on_components_changed"]
 [connection signal="item_edited" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" method="_on_item_edited"]
 [connection signal="item_selected" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" method="_on_item_selected"]
 [connection signal="button_clicked" from="VBoxContainer/HSplitContainer/component_detail" to="VBoxContainer/HSplitContainer/component_detail" method="_on_button_clicked"]

@@ -16,14 +16,19 @@ class License:
     ## Web present of the license
     var web: String
 
-    func get_property_list() -> Array:
-        var properties: Array = super.get_property_list()
-        for property in properties:
-            if property["name"] == "text":
-                property["hint"] = PROPERTY_HINT_MULTILINE_TEXT
-            if property["name"] == "file":
-                property["hint"] = PROPERTY_HINT_FILE
-        return properties
+    func _get_property_list() -> Array[Dictionary]:
+        return [
+            {
+                "name": "text",
+                "type": TYPE_STRING,
+                "hint": PROPERTY_HINT_MULTILINE_TEXT,
+            },
+            {
+                "name": "file",
+                "type": TYPE_STRING,
+                "hint": PROPERTY_HINT_FILE,
+            }
+        ]
 
     ## Either returns the license text or loads the text from file or a message that the text could not be loaded.
     func get_license_text() -> String:
@@ -75,18 +80,40 @@ var web: String
 var paths: PackedStringArray = []
 var licenses: Array[License] = []
 
-func get_property_list() -> Array:
-    var properties: Array = super.get_property_list()
-    for property in properties:
-        if property["name"] == "paths":
-            property["hint"] = PROPERTY_HINT_FILE
-            # allow files too (inofficial)
-            property["hint_text"] = "*"
-        if property["name"] == "description":
-            property["hint"] = PROPERTY_HINT_MULTILINE_TEXT
-        if property["name"] == "licenses":
-            property["constructor"] = License.new
-    return properties
+func _get_property_list() -> Array:
+    return [
+        {
+            "name": "paths",
+            "type": TYPE_PACKED_STRING_ARRAY,
+            "hint": PROPERTY_HINT_FILE,
+            "hint_text": "*",
+        },
+        {
+            "name": "description",
+            "type": TYPE_STRING,
+            "hint": PROPERTY_HINT_MULTILINE_TEXT,
+        },
+        {
+            "name": "licenses",
+            "type": TYPE_ARRAY,
+            "constructor": License.new,
+        },
+    ]
+
+func get_warnings() -> PackedStringArray:
+    var res: PackedStringArray = []
+    if self.name == "":
+        res.append("no name")
+    if self.licenses.is_empty():
+        res.append("no license")
+    if self.copyright.is_empty():
+        res.append("no copyright")
+    var path_missing: bool = false
+    for path in self.paths:
+        if FileAccess.file_exists(path) || DirAccess.dir_exists_absolute(path):
+            continue
+        res.append("path '" + path + "' does not exst")
+    return res
 
 func serialize() -> Dictionary:
     var licenses: Array[Dictionary] = []

@@ -5,9 +5,9 @@ const Licenses := preload("../licenses.gd")
 const ComponentsTree := preload("components_tree.gd")
 
 @export_node_path("Tree") var _components_tree_path; @onready var _components_tree: ComponentsTree = self.get_node(self._components_tree_path)
-@export_node_path("LineEdit") var _license_file_edit_path; @onready var _license_file_edit: LineEdit = self.get_node(self._license_file_edit_path)
-@export_node_path("Button") var _license_file_load_button_path; @onready var _license_file_load_button: Button = self.get_node(self._license_file_load_button_path)
-@export_node_path("Button") var _set_license_filepath_button_path; @onready var _set_license_filepath_button: Button = self.get_node(self._set_license_filepath_button_path)
+@export var _license_file_edit: LineEdit = null
+@export var _license_file_load_button: Button = null
+@export var _set_license_filepath_button: Button = null
 
 func _ready() -> void:
     self._license_file_load_button.icon = self.get_theme_icon("Load", "EditorIcons")
@@ -27,11 +27,10 @@ func reload() -> void:
     else:
         self._license_file_edit.right_icon = self.get_theme_icon("NodeWarning", "EditorIcons")
         self._license_file_edit.tooltip_text = res.err_msg
-    self._components_tree.licenses = res.components
-    self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
-    self._components_tree.reload()
+    res.components.sort_custom(Licenses.new().compare_components_ascending)
+    self._components_tree.set_components(res.components)
 
-func _update_set_license_filepath_button():
+func _update_set_license_filepath_button() -> void:
     if Licenses.get_license_data_filepath() == self._license_file_edit.text:
         self._set_license_filepath_button.icon = self.get_theme_icon("ImportCheck", "EditorIcons")
         self._set_license_filepath_button.tooltip_text = "Selected file is set as the project license file."
@@ -60,4 +59,6 @@ func _on_data_file_selected(path: String) -> void:
 func _on_set_license_filepath_clicked() -> void:
     Licenses.set_license_data_filepath(self._license_file_edit.text)
     self._update_set_license_filepath_button()
-  
+
+func _on_components_changed() -> void:
+    Licenses.save(self._components_tree.get_components(), self._license_file_edit.text)

@@ -5,8 +5,8 @@ const Licenses := preload("../licenses.gd")
 const Component := preload("../component.gd")
 const ComponentTree := preload("components_tree.gd")
 
-@export_node_path("Button") var _menu_button_path; @onready var _menu_button: Button = self.get_node(_menu_button_path)
-@export_node_path("Button") var _add_button_path; @onready var _add_button: Button = self.get_node(_add_button_path)
+@export var _menu_button: Button = null
+@export var _add_button: Button = null
 @export_node_path("Tree") var _components_tree_path; @onready var _components_tree: ComponentTree = self.get_node(_components_tree_path)
 
 var _menu: PopupMenu
@@ -86,7 +86,7 @@ func _create_plugin_menu_items() -> void:
     var idx: int = 0
     while (not elem.is_empty()):
         if dir.current_is_dir():
-            var path: String = "res://addons/" + elem + "/plugin.cfg"
+            var path: String = "res://addons/".path_join(elem).path_join("/plugin.cfg")
             var cfg: Dictionary = self._get_plugin_config(path)
             var name: String = cfg.get("plugin", {}).get("name", "")
             if name != "":
@@ -111,11 +111,10 @@ func _on_menu_pressed() -> void:
 func _on_engine_add_id_pressed(id: int) -> void:
     var component: Component = Licenses.get_engine_component(self._add_engine_menu.get_item_metadata(id))
     component.readonly = false
-    self._components_tree.licenses.append(component)
-    self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
-    self._components_tree.reload(component)
+    self._components_tree.add_component(component)
+    self._components_tree.select_component(component)
 
-# add license entry based on plugin cfg
+# add component entry based on plugin cfg
 func _on_plugin_add_id_pressed(id: int) -> void:
     var cfg: Dictionary = self._get_plugin_config(self._add_plugin_menu.get_item_metadata(id))
     var component: Component = Component.new()
@@ -123,21 +122,21 @@ func _on_plugin_add_id_pressed(id: int) -> void:
     component.description = cfg["plugin"].get("description", "")
     component.copyright.append(cfg["plugin"].get("author", ""))
     component.version = cfg["plugin"].get("version", "")
-    self._components_tree.licenses.append(component)
-    self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
-    self._components_tree.reload(component)
+    component.paths.append(self._add_plugin_menu.get_item_metadata(id).get_base_dir())
+    self._components_tree.add_component(component)
+    self._components_tree.select_component(component)
 
 func _on_menu_id_pressed(id: int) -> void:
     match id:
         0:
             self._menu.toggle_item_checked(0)
             self._components_tree.show_readonly_components = self._menu.is_item_checked(0)
-            self._components_tree.reload(self._components_tree.get_selected_component())
+            self._components_tree.reload()
 
 func _on_add_id_pressed(id: int) -> void:
     match id:
         0:
             var component: Component = Component.new()
-            self._components_tree.licenses.append(component)
-            self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
-            self._components_tree.reload(component)
+            self._components_tree.add_component(component)
+            self._components_tree.select_component(component)
+            self._components_tree.select_component(component)

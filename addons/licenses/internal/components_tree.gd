@@ -13,11 +13,13 @@ const Licenses := preload("../licenses.gd")
 
 const _BTN_ID_REMOVE: int = 2
 
+signal components_changed()
+
 @export_node_path("Tree") var _component_detail_path; @onready var _component_detail: ComponentDetailTree = self.get_node(_component_detail_path)
 
 var show_readonly_components: bool = false:
     set = set_show_readonly_components
-var licenses: Array[Component] = []
+var _components: Array[Component] = []
 ## cached value
 var _readonly_components: Array[Component] = []
 
@@ -31,6 +33,25 @@ func set_show_readonly_components(show: bool) -> void:
 func _ready() -> void:
     self._component_detail.component_edited.connect(self._on_component_edited)
     self._component_detail.handlers = [ObjectHandler, StringFileHandler, StringMultiLineHandler, StringHandler, ArrayHandler]
+
+func add_component(component: Component) -> void:
+    self._components.append(component)
+    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self.reload()
+
+# will not emit components_changed signal
+func set_components(components_: Array[Component]) -> void:
+    self._components = components_
+    self.reload()
+
+func get_components() -> Array[Component]:
+    return self._components
+
+# also reloads the view
+# do not use internally
+func select_component(component: Component) -> void:
+    self._component_detail.set_component(component)
+    self.reload()
 
 func get_selected_component() -> Component:
     return self._component_detail.get_component()
@@ -54,13 +75,9 @@ func _add_tree_item(component: Component, idx: int, parent: TreeItem) -> TreeIte
     if not component.readonly:
         item.add_button(0, self.get_theme_icon("Remove", "EditorIcons"), _BTN_ID_REMOVE)
     var tooltip = component.name
-    if component.name == "":
-        tooltip += "\n- no name"
-    if component.licenses.is_empty():
-        tooltip += "\n- no license"
-    if component.copyright.is_empty():
-        tooltip += "\n- no copyright"
-    if tooltip != component.name:
+    var comp_warnings: PackedStringArray = component.get_warnings()
+    if comp_warnings.size() != 0:
+        tooltip += "\n- " + "\n- ".join(comp_warnings)
         item.set_icon(0, self.get_theme_icon("NodeWarning", "EditorIcons"))
     item.set_tooltip_text(0, tooltip)
     return item
@@ -69,8 +86,10 @@ func _add_component(component: Component, category_cache: Dictionary, root: Tree
     var parent: TreeItem = self._create_category_item(category_cache, component.category, root)
     return self._add_tree_item(component, idx, parent)
 
-func reload(select_component: Component = null) -> void:
+func reload() -> void:
     self.clear()
+    if self.get_root() != null:
+        push_error("could not clear")
 
     var category_cache: Dictionary = {}
     var root: TreeItem = self.create_item(null)
@@ -79,32 +98,27 @@ func reload(select_component: Component = null) -> void:
     var readonly_idx: int = 0
     # count current added custom components
     var idx: int = 0
-    var component_selected: bool = false
 
-    while idx < len(self.licenses) or readonly_idx < len(self._readonly_components):
+    while idx < len(self._components) or readonly_idx < len(self._readonly_components):
         var component: Component = null
         var cur_idx: int = 0
         var cmp: bool = false
-        if idx < len(self.licenses) and readonly_idx < len(self._readonly_components):
+        if idx < len(self._components) and readonly_idx < len(self._readonly_components):
             # TODO: will be static later on
-            cmp = Licenses.new().compare_components_ascending(self.licenses[idx], self._readonly_components[readonly_idx])
+            cmp = Licenses.new().compare_components_ascending(self._components[idx], self._readonly_components[readonly_idx])
         if readonly_idx >= len(self._readonly_components) or cmp:
-            component = self.licenses[idx]
+            component = self._components[idx]
             cur_idx = idx
             idx = idx + 1
-        elif idx >= len(self.licenses) or not cmp:
+        elif idx >= len(self._components) or not cmp:
             component = self._readonly_components[readonly_idx]
             cur_idx = readonly_idx
             readonly_idx = readonly_idx + 1
 
         var item: TreeItem = self._add_component(component, category_cache, root, cur_idx)
-        if component == select_component:
-            component_selected = true
+        if component == self._component_detail.get_component():
             self.scroll_to_item(item)
             item.select(0)
-            self._component_detail.set_component(select_component)
-    if not component_selected:
-        self._component_detail.set_component(null)
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
     var item: TreeItem = self.get_item_at_position(at_position)
@@ -112,6 +126,8 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 
 func _get_drag_data(at_position: Vector2) -> Variant:
     var item: TreeItem = self.get_item_at_position(at_position)
+    if item == null:
+        return null
     if not item.has_meta("idx") or item.get_meta("readonly"):
         return null
 
@@ -130,17 +146,18 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
     var category: String = ""
     # below or above item with category
     if to_item.has_meta("idx"):
-        category = self.licenses[to_item.get_meta("idx")].category
+        category = self._components[to_item.get_meta("idx")].category
     # below category node
     elif shift == 1:
         category = to_item.get_text(0)
-    var cur_component: Component = self.licenses[data.get_meta("idx")]
+    var cur_component: Component = self._components[data.get_meta("idx")]
     if cur_component.category == category:
         return
     cur_component.category = category
-    Licenses.sort_components()
-    self.licenses.sort_custom(Licenses.new().compare_components_ascending)
-    self.reload(cur_component)
+    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self.components_changed.emit()
+    self.reload()
+    self._component_detail.reload()
 
 func _on_item_selected() -> void:
     var item: TreeItem = self.get_selected()
@@ -150,31 +167,40 @@ func _on_item_selected() -> void:
     if item.get_meta("readonly"):
         component = self._readonly_components[item.get_meta("idx")]
     else:
-        component = self.licenses[item.get_meta("idx")]
+        component = self._components[item.get_meta("idx")]
     self._component_detail.set_component(component)
 
 func _on_button_clicked(item: TreeItem, column: int, id: int, mouse_button_idx: int) -> void:
     match id:
         _BTN_ID_REMOVE:
-            self.licenses.remove_at(item.get_meta("idx"))
-            self.licenses.sort_custom(Licenses.new().compare_components_ascending)
-            Licenses.save(self.licenses, Licenses.get_license_data_filepath())
-            self.reload(self._component_detail.get_component())
+            var comp: Component = self._components[item.get_meta("idx")]
+            self._components.remove_at(item.get_meta("idx"))
+            self._components.sort_custom(Licenses.new().compare_components_ascending)
+            self.components_changed.emit()
+            # refresh detail view if the current component was removed
+            if comp == self._component_detail.get_component():
+                self._component_detail.set_component(null)
+            self.reload()
 
+# callback from commponent detail tree
 func _on_component_edited(component: Component) -> void:
-    self.licenses.sort_custom(Licenses.new().compare_components_ascending)
-    Licenses.save(self.licenses, Licenses.get_license_data_filepath())
-    self.reload(component)
+    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self.components_changed.emit()
+    self.reload()
 
 func _on_item_edited() -> void:
     var category_item: TreeItem = self.get_edited()
     var old_category: String = category_item.get_meta("category")
     var new_category: String = category_item.get_text(0)
     category_item.set_meta("category", new_category)
-    for component in self.licenses:
+    for component in self._components:
         if component.category == old_category:
             component.category = new_category
 
-    self.licenses.sort_custom(Licenses.new().compare_components_ascending)
-    Licenses.save(self.licenses, Licenses.get_license_data_filepath())
-    self.reload(self._component_detail.get_component())
+    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self.components_changed.emit()
+    # we cannot reload the tree while it is processing any kind of input/signals
+    # https://github.com/godotengine/godot/issues/50084
+    call_deferred("reload")
+    # reload detail view as the category can be changed
+    self._component_detail.reload()
