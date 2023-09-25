@@ -77,7 +77,7 @@ func _add_tree_item(component: Component, idx: int, parent: TreeItem) -> TreeIte
     var tooltip = component.name
     var comp_warnings: PackedStringArray = component.get_warnings()
     if comp_warnings.size() != 0:
-        tooltip += "\n- " + "\n - ".join(comp_warnings)
+        tooltip += "\n- " + "\n- ".join(comp_warnings)
         item.set_icon(0, self.get_theme_icon("NodeWarning", "EditorIcons"))
     item.set_tooltip_text(0, tooltip)
     return item
@@ -98,7 +98,6 @@ func reload() -> void:
     var readonly_idx: int = 0
     # count current added custom components
     var idx: int = 0
-    var component_selected: bool = false
 
     while idx < len(self._components) or readonly_idx < len(self._readonly_components):
         var component: Component = null
@@ -118,7 +117,6 @@ func reload() -> void:
 
         var item: TreeItem = self._add_component(component, category_cache, root, cur_idx)
         if component == self._component_detail.get_component():
-            component_selected = true
             self.scroll_to_item(item)
             item.select(0)
 

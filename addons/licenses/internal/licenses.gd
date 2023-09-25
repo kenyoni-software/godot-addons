@@ -30,7 +30,7 @@ func reload() -> void:
     res.components.sort_custom(Licenses.new().compare_components_ascending)
     self._components_tree.set_components(res.components)
 
-func _update_set_license_filepath_button():
+func _update_set_license_filepath_button() -> void:
     if Licenses.get_license_data_filepath() == self._license_file_edit.text:
         self._set_license_filepath_button.icon = self.get_theme_icon("ImportCheck", "EditorIcons")
         self._set_license_filepath_button.tooltip_text = "Selected file is set as the project license file."
