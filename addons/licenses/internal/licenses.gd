@@ -27,9 +27,8 @@ func reload() -> void:
     else:
         self._license_file_edit.right_icon = self.get_theme_icon("NodeWarning", "EditorIcons")
         self._license_file_edit.tooltip_text = res.err_msg
-    self._components_tree.licenses = res.components
-    self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
-    self._components_tree.reload()
+    res.components.sort_custom(Licenses.new().compare_components_ascending)
+    self._components_tree.set_components(res.components)
 
 func _update_set_license_filepath_button():
     if Licenses.get_license_data_filepath() == self._license_file_edit.text:
@@ -60,4 +59,6 @@ func _on_data_file_selected(path: String) -> void:
 func _on_set_license_filepath_clicked() -> void:
     Licenses.set_license_data_filepath(self._license_file_edit.text)
     self._update_set_license_filepath_button()
-  
+
+func _on_components_changed() -> void:
+    Licenses.save(self._components_tree.get_components(), self._license_file_edit.text)
