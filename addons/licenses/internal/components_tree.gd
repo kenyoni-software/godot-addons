@@ -76,6 +76,15 @@ func _add_tree_item(component: Component, idx: int, parent: TreeItem) -> TreeIte
         tooltip += "\n- no license"
     if component.copyright.is_empty():
         tooltip += "\n- no copyright"
+    var path_missing: bool = false
+    for path in component.paths:
+        if FileAccess.file_exists(path) || DirAccess.dir_exists_absolute(path):
+            continue
+        if !path_missing:
+            tooltip += "\n- referenced path do not exist"
+        tooltip += "\n    - " + path
+        path_missing = true
+
     if tooltip != component.name:
         item.set_icon(0, self.get_theme_icon("NodeWarning", "EditorIcons"))
     item.set_tooltip_text(0, tooltip)
