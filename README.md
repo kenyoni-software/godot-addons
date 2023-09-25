@@ -180,7 +180,7 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 Manage license and copyright for third party graphics, software or libraries.
 Group them into categories, add descriptions or web links.
 
-The data is stored inside a json file. This file is automatically added to the export, you do not need to add it yourself.
+The data is stored inside a json file. This file is automatically added to the export, you do not need to add it yourself. If you provide license files instead of a text, they are also exported.
 
 You can change the project license file either with a button at the upper right, in the license menu. Or inside the project settings under the menu `Plugins` -> `Licenses`.
 
@@ -209,6 +209,16 @@ Component class, data wrapper for all  information regarding one license item.
 **Component.License** - [`addons/licenses/component.gd`](./addons/licenses/component.gd)
 
 License class.
+
+### Changelog
+
+#### 1.5.0
+
+- Removed overriden engine methods
+- Creating a plugin component will now add the plugin path to paths
+- Fix dragging/ double click crash
+- Fix overriding project license file if another license file is loaded
+- Add warning tooltip if a plugin paths does not exist
 
 ---
 
