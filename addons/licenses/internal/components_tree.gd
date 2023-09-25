@@ -32,6 +32,12 @@ func _ready() -> void:
     self._component_detail.component_edited.connect(self._on_component_edited)
     self._component_detail.handlers = [ObjectHandler, StringFileHandler, StringMultiLineHandler, StringHandler, ArrayHandler]
 
+# also reloads the view
+# do not use internally
+func select_component(component: Component) -> void:
+    self._component_detail.set_component(component)
+    self.reload()
+
 func get_selected_component() -> Component:
     return self._component_detail.get_component()
 
@@ -69,8 +75,10 @@ func _add_component(component: Component, category_cache: Dictionary, root: Tree
     var parent: TreeItem = self._create_category_item(category_cache, component.category, root)
     return self._add_tree_item(component, idx, parent)
 
-func reload(select_component: Component = null) -> void:
+func reload() -> void:
     self.clear()
+    if self.get_root() != null:
+        push_error("could not clear")
 
     var category_cache: Dictionary = {}
     var root: TreeItem = self.create_item(null)
@@ -98,13 +106,10 @@ func reload(select_component: Component = null) -> void:
             readonly_idx = readonly_idx + 1
 
         var item: TreeItem = self._add_component(component, category_cache, root, cur_idx)
-        if component == select_component:
+        if component == self._component_detail.get_component():
             component_selected = true
             self.scroll_to_item(item)
             item.select(0)
-            self._component_detail.set_component(select_component)
-    if not component_selected:
-        self._component_detail.set_component(null)
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
     var item: TreeItem = self.get_item_at_position(at_position)
@@ -141,7 +146,8 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
         return
     cur_component.category = category
     self.licenses.sort_custom(Licenses.new().compare_components_ascending)
-    self.reload(cur_component)
+    self.reload()
+    self._component_detail.reload()
 
 func _on_item_selected() -> void:
     var item: TreeItem = self.get_selected()
@@ -157,15 +163,20 @@ func _on_item_selected() -> void:
 func _on_button_clicked(item: TreeItem, column: int, id: int, mouse_button_idx: int) -> void:
     match id:
         _BTN_ID_REMOVE:
+            var comp: Component = self.licenses[item.get_meta("idx")]
             self.licenses.remove_at(item.get_meta("idx"))
             self.licenses.sort_custom(Licenses.new().compare_components_ascending)
             Licenses.save(self.licenses, Licenses.get_license_data_filepath())
-            self.reload(self._component_detail.get_component())
+            # refresh detail view if the current component was removed
+            if comp == self._component_detail.get_component():
+                self._component_detail.set_component(null)
+            self.reload()
 
+# callback from commponent detail tree
 func _on_component_edited(component: Component) -> void:
     self.licenses.sort_custom(Licenses.new().compare_components_ascending)
     Licenses.save(self.licenses, Licenses.get_license_data_filepath())
-    self.reload(component)
+    self.reload()
 
 func _on_item_edited() -> void:
     var category_item: TreeItem = self.get_edited()
@@ -178,4 +189,6 @@ func _on_item_edited() -> void:
 
     self.licenses.sort_custom(Licenses.new().compare_components_ascending)
     Licenses.save(self.licenses, Licenses.get_license_data_filepath())
-    self.reload(self._component_detail.get_component())
+    call_deferred("reload")
+    # reload detail view as the category can be changed
+    self._component_detail.reload()

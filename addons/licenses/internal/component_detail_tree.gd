@@ -17,19 +17,21 @@ var _component: Component :
 var handlers: Array = []
 var _selected_item: TreeItem = null
 
+func set_component(new_component: Component) -> void:
+    if _component == new_component:
+        return
+    _component = new_component
+    self.reload()
+
+func get_component() -> Component:
+    return _component
+
 func _init() -> void:
     self.set_column_custom_minimum_width(0, 152)
     self.set_column_expand(0, false)
     self.set_column_clip_content(1, true)
 
-func set_component(new_component: Component) -> void:
-    _component = new_component
-    self._update_items()
-
-func get_component() -> Component:
-    return _component
-
-func _update_items() -> void:
+func reload() -> void:
     self._selected_item = null
     self.clear()
     if self._component == null:
