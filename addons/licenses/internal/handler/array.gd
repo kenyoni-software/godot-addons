@@ -2,7 +2,7 @@ extends "base.gd"
 
 var _constructor: Callable
 
-func _init(tree_: Tree, item_: TreeItem, value_: Variant, property_: Dictionary) -> void:
+func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, property_: Dictionary) -> void:
     super._init(tree_, item_, value_, property_)
     self.item.set_text(0, self.property["name"].capitalize())
     self.item.set_text(1, "[ " + str(len(self.value)) + " ]")

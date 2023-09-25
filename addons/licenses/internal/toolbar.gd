@@ -86,7 +86,7 @@ func _create_plugin_menu_items() -> void:
     var idx: int = 0
     while (not elem.is_empty()):
         if dir.current_is_dir():
-            var path: String = "res://addons/" + elem + "/plugin.cfg"
+            var path: String = "res://addons/".path_join(elem).path_join("/plugin.cfg")
             var cfg: Dictionary = self._get_plugin_config(path)
             var name: String = cfg.get("plugin", {}).get("name", "")
             if name != "":
@@ -115,7 +115,7 @@ func _on_engine_add_id_pressed(id: int) -> void:
     self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
     self._components_tree.reload(component)
 
-# add license entry based on plugin cfg
+# add component entry based on plugin cfg
 func _on_plugin_add_id_pressed(id: int) -> void:
     var cfg: Dictionary = self._get_plugin_config(self._add_plugin_menu.get_item_metadata(id))
     var component: Component = Component.new()

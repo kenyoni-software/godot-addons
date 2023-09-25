@@ -8,6 +8,7 @@ var property: Dictionary
 var value: Variant
 
 func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, property_: Dictionary) -> void:
+    assert(item_ != null, "item must not null")
     self.tree = tree_
     self.item = item_
     self.property = property_

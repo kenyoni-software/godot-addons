@@ -112,6 +112,8 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 
 func _get_drag_data(at_position: Vector2) -> Variant:
     var item: TreeItem = self.get_item_at_position(at_position)
+    if item == null:
+        return null
     if not item.has_meta("idx") or item.get_meta("readonly"):
         return null
 

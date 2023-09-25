@@ -11,7 +11,9 @@ enum BUTTON_ID {
     FILE_DIALOG = 3
 }
 
-var _component: Component : get = get_component, set = set_component
+var _component: Component :
+    set = set_component,
+    get = get_component
 var handlers: Array = []
 var _selected_item: TreeItem = null
 
@@ -67,7 +69,7 @@ func _on_item_edited(item: TreeItem = null) -> void:
     if parent != null:
         parent.get_meta("handler").child_edited(item)
 
-    self.emit_signal("component_edited", self._component)
+    self.component_edited.emit(self._component)
 
 func _get_handler(property: Dictionary) -> GDScript:
     for handler in self.handlers:
