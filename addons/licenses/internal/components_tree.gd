@@ -34,6 +34,11 @@ func _ready() -> void:
     self._component_detail.component_edited.connect(self._on_component_edited)
     self._component_detail.handlers = [ObjectHandler, StringFileHandler, StringMultiLineHandler, StringHandler, ArrayHandler]
 
+func add_component(component: Component) -> void:
+    self._components.append(component)
+    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self.reload()
+
 # will not emit components_changed signal
 func set_components(components_: Array[Component]) -> void:
     self._components = components_

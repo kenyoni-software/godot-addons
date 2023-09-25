@@ -111,8 +111,7 @@ func _on_menu_pressed() -> void:
 func _on_engine_add_id_pressed(id: int) -> void:
     var component: Component = Licenses.get_engine_component(self._add_engine_menu.get_item_metadata(id))
     component.readonly = false
-    self._components_tree.licenses.append(component)
-    self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
+    self._components_tree.add_component(component)
     self._components_tree.select_component(component)
 
 # add component entry based on plugin cfg
@@ -124,8 +123,7 @@ func _on_plugin_add_id_pressed(id: int) -> void:
     component.copyright.append(cfg["plugin"].get("author", ""))
     component.version = cfg["plugin"].get("version", "")
     component.paths.append(self._add_plugin_menu.get_item_metadata(id).get_base_dir())
-    self._components_tree.licenses.append(component)
-    self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
+    self._components_tree.add_component(component)
     self._components_tree.select_component(component)
 
 func _on_menu_id_pressed(id: int) -> void:
@@ -139,6 +137,6 @@ func _on_add_id_pressed(id: int) -> void:
     match id:
         0:
             var component: Component = Component.new()
-            self._components_tree.licenses.append(component)
-            self._components_tree.licenses.sort_custom(Licenses.new().compare_components_ascending)
+            self._components_tree.add_component(component)
+            self._components_tree.select_component(component)
             self._components_tree.select_component(component)
