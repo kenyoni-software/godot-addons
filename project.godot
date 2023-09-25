@@ -19,6 +19,14 @@ config/version="1.0.0"
 
 GLogging="*res://addons/glogging/glogging.gd"
 
+[debug]
+
+gdscript/warnings/exclude_addons=false
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/aspect_ratio_resize_container/plugin.cfg", "res://addons/custom_theme_overrides/plugin.cfg", "res://addons/git_sha_project_setting/plugin.cfg", "res://addons/glogging/plugin.cfg", "res://addons/hide_private_properties/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/qr_code/plugin.cfg", "res://addons/texture_button_colored/plugin.cfg")
