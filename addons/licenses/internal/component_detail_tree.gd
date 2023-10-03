@@ -14,7 +14,7 @@ enum BUTTON_ID {
 var _component: Component :
     set = set_component,
     get = get_component
-var handlers: Array = []
+var handlers: Array[GDScript] = []
 var _selected_item: TreeItem = null
 
 func set_component(new_component: Component) -> void:
@@ -41,11 +41,11 @@ func reload() -> void:
         self.set_readonly(self.get_root())
 
 func set_readonly(item: TreeItem) -> void:
-    for column in range(self.columns):
+    for column: int in range(self.columns):
         item.set_editable(column, false)
-        for idx in range(item.get_button_count(column)):
+        for idx: int in range(item.get_button_count(column)):
             item.erase_button(column, 0)
-    for child in item.get_children():
+    for child: TreeItem in item.get_children():
         self.set_readonly(child)
     if item.get_next() != null:
         self.set_readonly(item.get_next())
@@ -74,7 +74,7 @@ func _on_item_edited(item: TreeItem = null) -> void:
     self.component_edited.emit(self._component)
 
 func _get_handler(property: Dictionary) -> GDScript:
-    for handler in self.handlers:
+    for handler: GDScript in self.handlers:
         if handler.can_handle(property):
             return handler
     return null

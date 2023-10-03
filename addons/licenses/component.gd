@@ -109,7 +109,7 @@ func get_warnings() -> PackedStringArray:
     if self.copyright.is_empty():
         res.append("no copyright")
     var path_missing: bool = false
-    for path in self.paths:
+    for path: String in self.paths:
         if FileAccess.file_exists(path) || DirAccess.dir_exists_absolute(path):
             continue
         res.append("path '" + path + "' does not exst")
@@ -117,7 +117,7 @@ func get_warnings() -> PackedStringArray:
 
 func serialize() -> Dictionary:
     var licenses: Array[Dictionary] = []
-    for license in self.licenses:
+    for license: License in self.licenses:
         licenses.append(license.serialize())
     return {
         "id": self.id,
@@ -142,6 +142,6 @@ func deserialize(data: Dictionary):
     self.description = data.get("description", "")
     self.web = data.get("web", "")
     self.paths = data.get("paths", [])
-    for license in data.get("licenses", []):
+    for license: Dictionary in data.get("licenses", []):
         self.licenses.append(License.new().deserialize(license))
     return self

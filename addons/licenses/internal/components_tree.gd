@@ -193,7 +193,7 @@ func _on_item_edited() -> void:
     var old_category: String = category_item.get_meta("category")
     var new_category: String = category_item.get_text(0)
     category_item.set_meta("category", new_category)
-    for component in self._components:
+    for component: Component in self._components:
         if component.category == old_category:
             component.category = new_category
 

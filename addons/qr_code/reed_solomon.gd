@@ -23,7 +23,7 @@ static func _create_log_anti_log_tables() -> void:
     _anti_log_table.fill(0)
     _log_table.resize(256)
     _log_table.fill(0)
-    for degree in range(0, 256):
+    for degree: int in range(0, 256):
         var value: int = _anti_log(degree)
         _anti_log_table[degree] = value
         _log_table[value] = degree % 255
@@ -47,9 +47,9 @@ static func generator_polynom(size: int) -> PackedByteArray:
     res[0] = 1
 
     var a_j: int = 1
-    for exp in range(0, size):
+    for exp: int in range(0, size):
         var cur_val: int = a_j
-        for cur_exp in range(1, exp + 1):
+        for cur_exp: int in range(1, exp + 1):
             var old_res: int = res[cur_exp]
             res[cur_exp] = cur_val ^ old_res
             cur_val = mul(old_res, a_j)
@@ -65,12 +65,12 @@ static func encode(data: PackedByteArray, code_words: int) -> PackedByteArray:
     enc_msg.resize(len(data) + len(gen_poly) - 1)
     enc_msg.fill(0)
 
-    for idx in range(len(data)):
+    for idx: int in range(len(data)):
         enc_msg[idx] = data[idx]
 
-    for idx in range(len(data)):
+    for idx: int in range(len(data)):
         var coef: int = enc_msg[idx]
-        for p_idx in range(1, len(gen_poly)):
+        for p_idx: int in range(1, len(gen_poly)):
             enc_msg[idx+p_idx] ^= mul(gen_poly[p_idx], coef)
 
     return enc_msg.slice(len(data))

@@ -1,6 +1,7 @@
 extends EditorExportPlugin
 
 const Licenses := preload("licenses.gd")
+const Component := preload("component.gd")
 
 func _get_name() -> String:
     return "kenyoni_licenses_exporter"
@@ -13,8 +14,8 @@ func _export_begin(features: PackedStringArray, is_debug: bool, path: String, fl
     if res.err_msg != "":
         push_error("Failed to export license files: " + res.err_msg)
         return
-    for component in res.components:
-        for license in component.licenses:
+    for component: Component in res.components:
+        for license: Component.License in component.licenses:
             if license.file != "":
                 self._add_file(license.file)
 

@@ -23,7 +23,7 @@ func to_byte_array() -> PackedByteArray:
     var byte_arr: PackedByteArray = []
 
     var cur_byte: int = 0
-    for idx in range(self._data.size()):
+    for idx: int in range(self._data.size()):
         var byte_idx: int = 7 - idx % 8
         if self._data[idx]:
             cur_byte = _set_state(cur_byte, byte_idx)
@@ -42,15 +42,15 @@ func append_stream(stream) -> void:
     self._data.append_array(stream.get_array())
 
 func append_byte_array(arr: PackedByteArray) -> void:
-    for val in arr:
+    for val: int in arr:
         self.append(val, 8)
 
 func prepend(value: int, total_bits: int) -> void:
-    for idx in range(total_bits - 1, -1, -1):
+    for idx: int in range(total_bits - 1, -1, -1):
         self._data.insert(0, int(get_state(value, idx)))
 
 func append(value: int, total_bits: int) -> void:
-    for idx in range(total_bits - 1, -1, -1):
+    for idx: int in range(total_bits - 1, -1, -1):
         self._data.append(int(get_state(value, idx)))
 
 func set_bit(idx: int, bit: bool) -> void:
@@ -61,7 +61,7 @@ func get_bit(idx: int) -> bool:
 
 func _to_string() -> String:
     var val: String = ""
-    for idx in range(self._data.size()):
+    for idx: int in range(self._data.size()):
         if (idx + 1) % 8 == 1:
             val += "["
         val += str(self._data[idx])

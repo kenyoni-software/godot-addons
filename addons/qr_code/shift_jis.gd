@@ -35,7 +35,7 @@ static func get_string_from_shift_jis_2004(arr: PackedByteArray) -> String:
     assert(arr.size() % 2 == 0)
     var res: String = ""
 
-    for idx in range(arr.size() / 2):
+    for idx: int in range(arr.size() / 2):
         var unicode: int = _SHIFT_JIS_TO_UNICODE_TABLE.get(arr.decode_u16(idx * 2), -1)
         if unicode != -1:
             res += char(unicode)
@@ -50,7 +50,7 @@ static func to_jis_8_buffer(text: String) -> PackedByteArray:
     res.resize(text.length())
 
     var byte_idx: int = 0
-    for idx in range(text.length()):
+    for idx: int in range(text.length()):
         var unicode: int = text.unicode_at(idx)
         var jis_val: int = _UNICODE_TO_SHIFT_JIS_TABLE.get(unicode, -1)
         if jis_val != -1 && jis_val <= 0xFF:
@@ -66,7 +66,7 @@ static func to_jis_8_buffer(text: String) -> PackedByteArray:
 static func get_string_from_jis_8(arr: PackedByteArray) -> String:
     var res: String = ""
 
-    for idx in range(arr.size()):
+    for idx: int in range(arr.size()):
         var unicode: int = _SHIFT_JIS_TO_UNICODE_TABLE.get(arr.decode_u8(idx), -1)
         if unicode != -1:
             res += char(unicode)
