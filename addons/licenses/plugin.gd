@@ -18,7 +18,7 @@ func _enter_tree() -> void:
     self.add_export_plugin(self.export_plugin)
 
     self.licenses_dialog = LicensesDialogScene.instantiate()
-    self.get_editor_interface().get_base_control().add_child(self.licenses_dialog)
+    EditorInterface.get_base_control().add_child(self.licenses_dialog)
     self.add_tool_menu_item(self._get_plugin_name() + "...", self._show_popup)
 
 func _exit_tree() -> void:
