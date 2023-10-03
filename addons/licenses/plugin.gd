@@ -27,7 +27,10 @@ func _exit_tree() -> void:
     self.remove_export_plugin(self.export_plugin)
 
 func _show_popup() -> void:
-    self.licenses_dialog.popup_centered_ratio(0.4)
+    if licenses_dialog.visible:
+        self.licenses_dialog.grab_focus()
+    else:
+        self.licenses_dialog.popup_centered_ratio(0.4)
 
 static func set_project_setting(key: String, initial_value, type: int, type_hint: int) -> void:
     if not ProjectSettings.has_setting(key):
