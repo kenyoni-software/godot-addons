@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"slices"
 )
 
 func main() {
@@ -42,7 +43,7 @@ func iterDirectories(baseDir string, addons []string) error {
 		if !dir.IsDir() {
 			continue
 		}
-		if len(addons) != 0 && !contains(addons, dir.Name()) {
+		if len(addons) != 0 && !slices.Contains(addons, dir.Name()) {
 			continue
 		}
 		addonCfg := newAddonConfig(dir.Name(), baseDir)
