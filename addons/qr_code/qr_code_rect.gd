@@ -122,7 +122,7 @@ func get_data() -> Variant:
             QRCode.ECI.ISO_8859_1:
                 return input_data.get_string_from_ascii()
             QRCode.ECI.SHIFT_JIS:
-                return ShiftJIS.get_string_from_jis_2004(input_data)
+                return ShiftJIS.get_string_from_shift_jis_2004(input_data)
             QRCode.ECI.UTF_8:
                 return input_data.get_string_from_utf8()
             QRCode.ECI.UTF_16:

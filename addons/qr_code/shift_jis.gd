@@ -31,7 +31,7 @@ static func to_shift_jis_2004_buffer(text: String) -> PackedByteArray:
 
 ## requires an u16 int array, which is Shift JIS encoded
 ## unknown characters are skipped
-static func get_string_from_jis_2004(arr: PackedByteArray) -> String:
+static func get_string_from_shift_jis_2004(arr: PackedByteArray) -> String:
     assert(arr.size() % 2 == 0)
     var res: String = ""
 

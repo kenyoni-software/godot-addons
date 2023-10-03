@@ -950,7 +950,7 @@ func put_kanji(data: String) -> void:
     if self.mode != Mode.KANJI || data != self._input_data:
         self._clear_cache()
     self.mode = Mode.KANJI
-    self._input_data = ShiftJIS.get_string_from_jis_2004(ShiftJIS.to_shift_jis_2004_buffer(data))
+    self._input_data = ShiftJIS.get_string_from_shift_jis_2004(ShiftJIS.to_shift_jis_2004_buffer(data))
 
 ## returns row by row
 ## to get row size use get_module_count

@@ -16,7 +16,7 @@ Download [here](https://github.com/kenyoni-software/godot-addons/releases/tag/la
   Extension of `TextureButton` with color options.
 - [Logging](#logging)  
   Simple logger.
-- [QR Code (beta)](#qr-code)  
+- [QR Code](#qr-code)  
   QRCodeRect and QR Code generation.
 
 ### Tools
@@ -300,9 +300,6 @@ If not log level is set, the log level of the parent logger will be used.
 
 ## QR Code
 
-> *This addon might change it's interface and available functions.  
-> Please test and report any issues.*
-
 QR Code generation either with the included `QRCodeRect` node or use the encoding result of the `QRCode` class.
 
 ### Compatibility
@@ -413,11 +410,15 @@ Shift JIS encoding utility.
 ### Functions
 
 - `static func to_shift_jis_2004_buffer(text: String) -> PackedByteArray`
-- `static func get_string_from_jis_2004(arr: PackedByteArray) -> String`
+- `static func get_string_from_shift_jis_2004(arr: PackedByteArray) -> String`
 - `static func to_jis_8_buffer(text: String) -> PackedByteArray`
 - `static func get_string_from_jis_8(arr: PackedByteArray) -> String`
 
 ### Changelog
+
+#### 1.0.0
+
+- Renamed `get_string_from_jis_2004` to `get_string_from_shift_jis_2004`
 
 #### 0.3.1
 
