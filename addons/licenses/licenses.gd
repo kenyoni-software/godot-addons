@@ -4,8 +4,7 @@ const Component := preload("component.gd")
 
 const DATA_FILE: String = "plugins/licenses/data_file"
 
-# TODO: make static https://github.com/godotengine/godot/issues/69491
-func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
+static func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
     var lhs_cat_lower: String = lhs.category.to_lower()
     var rhs_cat_lower: String = rhs.category.to_lower()
     return lhs_cat_lower < rhs_cat_lower or (lhs_cat_lower == rhs_cat_lower and lhs.name.to_lower() < rhs.name.to_lower())
@@ -43,12 +42,6 @@ static func get_engine_component(name: String) -> Component:
     return null
 
 static func get_engine_components() -> Array[Component]:
-    # https://github.com/godotengine/godot/issues/69491
-    var compare_components_ascending: Callable = func(lhs: Component, rhs: Component) -> bool:
-        var lhs_cat_lower: String = lhs.category.to_lower()
-        var rhs_cat_lower: String = rhs.category.to_lower()
-        return lhs_cat_lower < rhs_cat_lower or (lhs_cat_lower == rhs_cat_lower and lhs.name.to_lower() < rhs.name.to_lower())
-
     var engine_components: Array[Component] = []
 
     for info: Dictionary in Engine.get_copyright_info():
@@ -58,12 +51,6 @@ static func get_engine_components() -> Array[Component]:
     return engine_components
 
 static func get_required_engine_components() -> Array[Component]:
-    # https://github.com/godotengine/godot/issues/69491
-    var compare_components_ascending: Callable = func(lhs: Component, rhs: Component) -> bool:
-        var lhs_cat_lower: String = lhs.category.to_lower()
-        var rhs_cat_lower: String = rhs.category.to_lower()
-        return lhs_cat_lower < rhs_cat_lower or (lhs_cat_lower == rhs_cat_lower and lhs.name.to_lower() < rhs.name.to_lower())
-
     var engine_components: Array[Component] = []
 
     for name: String in ["Godot Engine", "ENet", "The FreeType Project", "Mbed TLS"]:
