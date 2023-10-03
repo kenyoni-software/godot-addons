@@ -47,11 +47,19 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Example
 
 [examples/aspect_ratio_resize_container](./examples/aspect_ratio_resize_container)
+
+### Changelog
+
+#### 3.1.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
+- Add static typing in for loops
 
 ---
 
@@ -67,7 +75,7 @@ If everything is set up, your theme override variables can be handled like every
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Screenshot
 
@@ -113,6 +121,14 @@ func _property_get_revert(_property: StringName) -> Variant:
 
 [examples/custom_theme_overrides](./examples/custom_theme_overrides)
 
+### Changelog
+
+#### 1.1.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
+- Add static typing in for loops
+
 ---
 
 ## Git SHA Project Setting
@@ -124,7 +140,7 @@ This one is automatically set and updated when you run any scene or on exporting
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Example
 
@@ -132,10 +148,15 @@ This one is automatically set and updated when you run any scene or on exporting
 
 ### Changelog
 
+#### 2.1.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
+
 #### 2.0.0
 
-Added an initial Git SHA load on opening the project.
-Removed `application/config/version`, there was no need that this was part of the addon. The value can still be added manually.
+- Added an initial Git SHA load on opening the project.
+- Removed `application/config/version`, there was no need that this was part of the addon. The value can still be added manually.
 
 ---
 
@@ -147,11 +168,18 @@ This plugin will hide exported private properties in the inspector for instantia
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Example
 
 [examples/hide_private_properties](./examples/hide_private_properties)
+
+### Changelog
+
+#### 1.1.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
 
 ---
 
@@ -165,9 +193,14 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Changelog
+
+#### 1.3.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
 
 #### 1.2.0
 
@@ -186,7 +219,7 @@ You can change the project license file either with a button at the upper right,
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Screenshot
 
@@ -212,6 +245,13 @@ License class.
 
 ### Changelog
 
+#### 1.6.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
+- Add static typing in for loops
+- Use static sorting function as lambda
+
 #### 1.5.0
 
 - Removed overriden engine methods
@@ -232,7 +272,7 @@ Logging into a file is not supported yet. The output will be always done via pri
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Example
 
@@ -295,6 +335,12 @@ If not log level is set, the log level of the parent logger will be used.
 - `log(level: int, message: Variant, values: Array[Variant] = []) -> void`  
   log at custom level
 
+### Changelog
+
+#### 1.5.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
 
 ---
 
@@ -304,7 +350,7 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Screenshot
 
@@ -416,6 +462,12 @@ Shift JIS encoding utility.
 
 ### Changelog
 
+#### 1.1.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
+- Add static typing in for loops
+
 #### 1.0.0
 
 - Renamed `get_string_from_jis_2004` to `get_string_from_shift_jis_2004`
@@ -441,7 +493,7 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 ### Compatibility
 
-- Godot 4.1
+- Godot 4.2
 
 ### Dependencies
 
@@ -452,6 +504,11 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 [examples/texture_button_colored](./examples/texture_button_colored)
 
 ### Changelog
+
+#### 1.3.0
+
+- Require Godot 4.2
+- Add more values to plugin.cfg
 
 #### 1.2.3
 
