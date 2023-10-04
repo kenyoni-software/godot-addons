@@ -1,3 +1,5 @@
+## will return the property list of object
+## if an entry is duplicated the last one is replacing the previous one
 static func get_updated_property_list(object: Object) -> Array:
     var properties: Array = object.get_property_list()
     var patched_properties: Array = object._get_property_list()

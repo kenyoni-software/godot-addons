@@ -122,7 +122,7 @@ func get_data() -> Variant:
             QRCode.ECI.ISO_8859_1:
                 return input_data.get_string_from_ascii()
             QRCode.ECI.SHIFT_JIS:
-                return ShiftJIS.get_string_from_jis_2004(input_data)
+                return ShiftJIS.get_string_from_shift_jis_2004(input_data)
             QRCode.ECI.UTF_8:
                 return input_data.get_string_from_utf8()
             QRCode.ECI.UTF_16:
@@ -182,7 +182,7 @@ func set_module_px_size(new_module_px_size: int) -> void:
         self._update_qr()
 
 func set_quiet_zone_size(new_quiet_zone_size: int) -> void:
-    quiet_zone_size = max(0, new_quiet_zone_size)
+    quiet_zone_size = maxi(0, new_quiet_zone_size)
     self._update_qr()
 
 func _init() -> void:
@@ -339,7 +339,7 @@ func _property_get_revert(property: StringName) -> Variant:
         _:
             return null
 
-func _get_configuration_warnings():
+func _get_configuration_warnings() -> PackedStringArray:
     if self.auto_module_px_size && self.expand_mode == EXPAND_KEEP_SIZE:
         return ["Do not use auto module px size AND keep size expand mode."]
     return []
