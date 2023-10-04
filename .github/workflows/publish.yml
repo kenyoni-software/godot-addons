@@ -71,8 +71,8 @@ jobs:
         id: "prepare-artifacts"
         working-directory: publisher
         run: |
-          go run . zip ../ ${{ matrix.config.id }}
-          echo "version=$(go run . version ../ ${{ matrix.config.id }})" >> $GITHUB_OUTPUT 
+          go run . zip -b ../ -a ${{ matrix.config.id }} -o ../archives/
+          go run . github -b ../ -a ${{ matrix.config.id }} -o $GITHUB_OUTPUT
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
@@ -83,15 +83,15 @@ jobs:
       - uses: mukunku/tag-exists-action@v1.2.0
         id: checkTag
         with:
-          tag: ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}}
+          tag: ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }}
 
       - name: Prepare Release
         if: ${{ steps.checkTag.outputs.exists == 'false' }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git tag ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}}
-          git push origin tag ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}}
+          git tag ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }}
+          git push origin tag ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }}
 
       # wait 5s that the pushed tag is available in the next step, sometimes the next step saw only the local tag
       - name: Wait 5s
@@ -102,11 +102,8 @@ jobs:
         if: ${{ steps.checkTag.outputs.exists == 'false' }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          NOTES: |
-            ${{ matrix.config.name }}
-            Version: ${{steps.prepare-artifacts.outputs.version}}
         run: |
-          gh release create ${{ matrix.config.id }}-${{steps.prepare-artifacts.outputs.version}} ./archives/* --title "${{ matrix.config.name }} ${{steps.prepare-artifacts.outputs.version}}" --notes "${{ env.NOTES }}"
+          gh release create ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }} ./archives/* --title "${{ matrix.config.name }} ${{ steps.prepare-artifacts.outputs.version }}" --notes "${{ steps.prepare-artifacts.outputs.notes }}"
 
   combined-release:
     name: Combined Release
