@@ -218,7 +218,7 @@ License class.
 - Creating a plugin component will now add the plugin path to paths
 - Fix dragging/ double click crash
 - Fix overriding project license file if another license file is loaded
-- Add warning tooltip if a plugin paths does not exist
+- Add warning tooltip if a component paths does not exist
 
 ---
 
