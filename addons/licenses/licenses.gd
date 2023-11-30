@@ -4,15 +4,14 @@ const Component := preload("component.gd")
 
 const DATA_FILE: String = "plugins/licenses/data_file"
 
-# TODO: make static https://github.com/godotengine/godot/issues/69491
-func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
+static func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
     var lhs_cat_lower: String = lhs.category.to_lower()
     var rhs_cat_lower: String = rhs.category.to_lower()
     return lhs_cat_lower < rhs_cat_lower or (lhs_cat_lower == rhs_cat_lower and lhs.name.to_lower() < rhs.name.to_lower())
 
 static func get_engine_component(name: String) -> Component:
     var license_keys: Array = Engine.get_license_info().keys()
-    for info in Engine.get_copyright_info():
+    for info: Dictionary in Engine.get_copyright_info():
         if info["name"] != name:
             continue
         var component: Component = Component.new()
@@ -23,7 +22,7 @@ static func get_engine_component(name: String) -> Component:
 
         component.copyright = info["parts"][0]["copyright"]
         var license_str: String = info["parts"][0]["license"]
-        for license_key in license_keys:
+        for license_key: String in license_keys:
             if license_key in license_str:
                 var license: Component.License = Component.License.new()
                 license.name = license_key
@@ -43,30 +42,18 @@ static func get_engine_component(name: String) -> Component:
     return null
 
 static func get_engine_components() -> Array[Component]:
-    # https://github.com/godotengine/godot/issues/69491
-    var compare_components_ascending: Callable = func(lhs: Component, rhs: Component) -> bool:
-        var lhs_cat_lower: String = lhs.category.to_lower()
-        var rhs_cat_lower: String = rhs.category.to_lower()
-        return lhs_cat_lower < rhs_cat_lower or (lhs_cat_lower == rhs_cat_lower and lhs.name.to_lower() < rhs.name.to_lower())
-
     var engine_components: Array[Component] = []
 
-    for info in Engine.get_copyright_info():
+    for info: Dictionary in Engine.get_copyright_info():
         engine_components.append(get_engine_component(info["name"]))
 
     engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
 static func get_required_engine_components() -> Array[Component]:
-    # https://github.com/godotengine/godot/issues/69491
-    var compare_components_ascending: Callable = func(lhs: Component, rhs: Component) -> bool:
-        var lhs_cat_lower: String = lhs.category.to_lower()
-        var rhs_cat_lower: String = rhs.category.to_lower()
-        return lhs_cat_lower < rhs_cat_lower or (lhs_cat_lower == rhs_cat_lower and lhs.name.to_lower() < rhs.name.to_lower())
-
     var engine_components: Array[Component] = []
 
-    for name in ["Godot Engine", "ENet", "The FreeType Project", "Mbed TLS"]:
+    for name: String in ["Godot Engine", "ENet", "The FreeType Project", "Mbed TLS"]:
         engine_components.append(get_engine_component(name))
 
     engine_components.sort_custom(compare_components_ascending)
@@ -77,7 +64,7 @@ static func save(components: Array[Component], file_path: String) -> int:
     if file == null:
         return FileAccess.get_open_error()
     var raw: Array = []
-    for component in components:
+    for component: Component in components:
         raw.append(component.serialize())
     file.store_line(JSON.stringify({"components": raw}))
     file = null
@@ -109,7 +96,7 @@ static func load(file_path: String) -> LoadResult:
         return LoadResult.new([], "'%s' does not have a 'components' field" % [file_path])
 
     var components: Array[Component] = []
-    for raw in parser.data["components"]:
+    for raw: Dictionary in parser.data["components"]:
         components.append(Component.new().deserialize(raw))
     components = components
     return LoadResult.new(components)

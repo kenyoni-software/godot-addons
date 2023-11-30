@@ -47,9 +47,9 @@ func _get_plugin_config(path: String) -> Dictionary:
         return {}
 
     var cfg_data: Dictionary = {}
-    for section in config.get_sections():
+    for section: String in config.get_sections():
         var section_data: Dictionary = {}
-        for key in config.get_section_keys(section):
+        for key: String in config.get_section_keys(section):
             section_data[key] = config.get_value(section, key)
         cfg_data[section] = section_data
     return cfg_data
@@ -61,7 +61,7 @@ func _create_engine_menu_items() -> void:
     self._add_menu.add_child(self._add_engine_menu)
 
     var idx: int = 0
-    for info in Engine.get_copyright_info():
+    for info: Dictionary in Engine.get_copyright_info():
         self._add_engine_menu.add_item(info["name"])
         self._add_engine_menu.set_item_metadata(idx, info["name"])
         idx = idx + 1

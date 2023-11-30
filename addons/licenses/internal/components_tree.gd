@@ -36,7 +36,7 @@ func _ready() -> void:
 
 func add_component(component: Component) -> void:
     self._components.append(component)
-    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self._components.sort_custom(Licenses.compare_components_ascending)
     self.reload()
 
 # will not emit components_changed signal
@@ -104,8 +104,7 @@ func reload() -> void:
         var cur_idx: int = 0
         var cmp: bool = false
         if idx < len(self._components) and readonly_idx < len(self._readonly_components):
-            # TODO: will be static later on
-            cmp = Licenses.new().compare_components_ascending(self._components[idx], self._readonly_components[readonly_idx])
+            cmp = Licenses.compare_components_ascending(self._components[idx], self._readonly_components[readonly_idx])
         if readonly_idx >= len(self._readonly_components) or cmp:
             component = self._components[idx]
             cur_idx = idx
@@ -154,7 +153,7 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
     if cur_component.category == category:
         return
     cur_component.category = category
-    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self._components.sort_custom(Licenses.compare_components_ascending)
     self.components_changed.emit()
     self.reload()
     self._component_detail.reload()
@@ -175,7 +174,7 @@ func _on_button_clicked(item: TreeItem, column: int, id: int, mouse_button_idx: 
         _BTN_ID_REMOVE:
             var comp: Component = self._components[item.get_meta("idx")]
             self._components.remove_at(item.get_meta("idx"))
-            self._components.sort_custom(Licenses.new().compare_components_ascending)
+            self._components.sort_custom(Licenses.compare_components_ascending)
             self.components_changed.emit()
             # refresh detail view if the current component was removed
             if comp == self._component_detail.get_component():
@@ -184,7 +183,7 @@ func _on_button_clicked(item: TreeItem, column: int, id: int, mouse_button_idx: 
 
 # callback from commponent detail tree
 func _on_component_edited(component: Component) -> void:
-    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self._components.sort_custom(Licenses.compare_components_ascending)
     self.components_changed.emit()
     self.reload()
 
@@ -193,11 +192,11 @@ func _on_item_edited() -> void:
     var old_category: String = category_item.get_meta("category")
     var new_category: String = category_item.get_text(0)
     category_item.set_meta("category", new_category)
-    for component in self._components:
+    for component: Component in self._components:
         if component.category == old_category:
             component.category = new_category
 
-    self._components.sort_custom(Licenses.new().compare_components_ascending)
+    self._components.sort_custom(Licenses.compare_components_ascending)
     self.components_changed.emit()
     # we cannot reload the tree while it is processing any kind of input/signals
     # https://github.com/godotengine/godot/issues/50084

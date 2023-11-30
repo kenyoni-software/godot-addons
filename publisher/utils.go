@@ -34,12 +34,3 @@ func zipFile(zw *zip.Writer, src string, dest string) error {
 	_, err = io.Copy(zf, file)
 	return err
 }
-
-func contains[T comparable](elems []T, v T) bool {
-	for _, s := range elems {
-		if v == s {
-			return true
-		}
-	}
-	return false
-}

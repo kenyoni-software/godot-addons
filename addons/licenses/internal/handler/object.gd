@@ -7,7 +7,7 @@ func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, propert
     self.item.set_text(0, self.property["name"].capitalize())
     self.item.set_selectable(1, false)
 
-    for prop in Utils.get_updated_property_list(self.value):
+    for prop: Dictionary in Utils.get_updated_property_list(self.value):
         # ignore private variables and ignore non supported types and already added items
         if prop["name"].begins_with("_"):
             continue

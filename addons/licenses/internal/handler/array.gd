@@ -17,7 +17,7 @@ func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, propert
         TYPE_OBJECT:
             self._constructor = self.property["constructor"]
 
-    for idx in range(len(self.value)):
+    for idx: int in range(len(self.value)):
         self.tree._add_item(self.item, self.value[idx], self._get_child_property(str(idx)))
 
 func _get_child_property(name: String) -> Dictionary:

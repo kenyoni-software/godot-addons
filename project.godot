@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="Godot Addons"
-config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
 config/version="1.0.0"
+config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://icon.svg"
 
 [autoload]
 

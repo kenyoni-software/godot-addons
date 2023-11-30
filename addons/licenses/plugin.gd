@@ -12,21 +12,25 @@ func _get_plugin_name() -> String:
     return "Licenses"
 
 func _enter_tree() -> void:
-    self.set_project_setting(Licenses.DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
+    set_project_setting(Licenses.DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
 
     self.export_plugin = ExportPlugin.new()
     self.add_export_plugin(self.export_plugin)
 
     self.licenses_dialog = LicensesDialogScene.instantiate()
-    self.get_editor_interface().get_base_control().add_child(self.licenses_dialog)
+    EditorInterface.get_base_control().add_child(self.licenses_dialog)
     self.add_tool_menu_item(self._get_plugin_name() + "...", self._show_popup)
 
 func _exit_tree() -> void:
     self.remove_tool_menu_item(self._get_plugin_name() + "...")
+    self.licenses_dialog.queue_free()
     self.remove_export_plugin(self.export_plugin)
 
 func _show_popup() -> void:
-    self.licenses_dialog.popup_centered_ratio(0.4)
+    if licenses_dialog.visible:
+        self.licenses_dialog.grab_focus()
+    else:
+        self.licenses_dialog.popup_centered_ratio(0.4)
 
 static func set_project_setting(key: String, initial_value, type: int, type_hint: int) -> void:
     if not ProjectSettings.has_setting(key):

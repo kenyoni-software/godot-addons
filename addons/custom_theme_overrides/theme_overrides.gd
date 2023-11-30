@@ -28,7 +28,7 @@ class Item:
         return self.name
 
 func _init(overrides: Array[Array]) -> void:
-    for item in overrides:
+    for item: Array in overrides:
         self._overrides.append(Item.new(item[0], item[1]))
 
 func theme_property_list(obj: Control) -> Array[Dictionary]:
@@ -41,7 +41,7 @@ func theme_property_list(obj: Control) -> Array[Dictionary]:
         "usage": PROPERTY_USAGE_GROUP,
         "hint_string": "theme_override_"
     }]
-    for item in self._overrides:
+    for item: Item in self._overrides:
         var prop_type: Variant.Type
         var prop_hint: PropertyHint
         var prop_hint_string: String
@@ -79,7 +79,7 @@ func theme_property_list(obj: Control) -> Array[Dictionary]:
     return props
 
 func can_revert(prop_name: StringName) -> bool:
-    for item in self._overrides:
+    for item: Item in self._overrides:
         if item.full_name() == prop_name:
             return true
     return false
