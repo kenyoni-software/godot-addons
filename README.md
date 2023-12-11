@@ -249,7 +249,8 @@ License class.
 
 #### 1.7.0
 
-- Add renaming of paths when a file or folder gets renamed inside the editor.
+- Add renaming of paths when a file or folder gets renamed inside the editor
+- Add right click menu to duplicate or delete items
 
 #### 1.6.1
 
