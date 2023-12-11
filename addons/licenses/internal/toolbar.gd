@@ -110,6 +110,8 @@ func _on_menu_pressed() -> void:
 # add liense entry based on engine entry
 func _on_engine_add_id_pressed(id: int) -> void:
     var component: Component = Licenses.get_engine_component(self._add_engine_menu.get_item_metadata(id))
+    if component == null:
+        return
     component.readonly = false
     self._components_tree.add_component(component)
     self._components_tree.select_component(component)

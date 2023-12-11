@@ -245,6 +245,10 @@ License class.
 
 ### Changelog
 
+#### 1.6.1
+
+- Workaround show engine components, calling static function is bugged
+
 #### 1.6.0
 
 - Require Godot 4.2
