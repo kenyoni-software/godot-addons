@@ -5,9 +5,11 @@ const Licenses := preload("../licenses.gd")
 const Component := preload("../component.gd")
 const ComponentTree := preload("components_tree.gd")
 
+signal add_component(comp: Component)
+signal show_engine_components(show: bool)
+
 @export var _menu_button: Button = null
 @export var _add_button: Button = null
-@export_node_path("Tree") var _components_tree_path; @onready var _components_tree: ComponentTree = self.get_node(_components_tree_path)
 
 var _menu: PopupMenu
 var _add_menu: PopupMenu
@@ -107,14 +109,13 @@ func _on_add_pressed() -> void:
 func _on_menu_pressed() -> void:
     self._menu.popup_on_parent(Rect2(self._menu_button.global_position + Vector2(0.0, self._menu_button.size.y), self._menu.get_contents_minimum_size()))
 
-# add liense entry based on engine entry
+# add license entry based on engine entry
 func _on_engine_add_id_pressed(id: int) -> void:
     var component: Component = Licenses.get_engine_component(self._add_engine_menu.get_item_metadata(id))
     if component == null:
         return
     component.readonly = false
-    self._components_tree.add_component(component)
-    self._components_tree.select_component(component)
+    self.add_component.emit(component)
 
 # add component entry based on plugin cfg
 func _on_plugin_add_id_pressed(id: int) -> void:
@@ -125,20 +126,16 @@ func _on_plugin_add_id_pressed(id: int) -> void:
     component.copyright.append(cfg["plugin"].get("author", ""))
     component.version = cfg["plugin"].get("version", "")
     component.paths.append(self._add_plugin_menu.get_item_metadata(id).get_base_dir())
-    self._components_tree.add_component(component)
-    self._components_tree.select_component(component)
+    self.add_component.emit(component)
 
 func _on_menu_id_pressed(id: int) -> void:
     match id:
         0:
             self._menu.toggle_item_checked(0)
-            self._components_tree.show_readonly_components = self._menu.is_item_checked(0)
-            self._components_tree.reload()
+            self.show_engine_components.emit(self._menu.is_item_checked(0))
 
 func _on_add_id_pressed(id: int) -> void:
     match id:
         0:
             var component: Component = Component.new()
-            self._components_tree.add_component(component)
-            self._components_tree.select_component(component)
-            self._components_tree.select_component(component)
+            self.add_component.emit(component)

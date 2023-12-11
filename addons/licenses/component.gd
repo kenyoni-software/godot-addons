@@ -59,6 +59,16 @@ class License:
         self.web = data.get("web", "")
         return self
 
+    func duplicate():
+        var dup = new()
+        dup.name = self.name
+        dup.identifier = self.identifier
+        dup.text = self.text
+        dup.file = self.file
+        dup.web = self.web
+
+        return dup
+
 ## Identifier
 var id: String
 ## Use to structure the licenses to top categories. E.g. Textures, Fonts, ...
@@ -145,3 +155,18 @@ func deserialize(data: Dictionary):
     for license: Dictionary in data.get("licenses", []):
         self.licenses.append(License.new().deserialize(license))
     return self
+
+func duplicate():
+    var dup = new()
+    dup.id = self.id
+    dup.category = self.category
+    dup.name = self.name
+    dup.version = self.version
+    dup.copyright = self.copyright.duplicate()
+    dup.contact = self.contact
+    dup.web = self.web
+    dup.paths = self.paths.duplicate()
+    for license in self.licenses:
+        dup.licenses.append(license.duplicate())
+
+    return dup

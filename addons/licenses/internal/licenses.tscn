@@ -21,6 +21,8 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 script = ExtResource("3")
 _components_tree_path = NodePath("VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components")
+_component_detail_tree_path = NodePath("VBoxContainer/HSplitContainer/component_detail")
+_toolbar_path = NodePath("VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/toolbar")
 _license_file_edit = NodePath("VBoxContainer/license_file_config/edit")
 _license_file_load_button = NodePath("VBoxContainer/license_file_config/file_button")
 _set_license_filepath_button = NodePath("VBoxContainer/license_file_config/set_license_filepath_button")
@@ -63,7 +65,6 @@ layout_mode = 2
 script = ExtResource("2_a8iu8")
 _menu_button = NodePath("menu")
 _add_button = NodePath("add")
-_components_tree_path = NodePath("../components")
 
 [node name="menu" type="Button" parent="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/toolbar"]
 layout_mode = 2
@@ -88,7 +89,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_5cx7n")
 hide_root = true
 scroll_horizontal_enabled = false
 script = ExtResource("2")
-_component_detail_path = NodePath("../../../component_detail")
 
 [node name="component_detail" type="Tree" parent="VBoxContainer/HSplitContainer"]
 layout_mode = 2
@@ -99,7 +99,6 @@ hide_root = true
 script = ExtResource("1")
 
 [connection signal="button_clicked" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" method="_on_button_clicked"]
-[connection signal="components_changed" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="." method="_on_components_changed"]
 [connection signal="item_edited" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" method="_on_item_edited"]
 [connection signal="item_selected" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" method="_on_item_selected"]
 [connection signal="button_clicked" from="VBoxContainer/HSplitContainer/component_detail" to="VBoxContainer/HSplitContainer/component_detail" method="_on_button_clicked"]

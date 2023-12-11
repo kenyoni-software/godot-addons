@@ -215,6 +215,8 @@ Group them into categories, add descriptions or web links.
 
 The data is stored inside a json file. This file is automatically added to the export, you do not need to add it yourself. If you provide license files instead of a text, they are also exported.
 
+If you add paths to license data, it will be automatically adjusted if you rename a file or folder inside the editor.
+
 You can change the project license file either with a button at the upper right, in the license menu. Or inside the project settings under the menu `Plugins` -> `Licenses`.
 
 ### Compatibility
@@ -244,6 +246,10 @@ Component class, data wrapper for all  information regarding one license item.
 License class.
 
 ### Changelog
+
+#### 1.7.0
+
+- Add renaming of paths when a file or folder gets renamed inside the editor.
 
 #### 1.6.1
 
