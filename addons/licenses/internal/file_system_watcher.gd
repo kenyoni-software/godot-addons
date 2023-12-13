@@ -1,6 +1,7 @@
 extends RefCounted
 
 const ComponentsContainer := preload("components_container.gd")
+const Component := preload("../component.gd")
 
 var _components: ComponentsContainer
 
@@ -14,10 +15,13 @@ func _on_file_moved(old_file: String, new_file: String) -> void:
     var changed: bool = false
     for comp in self._components.components():
         for idx in range(comp.paths.size()):
-            var path: String = comp.paths[idx]
-            if path == old_file:
+            if comp.paths[idx] == old_file:
                 changed = true
                 comp.paths[idx] = new_file
+        for license: Component.License in comp.licenses:
+            if license.file == old_file:
+                changed = true
+                license.file = new_file
     if changed:
         self._components.emit_changed()
 
@@ -31,6 +35,11 @@ func _on_folder_moved(old_folder: String, new_folder: String) -> void:
                 changed = true
                 comp.paths[idx] = new_folder.rstrip("/")
             if path.begins_with(old_folder):
+                changed = true
                 comp.paths[idx] = new_folder.rstrip("/") + "/" + comp.paths[idx].trim_prefix(old_folder)
+        for license: Component.License in comp.licenses:
+            if license.file.begins_with(old_folder):
+                changed = true
+                license.file = new_folder.rstrip("/") + "/" + license.file.trim_prefix(old_folder)
     if changed:
         self._components.emit_changed()
