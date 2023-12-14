@@ -8,6 +8,9 @@ Download [here](https://github.com/kenyoni-software/godot-addons/releases/tag/la
 
 ## Overview
 
+If you import any plugin or open a Godot project for the first time, the plugins will throw errors. To ensure correct operation, reload the project and the errors are gone.
+*Background: most plugins are using `preload`, but on first import there is nothing which can be preloaded.*
+
 ### Nodes
 
 - [AspectRatioResizeContainer](#aspectratioresizecontainer)  
