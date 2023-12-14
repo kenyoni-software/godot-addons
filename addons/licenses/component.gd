@@ -116,13 +116,19 @@ func get_warnings() -> PackedStringArray:
         res.append("no name")
     if self.licenses.is_empty():
         res.append("no license")
+    for idx: int in range(self.licenses.size()):
+        var license: License = self.licenses[idx]
+        if license.name == "":
+            res.append("license [" + str(idx) + "] name is empty")
+        if license.file != "" && FileAccess.file_exists(license.file):
+            res.append("license [" + str(idx) + "] file '" + license.file + "' does not exst")
     if self.copyright.is_empty():
         res.append("no copyright")
-    var path_missing: bool = false
-    for path: String in self.paths:
+    for idx: int in range(self.paths.size()):
+        var path: String = self.paths[idx]
         if FileAccess.file_exists(path) || DirAccess.dir_exists_absolute(path):
             continue
-        res.append("path '" + path + "' does not exst")
+        res.append("paths [" + str(idx) + "] '" + path + "' does not exst")
     return res
 
 func serialize() -> Dictionary:
