@@ -68,6 +68,7 @@ func reload() -> void:
         self._license_file_edit.right_icon = self.get_theme_icon("NodeWarning", "EditorIcons")
         self._license_file_edit.tooltip_text = res.err_msg
     
+    self._component_detail_tree.set_component(null)
     self._components.set_components(res.components)
     self._components.sort_custom(Licenses.compare_components_ascending)
     self._components.emit_changed()
