@@ -251,6 +251,10 @@ License class.
 
 ### Changelog
 
+#### 1.7.5
+
+- Fix license file existing check
+
 #### 1.7.4
 
 - Fix show engine component

@@ -120,7 +120,7 @@ func get_warnings() -> PackedStringArray:
         var license: License = self.licenses[idx]
         if license.name == "":
             res.append("license [" + str(idx) + "] name is empty")
-        if license.file != "" && FileAccess.file_exists(license.file):
+        if license.file != "" && !FileAccess.file_exists(license.file):
             res.append("license [" + str(idx) + "] file '" + license.file + "' does not exst")
     if self.copyright.is_empty():
         res.append("no copyright")
