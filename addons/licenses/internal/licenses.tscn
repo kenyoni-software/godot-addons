@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfj2mhwrs1oss"]
+[gd_scene load_steps=8 format=3 uid="uid://bpqvyf7kssc70"]
 
 [ext_resource type="Script" path="res://addons/licenses/internal/component_detail_tree.gd" id="1"]
 [ext_resource type="Script" path="res://addons/licenses/internal/components_tree.gd" id="2"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://addons/licenses/internal/licenses.gd" id="3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cx7n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pof4k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g1exn"]
 
 [node name="licenses" type="MarginContainer" node_paths=PackedStringArray("_license_file_edit", "_license_file_load_button", "_set_license_filepath_button")]
 anchors_preset = 15
@@ -86,6 +90,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5cx7n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pof4k")
+allow_rmb_select = true
 hide_root = true
 scroll_horizontal_enabled = false
 script = ExtResource("2")
@@ -94,6 +100,7 @@ script = ExtResource("2")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g1exn")
 columns = 2
 hide_root = true
 script = ExtResource("1")

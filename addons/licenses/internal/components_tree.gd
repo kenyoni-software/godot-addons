@@ -25,12 +25,9 @@ func set_show_readonly_components(show: bool) -> void:
         self._readonly_components = []
     self.reload()
 
-func _ready() -> void:
-    self.allow_rmb_select = true
-
-# only used once
 func set_components(comp: ComponentsContainer) -> void:
     self._components = comp
+    self.reload()
 
 func _create_category_item(category_cache: Dictionary, category: String, root: TreeItem) -> TreeItem:
     if category in category_cache:
@@ -95,7 +92,7 @@ func reload(scroll_to: Component = null) -> void:
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
     var item: TreeItem = self.get_item_at_position(at_position)
-    return item != null and data is TreeItem
+    return item != null && data is TreeItem && item.has_meta("category")
 
 func _get_drag_data(at_position: Vector2) -> Variant:
     var item: TreeItem = self.get_item_at_position(at_position)
@@ -104,7 +101,14 @@ func _get_drag_data(at_position: Vector2) -> Variant:
     if not item.has_meta("idx") or (item.get_meta("readonly") as bool):
         return null
 
-    self.set_drop_mode_flags(Tree.DROP_MODE_INBETWEEN)
+    self.set_drop_mode_flags(Tree.DROP_MODE_ON_ITEM)
+    
+    # color possible category items
+    var tree_item: TreeItem = self.get_root().get_next_in_tree()
+    while tree_item != null:
+        if tree_item.has_meta("category"):
+            tree_item.set_custom_color(0, self.get_theme_color("accent_color", "Editor"))
+        tree_item = tree_item.get_next()
 
     var preview: Label = Label.new()
     preview.text = item.get_text(0)
@@ -114,21 +118,22 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
     var to_item: TreeItem = self.get_item_at_position(at_position)
-    var shift: int = self.get_drop_section_at_position(at_position)
-    # above category node
-    var category: String = ""
-    # below or above item with category
-    if to_item.has_meta("idx"):
-        category = self._components.get_at(to_item.get_meta("idx") as int).category
-    # below category node
-    elif shift == 1:
-        category = to_item.get_text(0)
+    var category = to_item.get_meta("category")
     var cur_component: Component = self._components.get_at(data.get_meta("idx") as int)
     if cur_component.category == category:
         return
     cur_component.category = category
     self._components.sort_custom(Licenses.compare_components_ascending)
     self._components.emit_changed()
+
+func _notification(what: int):
+    if what == NOTIFICATION_DRAG_END:
+        # clear custom color from dragging
+        var item: TreeItem = self.get_root().get_next_in_tree()
+        while item != null:
+            if item.has_meta("category"):
+                item.clear_custom_color(0)
+            item = item.get_next()
 
 func _on_item_selected() -> void:
     var item: TreeItem = self.get_selected()
