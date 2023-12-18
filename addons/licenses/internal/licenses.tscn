@@ -96,7 +96,7 @@ hide_root = true
 scroll_horizontal_enabled = false
 script = ExtResource("2")
 
-[node name="component_detail" type="Tree" parent="VBoxContainer/HSplitContainer"]
+[node name="component_detail" type="Tree" parent="VBoxContainer/HSplitContainer" node_paths=PackedStringArray("_nothing_selected_note")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -104,6 +104,19 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_g1exn")
 columns = 2
 hide_root = true
 script = ExtResource("1")
+_nothing_selected_note = NodePath("CenterContainer")
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HSplitContainer/component_detail"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/component_detail/CenterContainer"]
+layout_mode = 2
+text = "Select a component."
 
 [connection signal="button_clicked" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" method="_on_button_clicked"]
 [connection signal="item_edited" from="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" to="VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components" method="_on_item_edited"]

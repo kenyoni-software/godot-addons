@@ -11,6 +11,7 @@ enum BUTTON_ID {
     FILE_DIALOG = 3
 }
 
+@export var _nothing_selected_note: CenterContainer
 var _component: Component :
     set = set_component,
     get = get_component
@@ -21,6 +22,7 @@ func set_component(new_component: Component) -> void:
     if _component == new_component:
         return
     _component = new_component
+    self._nothing_selected_note.visible = _component == null
     self.reload()
 
 func get_component() -> Component:
