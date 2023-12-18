@@ -22,7 +22,6 @@ const StringMultiLineHandler := preload("handler/string_multiline.gd")
 @onready var _component_detail_tree: ComponentDetailTree = self.get_node(self._component_detail_tree_path)
 @export_node_path("HBoxContainer") var _toolbar_path
 @onready var _toolbar: Toolbar = self.get_node(self._toolbar_path)
-var _item_menu: PopupMenu
 @export var _license_file_edit: LineEdit = null
 @export var _license_file_load_button: Button = null
 @export var _set_license_filepath_button: Button = null
@@ -38,8 +37,6 @@ func _ready() -> void:
     self._license_file_edit.text_submitted.connect(self._on_data_file_edit_changed)
     self._license_file_edit.text = Licenses.get_license_data_filepath()
 
-    self._create_item_menu()
-    self._components_tree.gui_input.connect(self._on_gui_input)
     self.add_child(self._components)
 
     self._components_tree.set_components(self._components)
@@ -68,19 +65,9 @@ func reload() -> void:
         self._license_file_edit.right_icon = self.get_theme_icon("NodeWarning", "EditorIcons")
         self._license_file_edit.tooltip_text = res.err_msg
     
-    self._component_detail_tree.set_component(null)
     self._components.set_components(res.components)
     self._components.sort_custom(Licenses.compare_components_ascending)
     self._components.emit_changed()
-
-func _create_item_menu() -> void:
-    self._item_menu = PopupMenu.new()
-    self._item_menu.name = "item_menu"
-    self._item_menu.id_pressed.connect(self._on_item_menu_pressed)
-    self._item_menu.add_icon_item(self.get_theme_icon("Duplicate", "EditorIcons"), "Duplicate")
-    self._item_menu.add_icon_item(self.get_theme_icon("Remove", "EditorIcons"), "Delete")
-    self._item_menu.size = self._item_menu.get_contents_minimum_size()
-    self.add_child(self._item_menu)
 
 func _update_set_license_filepath_button() -> void:
     if Licenses.get_license_data_filepath() == self._license_file_edit.text:
@@ -145,25 +132,6 @@ func _on_components_changed() -> void:
     Licenses.save(self._components.components(), self._license_file_edit.text)
     self._component_detail_tree.reload()
     self._components_tree.reload(self._component_detail_tree.get_component())
-
-func _on_gui_input(event: InputEvent) -> void:
-    if !(event is InputEventMouseButton) || !event.pressed || event.button_index != MOUSE_BUTTON_RIGHT:
-        return
-    var item: TreeItem = self._components_tree.get_item_at_position(event.position)
-    if item == null || !item.has_meta("idx") || !item.has_meta("readonly") || (item.get_meta("readonly") as bool):
-        return
-
-    self._item_menu.popup_on_parent(Rect2(self.get_local_mouse_position(), self._item_menu.size))
-
-func _on_item_menu_pressed(btn_idx: int) -> void:
-    var idx: int = self._components_tree.get_selected().get_meta("idx") as int
-    match btn_idx:
-        0:
-            var new_comp: Component = self._components.get_at(idx).duplicate()
-            new_comp.name = new_comp.name + " Copy"
-            self._on_component_tree_add(new_comp)
-        1:
-            self._on_component_tree_remove(self._components.get_at(idx))
 
 func _emit_changed():
     self._components.emit_changed()

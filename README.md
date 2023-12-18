@@ -251,6 +251,10 @@ License class.
 
 ### Changelog
 
+#### 1.7.3
+
+- Fix component selection and right click menu
+
 #### 1.7.2
 
 - Fix current selection of component on popup
