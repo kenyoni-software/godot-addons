@@ -251,11 +251,16 @@ License class.
 
 ### Changelog
 
+#### 1.7.2
+
+- Fix current selection of component on popup
+- Change drag and drop behavior
+
 #### 1.7.1
 
 - Add adjusting filepath of license files on moving
-- Fix reloading UI if something was changed on moving
 - Add more warnings
+- Fix reloading UI if something was changed on moving
 
 #### 1.7.0
 
