@@ -251,6 +251,10 @@ License class.
 
 ### Changelog
 
+#### 1.7.4
+
+- Fix show engine component
+
 #### 1.7.3
 
 - Fix component selection and right click menu

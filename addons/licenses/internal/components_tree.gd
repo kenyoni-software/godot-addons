@@ -21,7 +21,7 @@ var _item_menu: PopupMenu
 func set_show_readonly_components(show_: bool) -> void:
     var sel_comp: Component = self._get_selected_component()
     show_readonly_components = show_
-    if show:
+    if show_:
         self._readonly_components = Licenses.get_required_engine_components()
         self.reload(sel_comp)
     else:
