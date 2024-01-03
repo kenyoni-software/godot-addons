@@ -201,6 +201,10 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 
 ### Changelog
 
+#### 1.3.1
+
+- Replace legacy code
+
 #### 1.3.0
 
 - Require Godot 4.2
