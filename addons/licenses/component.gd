@@ -172,7 +172,7 @@ func duplicate():
     dup.contact = self.contact
     dup.web = self.web
     dup.paths = self.paths.duplicate()
-    for license in self.licenses:
+    for license: License in self.licenses:
         dup.licenses.append(license.duplicate())
 
     return dup

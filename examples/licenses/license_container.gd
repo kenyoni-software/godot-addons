@@ -18,7 +18,7 @@ func set_component(component: Component) -> void:
     self._web.text = component.web
     self._license.text = ""
     self._license_text.text = ""
-    for idx in range(len(component.licenses)):
+    for idx: int in range(len(component.licenses)):
         var license: Component.License = component.licenses[idx]
         if idx > 0:
             self._license.text = self._license.text + " & "

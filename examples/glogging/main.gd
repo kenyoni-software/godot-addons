@@ -11,7 +11,7 @@ func _ready() -> void:
     GLogging.info("ready and initialize GUI")
     self._logger.append(GLogging.root_logger.create_child("network"))
     self._logger.append(GLogging.root_logger.create_child("gui", GLogging.LEVEL_WARNING))
-    for logger in self._logger:
+    for logger: GLogging.Logger in self._logger:
         self._logger_options.add_item(logger.name)
     self._log_level_options.select(GLogging.root_logger.log_level() / 10)
     GLogging.info("initialized logger %s %s", ["root", "and other"])

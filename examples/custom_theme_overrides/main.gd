@@ -43,7 +43,7 @@ func _notification(what: int) -> void:
             self._update_layout()
 
 func _update_layout() -> void:
-    for child in self.get_children():
+    for child: Node in self.get_children():
         if child is Label:
             if self.has_theme_color_override("my_font_color"):
                 child.add_theme_color_override("font_color", self.get_theme_color("my_font_color"))
