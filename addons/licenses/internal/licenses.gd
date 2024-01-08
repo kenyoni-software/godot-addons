@@ -126,7 +126,7 @@ func _on_component_detail_edited(component: Component) -> void:
     self._components.sort_custom(Licenses.compare_components_ascending)
     # we cannot reload the tree while it is processing any kind of input/signals
     # https://github.com/godotengine/godot/issues/50084
-    call_deferred("_emit_changed")
+    self._emit_changed.call_deferred()
 
 func _on_components_changed() -> void:
     Licenses.save(self._components.components(), self._license_file_edit.text)

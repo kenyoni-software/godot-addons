@@ -1,5 +1,5 @@
 extends RefCounted
-# DO NOT USE THE CLASS NAME, it will be removed later
+# TODO:  DO NOT USE THE CLASS NAME, it will be removed later
 class_name __LicenseManager
 
 const Component := preload("component.gd")
