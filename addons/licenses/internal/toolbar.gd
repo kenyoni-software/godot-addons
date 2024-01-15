@@ -17,9 +17,9 @@ var _add_plugin_menu: PopupMenu
 var _add_engine_menu: PopupMenu
 
 func _ready() -> void:
-    self._menu_button.icon = self.get_theme_icon("GuiTabMenuHl", "EditorIcons")
+    self._menu_button.icon = self.get_theme_icon(&"GuiTabMenuHl", &"EditorIcons")
     self._menu_button.pressed.connect(self._on_menu_pressed)
-    self._add_button.icon = self.get_theme_icon("Add", "EditorIcons")
+    self._add_button.icon = self.get_theme_icon(&"Add", &"EditorIcons")
     self._add_button.pressed.connect(self._on_add_pressed)
 
     self._menu = PopupMenu.new()
@@ -29,11 +29,11 @@ func _ready() -> void:
 
     self._add_menu = PopupMenu.new()
     self._add_menu.add_item("New Component", 0)
-    self._add_menu.set_item_icon(0, get_theme_icon("New", "EditorIcons"))
+    self._add_menu.set_item_icon(0, get_theme_icon(&"New", &"EditorIcons"))
     self._add_menu.add_submenu_item("Generate from Plugin", "menu_plugin", 1)
-    self._add_menu.set_item_icon(1, get_theme_icon("EditorPlugin", "EditorIcons"))
+    self._add_menu.set_item_icon(1, get_theme_icon(&"EditorPlugin", &"EditorIcons"))
     self._add_menu.add_submenu_item("Generate from Engine", "menu_engine", 2)
-    self._add_menu.set_item_icon(2, get_theme_icon("Godot", "EditorIcons"))
+    self._add_menu.set_item_icon(2, get_theme_icon(&"Godot", &"EditorIcons"))
     self._add_menu.id_pressed.connect(self._on_add_id_pressed)
     self.add_child(self._add_menu)
 

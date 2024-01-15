@@ -1279,7 +1279,7 @@ static func _calc_mask_rating(data: PackedByteArray, module_count: int) -> int:
     for x: int in range(module_count - 1):
         for y: int in range(module_count - 1):
             var val: int = data[x + y * module_count] + data[x + 1 + y * module_count] + data[x + (y + 1) * module_count] + data[x + 1 + (y + 1) * module_count]
-            if val == 0 or val == 4:
+            if val == 0 || val == 4:
                 rating += 3
 
     # condition 3

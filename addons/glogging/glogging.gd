@@ -28,7 +28,7 @@ class Logger:
         self._log_level = level
 
     func log_level() -> int:
-        if self.parent != null and self._log_level == LEVEL_NOTSET:
+        if self.parent != null && self._log_level == LEVEL_NOTSET:
             return self.parent.log_level()
         return self._log_level
 

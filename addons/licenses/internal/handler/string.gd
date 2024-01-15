@@ -12,9 +12,9 @@ static func can_handle(property: Dictionary) -> bool:
 
 func _update_reset_button() -> void:
     var button_id: int = self.item.get_button_by_id(0, 0)
-    if self.value != "" and button_id == -1:
-        self.item.add_button(0, self.tree.get_theme_icon("Reload", "EditorIcons"), 0)
-    elif self.value == "" and button_id != -1:
+    if self.value != "" && button_id == -1:
+        self.item.add_button(0, self.tree.get_theme_icon(&"Reload", &"EditorIcons"), 0)
+    elif self.value == "" && button_id != -1:
         self.item.erase_button(0, button_id)
 
 func button_clicked(column: int, id: int, mouse_button_idx: int) -> void:

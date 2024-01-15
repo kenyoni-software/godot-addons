@@ -10,13 +10,13 @@ func _ready() -> void:
 
 func _set_item_details(idx: int, settings_key: String, tooltip: String) -> void:
     var path: String = ProjectSettings.get_setting(settings_key)
-    var can_use: bool = path != "" and DirAccess.dir_exists_absolute(path)
+    var can_use: bool = path != "" && DirAccess.dir_exists_absolute(path)
     self.set_item_disabled(idx, !can_use)
     if can_use:
         self.set_item_icon(idx, null)
         self.set_item_tooltip(idx, "")
     else:
-        self.set_item_icon(idx, self.get_theme_icon("NodeWarning", "EditorIcons"))
+        self.set_item_icon(idx, self.get_theme_icon(&"NodeWarning", &"EditorIcons"))
         self.set_item_tooltip(idx, tooltip)
 
 func _on_about_to_popup() -> void:

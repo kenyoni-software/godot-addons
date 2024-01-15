@@ -61,6 +61,10 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 ### Changelog
 
+#### 3.1.1
+
+- Code improvement
+
 #### 3.1.0
 
 - Require Godot 4.2
@@ -235,6 +239,10 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 
 ### Changelog
 
+#### 1.3.2
+
+- Code improvement
+
 #### 1.3.1
 
 - Replace legacy code
@@ -288,6 +296,11 @@ Component class, data wrapper for all  information regarding one license item.
 License class.
 
 ### Changelog
+
+#### 1.7.6
+
+- Fix scene id
+- Code improvement
 
 #### 1.7.5
 
@@ -412,6 +425,10 @@ If not log level is set, the log level of the parent logger will be used.
   log at custom level
 
 ### Changelog
+
+#### 1.5.1
+
+- Code improvement
 
 #### 1.5.0
 
@@ -538,6 +555,10 @@ Shift JIS encoding utility.
 
 ### Changelog
 
+#### 1.1.1
+
+- Code optimizing
+
 #### 1.1.0
 
 - Require Godot 4.2
@@ -580,6 +601,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 [examples/texture_button_colored](./examples/texture_button_colored)
 
 ### Changelog
+
+#### 1.3.1
+
+- Code improvement
 
 #### 1.3.0
 
