@@ -233,6 +233,8 @@ Set the icon directory in the Project Settings under the menu `Plugins` -> `Icon
 
 Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 
+Consider using [Icon Explorer](#icon-explorer) instead and save it directly in white.
+
 ### Compatibility
 
 - Godot 4.2
