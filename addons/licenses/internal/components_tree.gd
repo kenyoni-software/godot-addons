@@ -51,18 +51,18 @@ func reload(scroll_to: Component = null) -> void:
     # count current added custom components
     var idx: int = 0
 
-    while idx < self._components.count() or readonly_idx < len(self._readonly_components):
+    while idx < self._components.count() || readonly_idx < len(self._readonly_components):
         var component: Component = null
         var cur_idx: int = 0
         var cmp: bool = false
         # compare readonly items with editable, to determine which one to show first
-        if idx < self._components.count() and readonly_idx < len(self._readonly_components):
+        if idx < self._components.count() && readonly_idx < len(self._readonly_components):
             cmp = Licenses.compare_components_ascending(self._components.get_at(idx), self._readonly_components[readonly_idx])
-        if readonly_idx >= len(self._readonly_components) or cmp:
+        if readonly_idx >= len(self._readonly_components) || cmp:
             component = self._components.get_at(idx)
             cur_idx = idx
             idx = idx + 1
-        elif idx >= self._components.count() or not cmp:
+        elif idx >= self._components.count() || not cmp:
             component = self._readonly_components[readonly_idx]
             cur_idx = readonly_idx
             readonly_idx = readonly_idx + 1
@@ -77,8 +77,8 @@ func _create_item_menu() -> void:
     self._item_menu = PopupMenu.new()
     self._item_menu.name = "item_menu"
     self._item_menu.id_pressed.connect(self._on_item_menu_pressed)
-    self._item_menu.add_icon_item(self.get_theme_icon("Duplicate", "EditorIcons"), "Duplicate")
-    self._item_menu.add_icon_item(self.get_theme_icon("Remove", "EditorIcons"), "Delete")
+    self._item_menu.add_icon_item(self.get_theme_icon(&"Duplicate", &"EditorIcons"), "Duplicate")
+    self._item_menu.add_icon_item(self.get_theme_icon(&"Remove", &"EditorIcons"), "Delete")
     self._item_menu.size = self._item_menu.get_contents_minimum_size()
     self.add_child(self._item_menu)
 
@@ -99,12 +99,12 @@ func _add_tree_item(component: Component, idx: int, parent: TreeItem) -> TreeIte
     item.set_meta("idx", idx)
     item.set_meta("readonly", component.readonly)
     if not component.readonly:
-        item.add_button(0, self.get_theme_icon("Remove", "EditorIcons"), _BTN_ID_REMOVE)
+        item.add_button(0, self.get_theme_icon(&"Remove", &"EditorIcons"), _BTN_ID_REMOVE)
     var tooltip: String = component.name
     var comp_warnings: PackedStringArray = component.get_warnings()
     if comp_warnings.size() != 0:
         tooltip += "\n- " + "\n- ".join(comp_warnings)
-        item.set_icon(0, self.get_theme_icon("NodeWarning", "EditorIcons"))
+        item.set_icon(0, self.get_theme_icon(&"NodeWarning", &"EditorIcons"))
     item.set_tooltip_text(0, tooltip)
     return item
 
@@ -116,7 +116,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
     var item: TreeItem = self.get_item_at_position(at_position)
     if item == null:
         return null
-    if not item.has_meta("idx") or (item.get_meta("readonly") as bool):
+    if not item.has_meta("idx") || (item.get_meta("readonly") as bool):
         return null
 
     self.set_drop_mode_flags(Tree.DROP_MODE_ON_ITEM)
@@ -125,7 +125,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
     var tree_item: TreeItem = self.get_root().get_next_in_tree()
     while tree_item != null:
         if tree_item.has_meta("category"):
-            tree_item.set_custom_color(0, self.get_theme_color("accent_color", "Editor"))
+            tree_item.set_custom_color(0, self.get_theme_color(&"accent_color", &"Editor"))
         tree_item = tree_item.get_next()
 
     var preview: Label = Label.new()

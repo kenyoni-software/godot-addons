@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtcstt4vepa17"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/bootstrap.gd" id="1_s6ueg"]
+[ext_resource type="PackedScene" uid="uid://b813qk6u7eveh" path="res://addons/icon_explorer/internal/ui/detail_panel/list_field.tscn" id="2_n1r08"]
+[ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="3_5y6bb"]
+
+[node name="bootstrap" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 205.0
+grow_horizontal = 2
+script = ExtResource("1_s6ueg")
+_categories_path = NodePath("categories")
+_tags_path = NodePath("aliases")
+_version_added_path = NodePath("version_added")
+
+[node name="categories" parent="." instance=ExtResource("2_n1r08")]
+layout_mode = 2
+title = "Categories"
+
+[node name="aliases" parent="." instance=ExtResource("2_n1r08")]
+layout_mode = 2
+title = "Aliases"
+
+[node name="version_added" parent="." instance=ExtResource("3_5y6bb")]
+layout_mode = 2
+title = "Version added"

@@ -59,7 +59,7 @@ func _on_cell_selected() -> void:
     if self._selected_item != null:
         self._selected_item.clear_custom_bg_color(0)
     self._selected_item = self.get_selected()
-    self._selected_item.set_custom_bg_color(0, self.get_theme_color("box_selection_fill_color", "Editor"))
+    self._selected_item.set_custom_bg_color(0, self.get_theme_color(&"box_selection_fill_color", &"Editor"))
     if self.get_selected_column() == 0:
         self._selected_item.deselect(0)
         self._selected_item.select(1)

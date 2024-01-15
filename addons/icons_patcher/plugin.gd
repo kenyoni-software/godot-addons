@@ -11,7 +11,6 @@ func _enter_tree() -> void:
     Utils.init_project_setting(Utils.MDI_DIRECTORY_PATH, "", TYPE_STRING, PROPERTY_HINT_DIR)
 
     self.tool_menu = ToolMenu.new()
-    tool_menu.editor_filesystem = self.get_editor_interface().get_resource_filesystem()
     self.add_tool_submenu_item("Icons Patcher", self.tool_menu)
 
 func _exit_tree() -> void:

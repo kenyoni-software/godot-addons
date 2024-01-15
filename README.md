@@ -29,6 +29,8 @@ If you import any plugin or open a Godot project for the first time, the plugins
   Add Git SHA as project setting.
 - [Hide Private Properties](#hide-private-properties)  
   Hide private properties of instantiated child scenes.
+- [Icon Explorer](#icon-explorer)  
+  Browse different icons and save them.
 - [Icons Patcher](#icons-patcher)  
   Patch Pictogrammers icons to white.
 - [License Manager](#license-manager)  
@@ -58,6 +60,10 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 [examples/aspect_ratio_resize_container](./examples/aspect_ratio_resize_container)
 
 ### Changelog
+
+#### 3.1.1
+
+- Code improvement
 
 #### 3.1.0
 
@@ -187,6 +193,38 @@ This plugin will hide exported private properties in the inspector for instantia
 
 ---
 
+## Icon Explorer
+
+Browse and save icons from popular icon collections.
+
+Install or update them via the options menu in the right upper corner. This can take several minutes.
+
+The following collections are available:
+
+- [Bootstrap Icons](https://github.com/twbs/icons)
+- [Font Awesome 6](https://github.com/FortAwesome/Font-Awesome)
+- [Material Design](https://github.com/Templarian/MaterialDesign-SVG)
+- [Simple Icons](https://github.com/simple-icons/simple-icons)
+- [tabler Icons](https://github.com/tabler/tabler-icons)
+
+Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it.
+
+### Compatibility
+
+- Godot 4.2
+
+### Screenshot
+
+![Icon Explorer screenshot](./doc/icon_explorer.png "Icon Explorer")
+
+### Changelog
+
+#### 1.0.0
+
+- Add icon explorer
+
+---
+
 ## Icons Patcher
 
 If you use Material Design icons from [Pictogrammers](https://pictogrammers.com/library/mdi/), they come without any fill color, automatically rendered black. This is not a convenient color as it makes it impossible to modulate the color. The icon patcher provides a utility to automatically patch the icons to white color.
@@ -200,6 +238,14 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 - Godot 4.2
 
 ### Changelog
+
+#### 1.3.2
+
+- Code improvement
+
+#### 1.3.1
+
+- Replace legacy code
 
 #### 1.3.0
 
@@ -250,6 +296,11 @@ Component class, data wrapper for all  information regarding one license item.
 License class.
 
 ### Changelog
+
+#### 1.7.6
+
+- Fix scene id
+- Code improvement
 
 #### 1.7.5
 
@@ -374,6 +425,10 @@ If not log level is set, the log level of the parent logger will be used.
   log at custom level
 
 ### Changelog
+
+#### 1.5.1
+
+- Code improvement
 
 #### 1.5.0
 
@@ -500,6 +555,10 @@ Shift JIS encoding utility.
 
 ### Changelog
 
+#### 1.1.1
+
+- Code optimizing
+
 #### 1.1.0
 
 - Require Godot 4.2
@@ -542,6 +601,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 [examples/texture_button_colored](./examples/texture_button_colored)
 
 ### Changelog
+
+#### 1.3.1
+
+- Code improvement
 
 #### 1.3.0
 

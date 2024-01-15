@@ -25,7 +25,7 @@ var _theme_overrides = CustomThemeOverrides.new([
 func get_theme_coloring(name: StringName, theme_type: StringName = "") -> Color:
     if self.has_theme_color(name, theme_type):
         return super.get_theme_color(name, theme_type)
-    return super.get_theme_color(name, "TextureButtonColored")
+    return super.get_theme_color(name, &"TextureButtonColored")
 
 func _get_property_list() -> Array[Dictionary]:
     return self._theme_overrides.theme_property_list(self)
@@ -51,14 +51,14 @@ func _draw() -> void:
 func _update_layout() -> void:
     var draw_mode: int = self.get_draw_mode()
     if draw_mode == DRAW_HOVER_PRESSED || (self._is_hovered && self.button_pressed):
-        self.self_modulate = self.get_theme_coloring("icon_hover_pressed_color")
+        self.self_modulate = self.get_theme_coloring(&"icon_hover_pressed_color")
     elif draw_mode == DRAW_NORMAL:
-        self.self_modulate = self.get_theme_coloring("icon_normal_color")
+        self.self_modulate = self.get_theme_coloring(&"icon_normal_color")
     elif draw_mode == DRAW_PRESSED:
-        self.self_modulate = self.get_theme_coloring("icon_pressed_color")
+        self.self_modulate = self.get_theme_coloring(&"icon_pressed_color")
     elif draw_mode == DRAW_HOVER:
-        self.self_modulate = self.get_theme_coloring("icon_hover_color")
+        self.self_modulate = self.get_theme_coloring(&"icon_hover_color")
     elif draw_mode == DRAW_DISABLED:
-        self.self_modulate = self.get_theme_coloring("icon_disabled_color")
+        self.self_modulate = self.get_theme_coloring(&"icon_disabled_color")
     elif self.has_focus():
-        self.self_modulate = self.get_theme_coloring("icon_hover_pressed_color")
+        self.self_modulate = self.get_theme_coloring(&"icon_hover_pressed_color")

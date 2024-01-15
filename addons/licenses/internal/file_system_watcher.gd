@@ -13,8 +13,8 @@ func _init(components: ComponentsContainer):
 
 func _on_file_moved(old_file: String, new_file: String) -> void:
     var changed: bool = false
-    for comp in self._components.components():
-        for idx in range(comp.paths.size()):
+    for comp: Component in self._components.components():
+        for idx: int in range(comp.paths.size()):
             if comp.paths[idx] == old_file:
                 changed = true
                 comp.paths[idx] = new_file
@@ -28,8 +28,8 @@ func _on_file_moved(old_file: String, new_file: String) -> void:
 func _on_folder_moved(old_folder: String, new_folder: String) -> void:
     var old_folder_no_slash: String = old_folder.rstrip("/")
     var changed: bool = false
-    for comp in self._components.components():
-        for idx in range(comp.paths.size()):
+    for comp: Component in self._components.components():
+        for idx: int in range(comp.paths.size()):
             var path: String = comp.paths[idx]
             if path == old_folder_no_slash:
                 changed = true

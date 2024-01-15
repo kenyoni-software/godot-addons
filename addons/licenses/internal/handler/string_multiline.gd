@@ -11,16 +11,16 @@ func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, propert
         tooltip_text += "..."
     self.item.set_tooltip_text(1, tooltip_text)
     self._update_reset_button()
-    self.item.add_button(1, self.tree.get_theme_icon("DistractionFree", "EditorIcons"), 1)
+    self.item.add_button(1, self.tree.get_theme_icon(&"DistractionFree", &"EditorIcons"), 1)
 
 static func can_handle(property: Dictionary) -> bool:
-    return property["type"] == TYPE_STRING and property.get("hint", PROPERTY_HINT_NONE) == PROPERTY_HINT_MULTILINE_TEXT
+    return property["type"] == TYPE_STRING && property.get("hint", PROPERTY_HINT_NONE) == PROPERTY_HINT_MULTILINE_TEXT
 
 func _update_reset_button() -> void:
     var button_id: int = self.item.get_button_by_id(0, 0)
-    if self.value != "" and button_id == -1:
-        self.item.add_button(0, self.tree.get_theme_icon("Reload", "EditorIcons"), 0)
-    elif self.value == "" and button_id != -1:
+    if self.value != "" && button_id == -1:
+        self.item.add_button(0, self.tree.get_theme_icon(&"Reload", &"EditorIcons"), 0)
+    elif self.value == "" && button_id != -1:
         self.item.erase_button(0, button_id)
 
 func button_clicked(column: int, id: int, mouse_button_idx: int) -> void:

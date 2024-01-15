@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpqvyf7kssc70"]
+[gd_scene load_steps=8 format=3 uid="uid://dfj2mhwrs1oss"]
 
 [ext_resource type="Script" path="res://addons/licenses/internal/component_detail_tree.gd" id="1"]
 [ext_resource type="Script" path="res://addons/licenses/internal/components_tree.gd" id="2"]

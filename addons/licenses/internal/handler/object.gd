@@ -14,7 +14,7 @@ func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, propert
         self.tree._add_item(self.item, (self.value as Object).get(prop["name"]), prop)
 
 static func can_handle(property: Dictionary) -> bool:
-    return property["type"] == TYPE_OBJECT and property.get("class_name", "") != "Script"
+    return property["type"] == TYPE_OBJECT && property.get("class_name", "") != "Script"
 
 func child_edited(item: TreeItem) -> void:
     var child = item.get_meta("handler")

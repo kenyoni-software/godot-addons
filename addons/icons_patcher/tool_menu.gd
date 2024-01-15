@@ -2,8 +2,6 @@ extends PopupMenu
 
 const Utils := preload("utils.gd")
 
-var editor_filesystem: EditorFileSystem
-
 func _ready() -> void:
     self.add_item("Patch Material Design Icons")
 
@@ -12,13 +10,13 @@ func _ready() -> void:
 
 func _set_item_details(idx: int, settings_key: String, tooltip: String) -> void:
     var path: String = ProjectSettings.get_setting(settings_key)
-    var can_use: bool = path != "" and DirAccess.dir_exists_absolute(path)
+    var can_use: bool = path != "" && DirAccess.dir_exists_absolute(path)
     self.set_item_disabled(idx, !can_use)
     if can_use:
         self.set_item_icon(idx, null)
         self.set_item_tooltip(idx, "")
     else:
-        self.set_item_icon(idx, self.get_theme_icon("NodeWarning", "EditorIcons"))
+        self.set_item_icon(idx, self.get_theme_icon(&"NodeWarning", &"EditorIcons"))
         self.set_item_tooltip(idx, tooltip)
 
 func _on_about_to_popup() -> void:
@@ -36,5 +34,5 @@ func _patch_icons_material_design() -> void:
     var rx: RegEx = RegEx.new()
     rx.compile('(" fill="#[a-fA-F0-9]{6})?">')
     var patched_icons: PackedStringArray = Utils.patch_icon_dir(base_path, rx, '" fill="#ffffff">')
-    self.editor_filesystem.reimport_files(patched_icons)
+    EditorInterface.get_resource_filesystem().reimport_files(patched_icons)
     print("Patched " + base_path)

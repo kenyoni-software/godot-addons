@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://3hl6t03xllbp"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/simple_icons.gd" id="1_icjlg"]
+[ext_resource type="PackedScene" uid="uid://cadjan8ev877o" path="res://addons/icon_explorer/internal/ui/detail_panel/color_field.tscn" id="2_q8ihc"]
+[ext_resource type="PackedScene" uid="uid://b813qk6u7eveh" path="res://addons/icon_explorer/internal/ui/detail_panel/list_field.tscn" id="3_ps7ly"]
+[ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="4_soj3e"]
+
+[node name="simple_icons" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 297.0
+grow_horizontal = 2
+script = ExtResource("1_icjlg")
+_color_path = NodePath("color")
+_aliases_path = NodePath("aliases")
+_guidelines_path = NodePath("guidelines")
+_license_path = NodePath("license")
+_source_path = NodePath("source")
+
+[node name="color" parent="." instance=ExtResource("2_q8ihc")]
+layout_mode = 2
+title = "Color"
+
+[node name="aliases" parent="." instance=ExtResource("3_ps7ly")]
+layout_mode = 2
+title = "Aliases"
+
+[node name="guidelines" parent="." instance=ExtResource("4_soj3e")]
+layout_mode = 2
+title = "Brand Guidelines"
+
+[node name="license" parent="." instance=ExtResource("4_soj3e")]
+layout_mode = 2
+title = "License"
+
+[node name="source" parent="." instance=ExtResource("4_soj3e")]
+layout_mode = 2
+title = "Source"

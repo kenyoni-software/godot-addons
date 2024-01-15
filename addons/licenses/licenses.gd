@@ -1,5 +1,5 @@
 extends RefCounted
-# DO NOT USE THE CLASS NAME, it will be removed later
+# TODO:  DO NOT USE THE CLASS NAME, it will be removed later
 class_name __LicenseManager
 
 const Component := preload("component.gd")
@@ -9,7 +9,7 @@ const DATA_FILE: String = "plugins/licenses/data_file"
 static func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
     var lhs_cat_lower: String = lhs.category.to_lower()
     var rhs_cat_lower: String = rhs.category.to_lower()
-    return lhs_cat_lower < rhs_cat_lower or (lhs_cat_lower == rhs_cat_lower and lhs.name.to_lower() < rhs.name.to_lower())
+    return lhs_cat_lower < rhs_cat_lower || (lhs_cat_lower == rhs_cat_lower && lhs.name.to_lower() < rhs.name.to_lower())
 
 static func get_engine_component(name: String) -> Component:
     var license_keys: Array = Engine.get_license_info().keys()

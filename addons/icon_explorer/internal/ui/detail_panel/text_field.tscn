@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://b64tcvn5sw03h"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd" id="1_fhni0"]
+[ext_resource type="PackedScene" uid="uid://bonqki0uorlhq" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.tscn" id="2_vjbmh"]
+
+[node name="text_field" type="VBoxContainer" node_paths=PackedStringArray("_label", "_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fhni0")
+_title_path = NodePath("title_panel")
+_label = NodePath("margin_container/h_box_container/label")
+_button = NodePath("margin_container/h_box_container/button")
+
+[node name="title_panel" parent="." instance=ExtResource("2_vjbmh")]
+layout_mode = 2
+
+[node name="margin_container" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+
+[node name="h_box_container" type="HBoxContainer" parent="margin_container"]
+layout_mode = 2
+
+[node name="button" type="Button" parent="margin_container/h_box_container"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="label" type="Label" parent="margin_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text_overrun_behavior = 3

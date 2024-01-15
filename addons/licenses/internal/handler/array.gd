@@ -8,8 +8,8 @@ func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, propert
     self.item.set_text(1, "[ " + str(len(self.value)) + " ]")
     self.item.set_text_alignment(1, HORIZONTAL_ALIGNMENT_CENTER)
     self._update_reset_button()
-    self.item.add_button(1, self.tree.get_theme_icon("Add", "EditorIcons"), 1)
-    self.item.add_button(1, self.tree.get_theme_icon("Remove", "EditorIcons"), 2)
+    self.item.add_button(1, self.tree.get_theme_icon(&"Add", &"EditorIcons"), 1)
+    self.item.add_button(1, self.tree.get_theme_icon(&"Remove", &"EditorIcons"), 2)
 
     match self._get_child_property("")["type"]:
         TYPE_STRING:
@@ -25,18 +25,18 @@ func _get_child_property(name: String) -> Dictionary:
     match self.property["type"]:
         TYPE_PACKED_STRING_ARRAY:
             type = TYPE_STRING
-    if self.property["type"] == TYPE_ARRAY and self.property.get("constructor") != null:
+    if self.property["type"] == TYPE_ARRAY && self.property.get("constructor") != null:
         type = TYPE_OBJECT
     return {"name": name, "type": type, "hint": self.property.get("hint", PROPERTY_HINT_NONE), "hint_text": self.property.get("hint_text", ""), "constructor": self.property.get("constructor", null)}
 
 static func can_handle(property: Dictionary) -> bool:
-    return property["type"] == TYPE_PACKED_STRING_ARRAY or property["type"] == TYPE_ARRAY and property.get("constructor") != null
+    return property["type"] == TYPE_PACKED_STRING_ARRAY || property["type"] == TYPE_ARRAY && property.get("constructor") != null
 
 func _update_reset_button() -> void:
     var button_id: int = self.item.get_button_by_id(0, 0)
-    if !self.value.is_empty() and button_id == -1:
-        self.item.add_button(0, self.tree.get_theme_icon("Reload", "EditorIcons"), 0)
-    elif self.value.is_empty() and button_id != -1:
+    if !self.value.is_empty() && button_id == -1:
+        self.item.add_button(0, self.tree.get_theme_icon(&"Reload", &"EditorIcons"), 0)
+    elif self.value.is_empty() && button_id != -1:
         self.item.erase_button(0, button_id)
 
 func button_clicked(column: int, id: int, mouse_button_idx: int) -> void:
@@ -62,7 +62,7 @@ func button_clicked(column: int, id: int, mouse_button_idx: int) -> void:
         # remove
         2:
             var selected_item: TreeItem = self.tree._selected_item
-            if selected_item == null or selected_item.get_parent() != self.item:
+            if selected_item == null || selected_item.get_parent() != self.item:
                 return
             self.value.remove_at(int(selected_item.get_text(0)))
 

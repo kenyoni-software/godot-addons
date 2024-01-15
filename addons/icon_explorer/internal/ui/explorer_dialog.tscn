@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyfr78rcugqaa"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/explorer_dialog.gd" id="1_yupxp"]
+[ext_resource type="PackedScene" uid="uid://dnxwdqwt2eqfi" path="res://addons/icon_explorer/internal/ui/explorer/explorer.tscn" id="2_3tinl"]
+
+[node name="explorer_dialog" type="Window"]
+disable_3d = true
+title = "Icon Explorer"
+position = Vector2i(210, 133)
+size = Vector2i(1920, 1080)
+visible = false
+wrap_controls = true
+transient = true
+script = ExtResource("1_yupxp")
+_explorer_path = NodePath("explorer")
+
+[node name="explorer" parent="." instance=ExtResource("2_3tinl")]
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
