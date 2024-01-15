@@ -26,8 +26,8 @@ func _get_minimum_size() -> Vector2:
     var min_size: Vector2 = self._get_children_min_size()
     if self.stretch_mode == STRETCH_WIDTH_CONTROLS_HEIGHT:
         var width: float = maxf(min_size.x, self.size.x)
-        min_size.y = width * self.ratio
+        min_size.y = width * 1 / self.ratio
     elif self.stretch_mode == STRETCH_HEIGHT_CONTROLS_WIDTH:
         var height: float = maxf(min_size.y, self.size.y)
-        min_size.x = height * self.ratio
+        min_size.x = height * 1 / self.ratio
     return min_size
