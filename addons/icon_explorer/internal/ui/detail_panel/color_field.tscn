@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cadjan8ev877o"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/color_field.gd" id="1_vl8db"]
+[ext_resource type="PackedScene" uid="uid://bonqki0uorlhq" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.tscn" id="2_2clk4"]
+
+[node name="color" type="VBoxContainer" node_paths=PackedStringArray("_color_rect", "_color_label")]
+script = ExtResource("1_vl8db")
+_color_rect = NodePath("margin_container/color_rect")
+_color_label = NodePath("margin_container/color")
+_title_path = NodePath("title_panel")
+
+[node name="title_panel" parent="." instance=ExtResource("2_2clk4")]
+layout_mode = 2
+
+[node name="margin_container" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+
+[node name="color_rect" type="ColorRect" parent="margin_container"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "Click to copy!"
+focus_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="color" type="Label" parent="margin_container"]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1

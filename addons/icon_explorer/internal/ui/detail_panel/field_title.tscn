@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bonqki0uorlhq"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.gd" id="1_unl3l"]
+
+[node name="title_panel" type="PanelContainer" node_paths=PackedStringArray("_text_label")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_unl3l")
+_text_label = NodePath("title")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 2

@@ -29,6 +29,8 @@ If you import any plugin or open a Godot project for the first time, the plugins
   Add Git SHA as project setting.
 - [Hide Private Properties](#hide-private-properties)  
   Hide private properties of instantiated child scenes.
+- [Icon Explorer](#icon-explorer)  
+  Browse different icons and save them.
 - [Icons Patcher](#icons-patcher)  
   Patch Pictogrammers icons to white.
 - [License Manager](#license-manager)  
@@ -184,6 +186,38 @@ This plugin will hide exported private properties in the inspector for instantia
 
 - Require Godot 4.2
 - Add more values to plugin.cfg
+
+---
+
+## Icon Explorer
+
+Browse and save icons from popular icon collections.
+
+Install or update them via the options menu in the right upper corner. This can take several minutes.
+
+The following collections are available:
+
+- [Bootstrap Icons](https://github.com/twbs/icons)
+- [Font Awesome 6](https://github.com/FortAwesome/Font-Awesome)
+- [Material Design](https://github.com/Templarian/MaterialDesign-SVG)
+- [Simple Icons](https://github.com/simple-icons/simple-icons)
+- [tabler Icons](https://github.com/tabler/tabler-icons)
+
+Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it.
+
+### Compatibility
+
+- Godot 4.2
+
+### Screenshot
+
+![Icon Explorer screenshot](./doc/icon_explorer.png "Icon Explorer")
+
+### Changelog
+
+#### 1.0.0
+
+- Add icon explorer
 
 ---
 

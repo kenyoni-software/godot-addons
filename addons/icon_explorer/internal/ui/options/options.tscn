@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfmh2kaf2qbrx"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/options/options.gd" id="1_hdn86"]
+
+[node name="control" type="PanelContainer" node_paths=PackedStringArray("_load_on_startup", "_collection_tree", "_options_panel", "_options_label", "_collections_panel", "_collections_label")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hdn86")
+_load_on_startup = NodePath("options/options/v_box_container/load_on_startup")
+_collection_tree = NodePath("options/options/tree")
+_options_panel = NodePath("options/options/options_panel")
+_options_label = NodePath("options/options/options_panel/options")
+_collections_panel = NodePath("options/options/collections_panel")
+_collections_label = NodePath("options/options/collections_panel/collections_title")
+
+[node name="options" type="ScrollContainer" parent="."]
+layout_mode = 2
+
+[node name="options" type="VBoxContainer" parent="options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="options_panel" type="PanelContainer" parent="options/options"]
+layout_mode = 2
+
+[node name="options" type="Label" parent="options/options/options_panel"]
+layout_mode = 2
+text = "Options"
+
+[node name="v_box_container" type="GridContainer" parent="options/options"]
+layout_mode = 2
+columns = 2
+
+[node name="label" type="Label" parent="options/options/v_box_container"]
+layout_mode = 2
+text = "Load on Godot startup"
+
+[node name="load_on_startup" type="CheckBox" parent="options/options/v_box_container"]
+layout_mode = 2
+
+[node name="label2" type="Label" parent="options/options/v_box_container"]
+visible = false
+layout_mode = 2
+text = "Base SVG texture size"
+
+[node name="spin_box" type="SpinBox" parent="options/options/v_box_container"]
+visible = false
+layout_mode = 2
+min_value = 8.0
+max_value = 1024.0
+value = 8.0
+editable = false
+suffix = "px"
+
+[node name="collections_panel" type="PanelContainer" parent="options/options"]
+layout_mode = 2
+
+[node name="collections_title" type="Label" parent="options/options/collections_panel"]
+layout_mode = 2
+text = "Collections"
+
+[node name="tree" type="Tree" parent="options/options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+column_titles_visible = true
+allow_search = false
+hide_folding = true
+hide_root = true
+select_mode = 1

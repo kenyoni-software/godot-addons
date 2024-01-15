@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf2b6v68rufpn"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/material_design.gd" id="1_7oq86"]
+[ext_resource type="PackedScene" uid="uid://b813qk6u7eveh" path="res://addons/icon_explorer/internal/ui/detail_panel/list_field.tscn" id="2_sgh8u"]
+[ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="3_7hl4l"]
+
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2aicr"]
+bg_color = Color(0.670588, 0, 0.0901961, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.670588, 0, 0.0901961, 1)
+
+[node name="material_design" type="VBoxContainer" node_paths=PackedStringArray("_deprecated_banner")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 227.0
+grow_horizontal = 2
+script = ExtResource("1_7oq86")
+_deprecated_banner = NodePath("deprecated_banner")
+_aliases_path = NodePath("aliases")
+_tags_path = NodePath("tags")
+_author_path = NodePath("author")
+_version_path = NodePath("version")
+
+[node name="deprecated_banner" type="Label" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2aicr")
+text = "Deprecated"
+horizontal_alignment = 1
+
+[node name="aliases" parent="." instance=ExtResource("2_sgh8u")]
+layout_mode = 2
+title = "Aliases"
+
+[node name="tags" parent="." instance=ExtResource("2_sgh8u")]
+layout_mode = 2
+title = "Tags"
+
+[node name="author" parent="." instance=ExtResource("3_7hl4l")]
+layout_mode = 2
+title = "Created by"
+
+[node name="version" parent="." instance=ExtResource("3_7hl4l")]
+layout_mode = 2
+title = "Version added"

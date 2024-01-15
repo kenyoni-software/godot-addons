@@ -1,0 +1,123 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnxwdqwt2eqfi"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/explorer/explorer.gd" id="1_2oqmk"]
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/explorer/filter_options.gd" id="2_dkuya"]
+[ext_resource type="PackedScene" uid="uid://c3s1t8hiu6xll" path="res://addons/icon_explorer/internal/ui/detail_panel/detail_panel.tscn" id="3_w4j77"]
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/explorer/option_popup.gd" id="4_03l1v"]
+[ext_resource type="PackedScene" uid="uid://bfmh2kaf2qbrx" path="res://addons/icon_explorer/internal/ui/options/options.tscn" id="5_wngaf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnh63"]
+
+[node name="explorer" type="PanelContainer" node_paths=PackedStringArray("_filter_icon", "_filter", "_preview_color", "_preview_size", "_icon_list", "_options_button", "_options_popup", "_progress_bar", "_toolbar_panel", "_preview_options_panel")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2oqmk")
+_filter_icon = NodePath("icon_viewer/toolbar_panel/toolbar/filter_icon")
+_filter = NodePath("icon_viewer/toolbar_panel/toolbar/filter")
+_filter_options_path = NodePath("icon_viewer/toolbar_panel/toolbar/filter_options")
+_preview_color = NodePath("icon_viewer/HSplitContainer/v_box_container/preview_options_panel/preview_options/preview_color")
+_preview_size = NodePath("icon_viewer/HSplitContainer/v_box_container/preview_options_panel/preview_options/preview_size")
+_icon_list = NodePath("icon_viewer/HSplitContainer/icons")
+_options_button = NodePath("icon_viewer/toolbar_panel/toolbar/options")
+_options_popup = NodePath("option_popup")
+_options_path = NodePath("option_popup/options")
+_progress_bar = NodePath("icon_viewer/progress_bar")
+_detail_panel_path = NodePath("icon_viewer/HSplitContainer/v_box_container/detail_panel")
+_toolbar_panel = NodePath("icon_viewer/toolbar_panel")
+_preview_options_panel = NodePath("icon_viewer/HSplitContainer/v_box_container/preview_options_panel")
+
+[node name="icon_viewer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="toolbar_panel" type="PanelContainer" parent="icon_viewer"]
+layout_mode = 2
+
+[node name="toolbar" type="HBoxContainer" parent="icon_viewer/toolbar_panel"]
+layout_mode = 2
+
+[node name="filter_icon" type="TextureRect" parent="icon_viewer/toolbar_panel/toolbar"]
+layout_mode = 2
+stretch_mode = 5
+
+[node name="filter" type="LineEdit" parent="icon_viewer/toolbar_panel/toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+auto_translate = false
+localize_numeral_system = false
+placeholder_text = "search icons..."
+editable = false
+clear_button_enabled = true
+
+[node name="filter_options" type="MenuButton" parent="icon_viewer/toolbar_panel/toolbar"]
+layout_mode = 2
+disabled = true
+script = ExtResource("2_dkuya")
+
+[node name="options" type="Button" parent="icon_viewer/toolbar_panel/toolbar"]
+layout_mode = 2
+disabled = true
+flat = true
+
+[node name="progress_bar" type="ProgressBar" parent="icon_viewer"]
+layout_mode = 2
+size_flags_vertical = 1
+show_percentage = false
+
+[node name="HSplitContainer" type="HSplitContainer" parent="icon_viewer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="icons" type="ItemList" parent="icon_viewer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gnh63")
+allow_search = false
+max_text_lines = 2
+max_columns = 0
+same_column_width = true
+fixed_column_width = 128
+icon_mode = 0
+fixed_icon_size = Vector2i(64, 64)
+
+[node name="v_box_container" type="VBoxContainer" parent="icon_viewer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.34
+
+[node name="preview_options_panel" type="PanelContainer" parent="icon_viewer/HSplitContainer/v_box_container"]
+layout_mode = 2
+
+[node name="preview_options" type="HBoxContainer" parent="icon_viewer/HSplitContainer/v_box_container/preview_options_panel"]
+layout_mode = 2
+
+[node name="preview_size" type="HSlider" parent="icon_viewer/HSplitContainer/v_box_container/preview_options_panel/preview_options"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 4.0
+max_value = 8.0
+value = 6.0
+
+[node name="preview_color" type="ColorPickerButton" parent="icon_viewer/HSplitContainer/v_box_container/preview_options_panel/preview_options"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="detail_panel" parent="icon_viewer/HSplitContainer/v_box_container" instance=ExtResource("3_w4j77")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.34
+
+[node name="option_popup" type="Window" parent="."]
+title = "Icon Explorer Options"
+visible = false
+wrap_controls = true
+transient = true
+exclusive = true
+script = ExtResource("4_03l1v")
+
+[node name="options" parent="option_popup" instance=ExtResource("5_wngaf")]

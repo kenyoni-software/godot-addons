@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b813qk6u7eveh"]
+
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/list_field.gd" id="1_wb7ty"]
+[ext_resource type="PackedScene" uid="uid://bonqki0uorlhq" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.tscn" id="2_gcg2e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wghjy"]
+
+[node name="list_field" type="VBoxContainer" node_paths=PackedStringArray("_list")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wb7ty")
+_title_path = NodePath("title_panel")
+_list = NodePath("margin_container/item_list")
+
+[node name="title_panel" parent="." instance=ExtResource("2_gcg2e")]
+layout_mode = 2
+
+[node name="margin_container" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+
+[node name="item_list" type="ItemList" parent="margin_container"]
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wghjy")
+allow_search = false
+auto_height = true
