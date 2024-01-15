@@ -75,9 +75,12 @@ func (addon *addon) Zip(outputFile string) error {
 		return err
 	}
 	exampleDir := filepath.Join(addon.ProjectPath(), "examples", addon.Id())
-	err = zipDir(zw, exampleDir, filepath.Join("examples", addon.Id()))
-	if err != nil {
-		return err
+	// zip example directory only if it exists
+	if _, err := os.Stat(exampleDir); err == nil {
+		err = zipDir(zw, exampleDir, filepath.Join("examples", addon.Id()))
+		if err != nil {
+			return err
+		}
 	}
 
 	err = zipFile(zw, filepath.Join(addon.ProjectPath(), "LICENSE.md"), filepath.Join("addons", addon.Id(), "LICENSE.md"))
