@@ -1,6 +1,6 @@
 extends RefCounted
 
-const ComponentDetailTree := preload("../component_detail_tree.gd")
+const ComponentDetailTree := preload("res://addons/licenses/internal/component_detail_tree.gd")
 
 var tree: ComponentDetailTree
 var item: TreeItem

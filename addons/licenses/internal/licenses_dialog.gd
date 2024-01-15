@@ -1,7 +1,7 @@
 @tool
 extends Window
 
-const LicensesContainer := preload("licenses.gd")
+const LicensesContainer := preload("res://addons/licenses/internal/licenses.gd")
 
 @export_node_path("MarginContainer") var _licenses_path; @onready var _licenses: LicensesContainer = self.get_node(self._licenses_path)
 

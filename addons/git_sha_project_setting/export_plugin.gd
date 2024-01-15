@@ -1,6 +1,6 @@
 extends EditorExportPlugin
 
-const Utils := preload("utils.gd")
+const Utils := preload("res://addons/git_sha_project_setting/utils.gd")
 
 func _get_name() -> String:
     return "kenyoni_git_sha_exporter"

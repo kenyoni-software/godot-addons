@@ -1,8 +1,8 @@
 @tool
 extends EditorPlugin
 
-const ToolMenu := preload("tool_menu.gd")
-const Utils := preload("utils.gd")
+const ToolMenu := preload("res://addons/icons_patcher/tool_menu.gd")
+const Utils := preload("res://addons/icons_patcher/utils.gd")
 
 var tool_menu: ToolMenu
 

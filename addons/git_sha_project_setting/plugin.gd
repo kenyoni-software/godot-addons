@@ -1,8 +1,8 @@
 @tool
 extends EditorPlugin
 
-const ExportPlugin := preload("export_plugin.gd")
-const Utils := preload("utils.gd")
+const ExportPlugin := preload("res://addons/git_sha_project_setting/export_plugin.gd")
+const Utils := preload("res://addons/git_sha_project_setting/utils.gd")
 
 var export_plugin: ExportPlugin
 

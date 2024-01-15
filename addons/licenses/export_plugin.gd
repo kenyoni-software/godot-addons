@@ -1,7 +1,7 @@
 extends EditorExportPlugin
 
-const Licenses := preload("licenses.gd")
-const Component := preload("component.gd")
+const Licenses := preload("res://addons/licenses/licenses.gd")
+const Component := preload("res://addons/licenses/component.gd")
 
 func _get_name() -> String:
     return "kenyoni_licenses_exporter"

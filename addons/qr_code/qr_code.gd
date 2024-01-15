@@ -1,8 +1,8 @@
 extends RefCounted
 
-const BitStream := preload("bit_stream.gd")
-const ReedSolomon := preload("reed_solomon.gd")
-const ShiftJIS := preload("shift_jis.gd")
+const BitStream := preload("res://addons/qr_code/bit_stream.gd")
+const ReedSolomon := preload("res://addons/qr_code/reed_solomon.gd")
+const ShiftJIS := preload("res://addons/qr_code/shift_jis.gd")
 
 ## Encoding Mode
 enum Mode {

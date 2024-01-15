@@ -1,9 +1,9 @@
 @tool
 extends Tree
 
-const Component := preload("../component.gd")
-const ComponentsContainer := preload("components_container.gd")
-const Licenses := preload("../licenses.gd")
+const Component := preload("res://addons/licenses/component.gd")
+const ComponentsContainer := preload("res://addons/licenses/internal/components_container.gd")
+const Licenses := preload("res://addons/licenses/licenses.gd")
 
 const _BTN_ID_REMOVE: int = 2
 

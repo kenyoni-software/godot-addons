@@ -1,9 +1,9 @@
 @tool
 extends HBoxContainer
 
-const Licenses := preload("../licenses.gd")
-const Component := preload("../component.gd")
-const ComponentTree := preload("components_tree.gd")
+const Licenses := preload("res://addons/licenses/licenses.gd")
+const Component := preload("res://addons/licenses/component.gd")
+const ComponentTree := preload("res://addons/licenses/internal/components_tree.gd")
 
 signal add_component(comp: Component)
 signal show_engine_components(show: bool)

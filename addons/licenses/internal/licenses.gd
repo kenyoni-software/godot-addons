@@ -1,20 +1,20 @@
 @tool
 extends MarginContainer
 
-const Licenses := preload("../licenses.gd")
-const Component := preload("../component.gd")
-const ComponentsTree := preload("components_tree.gd")
-const ComponentDetailTree := preload("component_detail_tree.gd")
-const Toolbar := preload("toolbar.gd")
-const ComponentsContainer := preload("components_container.gd")
-const FileSystemWatcher := preload("file_system_watcher.gd")
+const Licenses := preload("res://addons/licenses/licenses.gd")
+const Component := preload("res://addons/licenses/component.gd")
+const ComponentsTree := preload("res://addons/licenses/internal/components_tree.gd")
+const ComponentDetailTree := preload("res://addons/licenses/internal/component_detail_tree.gd")
+const Toolbar := preload("res://addons/licenses/internal/toolbar.gd")
+const ComponentsContainer := preload("res://addons/licenses/internal/components_container.gd")
+const FileSystemWatcher := preload("res://addons/licenses/internal/file_system_watcher.gd")
 # handler
-const BaseHandler := preload("handler/base.gd")
-const ObjectHandler := preload("handler/object.gd")
-const ArrayHandler := preload("handler/array.gd")
-const StringHandler := preload("handler/string.gd")
-const StringFileHandler := preload("handler/string_file.gd")
-const StringMultiLineHandler := preload("handler/string_multiline.gd")
+const BaseHandler := preload("res://addons/licenses/internal/handler/base.gd")
+const ObjectHandler := preload("res://addons/licenses/internal/handler/object.gd")
+const ArrayHandler := preload("res://addons/licenses/internal/handler/array.gd")
+const StringHandler := preload("res://addons/licenses/internal/handler/string.gd")
+const StringFileHandler := preload("res://addons/licenses/internal/handler/string_file.gd")
+const StringMultiLineHandler := preload("res://addons/licenses/internal/handler/string_multiline.gd")
 
 @export_node_path("Tree") var _components_tree_path
 @onready var _components_tree: ComponentsTree = self.get_node(self._components_tree_path)

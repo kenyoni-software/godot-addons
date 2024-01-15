@@ -1,10 +1,10 @@
 @tool
-@icon("qr_code.svg")
+@icon("res://addons/qr_code/qr_code.svg")
 extends TextureRect
 class_name QRCodeRect
 
-const QRCode := preload("qr_code.gd")
-const ShiftJIS := preload("shift_jis.gd")
+const QRCode := preload("res://addons/qr_code/qr_code.gd")
+const ShiftJIS := preload("res://addons/qr_code/shift_jis.gd")
 
 var _qr: QRCode = QRCode.new()
 

@@ -2,7 +2,7 @@ extends RefCounted
 # TODO:  DO NOT USE THE CLASS NAME, it will be removed later
 class_name __LicenseManager
 
-const Component := preload("component.gd")
+const Component := preload("res://addons/licenses/component.gd")
 
 const DATA_FILE: String = "plugins/licenses/data_file"
 

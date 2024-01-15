@@ -1,7 +1,7 @@
 extends Node
 
-const Component := preload("../component.gd")
-const Licenses := preload("../licenses.gd")
+const Component := preload("res://addons/licenses/component.gd")
+const Licenses := preload("res://addons/licenses/licenses.gd")
 
 signal components_changed()
 

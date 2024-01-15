@@ -1,6 +1,6 @@
 extends PopupMenu
 
-const Utils := preload("utils.gd")
+const Utils := preload("res://addons/icons_patcher/utils.gd")
 
 func _ready() -> void:
     self.add_item("Patch Material Design Icons")

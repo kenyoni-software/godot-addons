@@ -1,7 +1,7 @@
 @tool
 extends Tree
 
-const Component := preload("../component.gd")
+const Component := preload("res://addons/licenses/component.gd")
 
 signal component_edited(component: Component)
 

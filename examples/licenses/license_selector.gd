@@ -2,7 +2,7 @@ extends Tree
 
 const Component := preload("res://addons/licenses/component.gd")
 const Licenses := preload("res://addons/licenses/licenses.gd")
-const LicenseContainer := preload("license_container.gd")
+const LicenseContainer := preload("res://examples/licenses/license_container.gd")
 
 @export_node_path("Node") var _license_container_path; @onready var _license_container: LicenseContainer = self.get_node(_license_container_path)
 

@@ -1,9 +1,9 @@
 @tool
 extends EditorPlugin
 
-const LicensesDialogScene: PackedScene = preload("internal/licenses_dialog.tscn")
-const Licenses := preload("licenses.gd")
-const ExportPlugin := preload("export_plugin.gd")
+const LicensesDialogScene: PackedScene = preload("res://addons/licenses/internal/licenses_dialog.tscn")
+const Licenses := preload("res://addons/licenses/licenses.gd")
+const ExportPlugin := preload("res://addons/licenses/export_plugin.gd")
 
 var _export_plugin: ExportPlugin
 var _licenses_dialog: Window

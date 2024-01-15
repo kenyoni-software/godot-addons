@@ -61,6 +61,10 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 ### Changelog
 
+#### 3.1.2
+
+- Use absolute paths in preloads
+
 #### 3.1.1
 
 - Code improvement
@@ -158,6 +162,10 @@ This one is automatically set and updated when you run any scene or on exporting
 
 ### Changelog
 
+#### 2.1.1
+
+- Use absolute paths in preloads
+
 #### 2.1.0
 
 - Require Godot 4.2
@@ -185,6 +193,10 @@ This plugin will hide exported private properties in the inspector for instantia
 [examples/hide_private_properties](./examples/hide_private_properties)
 
 ### Changelog
+
+#### 1.1.1
+
+- Use absolute paths in preloads
 
 #### 1.1.0
 
@@ -240,6 +252,10 @@ Consider using [Icon Explorer](#icon-explorer) instead and save it directly in w
 - Godot 4.2
 
 ### Changelog
+
+#### 1.3.3
+
+- Use absolute paths in preloads
 
 #### 1.3.2
 
@@ -298,6 +314,10 @@ Component class, data wrapper for all  information regarding one license item.
 License class.
 
 ### Changelog
+
+#### 1.7.7
+
+- Use absolute paths in preloads
 
 #### 1.7.6
 
@@ -557,6 +577,10 @@ Shift JIS encoding utility.
 
 ### Changelog
 
+#### 1.1.2
+
+- Use absolute paths in preloads
+
 #### 1.1.1
 
 - Code optimizing
@@ -603,6 +627,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 [examples/texture_button_colored](./examples/texture_button_colored)
 
 ### Changelog
+
+#### 1.3.2
+
+- Use absolute paths in preloads
 
 #### 1.3.1
 

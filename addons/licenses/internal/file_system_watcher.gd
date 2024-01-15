@@ -1,7 +1,7 @@
 extends RefCounted
 
-const ComponentsContainer := preload("components_container.gd")
-const Component := preload("../component.gd")
+const ComponentsContainer := preload("res://addons/licenses/internal/components_container.gd")
+const Component := preload("res://addons/licenses/component.gd")
 
 var _components: ComponentsContainer
 

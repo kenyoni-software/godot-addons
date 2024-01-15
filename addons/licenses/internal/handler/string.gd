@@ -1,4 +1,4 @@
-extends "base.gd"
+extends "res://addons/licenses/internal/handler/base.gd"
 
 func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, property_: Dictionary) -> void:
     super._init(tree_, item_, value_, property_)

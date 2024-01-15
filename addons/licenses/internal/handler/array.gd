@@ -1,4 +1,4 @@
-extends "base.gd"
+extends "res://addons/licenses/internal/handler/base.gd"
 
 var _constructor: Callable
 

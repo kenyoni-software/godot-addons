@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-const InspectorPlugin := preload("inspector_plugin.gd")
+const InspectorPlugin := preload("res://addons/hide_private_properties/inspector_plugin.gd")
 
 var _inspector_plugin: InspectorPlugin
 

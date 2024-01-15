@@ -1,6 +1,6 @@
-extends "base.gd"
+extends "res://addons/licenses/internal/handler/base.gd"
 
-const Utils := preload("../utils.gd")
+const Utils := preload("res://addons/licenses/internal/utils.gd")
 
 func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, property_: Dictionary) -> void:
     super._init(tree_, item_, value_, property_)
