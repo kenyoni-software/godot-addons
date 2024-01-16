@@ -59,6 +59,14 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 [examples/aspect_ratio_resize_container](./examples/aspect_ratio_resize_container)
 
+#### 3.2.1
+
+- Revert: Fix ratio calculation, it is clunky on specific settings
+
+#### 3.2.0
+
+- Fix ratio calculation (but it's still bugged in some cases)
+
 ### Changelog
 
 #### 3.1.2
