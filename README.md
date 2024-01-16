@@ -61,10 +61,6 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 ### Changelog
 
-#### 3.2.0
-
-- Fix ratio calculation (but it's still bugged in some cases)
-
 #### 3.1.2
 
 - Use absolute paths in preloads
