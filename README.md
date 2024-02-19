@@ -202,6 +202,10 @@ This plugin will hide exported private properties in the inspector for instantia
 
 ### Changelog
 
+#### 1.1.2
+
+- Fix: property not found warning
+
 #### 1.1.1
 
 - Use absolute paths in preloads
