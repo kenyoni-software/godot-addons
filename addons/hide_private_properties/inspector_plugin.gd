@@ -1,6 +1,8 @@
 extends EditorInspectorPlugin
 
 func _can_handle(object: Object) -> bool:
+    # Early return if property does not exist, prevents triggering a warning for
+    # some objects that overwrite the 'get' method.
     if not _has_property(object, "scene_file_path"):
         return false
     
@@ -13,6 +15,8 @@ func _parse_property(object: Object, type: Variant.Type, name: String, hint_type
     return false
 
 func _has_property(object: Object, propertyName: String) -> bool:
+    # Note: Checking if the property exists using the 'in' keyword also triggers 
+    # the warning in 'core/config/project_settings.cpp:_get' (v4.2.1)
     for property in object.get_property_list():
         if property.name == propertyName:
             return true
