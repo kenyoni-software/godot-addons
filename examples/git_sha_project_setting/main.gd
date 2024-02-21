@@ -1,8 +1,8 @@
 extends PanelContainer
 
-@export_node_path("Label") var _version_path; @onready var _version: Label = self.get_node(_version_path)
-@export_node_path("Label") var _git_sha_path; @onready var _git_sha: Label = self.get_node(_git_sha_path)
-@export_node_path("Label") var _version_complete_path; @onready var _version_complete: Label = self.get_node(_version_complete_path)
+@export_node_path("Label") var _version_path: NodePath; @onready var _version: Label = self.get_node(_version_path)
+@export_node_path("Label") var _git_sha_path: NodePath; @onready var _git_sha: Label = self.get_node(_git_sha_path)
+@export_node_path("Label") var _version_complete_path: NodePath; @onready var _version_complete: Label = self.get_node(_version_complete_path)
 
 func _ready() -> void:
     var version: String = ProjectSettings.get_setting("application/config/version", "<not set>")

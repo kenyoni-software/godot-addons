@@ -1,9 +1,9 @@
 extends Node
 
-@export_node_path("OptionButton") var _logger_options_path; @onready var _logger_options: OptionButton = self.get_node(_logger_options_path)
-@export_node_path("OptionButton") var _log_level_options_path; @onready var _log_level_options: OptionButton = self.get_node(_log_level_options_path)
-@export_node_path("OptionButton") var _log_at_level_options_path; @onready var _log_at_level_options: OptionButton = self.get_node(_log_at_level_options_path)
-@export_node_path("LineEdit") var _log_text_path; @onready var _log_text: LineEdit = self.get_node(_log_text_path)
+@export_node_path("OptionButton") var _logger_options_path: NodePath; @onready var _logger_options: OptionButton = self.get_node(_logger_options_path)
+@export_node_path("OptionButton") var _log_level_options_path: NodePath; @onready var _log_level_options: OptionButton = self.get_node(_log_level_options_path)
+@export_node_path("OptionButton") var _log_at_level_options_path: NodePath; @onready var _log_at_level_options: OptionButton = self.get_node(_log_at_level_options_path)
+@export_node_path("LineEdit") var _log_text_path: NodePath; @onready var _log_text: LineEdit = self.get_node(_log_text_path)
 
 var _logger: Array[GLogging.Logger] = [GLogging.root_logger]
 
