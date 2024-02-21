@@ -658,6 +658,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 ### Changelog
 
+#### 1.3.3
+
+- Notify if Custom Themes Override is missing or enable it if disabled
+
 #### 1.3.2
 
 - Use absolute paths in preloads
