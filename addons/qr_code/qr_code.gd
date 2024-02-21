@@ -681,8 +681,8 @@ const _ALIGNMENT_PATTERN_POSITIONS: Array = [
 ## remainder bits after structured data bits
 const _REMAINDER_BITS: Array = [ 0, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4,4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0 ]
 
-static var _number_rx: RegEx = RegEx.new()
-static var _alphanumeric_rx: RegEx = RegEx.new()
+static var _number_rx: RegEx = RegEx.create_from_string("[^\\d]*")
+static var _alphanumeric_rx: RegEx = RegEx.create_from_string("[^0-9A-Z $%*+\\-.\\/:]*")
 
 ## cached qr data
 var _cached_qr: PackedByteArray = []
@@ -884,16 +884,14 @@ func _get_char_count_size() -> int:
                 return 12
     return 0
 
+# TODO: TEST IF STATIC VAR WORKS
 static func _static_init() -> void:
     # TODO: static init is not called in editor if not @tool
     if _number_rx == null:
-        _number_rx = RegEx.new()
+        _number_rx = RegEx.create_from_string("[^\\d]*")
     # TODO: static init is not called in editor if not @tool
     if _alphanumeric_rx == null:
-        _alphanumeric_rx = RegEx.new()
-
-    _number_rx.compile("[^\\d]*")
-    _alphanumeric_rx.compile("[^0-9A-Z $%*+\\-.\\/:]*")
+        _alphanumeric_rx = RegEx.create_from_string("[^0-9A-Z $%*+\\-.\\/:]*")
 
 func _init(error_correction_: ErrorCorrection = ErrorCorrection.LOW) -> void:
     self.error_correction = error_correction_

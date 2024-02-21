@@ -603,6 +603,10 @@ Shift JIS encoding utility.
 
 ### Changelog
 
+#### 1.1.3
+
+- Code improvements
+
 #### 1.1.2
 
 - Use absolute paths in preloads
