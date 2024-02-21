@@ -38,7 +38,7 @@ func _init(scene_tree: SceneTree) -> void:
     self.register(CollectionSimpleIcons.new())
     self.register(CollectionTabler.new())
 
-func _notification(what):
+func _notification(what: int):
     if what == NOTIFICATION_PREDELETE:
         if self._processing_thread != null:
             self._processing_thread.wait_to_finish()
