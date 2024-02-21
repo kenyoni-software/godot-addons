@@ -259,6 +259,8 @@ Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it
 
 ## Icons Patcher
 
+*Consider using [Icon Explorer](#icon-explorer) instead and save icons in white color.*
+
 If you use Material Design icons from [Pictogrammers](https://pictogrammers.com/library/mdi/), they come without any fill color, automatically rendered black. This is not a convenient color as it makes it impossible to modulate the color. The icon patcher provides a utility to automatically patch the icons to white color.
 
 Set the icon directory in the Project Settings under the menu `Plugins` -> `Icons Patcher`.
@@ -272,6 +274,10 @@ Consider using [Icon Explorer](#icon-explorer) instead and save it directly in w
 - Godot 4.2
 
 ### Changelog
+
+#### 1.4.0
+
+- Use editor toast notification
 
 #### 1.3.3
 
