@@ -247,6 +247,10 @@ Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it
 
 ### Changelog
 
+#### 1.1.0
+
+- Use editor toast notification
+
 #### 1.0.0
 
 - Add icon explorer
