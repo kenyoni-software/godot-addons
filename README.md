@@ -61,6 +61,10 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 ### Changelog
 
+#### 3.2.2
+
+- Add more static typing
+
 #### 3.2.1
 
 - Revert: Fix ratio calculation, it is clunky on specific settings
