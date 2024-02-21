@@ -54,6 +54,7 @@ func _ready() -> void:
     self._components.components_changed.connect(self._on_components_changed)
     if Engine.is_editor_hint():
         self._file_watcher = FileSystemWatcher.new(self._components)
+        EditorInterface.get_file_system_dock().files_moved.connect(self._on_file_moved)
 
 func reload() -> void:
     self._update_set_license_filepath_button()
@@ -135,3 +136,8 @@ func _on_components_changed() -> void:
 
 func _emit_changed():
     self._components.emit_changed()
+
+func _on_file_moved(old_file: String, new_file: String) -> void:
+    if old_file == Licenses.get_license_data_filepath():
+        Licenses.set_license_data_filepath(new_file)
+        self._license_file_edit.text = Licenses.get_license_data_filepath()

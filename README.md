@@ -341,6 +341,10 @@ License class.
 
 ### Changelog
 
+#### 1.7.8
+
+- Detect movement of licenses json file
+
 #### 1.7.7
 
 - Use absolute paths in preloads
