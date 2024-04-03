@@ -10,12 +10,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fhni0")
-_title_path = NodePath("title_panel")
 _label = NodePath("margin_container/h_box_container/label")
 _button = NodePath("margin_container/h_box_container/button")
 
-[node name="title_panel" parent="." instance=ExtResource("2_vjbmh")]
+[node name="title_panel" parent="." node_paths=PackedStringArray("_text_label") instance=ExtResource("2_vjbmh")]
 layout_mode = 2
+_text_label = NodePath("title")
 
 [node name="margin_container" type="MarginContainer" parent="."]
 layout_mode = 2

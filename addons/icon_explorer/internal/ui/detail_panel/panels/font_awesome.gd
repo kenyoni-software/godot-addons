@@ -5,10 +5,8 @@ const IconFontAwesome := preload("res://addons/icon_explorer/internal/scripts/co
 const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd")
 const ListField := preload("res://addons/icon_explorer/internal/ui/detail_panel/list_field.gd")
 
-@export var _style_path: NodePath
-@onready var _style: TextField = self.get_node(self._style_path)
-@export var _aliases_path: NodePath
-@onready var _aliases: ListField = self.get_node(self._aliases_path)
+@export var _style: TextField
+@export var _aliases: ListField
 
 func display(icon: IconFontAwesome) -> void:
     self._aliases.set_items(icon.aliases)

@@ -6,8 +6,7 @@ const FieldTitle := preload("res://addons/icon_explorer/internal/ui/detail_panel
 @export var title: String:
     set = set_title
 
-@export var _title_path: NodePath
-@onready var _title: FieldTitle = self.get_node(self._title_path)
+@export var _title: FieldTitle
 
 func set_title(new_title: String) -> void:
     title = new_title

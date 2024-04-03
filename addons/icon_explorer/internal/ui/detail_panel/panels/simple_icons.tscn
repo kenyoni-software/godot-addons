@@ -5,34 +5,43 @@
 [ext_resource type="PackedScene" uid="uid://b813qk6u7eveh" path="res://addons/icon_explorer/internal/ui/detail_panel/list_field.tscn" id="3_ps7ly"]
 [ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="4_soj3e"]
 
-[node name="simple_icons" type="VBoxContainer"]
+[node name="simple_icons" type="VBoxContainer" node_paths=PackedStringArray("_color", "_aliases", "_guidelines", "_license", "_source")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 297.0
 grow_horizontal = 2
 script = ExtResource("1_icjlg")
-_color_path = NodePath("color")
-_aliases_path = NodePath("aliases")
-_guidelines_path = NodePath("guidelines")
-_license_path = NodePath("license")
-_source_path = NodePath("source")
+_color = NodePath("color")
+_aliases = NodePath("aliases")
+_guidelines = NodePath("guidelines")
+_license = NodePath("license")
+_source = NodePath("source")
 
-[node name="color" parent="." instance=ExtResource("2_q8ihc")]
+[node name="color" parent="." node_paths=PackedStringArray("_color_rect", "_color_label") instance=ExtResource("2_q8ihc")]
 layout_mode = 2
+_color_rect = NodePath("margin_container/color_rect")
+_color_label = NodePath("margin_container/color")
 title = "Color"
 
-[node name="aliases" parent="." instance=ExtResource("3_ps7ly")]
+[node name="aliases" parent="." node_paths=PackedStringArray("_list") instance=ExtResource("3_ps7ly")]
 layout_mode = 2
+_list = NodePath("margin_container/item_list")
 title = "Aliases"
 
-[node name="guidelines" parent="." instance=ExtResource("4_soj3e")]
+[node name="guidelines" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("4_soj3e")]
 layout_mode = 2
+_label = NodePath("margin_container/h_box_container/label")
+_button = NodePath("margin_container/h_box_container/button")
 title = "Brand Guidelines"
 
-[node name="license" parent="." instance=ExtResource("4_soj3e")]
+[node name="license" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("4_soj3e")]
 layout_mode = 2
+_label = NodePath("margin_container/h_box_container/label")
+_button = NodePath("margin_container/h_box_container/button")
 title = "License"
 
-[node name="source" parent="." instance=ExtResource("4_soj3e")]
+[node name="source" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("4_soj3e")]
 layout_mode = 2
+_label = NodePath("margin_container/h_box_container/label")
+_button = NodePath("margin_container/h_box_container/button")
 title = "Source"

@@ -3,8 +3,7 @@ extends Window
 
 const Explorer := preload("res://addons/icon_explorer/internal/ui/explorer/explorer.gd")
 
-@export var _explorer_path: NodePath
-@onready var _explorer: Explorer = self.get_node(self._explorer_path)
+@export var _explorer: Explorer
 
 func _notification(what: int) -> void:
     if (what == NOTIFICATION_WM_CLOSE_REQUEST):

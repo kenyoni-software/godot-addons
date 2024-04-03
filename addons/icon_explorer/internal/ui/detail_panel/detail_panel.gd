@@ -10,8 +10,7 @@ const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/
 
 @export var _detail_container: VBoxContainer
 @export var _hint_container: CenterContainer
-@export var _toolbar_path: NodePath
-@onready var _toolbar: Toolbar = self.get_node(self._toolbar_path)
+@export var _toolbar: Toolbar
 @export var _detail_tabs: TabContainer
 
 @export var _icon: TextureRect

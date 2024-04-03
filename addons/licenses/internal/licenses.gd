@@ -16,12 +16,9 @@ const StringHandler := preload("res://addons/licenses/internal/handler/string.gd
 const StringFileHandler := preload("res://addons/licenses/internal/handler/string_file.gd")
 const StringMultiLineHandler := preload("res://addons/licenses/internal/handler/string_multiline.gd")
 
-@export_node_path("Tree") var _components_tree_path: NodePath
-@onready var _components_tree: ComponentsTree = self.get_node(self._components_tree_path)
-@export_node_path("Tree") var _component_detail_tree_path: NodePath
-@onready var _component_detail_tree: ComponentDetailTree = self.get_node(self._component_detail_tree_path)
-@export_node_path("HBoxContainer") var _toolbar_path: NodePath
-@onready var _toolbar: Toolbar = self.get_node(self._toolbar_path)
+@export var _components_tree: ComponentsTree
+@export var _component_detail_tree: ComponentDetailTree
+@export var _toolbar: Toolbar
 @export var _license_file_edit: LineEdit = null
 @export var _license_file_load_button: Button = null
 @export var _set_license_filepath_button: Button = null

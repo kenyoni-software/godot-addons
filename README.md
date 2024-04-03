@@ -239,13 +239,19 @@ Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it
 
 ### Compatibility
 
-- Godot 4.2
+- Godot 4.3: >= 1.2.0
+- Godot 4.2: <= 1.1.0
 
 ### Screenshot
 
 ![Icon Explorer screenshot](./doc/icon_explorer.png "Icon Explorer")
 
 ### Changelog
+
+#### 1.2.0
+
+- Require Godot 4.3
+- Make use of @export for custom Nodes
 
 #### 1.1.0
 
@@ -315,7 +321,9 @@ You can change the project license file either with a button at the upper right,
 
 ### Compatibility
 
-- Godot 4.2
+- Godot 4.3: >= 1.8.0
+- Godot 4.2: 1.6.0 - 1.7.8
+- Godot 4.1: < 1.6.0
 
 ### Screenshot
 
@@ -340,6 +348,11 @@ Component class, data wrapper for all  information regarding one license item.
 License class.
 
 ### Changelog
+
+#### 1.8.0
+
+- Require Godot 4.3
+- Make use of @export for custom Nodes
 
 #### 1.7.8
 

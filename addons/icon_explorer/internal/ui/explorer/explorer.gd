@@ -12,20 +12,17 @@ const Options := preload("res://addons/icon_explorer/internal/ui/options/options
 
 @export var _filter_icon: TextureRect
 @export var _filter: LineEdit
-@export var _filter_options_path: NodePath
-@onready var _filter_options: FilterOptions = self.get_node(self._filter_options_path)
+@export var _filter_options: FilterOptions
 @export var _preview_color: ColorPickerButton
 @export var _preview_size: HSlider
 @export var _icon_list: ItemList
 @export var _options_button: Button
 @export var _options_popup: Window
-@export var _options_path: NodePath
-@onready var _options: Options = self.get_node(self._options_path)
+@export var _options: Options
 
 @export var _progress_bar: ProgressBar
 
-@export var _detail_panel_path: NodePath
-@onready var _detail_panel: DetailPanel = self.get_node(self._detail_panel_path)
+@export var _detail_panel: DetailPanel
 
 @export var _toolbar_panel: PanelContainer
 @export var _preview_options_panel: PanelContainer

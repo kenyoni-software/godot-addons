@@ -6,14 +6,10 @@ const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/
 const ListField := preload("res://addons/icon_explorer/internal/ui/detail_panel/list_field.gd")
 
 @export var _deprecated_banner: Label
-@export var _aliases_path: NodePath
-@onready var _aliases: ListField = self.get_node(self._aliases_path)
-@export var _tags_path: NodePath
-@onready var _tags: ListField = self.get_node(self._tags_path)
-@export var _author_path: NodePath
-@onready var _author: TextField = self.get_node(self._author_path)
-@export var _version_path: NodePath
-@onready var _version: TextField = self.get_node(self._version_path)
+@export var _aliases: ListField
+@export var _tags: ListField
+@export var _author: TextField
+@export var _version: TextField
 
 func display(icon: IconMaterialDesign) -> void:
     self._deprecated_banner.visible = icon.deprecated

@@ -20,7 +20,7 @@ border_color = Color(0.439216, 0.729412, 0.980392, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_brt2g"]
 
-[node name="detail_panel" type="PanelContainer" node_paths=PackedStringArray("_detail_container", "_hint_container", "_detail_tabs", "_icon", "_preview_background", "_preview_panel", "_name", "_collection", "_size", "_toolbar_panel")]
+[node name="detail_panel" type="PanelContainer" node_paths=PackedStringArray("_detail_container", "_hint_container", "_toolbar", "_detail_tabs", "_icon", "_preview_background", "_preview_panel", "_name", "_collection", "_size", "_toolbar_panel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,7 +32,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_p1g3s")
 script = ExtResource("1_2iwjs")
 _detail_container = NodePath("detail_container")
 _hint_container = NodePath("hint_container")
-_toolbar_path = NodePath("detail_container/toolbar_panel/toolbar")
+_toolbar = NodePath("detail_container/toolbar_panel/toolbar")
 _detail_tabs = NodePath("detail_container/v_box_container/scroll_container/detail_tabs")
 _icon = NodePath("detail_container/v_box_container/preview/icon")
 _preview_background = NodePath("detail_container/v_box_container/preview/background")
@@ -120,24 +120,42 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_brt2g")
 current_tab = 2
 tabs_visible = false
 
-[node name="bootstrap" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("5_mxg1a")]
+[node name="bootstrap" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_categories", "_tags", "_version_added") instance=ExtResource("5_mxg1a")]
 visible = false
 layout_mode = 2
+_categories = NodePath("categories")
+_tags = NodePath("aliases")
+_version_added = NodePath("version_added")
 
-[node name="font_awesome" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("8_1041k")]
+[node name="font_awesome" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_style", "_aliases") instance=ExtResource("8_1041k")]
 visible = false
 layout_mode = 2
+_style = NodePath("style")
+_aliases = NodePath("aliases")
 
-[node name="material_design" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("2_ea6yg")]
+[node name="material_design" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_deprecated_banner", "_aliases", "_tags", "_author", "_version") instance=ExtResource("2_ea6yg")]
 layout_mode = 2
+_deprecated_banner = NodePath("deprecated_banner")
+_aliases = NodePath("aliases")
+_tags = NodePath("tags")
+_author = NodePath("author")
+_version = NodePath("version")
 
-[node name="simple_icons" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("4_em72e")]
+[node name="simple_icons" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_color", "_aliases", "_guidelines", "_license", "_source") instance=ExtResource("4_em72e")]
 visible = false
 layout_mode = 2
+_color = NodePath("color")
+_aliases = NodePath("aliases")
+_guidelines = NodePath("guidelines")
+_license = NodePath("license")
+_source = NodePath("source")
 
-[node name="tabler" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("7_2jw0k")]
+[node name="tabler" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_category", "_tags", "_version") instance=ExtResource("7_2jw0k")]
 visible = false
 layout_mode = 2
+_category = NodePath("category")
+_tags = NodePath("tags")
+_version = NodePath("version_added")
 
 [node name="hint_container" type="CenterContainer" parent="."]
 visible = false

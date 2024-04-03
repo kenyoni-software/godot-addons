@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://b813qk6u7eveh" path="res://addons/icon_explorer/internal/ui/detail_panel/list_field.tscn" id="2_sgh8u"]
 [ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="3_7hl4l"]
 
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2aicr"]
 bg_color = Color(0.670588, 0, 0.0901961, 1)
 border_width_left = 4
@@ -13,17 +12,17 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.670588, 0, 0.0901961, 1)
 
-[node name="material_design" type="VBoxContainer" node_paths=PackedStringArray("_deprecated_banner")]
+[node name="material_design" type="VBoxContainer" node_paths=PackedStringArray("_deprecated_banner", "_aliases", "_tags", "_author", "_version")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 227.0
 grow_horizontal = 2
 script = ExtResource("1_7oq86")
 _deprecated_banner = NodePath("deprecated_banner")
-_aliases_path = NodePath("aliases")
-_tags_path = NodePath("tags")
-_author_path = NodePath("author")
-_version_path = NodePath("version")
+_aliases = NodePath("aliases")
+_tags = NodePath("tags")
+_author = NodePath("author")
+_version = NodePath("version")
 
 [node name="deprecated_banner" type="Label" parent="."]
 layout_mode = 2
@@ -31,18 +30,24 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2aicr")
 text = "Deprecated"
 horizontal_alignment = 1
 
-[node name="aliases" parent="." instance=ExtResource("2_sgh8u")]
+[node name="aliases" parent="." node_paths=PackedStringArray("_list") instance=ExtResource("2_sgh8u")]
 layout_mode = 2
+_list = NodePath("margin_container/item_list")
 title = "Aliases"
 
-[node name="tags" parent="." instance=ExtResource("2_sgh8u")]
+[node name="tags" parent="." node_paths=PackedStringArray("_list") instance=ExtResource("2_sgh8u")]
 layout_mode = 2
+_list = NodePath("margin_container/item_list")
 title = "Tags"
 
-[node name="author" parent="." instance=ExtResource("3_7hl4l")]
+[node name="author" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("3_7hl4l")]
 layout_mode = 2
+_label = NodePath("margin_container/h_box_container/label")
+_button = NodePath("margin_container/h_box_container/button")
 title = "Created by"
 
-[node name="version" parent="." instance=ExtResource("3_7hl4l")]
+[node name="version" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("3_7hl4l")]
 layout_mode = 2
+_label = NodePath("margin_container/h_box_container/label")
+_button = NodePath("margin_container/h_box_container/button")
 title = "Version added"

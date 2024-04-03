@@ -5,12 +5,9 @@ const IconTabler := preload("res://addons/icon_explorer/internal/scripts/collect
 const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd")
 const ListField := preload("res://addons/icon_explorer/internal/ui/detail_panel/list_field.gd")
 
-@export var _category_path: NodePath
-@onready var _category: TextField = self.get_node(self._category_path)
-@export var _tags_path: NodePath
-@onready var _tags: ListField = self.get_node(self._tags_path)
-@export var _version_path: NodePath
-@onready var _version: TextField = self.get_node(self._version_path)
+@export var _category: TextField
+@export var _tags: ListField
+@export var _version: TextField
 
 func display(icon: IconTabler) -> void:
     self._tags.set_items(icon.tags)
