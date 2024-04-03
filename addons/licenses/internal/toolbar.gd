@@ -28,6 +28,8 @@ func _ready() -> void:
     self.add_child(self._menu)
 
     self._add_menu = PopupMenu.new()
+    self._create_plugin_menu_items()
+    self._create_engine_menu_items()
     self._add_menu.add_item("New Component", 0)
     self._add_menu.set_item_icon(0, get_theme_icon(&"New", &"EditorIcons"))
     self._add_menu.add_submenu_item("Generate from Plugin", "menu_plugin", 1)
@@ -36,9 +38,6 @@ func _ready() -> void:
     self._add_menu.set_item_icon(2, get_theme_icon(&"Godot", &"EditorIcons"))
     self._add_menu.id_pressed.connect(self._on_add_id_pressed)
     self.add_child(self._add_menu)
-
-    self._create_plugin_menu_items()
-    self._create_engine_menu_items()
 
 # get plugin config as dictionary
 func _get_plugin_config(path: String) -> Dictionary:
