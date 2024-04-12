@@ -252,6 +252,7 @@ Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it
 
 - Require Godot 4.3
 - Make use of @export for custom Nodes
+- Improve loading visualization
 
 #### 1.1.0
 

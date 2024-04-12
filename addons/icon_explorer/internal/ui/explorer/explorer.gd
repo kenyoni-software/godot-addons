@@ -78,7 +78,9 @@ func _ready() -> void:
         self.load_db()
 
 func _process(_delta: float) -> void:
-    self._progress_bar.value = self._db.load_progress()
+    var progress: float = self._db.load_progress()
+    self._progress_bar.indeterminate = progress <= 0.0
+    self._progress_bar.value = progress
 
 func load_db() -> void:
     if self._db_loaded:

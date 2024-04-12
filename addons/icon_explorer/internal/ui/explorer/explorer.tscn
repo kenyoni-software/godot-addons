@@ -66,6 +66,8 @@ flat = true
 layout_mode = 2
 size_flags_vertical = 1
 show_percentage = false
+indeterminate = true
+editor_preview_indeterminate = true
 
 [node name="HSplitContainer" type="HSplitContainer" parent="icon_viewer"]
 layout_mode = 2
