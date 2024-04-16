@@ -1,7 +1,7 @@
 @tool
 extends VBoxContainer
 
-const IconSimpleIcons := preload("res://addons/icon_explorer/internal/scripts/collections/icon_simple_icons.gd")
+const IconSimpleIcons := preload("res://addons/icon_explorer/internal/ext/simple_icons/icon.gd")
 const ColorField := preload("res://addons/icon_explorer/internal/ui/detail_panel/color_field.gd")
 const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd")
 const ListField := preload("res://addons/icon_explorer/internal/ui/detail_panel/list_field.gd")

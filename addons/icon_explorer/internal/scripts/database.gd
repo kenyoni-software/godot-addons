@@ -4,11 +4,6 @@ extends RefCounted
 ## Any texture loading has to be done on the main thread: https://github.com/godotengine/godot/issues/86796
 
 const Collection := preload("res://addons/icon_explorer/internal/scripts/collection.gd")
-const CollectionBootstrap := preload("res://addons/icon_explorer/internal/scripts/collections/bootstrap.gd")
-const CollectionFontAwesome := preload("res://addons/icon_explorer/internal/scripts/collections/font_awesome.gd")
-const CollectionMaterialDesign := preload("res://addons/icon_explorer/internal/scripts/collections/material_design.gd")
-const CollectionSimpleIcons := preload("res://addons/icon_explorer/internal/scripts/collections/simple_icons.gd")
-const CollectionTabler := preload("res://addons/icon_explorer/internal/scripts/collections/tabler.gd")
 const Icon := preload("res://addons/icon_explorer/internal/scripts/icon.gd")
 
 signal collection_installed(id: int, status: Error)
@@ -32,11 +27,9 @@ func load_progress() -> float:
 
 func _init(scene_tree: SceneTree) -> void:
     self._scene_tree = scene_tree
-    self.register(CollectionBootstrap.new())
-    self.register(CollectionFontAwesome.new())
-    self.register(CollectionMaterialDesign.new())
-    self.register(CollectionSimpleIcons.new())
-    self.register(CollectionTabler.new())
+    for path: String in Collection.get_default_collection_paths():
+        self.register((load(path.path_join("/collection.gd")) as Script).new())
+    print(typeof(Collection))
 
 func _notification(what: int):
     if what == NOTIFICATION_PREDELETE:

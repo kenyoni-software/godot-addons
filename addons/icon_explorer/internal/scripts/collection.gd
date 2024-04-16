@@ -64,3 +64,21 @@ func directory() -> String:
 
 func directory_name() -> String:
     return self.name.to_snake_case()
+
+static func get_default_collection_paths() -> PackedStringArray:
+    const ext_path: String = "res://addons/icon_explorer/internal/ext/"
+    var dir: DirAccess = DirAccess.open(ext_path)
+    if dir == null:
+        return []
+        
+    dir.list_dir_begin()
+    var elem: String = dir.get_next()
+    var paths: PackedStringArray = []
+    while (not elem.is_empty()):
+        if dir.current_is_dir():
+            paths.push_back(ext_path.path_join(elem))
+        elem = dir.get_next()
+    dir.list_dir_end()
+    dir = null
+
+    return paths

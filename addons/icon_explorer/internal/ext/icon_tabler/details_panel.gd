@@ -1,7 +1,7 @@
 @tool
 extends VBoxContainer
 
-const IconTabler := preload("res://addons/icon_explorer/internal/scripts/collections/icon_tabler.gd")
+const IconTabler := preload("res://addons/icon_explorer/internal/ext/icon_tabler/icon.gd")
 const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd")
 const ListField := preload("res://addons/icon_explorer/internal/ui/detail_panel/list_field.gd")
 

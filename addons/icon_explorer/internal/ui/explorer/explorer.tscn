@@ -111,11 +111,12 @@ layout_mode = 2
 color = Color(1, 1, 1, 1)
 edit_alpha = false
 
-[node name="detail_panel" parent="icon_viewer/HSplitContainer/v_box_container" node_paths=PackedStringArray("_detail_container", "_hint_container", "_detail_tabs", "_icon", "_preview_background", "_preview_panel", "_name", "_collection", "_size", "_toolbar_panel") instance=ExtResource("3_w4j77")]
+[node name="detail_panel" parent="icon_viewer/HSplitContainer/v_box_container" node_paths=PackedStringArray("_detail_container", "_hint_container", "_toolbar", "_detail_tabs", "_icon", "_preview_background", "_preview_panel", "_name", "_collection", "_size", "_toolbar_panel") instance=ExtResource("3_w4j77")]
 layout_mode = 2
 size_flags_stretch_ratio = 0.34
 _detail_container = NodePath("detail_container")
 _hint_container = NodePath("hint_container")
+_toolbar = NodePath("detail_container/toolbar_panel/toolbar")
 _detail_tabs = NodePath("detail_container/v_box_container/scroll_container/detail_tabs")
 _icon = NodePath("detail_container/v_box_container/preview/icon")
 _preview_background = NodePath("detail_container/v_box_container/preview/background")

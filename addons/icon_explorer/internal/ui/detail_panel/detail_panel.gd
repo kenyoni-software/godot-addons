@@ -60,6 +60,10 @@ func _ready() -> void:
     self._toolbar.save_pressed.connect(self._on_save_pressed.bind(false))
     self._toolbar.save_colored_pressed.connect(self._on_save_pressed.bind(true))
     self._icon.self_modulate = self.preview_color
+
+    for path: String in Collection.get_default_collection_paths():
+        self._detail_tabs.add_child((load(path.path_join("/details_panel.tscn")) as PackedScene).instantiate())
+    
     self.display(null)
 
 func display(icon: Icon) -> void:

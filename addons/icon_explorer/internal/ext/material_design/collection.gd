@@ -1,6 +1,6 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
-const IconMaterialDesign := preload("res://addons/icon_explorer/internal/scripts/collections/icon_material_design.gd")
+const IconMaterialDesign := preload("res://addons/icon_explorer/internal/ext/material_design/icon.gd")
 const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/Templarian/MaterialDesign-SVG/archive/master.zip"

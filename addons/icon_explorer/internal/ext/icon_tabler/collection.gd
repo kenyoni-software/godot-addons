@@ -1,6 +1,6 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
-const IconTabler := preload("res://addons/icon_explorer/internal/scripts/collections/icon_tabler.gd")
+const IconTabler := preload("res://addons/icon_explorer/internal/ext/icon_tabler/icon.gd")
 const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/tabler/tabler-icons/archive/master.zip"

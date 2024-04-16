@@ -1,6 +1,6 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
-const IconSimpleIcons := preload("res://addons/icon_explorer/internal/scripts/collections/icon_simple_icons.gd")
+const IconSimpleIcons := preload("res://addons/icon_explorer/internal/ext/simple_icons/icon.gd")
 const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/simple-icons/simple-icons/archive/master.zip"

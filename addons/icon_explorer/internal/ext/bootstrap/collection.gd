@@ -1,6 +1,6 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
-const IconBootstrap := preload("res://addons/icon_explorer/internal/scripts/collections/icon_bootstrap.gd")
+const IconBootstrap := preload("res://addons/icon_explorer/internal/ext/bootstrap/icon.gd")
 const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/twbs/icons/archive/main.zip"

@@ -1,12 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3s1t8hiu6xll"]
+[gd_scene load_steps=6 format=3 uid="uid://c3s1t8hiu6xll"]
 
 [ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/detail_panel.gd" id="1_2iwjs"]
-[ext_resource type="PackedScene" uid="uid://bf2b6v68rufpn" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/material_design.tscn" id="2_ea6yg"]
 [ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/toolbar.gd" id="2_rtuoh"]
-[ext_resource type="PackedScene" uid="uid://3hl6t03xllbp" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/simple_icons.tscn" id="4_em72e"]
-[ext_resource type="PackedScene" uid="uid://dtcstt4vepa17" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/bootstrap.tscn" id="5_mxg1a"]
-[ext_resource type="PackedScene" uid="uid://lk45nf0tqm80" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/tabler.tscn" id="7_2jw0k"]
-[ext_resource type="PackedScene" uid="uid://wqlpitsynlfk" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/font_awesome.tscn" id="8_1041k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1g3s"]
 
@@ -117,45 +112,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_brt2g")
-current_tab = 2
+current_tab = 0
 tabs_visible = false
-
-[node name="bootstrap" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_categories", "_tags", "_version_added") instance=ExtResource("5_mxg1a")]
-visible = false
-layout_mode = 2
-_categories = NodePath("categories")
-_tags = NodePath("aliases")
-_version_added = NodePath("version_added")
-
-[node name="font_awesome" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_style", "_aliases") instance=ExtResource("8_1041k")]
-visible = false
-layout_mode = 2
-_style = NodePath("style")
-_aliases = NodePath("aliases")
-
-[node name="material_design" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_deprecated_banner", "_aliases", "_tags", "_author", "_version") instance=ExtResource("2_ea6yg")]
-layout_mode = 2
-_deprecated_banner = NodePath("deprecated_banner")
-_aliases = NodePath("aliases")
-_tags = NodePath("tags")
-_author = NodePath("author")
-_version = NodePath("version")
-
-[node name="simple_icons" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_color", "_aliases", "_guidelines", "_license", "_source") instance=ExtResource("4_em72e")]
-visible = false
-layout_mode = 2
-_color = NodePath("color")
-_aliases = NodePath("aliases")
-_guidelines = NodePath("guidelines")
-_license = NodePath("license")
-_source = NodePath("source")
-
-[node name="tabler" parent="detail_container/v_box_container/scroll_container/detail_tabs" node_paths=PackedStringArray("_category", "_tags", "_version") instance=ExtResource("7_2jw0k")]
-visible = false
-layout_mode = 2
-_category = NodePath("category")
-_tags = NodePath("tags")
-_version = NodePath("version_added")
 
 [node name="hint_container" type="CenterContainer" parent="."]
 visible = false

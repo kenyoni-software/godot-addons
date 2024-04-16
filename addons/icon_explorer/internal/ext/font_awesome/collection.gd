@@ -1,6 +1,6 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
-const IconFontAwesome := preload("res://addons/icon_explorer/internal/scripts/collections/icon_font_awesome.gd")
+const IconFontAwesome := preload("res://addons/icon_explorer/internal/ext/font_awesome/icon.gd")
 const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/FortAwesome/Font-Awesome/archive/6.x.zip"

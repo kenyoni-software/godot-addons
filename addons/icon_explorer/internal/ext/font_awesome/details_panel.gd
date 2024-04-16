@@ -1,7 +1,7 @@
 @tool
 extends VBoxContainer
 
-const IconFontAwesome := preload("res://addons/icon_explorer/internal/scripts/collections/icon_font_awesome.gd")
+const IconFontAwesome := preload("res://addons/icon_explorer/internal/ext/font_awesome/icon.gd")
 const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd")
 const ListField := preload("res://addons/icon_explorer/internal/ui/detail_panel/list_field.gd")
 
