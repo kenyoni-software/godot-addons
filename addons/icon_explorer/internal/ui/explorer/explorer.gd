@@ -78,19 +78,13 @@ func set_icon_db(db: IconDatabase) -> void:
         self._db.load_finished.disconnect(self._on_icon_database_load_finished)
         self._db.collection_installed.disconnect(self._on_database_changed)
         self._db.collection_removed.disconnect(self._on_database_changed)
-        if Engine.is_editor_hint():
-            self._db.collection_installed.disconnect(self._on_collection_changed.bind(true))
-            self._db.collection_removed.disconnect(self._on_collection_changed.bind(false))
 
     self._db = db
     self._db.load_started.connect(self._on_icon_database_load_started)
     self._db.load_finished.connect(self._on_icon_database_load_finished)
     self._db.collection_installed.connect(self._on_database_changed)
     self._db.collection_removed.connect(self._on_database_changed)
-    if Engine.is_editor_hint():
-        self._db.collection_installed.connect(self._on_collection_changed.bind(true))
-        self._db.collection_removed.connect(self._on_collection_changed.bind(false))
-    self._options.db = self._db
+    self._options.set_db(self._db)
 
 func update() -> void:
     var filter: String = self._filter.text.to_lower()
@@ -172,7 +166,6 @@ func _on_icon_database_load_finished() -> void:
         filter_popup.set_item_checked(idx, true)
     self._filter_options.disabled = filter_popup.item_count == 0
     self.update()
-    self._options.update()
 
 func _on_icon_selected(idx: int) -> void:
     self._detail_panel.display(self._icon_list.get_item_metadata(idx) as Icon)
@@ -185,17 +178,3 @@ func _on_filter_submitted(_text: String) -> void:
 
 func _on_option_pressed() -> void:
     self._options_popup.popup_centered_ratio(0.35)
-
-func _on_collection_changed(id: int, status: Error, is_installation: bool):
-    var msg: String = "[Icon Explorer] '" + self._db.get_collection(id).name + "' "
-    if is_installation:
-        if status == Error.OK:
-            msg += "successfully installed."
-        else:
-            msg += "installation failed."
-    else:
-        if status == Error.OK:
-            msg += "successfully removed."
-        else:
-            msg += "removing failed."
-    print(msg)

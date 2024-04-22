@@ -8,6 +8,7 @@ const TEXTURE_SIZE: float = 128.0
 
 var name: String
 var version: String
+var latest_version: String
 var author: String
 var license: String
 var license_text: String
@@ -49,6 +50,10 @@ func remove() -> Error:
 func icon_directory() -> String:
     assert(false, "virtual function")
     return ""
+
+# VIRTUAL
+func update_latest_version() -> void:
+    pass
 
 func directory() -> String:
     if Engine.is_editor_hint():

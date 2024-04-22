@@ -134,10 +134,12 @@ transient = true
 exclusive = true
 script = ExtResource("4_03l1v")
 
-[node name="options" parent="option_popup" node_paths=PackedStringArray("_load_on_startup", "_collection_tree", "_options_panel", "_options_label", "_collections_panel", "_collections_label") instance=ExtResource("5_wngaf")]
+[node name="options" parent="option_popup" node_paths=PackedStringArray("_load_on_startup", "_show_main_screen", "_reload_current_project", "_collection_management", "_options_panel", "_options_label", "_collections_panel", "_collections_label") instance=ExtResource("5_wngaf")]
 _load_on_startup = NodePath("options/options/v_box_container/load_on_startup")
-_collection_tree = NodePath("options/options/tree")
+_show_main_screen = NodePath("options/options/v_box_container/show_main_screen")
+_reload_current_project = NodePath("options/options/restart_editor")
+_collection_management = NodePath("options/options/collection_management")
 _options_panel = NodePath("options/options/options_panel")
 _options_label = NodePath("options/options/options_panel/options")
-_collections_panel = NodePath("options/options/collections_panel")
-_collections_label = NodePath("options/options/collections_panel/collections_title")
+_collections_panel = NodePath("options/options/collection_management/collections_panel")
+_collections_label = NodePath("options/options/collection_management/collections_panel/h_box_container/collections_title")

@@ -31,6 +31,8 @@ func _enter_tree() -> void:
     self.add_tool_menu_item(self._get_plugin_name() + "...", self._show_popup)
 
     self._db = IconDatabase.new(self.get_tree())
+    self._db.collection_installed.connect(self._on_collection_changed.bind(true))
+    self._db.collection_removed.connect(self._on_collection_changed.bind(false))
     self._explorer_dialog.set_icon_db(self._db)
     if self._has_main_screen():
         self._main_screen = MainScreenScene.instantiate()
@@ -62,6 +64,20 @@ func _show_popup() -> void:
         self._explorer_dialog.grab_focus()
     else:
         self._explorer_dialog.popup_centered_ratio(0.4)
+
+func _on_collection_changed(id: int, status: Error, is_installation: bool):
+    var msg: String = "[Icon Explorer] '" + self._db.get_collection(id).name + "' "
+    if is_installation:
+        if status == Error.OK:
+            msg += "successfully installed."
+        else:
+            msg += "installation failed."
+    else:
+        if status == Error.OK:
+            msg += "successfully removed."
+        else:
+            msg += "removing failed."
+    print(msg)
 
 static func set_project_setting(key: String, initial_value, type: int, type_hint: int, hint_string: String = "") -> void:
     if not ProjectSettings.has_setting(key):

@@ -77,10 +77,6 @@ func _install(coll: Collection, http: HTTPRequest, version: String) -> void:
     self._install_done.bind(coll.id(), status).call_deferred()
 
 func _install_done(id: int, status: Error) -> void:
-    if self._loaded_collections.has(id):
-        self._icons = self._icons.filter(func (icon: Icon) -> bool: return icon.collection.id() != id)
-        if !self._loaded_collections.has(id):
-            self._loaded_collections.append(id)
     self.collection_installed.emit(id, status)
 
 func remove(coll: Collection) -> void:
@@ -99,6 +95,7 @@ func _remove(coll: Collection) -> void:
 
 func _remove_done(id: int, status: Error) -> void:
     self._icons = self._icons.filter(func (icon: Icon) -> bool: return icon.collection.id() != id)
+    self._loaded_collections.remove_at(self._loaded_collections.find(id))
     self.collection_removed.emit(id, status)
 
 func load() -> void:
