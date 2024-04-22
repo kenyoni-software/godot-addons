@@ -9,11 +9,15 @@ static func rrm_dir(dir_path: String) -> bool:
     while file_name != "":
         if dir.current_is_dir():
             if !rrm_dir(dir_path.path_join(file_name)):
+                dir.list_dir_end()
                 return false
         else:
             if dir.remove(file_name) != Error.OK:
+                dir.list_dir_end()
                 return false
         file_name = dir.get_next()
+    dir.list_dir_end()
+    dir = null
     DirAccess.remove_absolute(dir_path)
     return true
 

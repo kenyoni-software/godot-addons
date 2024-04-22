@@ -13,9 +13,6 @@ var license: String
 var license_text: String
 var web: String
 
-## base size of svg
-var svg_size: float
-
 # is set on registering it at the IconDatabase
 var _id: int = -1
 
@@ -26,8 +23,8 @@ func is_installed() -> bool:
     return DirAccess.dir_exists_absolute(self.icon_directory())
 
 # VIRTUAL
-func convert_icon_colored(buffer: String, color: String) -> String:
-    return ""
+func color_icon(buffer: String, color: String) -> String:
+    return buffer
 
 # VIRTUAL
 # called in a thread
@@ -53,6 +50,10 @@ func icon_directory() -> String:
     assert(false, "virtual function")
     return ""
 
+# VIRTUAL
+func detail_panel_scene() -> PackedScene:
+    return null
+
 func directory() -> String:
     if Engine.is_editor_hint():
         if ProjectSettings.get_setting("application/config/use_hidden_project_data_directory", true):
@@ -74,11 +75,12 @@ static func get_default_collection_paths() -> PackedStringArray:
     dir.list_dir_begin()
     var elem: String = dir.get_next()
     var paths: PackedStringArray = []
-    while (not elem.is_empty()):
+    while elem != "":
         if dir.current_is_dir():
             paths.push_back(ext_path.path_join(elem))
         elem = dir.get_next()
     dir.list_dir_end()
     dir = null
 
+    paths.sort()
     return paths

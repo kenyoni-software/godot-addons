@@ -11,10 +11,9 @@ func _init() -> void:
     self.author = "Paweł Kuna"
     self.license = "MIT"
     self.web = "https://github.com/tabler/tabler-icons"
-    self.svg_size = 24.0
 
 # OVERRIDE
-func convert_icon_colored(buffer: String, color: String) -> String:
+func color_icon(buffer: String, color: String) -> String:
     return buffer.replace("currentColor", "#" + color)
 
 # OVERRIDE
@@ -38,6 +37,8 @@ func load() -> Array:
     for item: Dictionary in parser.data.values():
         var icon: IconTabler = IconTabler.new()
         icon.collection = self
+        icon.svg_size = Vector2i(24, 24)
+        icon.colorable = true
         icon.name = item["name"]
         icon.icon_path = icon_path.path_join(icon.name + ".svg")
 
@@ -50,7 +51,7 @@ func load() -> Array:
             push_warning("could not load '" + icon.icon_path + "'")
             continue
         icons.append(icon)
-        buffers.append(self.convert_icon_colored(buffer, "FFFFFF"))
+        buffers.append(self.color_icon(buffer, "FFFFFF"))
     return [icons, buffers]
 
 # OVERRIDE

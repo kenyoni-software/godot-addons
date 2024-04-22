@@ -4,7 +4,6 @@ extends PanelContainer
 const Toolbar := preload("res://addons/icon_explorer/internal/ui/detail_panel/toolbar.gd")
 
 const Collection := preload("res://addons/icon_explorer/internal/scripts/collection.gd")
-const EditorToastNotification := preload("res://addons/icon_explorer/editor_toast_notification.gd")
 const Icon := preload("res://addons/icon_explorer/internal/scripts/icon.gd")
 const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd")
 
@@ -78,11 +77,16 @@ func display(icon: Icon) -> void:
     self._name.text = icon.name
     self._icon.texture = icon.texture
     self._size.text = "%dx%d" % [
-        icon.texture.get_size().x / Collection.TEXTURE_SIZE * icon.collection.svg_size,
-        icon.texture.get_size().y / Collection.TEXTURE_SIZE * icon.collection.svg_size
+        icon.svg_size.x,
+        icon.svg_size.y
     ]
     
     self._detail_tabs.current_tab = icon.collection.id()
+    if !icon.colorable:
+        self._icon.self_modulate = Color.WHITE
+    else:
+        self._icon.self_modulate = self.preview_color
+    self._toolbar.disable_save_colored_button(!icon.colorable)
     self._detail_tabs.get_child(icon.collection.id()).display(icon)
 
 func _on_save_pressed(colored: bool) -> void:
@@ -110,16 +114,15 @@ func _on_filepath_selected(path: String, colored: bool) -> void:
         var buffer: String = FileAccess.get_file_as_string(self._cur_icon.icon_path)
         if buffer == "":
             if Engine.is_editor_hint():
-                EditorToastNotification.notify("[Icon Explorer] Could not save icon.\nCould not load '" + self._cur_icon.icon_path + "'", EditorToastNotification.Severity.WARNING)
+                push_warning("[Icon Explorer] Could not save icon.\nCould not load '" + self._cur_icon.icon_path + "'")
             else:
                 push_warning("could not load '" + self._cur_icon.icon_path + "'")
             return
-        buffer = self._cur_icon.collection.convert_icon_colored(buffer, self.preview_color.to_html(false))
+        buffer = self._cur_icon.collection.color_icon(buffer, self.preview_color.to_html(false))
         var writer: FileAccess = FileAccess.open(path, FileAccess.WRITE)
         if writer == null:
-            writer = null
             if Engine.is_editor_hint():
-                EditorToastNotification.notify("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould not write to '" + path + "'", EditorToastNotification.Severity.WARNING)
+                push_warning("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould not write to '" + path + "'")
             else:
                 push_warning("could not save '" + path + "'")
             return
@@ -129,10 +132,10 @@ func _on_filepath_selected(path: String, colored: bool) -> void:
         var err: Error = DirAccess.copy_absolute(self._cur_icon.icon_path, path)
         if err != OK:
             if Engine.is_editor_hint():
-                EditorToastNotification.notify("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould copy file '" + path + "' to '" + self._cur_icon.icon_path + "'", EditorToastNotification.Severity.WARNING)
+                push_warning("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould copy file '" + path + "' to '" + self._cur_icon.icon_path + "'")
             else:
                 push_warning("could not copy file", err)
             return
     if Engine.is_editor_hint():
-        EditorToastNotification.notify("[Icon Explorer] Icon '" + self._cur_icon.name + "' saved to '" + path + "'")
+        print("[Icon Explorer] Icon '" + self._cur_icon.name + "' saved to '" + path + "'")
         EditorInterface.get_resource_filesystem().scan()

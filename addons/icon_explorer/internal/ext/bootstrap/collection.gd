@@ -11,17 +11,16 @@ func _init() -> void:
     self.author = "The Bootstrap Authors"
     self.license = "MIT"
     self.web = "https://github.com/twbs/icons"
-    self.svg_size = 16.0
 
 # OVERRIDE
-func convert_icon_colored(buffer: String, color: String) -> String:
+func color_icon(buffer: String, color: String) -> String:
     return buffer.replace("currentColor", "#" + color)
 
 # OVERRIDE
 func load() -> Array:
     var dir: DirAccess = DirAccess.open(self._meta_directory())
     if !dir:
-        return []
+        return [[], PackedStringArray()]
     
     var icons: Array[Icon] = []
     var buffers: PackedStringArray = PackedStringArray()
@@ -29,12 +28,15 @@ func load() -> Array:
     var file_name: String = dir.get_next()
     while file_name != "":
         if dir.current_is_dir():
+            file_name = dir.get_next()
             continue
         var res: Array = self._load_item(file_name)
         if res.size() == 2:
             icons.append(res[0])
             buffers.append(res[1])
         file_name = dir.get_next()
+    dir.list_dir_end()
+    dir = null
 
     var parser_version: JSON = JSON.new()
     var res_version: int = parser_version.parse(FileAccess.get_file_as_string(self.directory().path_join("icons-main/package.json")))
@@ -48,6 +50,8 @@ func load() -> Array:
 func _load_item(file_name: String) -> Array:
     var icon: IconBootstrap = IconBootstrap.new()
     icon.collection = self
+    icon.svg_size = Vector2i(16, 16)
+    icon.colorable = true
 
     var meta: String = FileAccess.get_file_as_string(self._meta_directory().path_join(file_name))
     if meta == "":
@@ -86,7 +90,7 @@ func _load_item(file_name: String) -> Array:
         push_warning("could not load '" + icon.icon_path + "'")
         return []
    
-    return [icon, self.convert_icon_colored(buffer, "FFFFFF")]
+    return [icon, self.color_icon(buffer, "FFFFFF")]
 
 # OVERRIDE
 func install(http: HTTPRequest, _version: String) -> Error:

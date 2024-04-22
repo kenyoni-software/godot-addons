@@ -2,13 +2,22 @@
 extends Window
 
 const Explorer := preload("res://addons/icon_explorer/internal/ui/explorer/explorer.gd")
+const IconDatabase := preload("res://addons/icon_explorer/internal/scripts/database.gd")
 
 @export var _explorer: Explorer
 
+var _db: IconDatabase
+var _db_loaded: bool = false
+
+func set_icon_db(db: IconDatabase) -> void:
+    self._db = db
+    self._explorer.set_icon_db(db)
+
 func _notification(what: int) -> void:
-    if (what == NOTIFICATION_WM_CLOSE_REQUEST):
+    if what == NOTIFICATION_WM_CLOSE_REQUEST:
         self.hide()
 
 func _on_about_to_popup() -> void:
-    if Engine.is_editor_hint() && !ProjectSettings.get_setting("plugins/icon_explorer/load_on_startup", false):
-        self._explorer.load_db()
+    if !self._db_loaded:
+        self._db_loaded = true
+        self._db.load()

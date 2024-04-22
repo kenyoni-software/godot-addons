@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd" id="1_fhni0"]
 [ext_resource type="PackedScene" uid="uid://bonqki0uorlhq" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.tscn" id="2_vjbmh"]
 
-[node name="text_field" type="VBoxContainer" node_paths=PackedStringArray("_label", "_button")]
-anchors_preset = 15
+[node name="text_field" type="VBoxContainer" node_paths=PackedStringArray("_label", "_button", "_title")]
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 72.0
 grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_fhni0")
 _label = NodePath("margin_container/h_box_container/label")
 _button = NodePath("margin_container/h_box_container/button")
+_title = NodePath("title_panel")
 
 [node name="title_panel" parent="." node_paths=PackedStringArray("_text_label") instance=ExtResource("2_vjbmh")]
 layout_mode = 2
@@ -25,6 +25,7 @@ theme_override_constants/margin_left = 16
 layout_mode = 2
 
 [node name="button" type="Button" parent="margin_container/h_box_container"]
+visible = false
 layout_mode = 2
 mouse_default_cursor_shape = 2
 flat = true

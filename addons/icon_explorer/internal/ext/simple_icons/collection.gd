@@ -39,10 +39,9 @@ func _init() -> void:
     self.author = ""
     self.license = "CC0 1.0 Universal / Others"
     self.web = "https://github.com/simple-icons/simple-icons"
-    self.svg_size = 24.0
 
 # OVERRIDE
-func convert_icon_colored(buffer: String, color: String) -> String:
+func color_icon(buffer: String, color: String) -> String:
     return '<svg fill="#' + color + '"' + buffer.substr(4)
 
 func _title_to_slug(title: String) -> String:
@@ -88,6 +87,8 @@ func load() -> Array:
 func _load_item(item: Dictionary) -> Array:
     var icon: IconSimpleIcons = IconSimpleIcons.new()
     icon.collection = self
+    icon.svg_size = Vector2i(24, 24)
+    icon.colorable = true
     icon.name = item["title"]
     
     if item.has("slug"):
@@ -112,7 +113,7 @@ func _load_item(item: Dictionary) -> Array:
         push_warning("could not load '" + icon.icon_path + "'")
         return []
 
-    return [icon, self.convert_icon_colored(buffer, "FFFFFF")]
+    return [icon, self.color_icon(buffer, "FFFFFF")]
 
 # OVERRIDE
 func install(http: HTTPRequest, _version: String) -> Error:

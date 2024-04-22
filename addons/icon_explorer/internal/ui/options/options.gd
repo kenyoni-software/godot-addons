@@ -12,6 +12,8 @@ enum BUTTON_ID {
 }
 
 @export var _load_on_startup: CheckBox
+@export var _show_main_screen: CheckBox
+@export var _reload_current_project: Label
 @export var _collection_tree: Tree
 @export var _options_panel: PanelContainer
 @export var _options_label: Label
@@ -36,16 +38,6 @@ func set_db(db_: IconDatabase) -> void:
     db.collection_removed.connect(self._on_processing_finished)
     self.update()
 
-func _process(delta: float) -> void:
-    self._process_spinner_msec += delta
-    if self._process_spinner_msec > 0.2:
-        self._process_spinner_msec = fmod(self._process_spinner_msec, 0.2)
-        self._process_spinner_frame = (self._process_spinner_frame + 1) % 8
-        if self._processing != -1:
-            for item: TreeItem in _collection_tree.get_root().get_children():
-                if (item.get_metadata(0) as Collection).id() == self._processing:
-                    item.set_icon(0, self.get_theme_icon("Progress"+str(self._process_spinner_frame + 1), &"EditorIcons"))
-
 func _ready() -> void:
     if Engine.is_editor_hint():
         self._options_label.add_theme_font_override(&"font", self.get_theme_font(&"title", &"EditorFonts"))
@@ -53,8 +45,10 @@ func _ready() -> void:
         self.add_theme_stylebox_override(&"panel", self.get_theme_stylebox(&"Background", &"EditorStyles"))
         self._collections_panel.add_theme_stylebox_override(&"panel", self.get_theme_stylebox(&"PanelForeground", &"EditorStyles"))
         self._options_panel.add_theme_stylebox_override(&"panel", self.get_theme_stylebox(&"PanelForeground", &"EditorStyles"))
+        self._reload_current_project.add_theme_color_override(&"font_color", self.get_theme_color(&"warning_color", &"Editor"))
 
     self._load_on_startup.toggled.connect(self._on_startup_changed)
+    self._show_main_screen.toggled.connect(self._on_show_main_screen_changed)
 
     self._collection_tree.columns = 6
     self._collection_tree.set_column_title(0, "Installed")
@@ -73,9 +67,13 @@ func _ready() -> void:
 
     if Engine.is_editor_hint():
         ProjectSettings.settings_changed.connect(self.update)
+    self.update()
 
 func update() -> void:
-    self._load_on_startup.button_pressed = ProjectSettings.get_setting("plugins/icon_explorer/load_on_startup", false)
+    if !self.is_node_ready() || self.db == null:
+        return
+    self._load_on_startup.set_pressed_no_signal(ProjectSettings.get_setting("plugins/icon_explorer/load_on_startup", false) as bool)
+    self._show_main_screen.set_pressed_no_signal(ProjectSettings.get_setting("plugins/icon_explorer/show_main_screen", false) as bool)
 
     self._collection_tree.clear()
     self._collection_tree.create_item()
@@ -104,6 +102,16 @@ func update() -> void:
         item.add_button(5, self.get_theme_icon(&"Remove", &"EditorIcons"), BUTTON_ID.REMOVE, is_one_processed || !coll.is_installed(), "Remove")
         item.add_button(5, self.get_theme_icon(&"Filesystem", &"EditorIcons"), BUTTON_ID.OPEN_DIR, !coll.is_installed(), "Show in File Explorer")
 
+func _process(delta: float) -> void:
+    self._process_spinner_msec += delta
+    if self._process_spinner_msec > 0.2:
+        self._process_spinner_msec = fmod(self._process_spinner_msec, 0.2)
+        self._process_spinner_frame = (self._process_spinner_frame + 1) % 8
+        if self._processing != -1:
+            for item: TreeItem in _collection_tree.get_root().get_children():
+                if (item.get_metadata(0) as Collection).id() == self._processing:
+                    item.set_icon(0, self.get_theme_icon("Progress"+str(self._process_spinner_frame + 1), &"EditorIcons"))
+
 func _gen_progress_texture() -> Array[Texture2D]:
     var anim: Array[Texture2D] = []
     for idx: int in range(8):
@@ -112,6 +120,10 @@ func _gen_progress_texture() -> Array[Texture2D]:
 
 func _on_startup_changed(toggled: bool) -> void:
     ProjectSettings.set_setting("plugins/icon_explorer/load_on_startup", toggled)
+
+func _on_show_main_screen_changed(toggled: bool) -> void:
+    ProjectSettings.set_setting("plugins/icon_explorer/show_main_screen", toggled)
+    self._reload_current_project.visible = true
 
 func _on_button_clicked(item: TreeItem, _column: int, id: int, _mouse_button_index: int) -> void:
     var coll: Collection = item.get_metadata(0)
@@ -129,7 +141,7 @@ func _on_button_clicked(item: TreeItem, _column: int, id: int, _mouse_button_ind
             self.update()
             self.db.remove(coll)
         BUTTON_ID.OPEN_DIR:
-            OS.shell_show_in_file_manager(coll.icon_directory())
+            OS.shell_show_in_file_manager(ProjectSettings.globalize_path(coll.icon_directory()))
         BUTTON_ID.WEB:
             OS.shell_open(coll.web)
 

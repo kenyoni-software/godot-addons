@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/options/options.gd" id="1_hdn86"]
 
-[node name="control" type="PanelContainer" node_paths=PackedStringArray("_load_on_startup", "_collection_tree", "_options_panel", "_options_label", "_collections_panel", "_collections_label")]
+[node name="control" type="PanelContainer" node_paths=PackedStringArray("_load_on_startup", "_show_main_screen", "_reload_current_project", "_collection_tree", "_options_panel", "_options_label", "_collections_panel", "_collections_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,6 +10,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hdn86")
 _load_on_startup = NodePath("options/options/v_box_container/load_on_startup")
+_show_main_screen = NodePath("options/options/v_box_container/show_main_screen")
+_reload_current_project = NodePath("options/options/restart_editor")
 _collection_tree = NodePath("options/options/tree")
 _options_panel = NodePath("options/options/options_panel")
 _options_label = NodePath("options/options/options_panel/options")
@@ -35,26 +37,29 @@ text = "Options"
 layout_mode = 2
 columns = 2
 
-[node name="label" type="Label" parent="options/options/v_box_container"]
+[node name="load_on_startup_label" type="Label" parent="options/options/v_box_container"]
 layout_mode = 2
 text = "Load on Godot startup"
 
 [node name="load_on_startup" type="CheckBox" parent="options/options/v_box_container"]
 layout_mode = 2
 
-[node name="label2" type="Label" parent="options/options/v_box_container"]
-visible = false
+[node name="show_main_screen_label" type="Label" parent="options/options/v_box_container"]
+auto_translate_mode = 1
 layout_mode = 2
-text = "Base SVG texture size"
+tooltip_text = "Requires an editor reload."
+mouse_filter = 1
+text = "Show in Main Screen Bar*"
 
-[node name="spin_box" type="SpinBox" parent="options/options/v_box_container"]
+[node name="show_main_screen" type="CheckBox" parent="options/options/v_box_container"]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="restart_editor" type="Label" parent="options/options"]
 visible = false
 layout_mode = 2
-min_value = 8.0
-max_value = 1024.0
-value = 8.0
-editable = false
-suffix = "px"
+size_flags_horizontal = 0
+text = "Reload the current project to apply changes."
 
 [node name="collections_panel" type="PanelContainer" parent="options/options"]
 layout_mode = 2

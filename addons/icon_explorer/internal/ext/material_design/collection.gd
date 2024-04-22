@@ -11,10 +11,9 @@ func _init() -> void:
     self.author = "Austin Andrews"
     self.license = "Apache 2.0"
     self.web = "https://github.com/Templarian/MaterialDesign-SVG"
-    self.svg_size = 24.0
 
 # OVERRIDE
-func convert_icon_colored(buffer: String, color: String) -> String:
+func color_icon(buffer: String, color: String) -> String:
     return '<svg fill="#' + color + '"' + buffer.substr(4)
 
 # OVERRIDE
@@ -38,6 +37,8 @@ func load() -> Array:
     for item: Dictionary in parser.data:
         var icon: IconMaterialDesign = IconMaterialDesign.new()
         icon.collection = self
+        icon.svg_size = Vector2i(24, 24)
+        icon.colorable = true
         icon.name = item["name"]
         icon.icon_path = icon_path.path_join(icon.name + ".svg")
 
@@ -52,7 +53,7 @@ func load() -> Array:
             push_warning("could not load '" + icon.icon_path + "'")
             continue
         icons.append(icon)
-        buffers.append(self.convert_icon_colored(buffer, "FFFFFF"))
+        buffers.append(self.color_icon(buffer, "FFFFFF"))
     return [icons, buffers]
 
 # OVERRIDE

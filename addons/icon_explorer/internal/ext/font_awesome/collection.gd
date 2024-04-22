@@ -11,10 +11,9 @@ func _init() -> void:
     self.author = "The Font Awesome Team"
     self.license = "CC BY 4.0"
     self.web = "https://github.com/FortAwesome/Font-Awesome"
-    self.svg_size = 512.0
 
 # OVERRIDE
-func convert_icon_colored(buffer: String, color: String) -> String:
+func color_icon(buffer: String, color: String) -> String:
     return '<svg fill="#' + color + '"' + buffer.substr(4)
 
 # OVERRIDE
@@ -48,6 +47,8 @@ func load() -> Array:
         for style: String in item.get("styles", []):
             var icon: IconFontAwesome = IconFontAwesome.new()
             icon.collection = self
+            icon.svg_size = Vector2i(512, 512)
+            icon.colorable = true
             icon.name = item["label"]
             icon.icon_path = self.icon_directory().path_join(style + "/" + icon_id + ".svg")
 
@@ -55,7 +56,7 @@ func load() -> Array:
             icon.aliases = item.get("aliases", {}).get("names", PackedStringArray())
             icon.search_terms =  item.get("search", {}).get("terms", PackedStringArray())
             icons.append(icon)
-            buffers.append(self.convert_icon_colored(item["svg"][style]["raw"], "FFFFFF"))
+            buffers.append(self.color_icon(item["svg"][style]["raw"], "FFFFFF"))
 
     return [icons, buffers]
 
