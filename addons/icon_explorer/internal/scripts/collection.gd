@@ -50,10 +50,6 @@ func icon_directory() -> String:
     assert(false, "virtual function")
     return ""
 
-# VIRTUAL
-func detail_panel_scene() -> PackedScene:
-    return null
-
 func directory() -> String:
     if Engine.is_editor_hint():
         if ProjectSettings.get_setting("application/config/use_hidden_project_data_directory", true):

@@ -22,7 +22,7 @@ func _get_plugin_icon() -> Texture2D:
 
 func _enter_tree() -> void:
     set_project_setting("plugins/icon_explorer/load_on_startup", false, TYPE_BOOL, PROPERTY_HINT_NONE)
-    set_project_setting("plugins/icon_explorer/show_main_screen", false, TYPE_BOOL, PROPERTY_HINT_NONE)
+    set_project_setting("plugins/icon_explorer/show_main_screen", true, TYPE_BOOL, PROPERTY_HINT_NONE)
     ProjectSettings.set_restart_if_changed("plugins/icon_explorer/show_main_screen", true)
     set_project_setting("plugins/icon_explorer/preview_size_exp", 6, TYPE_INT, PROPERTY_HINT_RANGE, "4,8,1")
 
@@ -49,7 +49,7 @@ func _exit_tree() -> void:
     self._explorer_dialog.queue_free()
 
 func _has_main_screen() -> bool:
-    return ProjectSettings.get_setting("plugins/icon_explorer/show_main_screen", false)
+    return ProjectSettings.get_setting("plugins/icon_explorer/show_main_screen", true)
 
 func _make_visible(visible: bool) -> void:
     if !self._db_loaded:

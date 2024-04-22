@@ -73,7 +73,7 @@ func update() -> void:
     if !self.is_node_ready() || self.db == null:
         return
     self._load_on_startup.set_pressed_no_signal(ProjectSettings.get_setting("plugins/icon_explorer/load_on_startup", false) as bool)
-    self._show_main_screen.set_pressed_no_signal(ProjectSettings.get_setting("plugins/icon_explorer/show_main_screen", false) as bool)
+    self._show_main_screen.set_pressed_no_signal(ProjectSettings.get_setting("plugins/icon_explorer/show_main_screen", true) as bool)
 
     self._collection_tree.clear()
     self._collection_tree.create_item()
