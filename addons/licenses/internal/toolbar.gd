@@ -85,7 +85,7 @@ func _create_plugin_menu_items() -> void:
     dir.list_dir_begin()
     var elem: String = dir.get_next()
     var idx: int = 0
-    while (not elem.is_empty()):
+    while elem != "":
         if dir.current_is_dir():
             var path: String = "res://addons/".path_join(elem).path_join("/plugin.cfg")
             var cfg: Dictionary = self._get_plugin_config(path)
