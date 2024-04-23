@@ -253,6 +253,9 @@ Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it
 - Require Godot 4.3
 - Make use of @export for custom Nodes
 - Improve loading visualization
+- Add Icons to Main Screen (this is optional and can be turned off)
+- Add check for updates button
+- Remove editor toast notification (access was removed)
 
 #### 1.1.0
 
@@ -278,9 +281,14 @@ Consider using [Icon Explorer](#icon-explorer) instead and save it directly in w
 
 ### Compatibility
 
-- Godot 4.2
+- Godot 4.3: >= 1.5.0
+- Godot 4.2: <= 1.5.0
 
 ### Changelog
+
+#### 1.5.0
+
+- Remove editor toast notification (access was removed)
 
 #### 1.4.0
 
@@ -664,7 +672,8 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 ### Compatibility
 
-- Godot 4.2
+- Godot 4.3: >= 1.4.0
+- Godot 4.2: <= 1.4.0
 
 ### Dependencies
 
@@ -675,6 +684,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 [examples/texture_button_colored](./examples/texture_button_colored)
 
 ### Changelog
+
+#### 1.4.0
+
+- Remove editor toast notification (access was removed)
 
 #### 1.3.3
 
