@@ -52,7 +52,7 @@ func icon_directory() -> String:
     return ""
 
 # VIRTUAL
-func update_latest_version() -> void:
+func update_latest_version(http: HTTPRequest) -> void:
     pass
 
 func directory() -> String:

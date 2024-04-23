@@ -21,7 +21,7 @@ static func rrm_dir(dir_path: String) -> bool:
     DirAccess.remove_absolute(dir_path)
     return true
 
-class FileDownloader:
+class Downloader:
     extends RefCounted
 
     var result: int
@@ -49,6 +49,10 @@ class FileDownloader:
         var res: Array = await self._http.request_completed
         self.from_array(res)
         self._sema.post()
+    
+    func await_request(uri: String) -> void:
+        self.request.bind(uri).call_deferred()
+        self.wait()
 
     func wait() -> void:
         self._sema.wait()

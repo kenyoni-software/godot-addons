@@ -120,10 +120,8 @@ func install(http: HTTPRequest, _version: String) -> Error:
     DirAccess.make_dir_recursive_absolute(self.directory())
     var zip_path: String = self.directory().path_join("icons.zip")
     http.download_file = zip_path
-    var downloader: Io.FileDownloader = Io.FileDownloader.new(http)
-    downloader.request.bind(_DOWNLOAD_FILE).call_deferred()
-
-    downloader.wait()
+    var downloader: Io.Downloader = Io.Downloader.new(http)
+    downloader.await_request(_DOWNLOAD_FILE)
     if downloader.result != HTTPRequest.RESULT_SUCCESS:
         return Error.FAILED
 
@@ -142,6 +140,20 @@ func install(http: HTTPRequest, _version: String) -> Error:
 func remove() -> Error:
     self.version = ""
     return super.remove()
+
+# OVERRIDE
+func update_latest_version(http: HTTPRequest) -> void:
+    var downloader: Io.Downloader = Io.Downloader.new(http)
+    downloader.await_request("https://raw.githubusercontent.com/simple-icons/simple-icons/develop/package.json")
+    if downloader.result != HTTPRequest.RESULT_SUCCESS:
+        return
+
+    var parser_version: JSON = JSON.new()
+    var res_version: int = parser_version.parse(downloader.body.get_string_from_utf8())
+    if res_version != OK:
+        push_warning("could get latest simple icons version: '%s'", [parser_version.get_error_message()])
+        return
+    self.latest_version = parser_version.data["version"]
 
 # OVERRIDE
 func icon_directory() -> String:

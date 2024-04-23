@@ -12,6 +12,7 @@ enum ButtonId {
 }
 
 @export var _check_update_button: Button
+@export var _check_progress_bar: ProgressBar
 @export var _tree: Tree
 
 var db: IconDatabase:
@@ -21,6 +22,7 @@ var _http_request: HTTPRequest
 var _processing: int = -1
 var _process_spinner_frame: int
 var _process_spinner_msec: float
+var _update_thread: Thread
 
 func set_db(db_: IconDatabase) -> void:
     if db != null:
@@ -62,6 +64,7 @@ func _ready() -> void:
     self._tree.set_column_expand(Column.WEB, false)
     self._tree.set_column_expand(Column.ACTIONS, false)
     self._tree.button_clicked.connect(self._on_button_clicked)
+    self._check_update_button.pressed.connect(self._check_for_updates)
 
     if Engine.is_editor_hint():
         ProjectSettings.settings_changed.connect(self.update)
@@ -85,6 +88,9 @@ func update() -> void:
         var is_processed: bool = self._processing == coll.id()
         if is_processed:
             pass
+        elif coll.version != "" && coll.latest_version != "" && coll.latest_version > coll.version:
+            item.set_icon(Column.INSTALLED, self.get_theme_icon(&"StatusWarning", &"EditorIcons"))
+            item.set_tooltip_text(Column.INSTALLED, "Update Available")
         elif coll.is_installed():
             item.set_icon(Column.INSTALLED, self.get_theme_icon(&"StatusSuccess", &"EditorIcons"))
             item.set_tooltip_text(Column.INSTALLED, "Installed")
@@ -94,11 +100,40 @@ func update() -> void:
 
         var is_one_processed: bool = self._processing != -1
         if coll.is_installed():
-            item.add_button(Column.ACTIONS, self.get_theme_icon(&"Reload", &"EditorIcons"), ButtonId.INSTALL, is_one_processed || coll.latest_version >= coll.version || coll.latest_version == "", "Update")
+            item.add_button(Column.ACTIONS, self.get_theme_icon(&"Reload", &"EditorIcons"), ButtonId.INSTALL, is_one_processed || coll.latest_version == "" || coll.latest_version <= coll.version, "Update")
         else:
             item.add_button(Column.ACTIONS, self.get_theme_icon(&"AssetLib", &"EditorIcons"), ButtonId.INSTALL, is_one_processed, "Install")
         item.add_button(Column.ACTIONS, self.get_theme_icon(&"Remove", &"EditorIcons"), ButtonId.REMOVE, is_one_processed || !coll.is_installed(), "Remove")
         item.add_button(Column.ACTIONS, self.get_theme_icon(&"Filesystem", &"EditorIcons"), ButtonId.OPEN_DIR, !coll.is_installed(), "Show in File Explorer")
+
+func _check_for_updates() -> void:
+    if self._update_thread != null && self._update_thread.is_alive():
+        return
+    if self._update_thread != null:
+        self._update_thread.wait_to_finish()
+
+    self._check_update_button.disabled = true
+    self._check_progress_bar.max_value = self.db.collections().size()
+    self._check_progress_bar.value = 0
+    self._check_progress_bar.visible = true
+    self._update_thread = Thread.new()
+    var http: HTTPRequest = HTTPRequest.new()
+    self.add_child(http)
+    self._update_thread.start(self._update_check.bind(http))
+
+# thread function
+func _update_check(http: HTTPRequest) -> void:
+    var upd := func upd() -> void: self._check_progress_bar.value += 1
+    for coll: Collection in self.db.collections():
+        coll.update_latest_version(http)
+        upd.call_deferred()
+    http.queue_free.call_deferred()
+    self._update_check_done.call_deferred()
+
+func _update_check_done() -> void:
+    self._check_update_button.disabled = false
+    self._check_progress_bar.visible = false
+    self.update()
 
 func _process(delta: float) -> void:
     self._process_spinner_msec += delta
