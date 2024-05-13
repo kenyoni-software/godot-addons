@@ -21,3 +21,4 @@ func _on_about_to_popup() -> void:
     if !self._db_loaded:
         self._db_loaded = true
         self._db.load()
+    self._explorer.grab_focus()

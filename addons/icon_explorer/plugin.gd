@@ -58,6 +58,8 @@ func _make_visible(visible: bool) -> void:
         self._db_loaded = true
         self._db.load()
     self._main_screen.visible = visible
+    if visible:
+        self._main_screen.grab_focus()
 
 func _show_popup() -> void:
     if self._explorer_dialog.visible:

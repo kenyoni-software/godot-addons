@@ -61,6 +61,7 @@ func _ready() -> void:
 
     self._options_button.icon = self.get_theme_icon(&"Tools", &"EditorIcons")
     self._options_button.pressed.connect(self._on_option_pressed)
+    self.focus_entered.connect(self._on_focus_entered)
 
     self.set_process(false)
     if !Engine.is_editor_hint():
@@ -178,3 +179,7 @@ func _on_filter_submitted(_text: String) -> void:
 
 func _on_option_pressed() -> void:
     self._options_popup.popup_centered_ratio(0.35)
+
+func _on_focus_entered() -> void:
+    self._filter.grab_focus()
+    self._filter.select_all()
