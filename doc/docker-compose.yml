@@ -1,0 +1,13 @@
+services:
+  mkdocs-serve:
+    image: squidfunk/mkdocs-material:9.5.21
+    volumes:
+      - ./:/docs
+    ports:
+      - 8000:8000
+
+  mkdocs-build:
+    image: squidfunk/mkdocs-material:9.5.21
+    volumes:
+      - ./:/docs
+    command: build
