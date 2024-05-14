@@ -8,7 +8,7 @@ jobs:
   addon:
     name: ${{ matrix.config.name }}
     runs-on: ubuntu-latest
-
+    #environment: asset-library
     strategy:
       fail-fast: false
       matrix:
@@ -16,42 +16,52 @@ jobs:
           - {
             id: "aspect_ratio_resize_container",
             name: "AspectRatioResizeContainer",
+            asset-id: "2089",
           }
           - {
             id: "custom_theme_overrides",
             name: "Custom Theme Overrides",
+            asset-id: "2091",
           }
           - {
             id: "git_sha_project_setting",
             name: "Git SHA Project Setting",
+            asset-id: "1979",
           }
           - {
             id: "glogging",
             name: "GLogging",
+            asset-id: "no-deploy",
           }
           - {
             id: "hide_private_properties",
             name: "Hide Private Properties",
+            asset-id: "1989",
           }
           - {
             id: "icon_explorer",
             name: "Icon Explorer",
+            asset-id: "2511",
           }
           - {
             id: "icons_patcher",
             name: "Icons Patcher",
+            asset-id: "1980",
           }
           - {
             id: "licenses",
             name: "License Manager",
+            asset-id: "1969",
           }
           - {
             id: "qr_code",
             name: "QR Code",
+            asset-id: "2090",
           }
           - {
             id: "texture_button_colored",
             name: "TextureButtonColored",
+            asset-id: "2092",
           }
 
     steps:
@@ -102,12 +112,18 @@ jobs:
         run: sleep 5s
         shell: bash
 
-      - name: Release addon
+      - name: Deploy to GitHub Release
         if: ${{ steps.checkTag.outputs.exists == 'false' }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           gh release create ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }} ./archives/* --title "${{ matrix.config.name }} ${{ steps.prepare-artifacts.outputs.version }}" --notes "${{ steps.prepare-artifacts.outputs.notes }}"
+
+      #- name: Deploy to Godot Asset Library
+      #  if: ${{ matrix.config.asset-id != 'no-deploy' }}
+      #  working-directory: publisher
+      #  run: |
+      #    go run . asset-library -b ../ -a ${{ matrix.config.id }} -u "${{ secrets.GD_ASSET_LIBRARY_USER }}" -p "${{ secrets.GD_ASSET_LIBRARY_PASSWORD }}" --asset-id "${{ matrix.config.asset-id }}"
 
   combined-release:
     name: Combined Release

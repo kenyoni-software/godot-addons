@@ -1,4 +1,4 @@
-package main
+package internal
 
 import (
 	"archive/zip"
@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 )
 
-func zipDir(zw *zip.Writer, src string, dest string) error {
+func ZipDir(zw *zip.Writer, src string, dest string) error {
 	return filepath.WalkDir(src, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
@@ -19,11 +19,11 @@ func zipDir(zw *zip.Writer, src string, dest string) error {
 			_, err := zw.Create(destPath + "/")
 			return err
 		}
-		return zipFile(zw, path, destPath)
+		return ZipFile(zw, path, destPath)
 	})
 }
 
-func zipFile(zw *zip.Writer, src string, dest string) error {
+func ZipFile(zw *zip.Writer, src string, dest string) error {
 	file, err := os.Open(src)
 	if err != nil {
 		return err
