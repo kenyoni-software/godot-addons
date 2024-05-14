@@ -181,7 +181,7 @@ func doActionAssetLibrary(baseDir string, addonId string, cfg assetLibraryAction
 	assetData := internal.AssetData{
 		AssetId:          cfg.AssetId,
 		Title:            plgCfg.Plugin.Name,
-		Description:      plgCfg.Plugin.Description,
+		Description:      fmt.Sprintf("%s\n\n%s", plgCfg.Plugin.Description, fmt.Sprintf("More detailed information and documentation is available at https://kenyoni-software.github.io/godot-addons/addons/%s", addon.Id())),
 		VersionString:    plgCfg.Plugin.Version,
 		GodotVersion:     gdMinversion,
 		CategoryId:       cfg.Category,
