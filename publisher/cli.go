@@ -32,6 +32,7 @@ type assetLibraryActionCfg struct {
 	Username string
 	Password string
 	AssetId  string
+	Category string
 	Host     string
 }
 
@@ -79,13 +80,13 @@ func newCli() *cli {
 		},
 	}
 	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.AssetId, "asset-id", "", "", "Asset ID.")
-	gdAssetCmd.MarkFlagRequired("asset-id")
 	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Username, "username", "u", "", "Asset Library username.")
 	gdAssetCmd.MarkFlagRequired("username")
 	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Password, "password", "p", "", "Asset Library password.")
 	gdAssetCmd.MarkFlagRequired("password")
-	// gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Host, "host", "host", "https://godotengine.org/asset-library/api", "Asset Library Host URL.")
-	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Host, "host", "", "http://localhost:8080/asset-library/api", "Asset Library Host URL.")
+	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Category, "category", "c", "", "Asset category.")
+	gdAssetCmd.MarkFlagRequired("category")
+	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Host, "host", "host", "https://godotengine.org/asset-library/api", "Asset Library Host URL.")
 
 	zipCmd := &cobra.Command{
 		Use:   "zip",
@@ -183,7 +184,7 @@ func doActionAssetLibrary(baseDir string, addonId string, cfg assetLibraryAction
 		Description:      plgCfg.Plugin.Description,
 		VersionString:    plgCfg.Plugin.Version,
 		GodotVersion:     gdMinversion,
-		CategoryId:       internal.Cat2DTools,
+		CategoryId:       cfg.Category,
 		License:          "MIT",
 		DownloadProvider: "Custom",
 		DownloadCommit:   fmt.Sprintf("https://github.com/kenyoni-software/godot-addons/releases/download/%s-%s/%s-%s.zip", addonId, plgCfg.Plugin.Version, addonId, strings.ReplaceAll(plgCfg.Plugin.Version, ".", "_")),
@@ -192,7 +193,7 @@ func doActionAssetLibrary(baseDir string, addonId string, cfg assetLibraryAction
 		IconUrl:          "https://godotengine.org/assets/press/icon_color.png",
 	}
 	if cfg.AssetId == "" {
-		err = alClient.UpdateAssetEdit("18", assetData)
+		err = alClient.CreateAsset(assetData)
 	} else {
 		err = alClient.UpdateAsset(assetData)
 	}
