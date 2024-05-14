@@ -1,3 +1,7 @@
+---
+description: Kenyoni Godot Addons is a pack of useful Godot additions to make your life easier!
+---
+
 # Kenyoni Godot Addons
 
 Kenyoni Godot Addons is a pack of useful Godot additions to make your life easier!
