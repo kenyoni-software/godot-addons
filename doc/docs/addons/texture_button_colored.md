@@ -16,15 +16,15 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 ## Example
 
-<!-- kny:source /examples/texture_button_colored/ -->
+{{ kny:source /examples/texture_button_colored/ }}
 
 ## Interface
 
 ### TextureButtonColored
 
-<!-- kny:badge extends TextureButton -->
+{{ kny:badge extends TextureButton }}
 
-<!-- kny:source /addons/custom_theme_overrides/texture_button_colored.gd res://addons/custom_theme_overrides/texture_button_colored.gd -->
+{{ kny:source /addons/custom_theme_overrides/texture_button_colored.gd res://addons/custom_theme_overrides/texture_button_colored.gd }}
 
 #### Theme Overrides
 

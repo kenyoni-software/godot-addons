@@ -15,7 +15,7 @@ Logging into a file is not supported. The output will be always done via print.
 
 ## Example
 
-<!-- kny:source /examples/glogging/ -->
+{{ kny:source /examples/glogging/ }}
 
 Example output.
 
@@ -35,7 +35,7 @@ Example output.
 
 ### GLogging
 
-<!-- kny:source /addons/glogging/glogging.gd res://addons/glogging/glogging.gd -->
+{{ kny:source /addons/glogging/glogging.gd res://addons/glogging/glogging.gd }}
 
 Logging base class. Provides helper methods.
 
@@ -67,9 +67,9 @@ Logging base class. Provides helper methods.
 
 ### GLogging.Logger
 
-<!-- kny:badge extends RefCounted -->
+{{ kny:badge extends RefCounted }}
 
-<!-- kny:source /addons/glogging/glogging.gd res://addons/glogging/glogging.gd -->
+{{ kny:source /addons/glogging/glogging.gd res://addons/glogging/glogging.gd }}
 
 Logger class.
 If not log level is set, the log level of the parent logger will be used.

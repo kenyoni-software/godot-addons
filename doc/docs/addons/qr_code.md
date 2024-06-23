@@ -16,15 +16,15 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 
 ## Example
 
-<!-- kny:source /examples/qr_code/ -->
+{{ kny:source /examples/qr_code/ }}
 
 ## Interface
 
-## QRCodeRect
+### QRCodeRect
 
-<!-- kny:badge extends TextureRect -->
+{{ kny:badge extends TextureRect }}
 
-<!-- kny:source /addons/qr_code/qr_code_rect.gd res://addons/qr_code/qr_code_rect.gd -->
+{{ kny:source /addons/qr_code/qr_code_rect.gd res://addons/qr_code/qr_code_rect.gd }}
 
 `TextureRect` like node. The texture is updated by itself.
 When using byte encoding you can also pass strings for specific ECI values (ISO 8859-1, Shift JIS, UTF-8, UTF-16, US ASCII), the input string will be automatically converted to an byte array.
@@ -50,9 +50,9 @@ When using byte encoding you can also pass strings for specific ECI values (ISO 
 
 ### QRCode
 
-<!-- kny:badge extends RefCounted -->
+{{ kny:badge extends RefCounted }}
 
-<!-- kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd -->
+{{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
 
 QRCode class to generate QR Codes.
 
@@ -97,7 +97,7 @@ QRCode class to generate QR Codes.
 
 ### QRCode.Mode
 
-<!-- kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd -->
+{{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
 
 Encoding mode enum.
 
@@ -110,7 +110,7 @@ Encoding mode enum.
 
 ### QRCode.ErrorCorrection
 
-<!-- kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd -->
+{{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
 
 Error correction enum.
 
@@ -123,17 +123,17 @@ Error correction enum.
 
 ### QRCode.ECI
 
-<!-- kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd -->
+{{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
 
 ECI values. See source code for available values.
 
 ### ShiftJIS
 
-<!-- kny:source /addons/qr_code/shift_jis.gd res://addons/qr_code/shift_jis.gd -->
+{{ kny:source /addons/qr_code/shift_jis.gd res://addons/qr_code/shift_jis.gd }}
 
 Shift JIS encoding utility.
 
-## Methods
+#### Methods
 
 `static func to_shift_jis_2004_buffer(text: String) -> PackedByteArray`
 :     Convert text to Shift JIS 2004 encoded bytes. Returns u16 int array. Unknown characters are skipped.

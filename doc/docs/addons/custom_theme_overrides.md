@@ -2,7 +2,7 @@
 
 Utility to make custom theme overrides for any node possible.
 
-Will register (via `class_name`) the class `CustomThemeOverrides`.
+Registers (via `class_name`) the class `CustomThemeOverrides`.
 
 The custom theme override variables can be handled like every other theme override property.
 
@@ -19,7 +19,7 @@ The custom theme override variables can be handled like every other theme overri
 
 ## Example
 
-<!-- kny:source /examples/custom_theme_overrides/ -->
+{{ kny:source /examples/custom_theme_overrides/ }}
 
 ```gdscript
 # declare the members

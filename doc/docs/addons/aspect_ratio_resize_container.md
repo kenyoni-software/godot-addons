@@ -18,7 +18,7 @@ This works except for `STRETCH_MODE_COVER`.
 
 ## Example
 
-<!-- kny:source /examples/aspect_ratio_resize_container/ -->
+{{ kny:source /examples/aspect_ratio_resize_container/ }}
 
 ## Changelog
 

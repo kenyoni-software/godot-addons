@@ -8,7 +8,7 @@ Kenyoni Godot Addons is a pack of useful Godot additions to make your life easie
 
 Find the releases [here](https://github.com/kenyoni-software/godot-addons/releases/tag/latest).
 
-!!! note 
+!!! note
 
     If you import any plugin or open a Godot project for the first time, the plugins will throw errors. To ensure correct operation, reload the project and the errors are gone.
 

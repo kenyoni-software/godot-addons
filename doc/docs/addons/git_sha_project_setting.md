@@ -19,7 +19,7 @@ The Git SHA will **not** be kept in `project.godot` to not clutter any version c
 
 ## Example
 
-<!-- kny:source /examples/git_sha_project_setting/ -->
+{{ kny:source /examples/git_sha_project_setting/ }}
 
 ## Changelog
 
