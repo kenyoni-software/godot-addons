@@ -22,9 +22,9 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 ### TextureButtonColored
 
-{{ kny:badge extends TextureButton }}
+{{ kny:badge extends TextureButton --left-bg }}
 
-{{ kny:source /addons/custom_theme_overrides/texture_button_colored.gd res://addons/custom_theme_overrides/texture_button_colored.gd }}
+{{ kny:source "/addons/custom_theme_overrides/texture_button_colored.gd" "res://addons/custom_theme_overrides/texture_button_colored.gd" }}
 
 #### Theme Overrides
 

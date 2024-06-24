@@ -1,6 +1,7 @@
 import argparse
 import re
 from re import Match
+import shlex
 from typing import Callable
 
 from mkdocs.config.defaults import MkDocsConfig
@@ -35,11 +36,11 @@ add_hooks(source_link.HOOKS)
 
 def on_page_markdown(markdown: str, *, page: Page, config: MkDocsConfig, files: Files):
     def replace(match: re.Match):
-        args: argparse.Namespace = PARSER.parse_args(match.groups()[0].split(" "))
+        args: argparse.Namespace = PARSER.parse_args(shlex.split(match.groups()[0]))
 
         fn: Callable[[argparse.Namespace, MkDocsConfig], str] = HOOKS.get(args.command, None)
         if fn is None:
-            raise RuntimeError(f"Unknown shortcode: {type}")
+            raise RuntimeError(f"Unknown shortcode: {args.command}")
 
         return fn(args, config)
 

@@ -63,9 +63,9 @@ Providing static utility and static functions to save and load licenses.
 
 ### Component
 
-{{ kny:badge extends RefCounted }}
+{{ kny:badge extends RefCounted --left-bg }}
 
-{{ kny:source /addons/licenses/component.gd res://addons/licenses/component.gd }}
+{{ kny:source "/addons/licenses/component.gd" "res://addons/licenses/component.gd" }}
 
 Component class, data wrapper for all information regarding one license item.
 
@@ -100,9 +100,9 @@ Component class, data wrapper for all information regarding one license item.
 
 ### Component.License
 
-{{ kny:badge extends RefCounted }}
+{{ kny:badge extends RefCounted --left-bg }}
 
-{{ kny:source /addons/licenses/licenses.gd res://addons/licenses/licenses.gd }}
+{{ kny:source "/addons/licenses/licenses.gd" "res://addons/licenses/licenses.gd" }}
 
 License class.
 

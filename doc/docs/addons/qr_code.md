@@ -22,7 +22,7 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 
 ### QRCodeRect
 
-{{ kny:badge extends TextureRect }}
+{{ kny:badge extends TextureRect --left-bg }}
 
 {{ kny:source /addons/qr_code/qr_code_rect.gd res://addons/qr_code/qr_code_rect.gd }}
 
@@ -50,7 +50,7 @@ When using byte encoding you can also pass strings for specific ECI values (ISO 
 
 ### QRCode
 
-{{ kny:badge extends RefCounted }}
+{{ kny:badge extends RefCounted --left-bg }}
 
 {{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
 
