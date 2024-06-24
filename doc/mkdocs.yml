@@ -15,6 +15,7 @@ extra:
 extra_css:
   - _static/css/common.css
   - _static/css/badge.css
+  - _static/css/godot_ref.css
 
 extra_javascript:
   # mathjax

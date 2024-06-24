@@ -14,7 +14,7 @@ This plugin will hide exported private properties in the inspector for instantia
 
 ## Example
 
-{{ kny:source /examples/hide_private_properties/ }}
+{{ kny:source "/examples/hide_private_properties/" }}
 
 ## Changelog
 

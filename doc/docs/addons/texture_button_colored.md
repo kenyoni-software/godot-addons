@@ -5,7 +5,7 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 ## Compatibility
 
 | Godot | Version       |
-|-------|---------------|
+| ----- | ------------- |
 | 4.3   | >= 1.4.0      |
 | 4.2   | 1.3.0 - 1.3.2 |
 | 4.1   | <= 1.2.3      |
@@ -28,14 +28,14 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 #### Theme Overrides
 
-| Name                     | Type  |
-|--------------------------|-------|
-| icon_normal_color        | Color |
-| icon_pressed_color       | Color |
-| icon_hover_color         | Color |
-| icon_hover_pressed_color | Color |
-| icon_focus_color         | Color |
-| icon_disabled_color      | Color |
+| Name                                         | Type                  |
+| -------------------------------------------- | --------------------- |
+| icon_normal_color {: .kny-mono-font }        | {{ kny:godot Color }} |
+| icon_pressed_color {: .kny-mono-font }       | {{ kny:godot Color }} |
+| icon_hover_color {: .kny-mono-font }         | {{ kny:godot Color }} |
+| icon_hover_pressed_color {: .kny-mono-font } | {{ kny:godot Color }} |
+| icon_focus_color {: .kny-mono-font }         | {{ kny:godot Color }} |
+| icon_disabled_color {: .kny-mono-font }      | {{ kny:godot Color }} |
 
 ## Changelog
 

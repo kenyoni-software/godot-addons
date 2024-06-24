@@ -14,7 +14,7 @@ project settings under the menu `Plugins` -> `Licenses`.
 ## Compatibility
 
 | Godot | Version       |
-|-------|---------------|
+| ----- | ------------- |
 | 4.3   | >= 1.8.0      |
 | 4.2   | 1.6.0 - 1.7.8 |
 | 4.1   | <= 1.5.0      |
@@ -25,41 +25,56 @@ project settings under the menu `Plugins` -> `Licenses`.
 
 ## Example
 
-{{ kny:source /examples/licenses/ }}
+{{ kny:source "/examples/licenses/" }}
 
 ## Interface
 
 ### Licenses
 
-{{ kny:source /addons/licenses/licenses.gd res://addons/licenses/licenses.gd }}
+{{ kny:source "/addons/licenses/licenses.gd" "res://addons/licenses/licenses.gd" }}
 
 Providing static utility and static functions to save and load licenses.
 
 #### Methods
 
-`static compare_components_ascending(lhs: Component, rhs: Component) -> bool`
+{{ kny:godot bool }} compare_components_ascending ( [Component](#component) lhs, [Component](#component) rhs ) static {: .kny-mono-font }
 :     Compare components ascending.
 
-`static get_engine_component(name: String) -> Component`
+[Component](#component) get_engine_component ( {{ kny:godot String }} name ) static {: .kny-mono-font }
 :     Get engine component by name.
 
-`static get_engine_components() -> Array[Component]`
+{{ kny:godot Array }}[[Component](#component)] get_engine_components () static {: .kny-mono-font }
 :     Get all engine components.
 
-`static get_required_engine_components() -> Array[Component]`
+{{ kny:godot Array }}[[Component](#component)] get_required_engine_components () static {: .kny-mono-font }
 :     Get engine components which are marked as required to mention.
 
-`static save(components: Array[Component], file_path: String) -> int`
+{{ kny:godot int }} save ( {{ kny:godot Array }}[[Component](#component)] components, {{ kny:godot String }} file_path ) -> static {: .kny-mono-font }
 :     Save array of components to file.
 
-`static load(file_path: String) -> LoadResult`
+[LoadResult](#licensesloadresult) load ( {{ kny:godot String }} file_path ) static {: .kny-mono-font }
 :     Load licenses from file.
 
-`static set_license_data_filepath(path: String) -> void`
+void set_license_data_filepath ( {{ kny:godot String }} path ) static {: .kny-mono-font }
 :     Set the project license data path.
 
-`static get_license_data_filepath() -> String`
+{{ kny:godot String }} get_license_data_filepath () static {: .kny-mono-font }
 :     Returns the project license data path.
+
+### Licenses.LoadResult
+
+{{ kny:badge extends RefCounted --left-bg }}
+
+{{ kny:source "/addons/licenses/licenses.gd" "res://addons/licenses/licenses.gd" }}
+
+Loading result returned when loading a licenses file.
+
+#### Properties
+
+| Name                           | Type                                           | Description                        |
+| ------------------------------ | ---------------------------------------------- | ---------------------------------- |
+| components {: .kny-mono-font } | {{ kny:godot Array }}[[Component](#component)] | Components.                        |
+| err_msg {: .kny-mono-font }    | {{ kny:godot String }}                         | Error message when loading failed. |
 
 ### Component
 
@@ -71,31 +86,31 @@ Component class, data wrapper for all information regarding one license item.
 
 #### Properties
 
-| Name        | Type                                  | Description                                                                |
-|-------------|---------------------------------------|----------------------------------------------------------------------------|
-| id          | String                                | Identifier.                                                                |
-| category    | String                                | Use to structure the licenses to top categories. E.g. Textures, Fonts, ... |
-| name        | String                                | Name of the software or component.                                         |
-| version     | String                                | Version of the software or component.                                      |
-| copyright   | PackedStringArray                     | Copyrights.                                                                |
-| contact     | String                                | Contact of developer.                                                      |
-| description | String                                | Additional description.                                                    |
-| web         | String                                | Web url to project page.                                                   |
-| paths       | PackedStringArray                     | Array of String, affected files or directories.                            |
-| licenses    | Array\[[License](#componentlicense)\] | Licenses.                                                                  |
+| Name                            | Type                                                  | Description                                                                |
+| ------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------- |
+| id {: .kny-mono-font }          | {{ kny:godot String }}                                | Identifier.                                                                |
+| category {: .kny-mono-font }    | {{ kny:godot String }}                                | Use to structure the licenses to top categories. E.g. Textures, Fonts, ... |
+| name {: .kny-mono-font }        | {{ kny:godot String }}                                | Name of the software or component.                                         |
+| version {: .kny-mono-font }     | {{ kny:godot String }}                                | Version of the software or component.                                      |
+| copyright {: .kny-mono-font }   | {{ kny:godot PackedStringArray }}                     | Copyrights.                                                                |
+| contact {: .kny-mono-font }     | {{ kny:godot String }}                                | Contact of developer.                                                      |
+| description {: .kny-mono-font } | {{ kny:godot String }}                                | Additional description.                                                    |
+| web {: .kny-mono-font }         | {{ kny:godot String }}                                | Web url to project page.                                                   |
+| paths {: .kny-mono-font }       | {{ kny:godot PackedStringArray }}                     | Path to affected files or directories.                                     |
+| licenses {: .kny-mono-font }    | {{ kny:godot Array }}\[[License](#componentlicense)\] | Licenses.                                                                  |
 
 #### Methods
 
-`get_warnings() -> PackedStringArray`
+{{ kny:godot PackedStringArray }} get_warnings () const {: .kny-mono-font }
 :     Get warnings regarding this component, e.g. missing license.
 
-`serialize() -> Dictionary`
+{{ kny:godot Dictionary }} serialize () const {: .kny-mono-font }
 :     Serialize to dictionary.
 
-`deserialize(data: Dictionary) -> Component`
+[Component](#component) deserialize ( {{ kny:godot Dictionary }} data ) {: .kny-mono-font }
 :     Load values from dictionary.
 
-`duplicate() -> Component`
+[Component](#component) duplicate () const {: .kny-mono-font }
 :     Returns a duplicate of itself.
 
 ### Component.License
@@ -108,26 +123,26 @@ License class.
 
 #### Properties
 
-| Name       | Type   | Description                                                                               |
-|------------|--------|-------------------------------------------------------------------------------------------|
-| name       | String | Full name.                                                                                |
-| identifier | String | Shortcode for this license.                                                               |
-| text       | String | License text.                                                                             |
-| file       | String | License file. Will load the license text from this file automatically if `text` is empty. |
-| web        | String | Web present of the license.                                                               |
+| Name                           | Type                   | Description                                                                               |
+| ------------------------------ | ---------------------- | ----------------------------------------------------------------------------------------- |
+| name {: .kny-mono-font }       | {{ kny:godot String }} | Full name.                                                                                |
+| identifier {: .kny-mono-font } | {{ kny:godot String }} | Shortcode for this license.                                                               |
+| text {: .kny-mono-font }       | {{ kny:godot String }} | License text.                                                                             |
+| file {: .kny-mono-font }       | {{ kny:godot String }} | License file. Will load the license text from this file automatically if `text` is empty. |
+| web {: .kny-mono-font }        | {{ kny:godot String }} | Web present of the license.                                                               |
 
 #### Methods
 
-`get_license_text() -> String`
+{{ kny:godot String }} get_license_text () const {: .kny-mono-font }
 :     Either returns the license text or loads the text from file or a message that the text could not be loaded.
 
-`serialize() -> Dictionary`
+{{ kny:godot String }} serialize () const {: .kny-mono-font }
 :     Serialize to dictionary.
 
-`deserialize() -> Dictionary`
+[License](#componentlicense) deserialize ( {{ kny:godot Dictionary }} data ) {: .kny-mono-font }
 :     Load values from dictionary.
 
-`duplicate() -> License`
+[License](#componentlicense) duplicate () const {: .kny-mono-font }
 :     Returns a duplicate of itself.
 
 ## Changelog

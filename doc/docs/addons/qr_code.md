@@ -5,7 +5,7 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 ## Compatibility
 
 | Godot | Version  |
-|-------|----------|
+| ----- | -------- |
 | 4.3   | >= 1.1.0 |
 | 4.2   | >= 1.1.0 |
 | 4.1   | <= 1.0.0 |
@@ -16,7 +16,7 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 
 ## Example
 
-{{ kny:source /examples/qr_code/ }}
+{{ kny:source "/examples/qr_code/" }}
 
 ## Interface
 
@@ -24,127 +24,127 @@ QR Code generation either with the included `QRCodeRect` node or use the encodin
 
 {{ kny:badge extends TextureRect --left-bg }}
 
-{{ kny:source /addons/qr_code/qr_code_rect.gd res://addons/qr_code/qr_code_rect.gd }}
+{{ kny:source "/addons/qr_code/qr_code_rect.gd" "res://addons/qr_code/qr_code_rect.gd" }}
 
 `TextureRect` like node. The texture is updated by itself.
 When using byte encoding you can also pass strings for specific ECI values (ISO 8859-1, Shift JIS, UTF-8, UTF-16, US ASCII), the input string will be automatically converted to an byte array.
 
 #### Properties
 
-| Name                | Type                                             | Description                                                                                                                                                                                                              |
-|---------------------|--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| mode                | [QRCode.Mode](#qrcodemode)                       | QR Code mode                                                                                                                                                                                                             |
-| error_correction    | [QRCode.ErrorCorrection](#qrcodeerrorcorrection) | Error correction value.                                                                                                                                                                                                  |
-| use_eci             | String                                           | Use Extended Channel Interpretation (ECI)                                                                                                                                                                                |
-| eci_value           | String                                           | Extended Channel Interpretation (ECI) Value                                                                                                                                                                              |
-| data                | Variant                                          | Type varies based on the encoding mode.                                                                                                                                                                                  |
-| auto_version        | bool                                             | Use automatically the smallest QR Code version.                                                                                                                                                                          |
-| version             | int                                              | QR Code version (size).                                                                                                                                                                                                  |
-| auto_mask_pattern   | bool                                             | Use automatically the best mask pattern.                                                                                                                                                                                 |
-| mask_pattern        | int                                              | QR Code mask pattern.                                                                                                                                                                                                    |
-| light_module_color  | Color                                            | Color of the light modules.                                                                                                                                                                                              |
-| dark_module_color   | Color                                            | Color of the dark modules.                                                                                                                                                                                               |
-| auto_module_px_size | bool                                             | Automatically set the module pixel size based on the size. Do not use expand mode `KEEP_SIZE` when using it.<br>Turn this off when the QR Code changes or is resized often, as it impacts the performance quite heavily. |
-| module_px_size      | int                                              | Use that many pixel for one module.                                                                                                                                                                                      |
-| quiet_zone_size     | int                                              | Use that many modules for the quiet zone. A value of 4 is recommended.                                                                                                                                                   |
+| Name                                    | Type                                             | Description                                                                                                                                                                                                              |
+| --------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| mode {: .kny-mono-font }                | [QRCode.Mode](#qrcodemode)                       | QR Code mode                                                                                                                                                                                                             |
+| error_correction {: .kny-mono-font }    | [QRCode.ErrorCorrection](#qrcodeerrorcorrection) | Error correction value.                                                                                                                                                                                                  |
+| use_eci {: .kny-mono-font }             | {{ kny:godot String }}                           | Use Extended Channel Interpretation (ECI)                                                                                                                                                                                |
+| eci_value {: .kny-mono-font }           | {{ kny:godot String }}                           | Extended Channel Interpretation (ECI) Value                                                                                                                                                                              |
+| data {: .kny-mono-font }                | {{ kny:godot Variant }}                          | Type varies based on the encoding mode.                                                                                                                                                                                  |
+| auto_version {: .kny-mono-font }        | {{ kny:godot bool }}                             | Use automatically the smallest QR Code version.                                                                                                                                                                          |
+| version {: .kny-mono-font }             | {{ kny:godot int }}                              | QR Code version (size).                                                                                                                                                                                                  |
+| auto_mask_pattern {: .kny-mono-font }   | {{ kny:godot bool }}                             | Use automatically the best mask pattern.                                                                                                                                                                                 |
+| mask_pattern {: .kny-mono-font }        | {{ kny:godot int }}                              | QR Code mask pattern.                                                                                                                                                                                                    |
+| light_module_color {: .kny-mono-font }  | {{ kny:godot Color }}                            | Color of the light modules.                                                                                                                                                                                              |
+| dark_module_color {: .kny-mono-font }   | {{ kny:godot Color }}                            | Color of the dark modules.                                                                                                                                                                                               |
+| auto_module_px_size {: .kny-mono-font } | {{ kny:godot bool }}                             | Automatically set the module pixel size based on the size. Do not use expand mode `KEEP_SIZE` when using it.<br>Turn this off when the QR Code changes or is resized often, as it impacts the performance quite heavily. |
+| module_px_size {: .kny-mono-font }      | {{ kny:godot int }}                              | Use that many pixel for one module.                                                                                                                                                                                      |
+| quiet_zone_size {: .kny-mono-font }     | {{ kny:godot int }}                              | Use that many modules for the quiet zone. A value of 4 is recommended.                                                                                                                                                   |
 
 ### QRCode
 
 {{ kny:badge extends RefCounted --left-bg }}
 
-{{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
+{{ kny:source "/addons/qr_code/qr_code.gd" "res://addons/qr_code/qr_code.gd" }}
 
 QRCode class to generate QR Codes.
 
 #### Properties
 
-| Name              | Type                                             | Description                                     |
-|-------------------|--------------------------------------------------|-------------------------------------------------|
-| mode              | [QRCode.Mode](#qrcodemode)                       | QR Code mode.                                   |
-| error_correction  | [QRCode.ErrorCorrection](#qrcodeerrorcorrection) | Error correction value.                         |
-| use_eci           | String                                           | Use Extended Channel Interpretation (ECI)       |
-| eci_value         | String                                           | Extended Channel Interpretation (ECI) Value     |
-| auto_version      | bool                                             | Use automatically the smallest QR Code version. |
-| version           | int                                              | QR Code version (size).                         |
-| auto_mask_pattern | bool                                             | Use automatically the best mask pattern.        |
-| mask_pattern      | int                                              | QR Code mask pattern.                           |
+| Name                                  | Type                                             | Description                                     |
+| ------------------------------------- | ------------------------------------------------ | ----------------------------------------------- |
+| mode {: .kny-mono-font }              | [QRCode.Mode](#qrcodemode)                       | QR Code mode.                                   |
+| error_correction {: .kny-mono-font }  | [QRCode.ErrorCorrection](#qrcodeerrorcorrection) | Error correction value.                         |
+| use_eci {: .kny-mono-font }           | {{ kny:godot String }}                           | Use Extended Channel Interpretation (ECI)       |
+| eci_value {: .kny-mono-font }         | {{ kny:godot String }}                           | Extended Channel Interpretation (ECI) Value     |
+| auto_version {: .kny-mono-font }      | {{ kny:godot bool }}                             | Use automatically the smallest QR Code version. |
+| version {: .kny-mono-font }           | {{ kny:godot int }}                              | QR Code version (size).                         |
+| auto_mask_pattern {: .kny-mono-font } | {{ kny:godot bool }}                             | Use automatically the best mask pattern.        |
+| mask_pattern {: .kny-mono-font }      | {{ kny:godot int }}                              | QR Code mask pattern.                           |
 
 #### Methods
 
-`get_module_count() -> int`
+{{ kny:godot int }} get_module_count () const {: .kny-mono-font }
 :     Return the module count per side.
 
-`calc_min_version() -> int`
+{{ kny:godot int }} calc_min_version () const {: .kny-mono-font }
 :     Return the minimal version required to encode the data.
 
-`generate_image(module_px_size: int = 1, light_module_color: Color = Color.WHITE, dark_module_color: Color = Color.BLACK) -> Image`
-:     Generate an image. This method can be called repeatedly, as encoding will only happens once and be cached.
+{{ kny:godot Image }} generate_image ( {{ kny:godot int }} module_px_size=1, {{ kny:godot Color }} light_module_color=Color.WHITE, {{ kny:godot Color }} dark_module_color=Color.BLACK ) {: .kny-mono-font }
+:     Generate an image. This method can be called repeatedly, as encoding will only happens once and the result is cached.
 
-`put_numeric(number: String) -> void`
+void put_numeric ( {{ kny:godot String }} number ) {: .kny-mono-font }
 :     Put a numeric text. Invalid characters are removed. Will change the encoding mode to `Mode.NUMERIC`.
 
-`put_alphanumeric(text: String) -> void`
+void put_alphanumeric ( {{ kny:godot String }} text ) {: .kny-mono-font }
 :     Put a alphanumeric text. Invalid characters are removed. Will change the encoding mode to `Mode.ALPHANUMERIC`.
 
-`put_byte(data: PackedByteArray) -> void`
+void put_byte ( {{ kny:godot PackedByteArray }} data ) {: .kny-mono-font }
 :     Put a bytes. Will change the encoding mode to `Mode.BYTE`.
 
-`put_kanji(data: String) -> void`
+void put_kanji ( {{ kny:godot String }} data ) {: .kny-mono-font }
 :     Put a kanji text. Invalid characters are removed. Will change the encoding mode to `Mode.KANJI`.
 
-`encode() -> PackedByteArray`
+{{ kny:godot PackedByteArray }} encode () {: .kny-mono-font }
 :     Get the QR Code row by row in one array. To get the row size use `get_module_count`.
 
 ### QRCode.Mode
 
-{{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
+{{ kny:source "/addons/qr_code/qr_code.gd" "res://addons/qr_code/qr_code.gd" }}
 
 Encoding mode enum.
 
-| Name         | Value |
-|--------------|-------|
-| NUMERIC      | 1     |
-| ALPHANUMERIC | 2     |
-| BYTE         | 4     |
-| KANJI        | 8     |
+| Name                             | Value |
+| -------------------------------- | ----- |
+| NUMERIC {: .kny-mono-font }      | 1     |
+| ALPHANUMERIC {: .kny-mono-font } | 2     |
+| BYTE {: .kny-mono-font }         | 4     |
+| KANJI {: .kny-mono-font }        | 8     |
 
 ### QRCode.ErrorCorrection
 
-{{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
+{{ kny:source "/addons/qr_code/qr_code.gd" "res://addons/qr_code/qr_code.gd" }}
 
 Error correction enum.
 
-| Name     | Value |
-|----------|-------|
-| LOW      | 1     |
-| MEDIUM   | 0     |
-| QUARTILE | 3     |
-| HIGH     | 2     |
+| Name                         | Value |
+| ---------------------------- | ----- |
+| LOW {: .kny-mono-font }      | 1     |
+| MEDIUM {: .kny-mono-font }   | 0     |
+| QUARTILE {: .kny-mono-font } | 3     |
+| HIGH {: .kny-mono-font }     | 2     |
 
 ### QRCode.ECI
 
-{{ kny:source /addons/qr_code/qr_code.gd res://addons/qr_code/qr_code.gd }}
+{{ kny:source "/addons/qr_code/qr_code.gd" "res://addons/qr_code/qr_code.gd" }}
 
 ECI values. See source code for available values.
 
 ### ShiftJIS
 
-{{ kny:source /addons/qr_code/shift_jis.gd res://addons/qr_code/shift_jis.gd }}
+{{ kny:source "/addons/qr_code/shift_jis.gd" "res://addons/qr_code/shift_jis.gd" }}
 
 Shift JIS encoding utility.
 
 #### Methods
 
-`static func to_shift_jis_2004_buffer(text: String) -> PackedByteArray`
+{{ kny:godot PackedByteArray }} to_shift_jis_2004_buffer ( {{ kny:godot String }} text ) -> PackedByteArray` static {: .kny-mono-font }
 :     Convert text to Shift JIS 2004 encoded bytes. Returns u16 int array. Unknown characters are skipped.
 
-`static func get_string_from_shift_jis_2004(arr: PackedByteArray) -> String`
+{{ kny:godot String }} get_string_from_shift_jis_2004 ( {{ kny:godot PackedByteArray }} arr ) static {: .kny-mono-font }
 :     Get text from Shift JIS 2004 encoded bytes. Requires an u16 int array. Unknown characters are skipped.
 
-`static func to_jis_8_buffer(text: String) -> PackedByteArray`
+{{ kny:godot PackedByteArray }} to_jis_8_buffer ( {{ kny:godot String }} text ) static {: .kny-mono-font }
 :     Convert text to JIS 8 encoded bytes. Returns u8 int array. Unknown characters are skipped.
 
-`static func get_string_from_jis_8(arr: PackedByteArray) -> String`
+{{ kny:godot String }} get_string_from_jis_8 ( {{ kny:godot PackedByteArray }} arr ) static {: .kny-mono-font }
 :     Get text from JIS 8 encoded bytes. Requires an u8 int array. Unknown characters are skipped.
 
 ## Changelog

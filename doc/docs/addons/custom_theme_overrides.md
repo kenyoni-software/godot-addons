@@ -19,7 +19,7 @@ The custom theme override variables can be handled like every other theme overri
 
 ## Example
 
-{{ kny:source /examples/custom_theme_overrides/ }}
+{{ kny:source "/examples/custom_theme_overrides/" }}
 
 ```gdscript
 # declare the members
