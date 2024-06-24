@@ -52,7 +52,7 @@ Find the releases [here](https://github.com/kenyoni-software/godot-addons/releas
 
     ---
 
-    Simple logging utility.
+    Explore icon collections with thousands of icons and add them easily to your project.
 
 -   [Icons Patcher](addons/icons_patcher.md){ .md-button .center-lg-button }
 
