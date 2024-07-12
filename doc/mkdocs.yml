@@ -23,7 +23,7 @@ extra_javascript:
   - _static/dist/mathjax@3.2.2-es5-tex-mml-chtml.js
   # tablesort
   - _static/js/tablesort.js
-  - _static/dist/tablesort@5_3_0-min.js
+  - _static/dist/tablesort@5.3.0-min.js
 
 hooks:
   - hooks/hooks.py
