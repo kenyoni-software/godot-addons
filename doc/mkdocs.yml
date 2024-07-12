@@ -13,18 +13,17 @@ extra:
     source_url: "https://github.com/kenyoni-software/godot-addons/tree/main"
 
 extra_css:
-  - _static/css/common.css
   - _static/css/badge.css
+  - _static/css/common.css
   - _static/css/godot_ref.css
 
 extra_javascript:
   # mathjax
   - _static/js/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - _static/dist/mathjax@3.2.2-es5-tex-mml-chtml.js
   # tablesort
   - _static/js/tablesort.js
-  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - _static/dist/tablesort@5_3_0-min.js
 
 hooks:
   - hooks/hooks.py
