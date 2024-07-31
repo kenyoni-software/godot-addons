@@ -9,24 +9,9 @@ extra:
       link: https://github.com/kenyoni-software
     - icon: fontawesome/brands/github
       link: https://github.com/kenyoni-software
-  kenyoni:
-    source_url: "https://github.com/kenyoni-software/godot-addons/tree/main"
 
 extra_css:
-  - _static/css/badge.css
-  - _static/css/common.css
-  - _static/css/godot_ref.css
-
-extra_javascript:
-  # mathjax
-  - _static/js/mathjax.js
-  - _static/dist/mathjax@3.2.2-es5-tex-mml-chtml.js
-  # tablesort
-  - _static/js/tablesort.js
-  - _static/dist/tablesort@5.3.0-min.js
-
-hooks:
-  - hooks/hooks.py
+  - assets/css/common.css
 
 markdown_extensions:
   # Python Markdown
@@ -48,9 +33,6 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-      options:
-        custom_icons:
-          - _static/img/icons
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.keys
@@ -64,6 +46,12 @@ markdown_extensions:
   - pymdownx.tilde
 
 plugins:
+  - kny_badge
+  - kny_godot_ref
+  - kny_common:
+      tablesort: true
+  - kny_source_ref:
+      source_url: "https://github.com/kenyoni-software/godot-addons/tree/main"
   - minify:
       minify_html: true
   - search
