@@ -16,6 +16,7 @@ func _init() -> void:
 func load() -> Array:
     var dir: DirAccess = DirAccess.open(self.icon_directory())
     if !dir:
+        push_warning("could not open country flag icons directory: '%s'", [self.icon_directory()])
         return [[], PackedStringArray()]
 
     var flag_names: JSON = JSON.new()

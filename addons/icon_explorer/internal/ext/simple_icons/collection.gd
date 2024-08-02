@@ -53,13 +53,6 @@ func _title_to_slug(title: String) -> String:
 
 # OVERRIDE
 func load() -> Array:
-    var parser_version: JSON = JSON.new()
-    var res_version: int = parser_version.parse(FileAccess.get_file_as_string(self.directory().path_join("simple-icons-master/package.json")))
-    if res_version != OK:
-        push_warning("could not parse simple icons package.json: '%s'", [parser_version.get_error_message()])
-        return [[], PackedStringArray()]
-    self.version = parser_version.data["version"]
-
     var parser: JSON = JSON.new()
     var res: int = parser.parse(FileAccess.get_file_as_string(self.directory().path_join("simple-icons-master/_data/simple-icons.json")))
     if res != OK:
@@ -81,6 +74,13 @@ func load() -> Array:
             if arr_res.size() == 2:
                 icons.append(arr_res[0])
                 buffers.append(arr_res[1])
+
+    var parser_version: JSON = JSON.new()
+    var res_version: int = parser_version.parse(FileAccess.get_file_as_string(self.directory().path_join("simple-icons-master/package.json")))
+    if res_version != OK:
+        push_warning("could not parse simple icons package.json: '%s'", [parser_version.get_error_message()])
+        return [[], PackedStringArray()]
+    self.version = parser_version.data["version"]
 
     return [icons, buffers]
 

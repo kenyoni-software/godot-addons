@@ -156,6 +156,7 @@ func _on_button_clicked(item: TreeItem, _column: int, id: int, _mouse_button_ind
     match id:
         ButtonId.INSTALL:
             self._processing = coll.id()
+            # lock buttons
             self.update()
             if self._http_request != null:
                 self._http_request.queue_free()
@@ -164,6 +165,7 @@ func _on_button_clicked(item: TreeItem, _column: int, id: int, _mouse_button_ind
             self.db.install(coll, self._http_request, "")
         ButtonId.REMOVE:
             self._processing = coll.id()
+            # lock buttons
             self.update()
             self.db.remove(coll)
         ButtonId.OPEN_DIR:

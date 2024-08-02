@@ -18,13 +18,6 @@ func color_icon(buffer: String, color: String) -> String:
 
 # OVERRIDE
 func load() -> Array:
-    var parser_version: JSON = JSON.new()
-    var res_version: int = parser_version.parse(FileAccess.get_file_as_string(self.directory().path_join("Font-Awesome-6.x/js-packages/@fortawesome/fontawesome-free/package.json")))
-    if res_version != OK:
-        push_warning("could not parse font awesome package.json: '%s'", [parser_version.get_error_message()])
-        return [[], PackedStringArray()]
-    self.version = parser_version.data["version"]
-
     var meta_string: String = FileAccess.get_file_as_string(self.directory().path_join("Font-Awesome-6.x/metadata/icons.json"))
     var icons: Array[Icon] = []
     var buffers: PackedStringArray = PackedStringArray()
@@ -57,6 +50,13 @@ func load() -> Array:
             icon.search_terms =  item.get("search", {}).get("terms", PackedStringArray())
             icons.append(icon)
             buffers.append(self.color_icon(item["svg"][style]["raw"], "FFFFFF"))
+
+    var parser_version: JSON = JSON.new()
+    var res_version: int = parser_version.parse(FileAccess.get_file_as_string(self.directory().path_join("Font-Awesome-6.x/js-packages/@fortawesome/fontawesome-free/package.json")))
+    if res_version != OK:
+        push_warning("could not parse font awesome package.json: '%s'", [parser_version.get_error_message()])
+        return [[], PackedStringArray()]
+    self.version = parser_version.data["version"]
 
     return [icons, buffers]
 
