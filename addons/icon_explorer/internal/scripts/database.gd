@@ -71,8 +71,10 @@ func _install(coll: Collection, http: HTTPRequest, version: String) -> void:
     if status != Error.OK:
         self._install_done.bind(coll.id(), status).call_deferred()
         return
+    # remove loaded icons and unload collection, to load the new ones
     if self._loaded_collections.has(coll.id()):
         self._icons = self._icons.filter(func (icon: Icon) -> bool: return icon.collection.id() != coll.id())
+        self._loaded_collections.remove_at(self._loaded_collections.find(coll.id()))
     self._load()
     self._install_done.bind(coll.id(), status).call_deferred()
 
