@@ -61,6 +61,10 @@ You are also not able to use the property `custom_minimum_size` anymore as it is
 
 ### Changelog
 
+#### 3.2.2
+
+- Add more static typing
+
 #### 3.2.1
 
 - Revert: Fix ratio calculation, it is clunky on specific settings
@@ -243,6 +247,10 @@ Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it
 
 ### Changelog
 
+#### 1.1.0
+
+- Use editor toast notification
+
 #### 1.0.0
 
 - Add icon explorer
@@ -250,6 +258,8 @@ Downloaded data is saved into `.godot/cache/icon_explorer` to avoid importing it
 ---
 
 ## Icons Patcher
+
+*Consider using [Icon Explorer](#icon-explorer) instead and save icons in white color.*
 
 If you use Material Design icons from [Pictogrammers](https://pictogrammers.com/library/mdi/), they come without any fill color, automatically rendered black. This is not a convenient color as it makes it impossible to modulate the color. The icon patcher provides a utility to automatically patch the icons to white color.
 
@@ -264,6 +274,10 @@ Consider using [Icon Explorer](#icon-explorer) instead and save it directly in w
 - Godot 4.2
 
 ### Changelog
+
+#### 1.4.0
+
+- Use editor toast notification
 
 #### 1.3.3
 
@@ -326,6 +340,10 @@ Component class, data wrapper for all  information regarding one license item.
 License class.
 
 ### Changelog
+
+#### 1.7.8
+
+- Detect movement of licenses json file
 
 #### 1.7.7
 
@@ -589,6 +607,10 @@ Shift JIS encoding utility.
 
 ### Changelog
 
+#### 1.1.3
+
+- Code improvements
+
 #### 1.1.2
 
 - Use absolute paths in preloads
@@ -639,6 +661,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 [examples/texture_button_colored](./examples/texture_button_colored)
 
 ### Changelog
+
+#### 1.3.3
+
+- Notify if Custom Themes Override is missing or enable it if disabled
 
 #### 1.3.2
 

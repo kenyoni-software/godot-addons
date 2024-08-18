@@ -31,7 +31,7 @@ var _TITLE_TO_SLUG_REPLACEMENTS: Dictionary = {
     "ż": "z",
 }
 
-var _title_to_slug_range_rx: RegEx = RegEx.new()
+var _title_to_slug_range_rx: RegEx = RegEx.create_from_string("[^a-z0-9]")
 
 func _init() -> void:
     self.name = "Simple Icons"
@@ -40,8 +40,6 @@ func _init() -> void:
     self.license = "CC0 1.0 Universal / Others"
     self.web = "https://github.com/simple-icons/simple-icons"
     self.svg_size = 24.0
-
-    self._title_to_slug_range_rx.compile("[^a-z0-9]")
 
 # OVERRIDE
 func convert_icon_colored(buffer: String, color: String) -> String:

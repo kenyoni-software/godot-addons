@@ -4,6 +4,7 @@ extends PanelContainer
 const Toolbar := preload("res://addons/icon_explorer/internal/ui/detail_panel/toolbar.gd")
 
 const Collection := preload("res://addons/icon_explorer/internal/scripts/collection.gd")
+const EditorToastNotification := preload("res://addons/icon_explorer/editor_toast_notification.gd")
 const Icon := preload("res://addons/icon_explorer/internal/scripts/icon.gd")
 const TextField := preload("res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd")
 
@@ -105,20 +106,30 @@ func _on_filepath_selected(path: String, colored: bool) -> void:
     if colored:
         var buffer: String = FileAccess.get_file_as_string(self._cur_icon.icon_path)
         if buffer == "":
-            push_warning("could not load '" + self._cur_icon.icon_path + "'")
+            if Engine.is_editor_hint():
+                EditorToastNotification.notify("[Icon Explorer] Could not save icon.\nCould not load '" + self._cur_icon.icon_path + "'", EditorToastNotification.Severity.WARNING)
+            else:
+                push_warning("could not load '" + self._cur_icon.icon_path + "'")
             return
         buffer = self._cur_icon.collection.convert_icon_colored(buffer, self.preview_color.to_html(false))
         var writer: FileAccess = FileAccess.open(path, FileAccess.WRITE)
         if writer == null:
             writer = null
-            push_warning("could not save '" + path + "'")
+            if Engine.is_editor_hint():
+                EditorToastNotification.notify("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould not write to '" + path + "'", EditorToastNotification.Severity.WARNING)
+            else:
+                push_warning("could not save '" + path + "'")
             return
         writer.store_string(buffer)
         writer = null
     else:
         var err: Error = DirAccess.copy_absolute(self._cur_icon.icon_path, path)
         if err != OK:
-            push_error(err)
+            if Engine.is_editor_hint():
+                EditorToastNotification.notify("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould copy file '" + path + "' to '" + self._cur_icon.icon_path + "'", EditorToastNotification.Severity.WARNING)
+            else:
+                push_warning("could not copy file", err)
             return
     if Engine.is_editor_hint():
+        EditorToastNotification.notify("[Icon Explorer] Icon '" + self._cur_icon.name + "' saved to '" + path + "'")
         EditorInterface.get_resource_filesystem().scan()

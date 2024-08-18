@@ -7,6 +7,7 @@ const Icon := preload("res://addons/icon_explorer/internal/scripts/icon.gd")
 const IconDatabase := preload("res://addons/icon_explorer/internal/scripts/database.gd")
 const DetailPanel := preload("res://addons/icon_explorer/internal/ui/detail_panel/detail_panel.gd")
 
+const EditorToastNotification := preload("res://addons/icon_explorer/editor_toast_notification.gd")
 const Options := preload("res://addons/icon_explorer/internal/ui/options/options.gd")
 
 @export var _filter_icon: TextureRect
@@ -70,6 +71,9 @@ func _ready() -> void:
     self._db.loaded.connect(self._on_icon_database_loaded)
     self._db.collection_installed.connect(self._on_database_changed)
     self._db.collection_removed.connect(self._on_database_changed)
+    if Engine.is_editor_hint():
+        self._db.collection_installed.connect(self._on_collection_changed.bind(true))
+        self._db.collection_removed.connect(self._on_collection_changed.bind(false))
 
     self._options.db = self._db
 
@@ -170,3 +174,17 @@ func _on_filter_submitted(_text: String) -> void:
 
 func _on_option_pressed() -> void:
     self._options_popup.popup_centered_ratio(0.35)
+
+func _on_collection_changed(id: int, status: Error, is_installation: bool):
+    var msg: String = "[Icon Explorer] '" + self._db.get_collection(id).name + "' "
+    if is_installation:
+        if status == Error.OK:
+            msg += " successfully installed."
+        else:
+            msg += " installation failed."
+    else:
+        if status == Error.OK:
+            msg += " successfully removed."
+        else:
+            msg += " removing failed."
+    EditorToastNotification.notify(msg)
