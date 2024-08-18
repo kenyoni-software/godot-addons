@@ -71,10 +71,10 @@ Loading result returned when loading a licenses file.
 
 #### Properties
 
-| Name                           | Type                                           | Description                        |
-| ------------------------------ | ---------------------------------------------- | ---------------------------------- |
-| components {: .kny-mono-font } | {{ kny:godot Array }}[[Component](#component)] | Components.                        |
-| err_msg {: .kny-mono-font }    | {{ kny:godot String }}                         | Error message when loading failed. |
+| Name                           | Type                                                               | Description                        |
+| ------------------------------ | ------------------------------------------------------------------ | ---------------------------------- |
+| components {: .kny-mono-font } | {{ kny:godot Array }}[[Component](#component)] {: .kny-mono-font } | Components.                        |
+| err_msg {: .kny-mono-font }    | {{ kny:godot String }}                                             | Error message when loading failed. |
 
 ### Component
 
@@ -86,18 +86,18 @@ Component class, data wrapper for all information regarding one license item.
 
 #### Properties
 
-| Name                            | Type                                                  | Description                                                                |
-| ------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------- |
-| id {: .kny-mono-font }          | {{ kny:godot String }}                                | Identifier.                                                                |
-| category {: .kny-mono-font }    | {{ kny:godot String }}                                | Use to structure the licenses to top categories. E.g. Textures, Fonts, ... |
-| name {: .kny-mono-font }        | {{ kny:godot String }}                                | Name of the software or component.                                         |
-| version {: .kny-mono-font }     | {{ kny:godot String }}                                | Version of the software or component.                                      |
-| copyright {: .kny-mono-font }   | {{ kny:godot PackedStringArray }}                     | Copyrights.                                                                |
-| contact {: .kny-mono-font }     | {{ kny:godot String }}                                | Contact of developer.                                                      |
-| description {: .kny-mono-font } | {{ kny:godot String }}                                | Additional description.                                                    |
-| web {: .kny-mono-font }         | {{ kny:godot String }}                                | Web url to project page.                                                   |
-| paths {: .kny-mono-font }       | {{ kny:godot PackedStringArray }}                     | Path to affected files or directories.                                     |
-| licenses {: .kny-mono-font }    | {{ kny:godot Array }}\[[License](#componentlicense)\] | Licenses.                                                                  |
+| Name                            | Type                                                                    | Description                                                                |
+| ------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| id {: .kny-mono-font }          | {{ kny:godot String }}                                                  | Identifier.                                                                |
+| category {: .kny-mono-font }    | {{ kny:godot String }}                                                  | Use to structure the licenses to top categories. E.g. Textures, Fonts, ... |
+| name {: .kny-mono-font }        | {{ kny:godot String }}                                                  | Name of the software or component.                                         |
+| version {: .kny-mono-font }     | {{ kny:godot String }}                                                  | Version of the software or component.                                      |
+| copyright {: .kny-mono-font }   | {{ kny:godot PackedStringArray }}                                       | Copyrights.                                                                |
+| contact {: .kny-mono-font }     | {{ kny:godot String }}                                                  | Contact of developer.                                                      |
+| description {: .kny-mono-font } | {{ kny:godot String }}                                                  | Additional description.                                                    |
+| web {: .kny-mono-font }         | {{ kny:godot String }}                                                  | Web url to project page.                                                   |
+| paths {: .kny-mono-font }       | {{ kny:godot PackedStringArray }}                                       | Path to affected files or directories.                                     |
+| licenses {: .kny-mono-font }    | {{ kny:godot Array }}[[License](#componentlicense)] {: .kny-mono-font } | Licenses.                                                                  |
 
 #### Methods
 

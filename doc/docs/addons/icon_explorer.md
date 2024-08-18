@@ -8,12 +8,12 @@ You can remove the main screen button in the options.
 
 **Available collections**
 
-- [Bootstrap Icons](https://github.com/twbs/icons) {{ kny:badge-version 1.0.0 }}
-- [country-flag-icons](https://gitlab.com/catamphetamine/country-flag-icons) {{ kny:badge-version 1.2.0 }}
-- [Font Awesome 6](https://github.com/FortAwesome/Font-Awesome) {{ kny:badge-version 1.0.0 }}
-- [Material Design](https://github.com/Templarian/MaterialDesign-SVG) {{ kny:badge-version 1.0.0 }}
-- [Simple Icons](https://github.com/simple-icons/simple-icons) {{ kny:badge-version 1.0.0 }}
-- [tabler Icons](https://github.com/tabler/tabler-icons) {{ kny:badge-version 1.0.0 }}
+- [Bootstrap Icons](https://github.com/twbs/icons) (since `1.0.0`)
+- [country-flag-icons](https://gitlab.com/catamphetamine/country-flag-icons) (since `1.2.0`)
+- [Font Awesome 6](https://github.com/FortAwesome/Font-Awesome) (since `1.0.0`)
+- [Material Design](https://github.com/Templarian/MaterialDesign-SVG) (since `1.0.0`)
+- [Simple Icons](https://github.com/simple-icons/simple-icons) (since `1.0.0`)
+- [tabler Icons](https://github.com/tabler/tabler-icons) (since `1.0.0`)
 
 !!! note
 

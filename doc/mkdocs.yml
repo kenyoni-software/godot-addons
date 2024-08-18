@@ -54,6 +54,7 @@ plugins:
       source_url: "https://github.com/kenyoni-software/godot-addons/tree/main"
   - minify:
       minify_html: true
+  - privacy
   - search
   - social:
       cards_layout_options:

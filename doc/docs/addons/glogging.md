@@ -8,7 +8,7 @@ Logging into a file is not supported. The output will be always done via print.
 ## Compatibility
 
 | Godot | Version  |
-| ----- | -------- |
+|-------|----------|
 | 4.3   | >= 1.5.0 |
 | 4.2   | >= 1.5.0 |
 | 4.1   | <= 1.4.1 |
@@ -41,20 +41,20 @@ Logging base class. Provides helper methods.
 
 #### Properties
 
-| Name                            | Type                      | Description         |
-| ------------------------------- | ------------------------- | ------------------- |
-| root_logger {: .kny-mono-font } | [Logger](#glogginglogger) | root logger object. |
+| Name                            | Type                                          | Description         |
+|---------------------------------|-----------------------------------------------|---------------------|
+| root_logger {: .kny-mono-font } | [Logger](#glogginglogger) {: .kny-mono-font } | root logger object. |
 
 #### Constants
 
-| Name                             | Type                | Value | Description         |
-| -------------------------------- | ------------------- | ----- | ------------------- |
-| LEVEL_NOTSET {: .kny-mono-font } | {{ kny:godot int }} | 0     | Logging level not set. |
-| LEVEL_DEBUG {: .kny-mono-font } | {{ kny:godot int }} | 10     |  |
-| LEVEL_INFO {: .kny-mono-font } | {{ kny:godot int }} | 20     |  |
-| LEVEL_WARNING {: .kny-mono-font } | {{ kny:godot int }} | 30     |  |
-| LEVEL_ERROR {: .kny-mono-font } | {{ kny:godot int }} | 40     |  |
-| LEVEL_CRITICAL {: .kny-mono-font } | {{ kny:godot int }} | 50     |  |
+| Name                               | Type                | Value | Description            |
+|------------------------------------|---------------------|-------|------------------------|
+| LEVEL_NOTSET {: .kny-mono-font }   | {{ kny:godot int }} | 0     | Logging level not set. |
+| LEVEL_DEBUG {: .kny-mono-font }    | {{ kny:godot int }} | 10    |                        |
+| LEVEL_INFO {: .kny-mono-font }     | {{ kny:godot int }} | 20    |                        |
+| LEVEL_WARNING {: .kny-mono-font }  | {{ kny:godot int }} | 30    |                        |
+| LEVEL_ERROR {: .kny-mono-font }    | {{ kny:godot int }} | 40    |                        |
+| LEVEL_CRITICAL {: .kny-mono-font } | {{ kny:godot int }} | 50    |                        |
 
 #### Methods
 

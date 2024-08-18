@@ -27,7 +27,9 @@ jobs:
         with:
           python-version: 3.x
       - name: Install Material for MkDocs
-        run: pip install mkdocs-material mkdocs-minify-plugin pillow cairosvg
+        run: |
+          pip install mkdocs-material==9.5.31 mkdocs-minify-plugin pillow cairosvg
+          pip install git+https://github.com/kenyoni-software/kny-mkdocs@1.1.1
       - name: Build Website
         working-directory: doc/
         run: mkdocs build

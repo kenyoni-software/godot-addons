@@ -1,5 +1,7 @@
 # QR Code
 
+{{ kny:badge-download "text" }}
+
 QR Code generation either with the included `QRCodeRect` node or use the encoding result of the `QRCode` class.
 
 ## Compatibility
@@ -58,16 +60,16 @@ QRCode class to generate QR Codes.
 
 #### Properties
 
-| Name                                  | Type                                             | Description                                     |
-| ------------------------------------- | ------------------------------------------------ | ----------------------------------------------- |
-| mode {: .kny-mono-font }              | [QRCode.Mode](#qrcodemode)                       | QR Code mode.                                   |
-| error_correction {: .kny-mono-font }  | [QRCode.ErrorCorrection](#qrcodeerrorcorrection) | Error correction value.                         |
-| use_eci {: .kny-mono-font }           | {{ kny:godot String }}                           | Use Extended Channel Interpretation (ECI)       |
-| eci_value {: .kny-mono-font }         | {{ kny:godot String }}                           | Extended Channel Interpretation (ECI) Value     |
-| auto_version {: .kny-mono-font }      | {{ kny:godot bool }}                             | Use automatically the smallest QR Code version. |
-| version {: .kny-mono-font }           | {{ kny:godot int }}                              | QR Code version (size).                         |
-| auto_mask_pattern {: .kny-mono-font } | {{ kny:godot bool }}                             | Use automatically the best mask pattern.        |
-| mask_pattern {: .kny-mono-font }      | {{ kny:godot int }}                              | QR Code mask pattern.                           |
+| Name                                  | Type                                                                 | Description                                     |
+| ------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
+| mode {: .kny-mono-font }              | [QRCode.Mode](#qrcodemode) {: .kny-mono-font }                       | QR Code mode.                                   |
+| error_correction {: .kny-mono-font }  | [QRCode.ErrorCorrection](#qrcodeerrorcorrection) {: .kny-mono-font } | Error correction value.                         |
+| use_eci {: .kny-mono-font }           | {{ kny:godot String }}                                               | Use Extended Channel Interpretation (ECI)       |
+| eci_value {: .kny-mono-font }         | {{ kny:godot String }}                                               | Extended Channel Interpretation (ECI) Value     |
+| auto_version {: .kny-mono-font }      | {{ kny:godot bool }}                                                 | Use automatically the smallest QR Code version. |
+| version {: .kny-mono-font }           | {{ kny:godot int }}                                                  | QR Code version (size).                         |
+| auto_mask_pattern {: .kny-mono-font } | {{ kny:godot bool }}                                                 | Use automatically the best mask pattern.        |
+| mask_pattern {: .kny-mono-font }      | {{ kny:godot int }}                                                  | QR Code mask pattern.                           |
 
 #### Methods
 
