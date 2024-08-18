@@ -17,6 +17,9 @@ func _ready() -> void:
     self._save_button.pressed.connect(self._on_save_button_pressed)
     self._save_colored_button.pressed.connect(self._on_save_colored_button_pressed)
 
+func disable_save_colored_button(disable: bool) -> void:
+    self._save_colored_button.disabled = disable
+
 func _on_save_button_pressed() -> void:
     self.save_pressed.emit()
 

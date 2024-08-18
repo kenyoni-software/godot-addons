@@ -2,13 +2,13 @@ extends MarginContainer
 
 const Component := preload("res://addons/licenses/component.gd")
 
-@export_node_path("Label") var _name_path: NodePath; @onready var _name: Label = self.get_node(_name_path)
-@export_node_path("Label") var _version_path: NodePath; @onready var _version: Label = self.get_node(_version_path)
-@export_node_path("RichTextLabel") var _description_path: NodePath; @onready var _description: RichTextLabel = self.get_node(_description_path)
-@export_node_path("RichTextLabel") var _contact_path: NodePath; @onready var _contact: RichTextLabel = self.get_node(_contact_path)
-@export_node_path("RichTextLabel") var _web_path: NodePath; @onready var _web: RichTextLabel = self.get_node(_web_path)
-@export_node_path("RichTextLabel") var _license_path: NodePath; @onready var _license: RichTextLabel = self.get_node(_license_path)
-@export_node_path("RichTextLabel") var _license_text_path: NodePath; @onready var _license_text: RichTextLabel = self.get_node(_license_text_path)
+@export var _name: Label
+@export var _version: Label
+@export var _description: RichTextLabel
+@export var _contact: RichTextLabel
+@export var _web: RichTextLabel
+@export var _license: RichTextLabel
+@export var _license_text: RichTextLabel
 
 func set_component(component: Component) -> void:
     self._name.text = component.name

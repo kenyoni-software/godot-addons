@@ -1,0 +1,8 @@
+.center-lg-button {
+    width: 100%;
+    text-align: center;
+}
+
+.kny-mono-font {
+    font-family: var(--md-code-font-family);
+}

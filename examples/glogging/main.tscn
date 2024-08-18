@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" path="res://examples/glogging/main.gd" id="1_tinti"]
 
-[node name="main" type="PanelContainer"]
+[node name="main" type="PanelContainer" node_paths=PackedStringArray("_logger_options", "_log_level_options", "_log_at_level_options", "_log_text")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tinti")
-_logger_options_path = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton")
-_log_level_options_path = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton2")
-_log_at_level_options_path = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton3")
-_log_text_path = NodePath("MarginContainer/VBoxContainer/TextEdit")
+_logger_options = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton")
+_log_level_options = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton2")
+_log_at_level_options = NodePath("MarginContainer/VBoxContainer/GridContainer/OptionButton3")
+_log_text = NodePath("MarginContainer/VBoxContainer/TextEdit")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -62,8 +62,8 @@ text = "Log at level"
 
 [node name="OptionButton3" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-item_count = 6
 selected = 1
+item_count = 6
 popup/item_0/text = "NOT SET"
 popup/item_0/id = 0
 popup/item_1/text = "Debug"

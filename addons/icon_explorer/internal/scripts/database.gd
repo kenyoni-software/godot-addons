@@ -4,24 +4,19 @@ extends RefCounted
 ## Any texture loading has to be done on the main thread: https://github.com/godotengine/godot/issues/86796
 
 const Collection := preload("res://addons/icon_explorer/internal/scripts/collection.gd")
-const CollectionBootstrap := preload("res://addons/icon_explorer/internal/scripts/collections/bootstrap.gd")
-const CollectionFontAwesome := preload("res://addons/icon_explorer/internal/scripts/collections/font_awesome.gd")
-const CollectionMaterialDesign := preload("res://addons/icon_explorer/internal/scripts/collections/material_design.gd")
-const CollectionSimpleIcons := preload("res://addons/icon_explorer/internal/scripts/collections/simple_icons.gd")
-const CollectionTabler := preload("res://addons/icon_explorer/internal/scripts/collections/tabler.gd")
 const Icon := preload("res://addons/icon_explorer/internal/scripts/icon.gd")
 
 signal collection_installed(id: int, status: Error)
 signal collection_removed(id: int, status: Error)
-## emitted after calling load()
-signal loaded()
+signal load_started()
+signal load_finished()
 
 var _loaded_collections: Array[int] = []
 var _collections: Array[Collection] = []
 var _icons: Array[Icon] = []
 
-## used to await next frame on texture loading
 var _scene_tree: SceneTree
+
 ## no mutex required as loading is suspended while main thread runs
 ## as this progress is exclusively used in loading the textures
 var _load_progress: float
@@ -30,13 +25,10 @@ var _processing_thread: Thread
 func load_progress() -> float:
     return self._load_progress
 
-func _init(scene_tree: SceneTree) -> void:
+func _init(scene_tree: SceneTree = null) -> void:
     self._scene_tree = scene_tree
-    self.register(CollectionBootstrap.new())
-    self.register(CollectionFontAwesome.new())
-    self.register(CollectionMaterialDesign.new())
-    self.register(CollectionSimpleIcons.new())
-    self.register(CollectionTabler.new())
+    for path: String in Collection.get_default_collection_paths():
+        self.register(load(path.path_join("/collection.gd")).new() as Collection)
 
 func _notification(what: int):
     if what == NOTIFICATION_PREDELETE:
@@ -79,16 +71,14 @@ func _install(coll: Collection, http: HTTPRequest, version: String) -> void:
     if status != Error.OK:
         self._install_done.bind(coll.id(), status).call_deferred()
         return
+    # remove loaded icons and unload collection, to load the new ones
     if self._loaded_collections.has(coll.id()):
         self._icons = self._icons.filter(func (icon: Icon) -> bool: return icon.collection.id() != coll.id())
+        self._loaded_collections.remove_at(self._loaded_collections.find(coll.id()))
     self._load()
     self._install_done.bind(coll.id(), status).call_deferred()
 
 func _install_done(id: int, status: Error) -> void:
-    if self._loaded_collections.has(id):
-        self._icons = self._icons.filter(func (icon: Icon) -> bool: return icon.collection.id() != id)
-        if !self._loaded_collections.has(id):
-            self._loaded_collections.append(id)
     self.collection_installed.emit(id, status)
 
 func remove(coll: Collection) -> void:
@@ -107,6 +97,7 @@ func _remove(coll: Collection) -> void:
 
 func _remove_done(id: int, status: Error) -> void:
     self._icons = self._icons.filter(func (icon: Icon) -> bool: return icon.collection.id() != id)
+    self._loaded_collections.remove_at(self._loaded_collections.find(id))
     self.collection_removed.emit(id, status)
 
 func load() -> void:
@@ -116,9 +107,11 @@ func load() -> void:
         self._processing_thread.wait_to_finish()
 
     self._processing_thread = Thread.new()
+    self.load_started.emit()
     self._processing_thread.start(self._load)
 
 # thread function
+# does not call self.load_started.emit()
 func _load() -> void:
     var loaded_icons: Array[Icon] = []
     var buffers: PackedStringArray = PackedStringArray()
@@ -136,15 +129,21 @@ func _load_done(loaded_icons: Array[Icon], buffers: PackedStringArray) -> void:
     for idx: int in range(loaded_icons.size()):
         if idx % 50 == 0:
             self._load_progress = float(idx + 1) / loaded_icons.size() * 100.0
-            await self._scene_tree.process_frame
+            if self._scene_tree != null:
+                await self._scene_tree.process_frame
         _load_texture(loaded_icons[idx], buffers[idx])
     self._icons.append_array(loaded_icons)
-    self.loaded.emit()
+    self.load_finished.emit()
 
 static func _load_texture(icon: Icon, buffer: String) -> void:
     var img: Image = Image.new()
     # scale texture to 128
-    var success: int = img.load_svg_from_string(buffer, Collection.TEXTURE_SIZE / icon.collection.svg_size)
+    var scale: float = 1.0
+    if icon.svg_size == Vector2.ZERO:
+        push_warning("icon %s has no size" % icon.icon_path)
+    else:
+        scale = Collection.TEXTURE_SIZE / max(icon.svg_size.x, icon.svg_size.y)
+    var success: int = img.load_svg_from_string(buffer, scale)
     if success != OK:
         push_warning("could not load '" + icon.icon_path + "'")
         return

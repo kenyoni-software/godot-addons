@@ -1,0 +1,15 @@
+services:
+  mkdocs-serve:
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/docs
+    ports:
+      - 8000:8000
+
+  mkdocs-build:
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/docs
+    command: build

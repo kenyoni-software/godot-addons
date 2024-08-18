@@ -28,17 +28,16 @@ func _ready() -> void:
     self.add_child(self._menu)
 
     self._add_menu = PopupMenu.new()
+    self._create_plugin_menu_items()
+    self._create_engine_menu_items()
     self._add_menu.add_item("New Component", 0)
     self._add_menu.set_item_icon(0, get_theme_icon(&"New", &"EditorIcons"))
-    self._add_menu.add_submenu_item("Generate from Plugin", "menu_plugin", 1)
+    self._add_menu.add_submenu_node_item("Generate from Plugin", self._add_plugin_menu, 1)
     self._add_menu.set_item_icon(1, get_theme_icon(&"EditorPlugin", &"EditorIcons"))
-    self._add_menu.add_submenu_item("Generate from Engine", "menu_engine", 2)
+    self._add_menu.add_submenu_node_item("Generate from Engine", self._add_engine_menu, 2)
     self._add_menu.set_item_icon(2, get_theme_icon(&"Godot", &"EditorIcons"))
     self._add_menu.id_pressed.connect(self._on_add_id_pressed)
     self.add_child(self._add_menu)
-
-    self._create_plugin_menu_items()
-    self._create_engine_menu_items()
 
 # get plugin config as dictionary
 func _get_plugin_config(path: String) -> Dictionary:
@@ -59,7 +58,6 @@ func _get_plugin_config(path: String) -> Dictionary:
 func _create_engine_menu_items() -> void:
     self._add_engine_menu = PopupMenu.new()
     self._add_engine_menu.id_pressed.connect(self._on_engine_add_id_pressed)
-    self._add_engine_menu.name = "menu_engine"
     self._add_menu.add_child(self._add_engine_menu)
 
     var idx: int = 0
@@ -76,7 +74,6 @@ func _create_engine_menu_items() -> void:
 func _create_plugin_menu_items() -> void:
     self._add_plugin_menu = PopupMenu.new()
     self._add_plugin_menu.id_pressed.connect(self._on_plugin_add_id_pressed)
-    self._add_plugin_menu.name = "menu_plugin"
     self._add_menu.add_child(self._add_plugin_menu)
 
     var dir: DirAccess = DirAccess.open("res://addons/")
@@ -86,7 +83,7 @@ func _create_plugin_menu_items() -> void:
     dir.list_dir_begin()
     var elem: String = dir.get_next()
     var idx: int = 0
-    while (not elem.is_empty()):
+    while elem != "":
         if dir.current_is_dir():
             var path: String = "res://addons/".path_join(elem).path_join("/plugin.cfg")
             var cfg: Dictionary = self._get_plugin_config(path)

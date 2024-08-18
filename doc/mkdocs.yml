@@ -1,0 +1,94 @@
+site_name: Kenyoni Godot Addons
+site_url: https://kenyoni-software.github.io/godot-addons
+copyright: "&copy; Copyright 2022-present Kenyoni Software"
+
+extra:
+  generator: true
+  social:
+    - icon: material/earth
+      link: https://github.com/kenyoni-software
+    - icon: fontawesome/brands/github
+      link: https://github.com/kenyoni-software
+
+extra_css:
+  - assets/css/common.css
+
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  # Python Markdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - kny_badge
+  - kny_godot_ref
+  - kny_common:
+      tablesort: true
+  - kny_source_ref:
+      source_url: "https://github.com/kenyoni-software/godot-addons/tree/main"
+  - minify:
+      minify_html: true
+  - privacy
+  - search
+  - social:
+      cards_layout_options:
+        font_family: Noto Sans
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+  font: false
+  language: en
+  features:
+    - header.autohide
+    - navigation.top
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.prune
+    - navigation.tracking
+    - search.highlight
+    - search.suggest
+    - toc.follow
+    - toc.integrate

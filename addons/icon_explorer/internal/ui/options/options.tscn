@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfmh2kaf2qbrx"]
+[gd_scene load_steps=4 format=3 uid="uid://bfmh2kaf2qbrx"]
 
 [ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/options/options.gd" id="1_hdn86"]
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/options/collection_management.gd" id="2_fsa3m"]
 
-[node name="control" type="PanelContainer" node_paths=PackedStringArray("_load_on_startup", "_collection_tree", "_options_panel", "_options_label", "_collections_panel", "_collections_label")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i38b2"]
+
+[node name="control" type="PanelContainer" node_paths=PackedStringArray("_load_on_startup", "_show_main_screen", "_reload_current_project", "_collection_management", "_options_panel", "_options_label", "_collections_panel", "_collections_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,11 +13,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hdn86")
 _load_on_startup = NodePath("options/options/v_box_container/load_on_startup")
-_collection_tree = NodePath("options/options/tree")
+_show_main_screen = NodePath("options/options/v_box_container/show_main_screen")
+_reload_current_project = NodePath("options/options/restart_editor")
+_collection_management = NodePath("options/options/collection_management")
 _options_panel = NodePath("options/options/options_panel")
 _options_label = NodePath("options/options/options_panel/options")
-_collections_panel = NodePath("options/options/collections_panel")
-_collections_label = NodePath("options/options/collections_panel/collections_title")
+_collections_panel = NodePath("options/options/collection_management/collections_panel")
+_collections_label = NodePath("options/options/collection_management/collections_panel/h_box_container/collections_title")
 
 [node name="options" type="ScrollContainer" parent="."]
 layout_mode = 2
@@ -35,35 +40,69 @@ text = "Options"
 layout_mode = 2
 columns = 2
 
-[node name="label" type="Label" parent="options/options/v_box_container"]
+[node name="load_on_startup_label" type="Label" parent="options/options/v_box_container"]
 layout_mode = 2
 text = "Load on Godot startup"
 
 [node name="load_on_startup" type="CheckBox" parent="options/options/v_box_container"]
 layout_mode = 2
 
-[node name="label2" type="Label" parent="options/options/v_box_container"]
+[node name="show_main_screen_label" type="Label" parent="options/options/v_box_container"]
+auto_translate_mode = 1
+layout_mode = 2
+tooltip_text = "Requires an editor reload."
+mouse_filter = 1
+text = "Show in Main Screen Bar*"
+
+[node name="show_main_screen" type="CheckBox" parent="options/options/v_box_container"]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="restart_editor" type="Label" parent="options/options"]
 visible = false
 layout_mode = 2
-text = "Base SVG texture size"
+size_flags_horizontal = 0
+text = "Reload the current project to apply changes."
 
-[node name="spin_box" type="SpinBox" parent="options/options/v_box_container"]
-visible = false
+[node name="collection_management" type="VBoxContainer" parent="options/options" node_paths=PackedStringArray("_check_update_button", "_check_progress_bar", "_tree")]
 layout_mode = 2
-min_value = 8.0
-max_value = 1024.0
-value = 8.0
-editable = false
-suffix = "px"
+size_flags_vertical = 3
+script = ExtResource("2_fsa3m")
+_check_update_button = NodePath("collections_panel/h_box_container/update_check_button")
+_check_progress_bar = NodePath("collections_panel/h_box_container/update_check_button/progress_bar")
+_tree = NodePath("collection_management/tree")
 
-[node name="collections_panel" type="PanelContainer" parent="options/options"]
+[node name="collections_panel" type="PanelContainer" parent="options/options/collection_management"]
 layout_mode = 2
 
-[node name="collections_title" type="Label" parent="options/options/collections_panel"]
+[node name="h_box_container" type="HBoxContainer" parent="options/options/collection_management/collections_panel"]
+layout_mode = 2
+
+[node name="collections_title" type="Label" parent="options/options/collection_management/collections_panel/h_box_container"]
 layout_mode = 2
 text = "Collections"
 
-[node name="tree" type="Tree" parent="options/options"]
+[node name="update_check_button" type="Button" parent="options/options/collection_management/collections_panel/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Check for Updates"
+
+[node name="progress_bar" type="ProgressBar" parent="options/options/collection_management/collections_panel/h_box_container/update_check_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_i38b2")
+show_percentage = false
+
+[node name="collection_management" type="VBoxContainer" parent="options/options/collection_management"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="tree" type="Tree" parent="options/options/collection_management/collection_management"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

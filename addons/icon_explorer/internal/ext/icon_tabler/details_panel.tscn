@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://lk45nf0tqm80"]
+
+[ext_resource type="PackedScene" uid="uid://b813qk6u7eveh" path="res://addons/icon_explorer/internal/ui/detail_panel/list_field.tscn" id="1_muhea"]
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ext/icon_tabler/details_panel.gd" id="1_te45c"]
+[ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="2_u3ntg"]
+
+[node name="tabler" type="VBoxContainer" node_paths=PackedStringArray("_category", "_tags", "_version")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 136.0
+grow_horizontal = 2
+script = ExtResource("1_te45c")
+_category = NodePath("category")
+_tags = NodePath("tags")
+_version = NodePath("version_added")
+
+[node name="category" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("2_u3ntg")]
+layout_mode = 2
+_label = NodePath("margin_container/h_box_container/label")
+_button = NodePath("margin_container/h_box_container/button")
+title = "Category"
+
+[node name="tags" parent="." node_paths=PackedStringArray("_list") instance=ExtResource("1_muhea")]
+layout_mode = 2
+_list = NodePath("margin_container/item_list")
+title = "Tags"
+
+[node name="version_added" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("2_u3ntg")]
+layout_mode = 2
+_label = NodePath("margin_container/h_box_container/label")
+_button = NodePath("margin_container/h_box_container/button")
+title = "Version added"

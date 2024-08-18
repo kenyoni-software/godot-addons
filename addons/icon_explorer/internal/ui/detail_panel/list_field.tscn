@@ -5,18 +5,20 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wghjy"]
 
-[node name="list_field" type="VBoxContainer" node_paths=PackedStringArray("_list")]
+[node name="list_field" type="VBoxContainer" node_paths=PackedStringArray("_list", "_title")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wb7ty")
-_title_path = NodePath("title_panel")
+items = PackedStringArray()
 _list = NodePath("margin_container/item_list")
+_title = NodePath("title_panel")
 
-[node name="title_panel" parent="." instance=ExtResource("2_gcg2e")]
+[node name="title_panel" parent="." node_paths=PackedStringArray("_text_label") instance=ExtResource("2_gcg2e")]
 layout_mode = 2
+_text_label = NodePath("title")
 
 [node name="margin_container" type="MarginContainer" parent="."]
 layout_mode = 2

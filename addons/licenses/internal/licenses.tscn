@@ -11,7 +11,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g1exn"]
 
-[node name="licenses" type="MarginContainer" node_paths=PackedStringArray("_license_file_edit", "_license_file_load_button", "_set_license_filepath_button")]
+[node name="licenses" type="MarginContainer" node_paths=PackedStringArray("_components_tree", "_component_detail_tree", "_toolbar", "_license_file_edit", "_license_file_load_button", "_set_license_filepath_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,9 +24,9 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 script = ExtResource("3")
-_components_tree_path = NodePath("VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components")
-_component_detail_tree_path = NodePath("VBoxContainer/HSplitContainer/component_detail")
-_toolbar_path = NodePath("VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/toolbar")
+_components_tree = NodePath("VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/components")
+_component_detail_tree = NodePath("VBoxContainer/HSplitContainer/component_detail")
+_toolbar = NodePath("VBoxContainer/HSplitContainer/PanelContainer/VBoxContainer/toolbar")
 _license_file_edit = NodePath("VBoxContainer/license_file_config/edit")
 _license_file_load_button = NodePath("VBoxContainer/license_file_config/file_button")
 _set_license_filepath_button = NodePath("VBoxContainer/license_file_config/set_license_filepath_button")
@@ -41,10 +41,11 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="edit" type="LineEdit" parent="VBoxContainer/license_file_config"]
+auto_translate_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
-auto_translate = false
 localize_numeral_system = false
+auto_translate = false
 placeholder_text = "res://licenses.json"
 
 [node name="set_license_filepath_button" type="Button" parent="VBoxContainer/license_file_config"]

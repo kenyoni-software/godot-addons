@@ -77,8 +77,8 @@ vertical_alignment = 1
 [node name="stretch_mode" type="OptionButton" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-item_count = 4
 selected = 2
+item_count = 4
 popup/item_0/text = "STRETCH_WIDTH_CONTROLS_HEIGHT"
 popup/item_0/id = 0
 popup/item_1/text = "STRETCH_HEIGHT_CONTROLS_WIDTH"
@@ -99,8 +99,8 @@ vertical_alignment = 1
 [node name="hor_align" type="OptionButton" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-item_count = 3
 selected = 1
+item_count = 3
 popup/item_0/text = "ALIGNMENT_BEGIN"
 popup/item_0/id = 0
 popup/item_1/text = "ALIGNMENT_CENTER"
@@ -119,8 +119,8 @@ vertical_alignment = 1
 [node name="ver_align" type="OptionButton" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-item_count = 3
 selected = 1
+item_count = 3
 popup/item_0/text = "ALIGNMENT_BEGIN"
 popup/item_0/id = 0
 popup/item_1/text = "ALIGNMENT_CENTER"

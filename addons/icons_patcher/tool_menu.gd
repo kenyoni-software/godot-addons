@@ -1,7 +1,6 @@
 extends PopupMenu
 
 const Utils := preload("res://addons/icons_patcher/utils.gd")
-const EditorToastNotification := preload("res://addons/icons_patcher/editor_toast_notification.gd")
 
 func _ready() -> void:
     self.add_item("Patch Material Design Icons")
@@ -35,4 +34,4 @@ func _patch_icons_material_design() -> void:
     rx.compile('(" fill="#[a-fA-F0-9]{6})?">')
     var patched_icons: PackedStringArray = Utils.patch_icon_dir(base_path, rx, '" fill="#ffffff">')
     EditorInterface.get_resource_filesystem().reimport_files(patched_icons)
-    EditorToastNotification.notify("[IconsPatcher] Patched " + base_path)
+    print("[IconsPatcher] Patched " + base_path)

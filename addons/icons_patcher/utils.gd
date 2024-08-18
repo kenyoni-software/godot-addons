@@ -20,7 +20,7 @@ static func patch_icon_dir(dir_path: String, rx: RegEx, replacement: String) -> 
     var patched_icons: PackedStringArray = []
     dir.list_dir_begin()
     var elem: String = dir.get_next()
-    while (not elem.is_empty()):
+    while elem != "":
         if dir.current_is_dir():
             patched_icons.append_array(patch_icon_dir(dir_path + "/" + elem, rx, replacement))
         elif elem.get_extension() == "svg":

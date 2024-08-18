@@ -7,31 +7,26 @@ const Icon := preload("res://addons/icon_explorer/internal/scripts/icon.gd")
 const IconDatabase := preload("res://addons/icon_explorer/internal/scripts/database.gd")
 const DetailPanel := preload("res://addons/icon_explorer/internal/ui/detail_panel/detail_panel.gd")
 
-const EditorToastNotification := preload("res://addons/icon_explorer/editor_toast_notification.gd")
 const Options := preload("res://addons/icon_explorer/internal/ui/options/options.gd")
 
 @export var _filter_icon: TextureRect
 @export var _filter: LineEdit
-@export var _filter_options_path: NodePath
-@onready var _filter_options: FilterOptions = self.get_node(self._filter_options_path)
+@export var _filter_options: FilterOptions
 @export var _preview_color: ColorPickerButton
 @export var _preview_size: HSlider
 @export var _icon_list: ItemList
 @export var _options_button: Button
 @export var _options_popup: Window
-@export var _options_path: NodePath
-@onready var _options: Options = self.get_node(self._options_path)
+@export var _options: Options
 
 @export var _progress_bar: ProgressBar
 
-@export var _detail_panel_path: NodePath
-@onready var _detail_panel: DetailPanel = self.get_node(self._detail_panel_path)
+@export var _detail_panel: DetailPanel
 
 @export var _toolbar_panel: PanelContainer
 @export var _preview_options_panel: PanelContainer
 
 var _db: IconDatabase
-var _db_loaded: bool
 
 # timer which starts after filter change and will fire the update
 # is updated on each input again to not update the list on each change but wait a short time
@@ -55,40 +50,42 @@ func _ready() -> void:
     self._filter.text_changed.connect(self._on_filter_changed)
     self._filter.text_submitted.connect(self._on_filter_submitted)
     self._preview_color.popup_closed.connect(self._update_preview_color)
-    self._update_preview_size(ProjectSettings.get_setting("plugins/icon_explorer/preview_size_exp"))
+    self._update_preview_size(ProjectSettings.get_setting("plugins/icon_explorer/preview_size_exp") as float)
     if Engine.is_editor_hint():
         ProjectSettings.settings_changed.connect(
         func () -> void:
-            self._update_preview_size(ProjectSettings.get_setting("plugins/icon_explorer/preview_size_exp"))
+            self._update_preview_size(ProjectSettings.get_setting("plugins/icon_explorer/preview_size_exp") as float)
     )
     self._preview_size.value_changed.connect(self._on_preview_size_changed)
     self._detail_panel.preview_color = self._preview_color.color
 
     self._options_button.icon = self.get_theme_icon(&"Tools", &"EditorIcons")
     self._options_button.pressed.connect(self._on_option_pressed)
-    
-    self._db = IconDatabase.new(self.get_tree())
-    self._db.loaded.connect(self._on_icon_database_loaded)
-    self._db.collection_installed.connect(self._on_database_changed)
-    self._db.collection_removed.connect(self._on_database_changed)
-    if Engine.is_editor_hint():
-        self._db.collection_installed.connect(self._on_collection_changed.bind(true))
-        self._db.collection_removed.connect(self._on_collection_changed.bind(false))
+    self.focus_entered.connect(self._on_focus_entered)
 
-    self._options.db = self._db
-
-    if !Engine.is_editor_hint() || (Engine.is_editor_hint() && ProjectSettings.get_setting("plugins/icon_explorer/load_on_startup", false)):
-        self.load_db()
+    self.set_process(false)
+    if !Engine.is_editor_hint():
+        self.set_icon_db(IconDatabase.new(self.get_tree()))
+        self._db.load()
 
 func _process(_delta: float) -> void:
-    self._progress_bar.value = self._db.load_progress()
+    var progress: float = self._db.load_progress()
+    self._progress_bar.indeterminate = progress <= 0.0
+    self._progress_bar.value = progress
 
-func load_db() -> void:
-    if self._db_loaded:
-        return
-    self._db_loaded = true
-    self.set_process(true)
-    self._db.load()
+func set_icon_db(db: IconDatabase) -> void:
+    if self._db != null:
+        self._db.load_started.disconnect(self._on_icon_database_load_started)
+        self._db.load_finished.disconnect(self._on_icon_database_load_finished)
+        self._db.collection_installed.disconnect(self._on_database_changed)
+        self._db.collection_removed.disconnect(self._on_database_changed)
+
+    self._db = db
+    self._db.load_started.connect(self._on_icon_database_load_started)
+    self._db.load_finished.connect(self._on_icon_database_load_finished)
+    self._db.collection_installed.connect(self._on_database_changed)
+    self._db.collection_removed.connect(self._on_database_changed)
+    self._options.set_db(self._db)
 
 func update() -> void:
     var filter: String = self._filter.text.to_lower()
@@ -112,7 +109,10 @@ func update() -> void:
         var idx: int = self._icon_list.add_item(icon.name, icon.texture)
         self._icon_list.set_item_tooltip(idx, icon.collection.name)
         self._icon_list.set_item_metadata(idx, icon)
-        self._icon_list.set_item_icon_modulate(idx, color)
+        if icon.colorable:
+            self._icon_list.set_item_icon_modulate(idx, color)
+        else:
+            self._icon_list.set_item_icon_modulate(idx, Color.WHITE)
     self._icon_list.get_v_scroll_bar().value = 0
 
 func _clear() -> void:
@@ -123,7 +123,10 @@ func _update_preview_color() -> void:
     var color: Color = self._preview_color.color
     self._detail_panel.preview_color = color
     for idx: int in range(self._icon_list.item_count):
-        self._icon_list.set_item_icon_modulate(idx, color)
+        if (self._icon_list.get_item_metadata(idx) as Icon).colorable:
+            self._icon_list.set_item_icon_modulate(idx, color)
+        else:
+            self._icon_list.set_item_icon_modulate(idx, Color.WHITE)
 
 func _on_preview_size_changed(expo: float) -> void:
     self._update_preview_size(expo)
@@ -146,7 +149,10 @@ func _on_database_changed(_id: int, status: Error) -> void:
     if status == Error.OK:
         self.update()
 
-func _on_icon_database_loaded() -> void:
+func _on_icon_database_load_started() -> void:
+    self.set_process(true)
+
+func _on_icon_database_load_finished() -> void:
     self.set_process(false)
     self._progress_bar.value = 100.0
     self._progress_bar.visible = false
@@ -161,7 +167,6 @@ func _on_icon_database_loaded() -> void:
         filter_popup.set_item_checked(idx, true)
     self._filter_options.disabled = filter_popup.item_count == 0
     self.update()
-    self._options.update()
 
 func _on_icon_selected(idx: int) -> void:
     self._detail_panel.display(self._icon_list.get_item_metadata(idx) as Icon)
@@ -175,16 +180,6 @@ func _on_filter_submitted(_text: String) -> void:
 func _on_option_pressed() -> void:
     self._options_popup.popup_centered_ratio(0.35)
 
-func _on_collection_changed(id: int, status: Error, is_installation: bool):
-    var msg: String = "[Icon Explorer] '" + self._db.get_collection(id).name + "' "
-    if is_installation:
-        if status == Error.OK:
-            msg += " successfully installed."
-        else:
-            msg += " installation failed."
-    else:
-        if status == Error.OK:
-            msg += " successfully removed."
-        else:
-            msg += " removing failed."
-    EditorToastNotification.notify(msg)
+func _on_focus_entered() -> void:
+    self._filter.grab_focus()
+    self._filter.select_all()

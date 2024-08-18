@@ -1,12 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3s1t8hiu6xll"]
+[gd_scene load_steps=6 format=3 uid="uid://c3s1t8hiu6xll"]
 
 [ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/detail_panel.gd" id="1_2iwjs"]
-[ext_resource type="PackedScene" uid="uid://bf2b6v68rufpn" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/material_design.tscn" id="2_ea6yg"]
 [ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/toolbar.gd" id="2_rtuoh"]
-[ext_resource type="PackedScene" uid="uid://3hl6t03xllbp" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/simple_icons.tscn" id="4_em72e"]
-[ext_resource type="PackedScene" uid="uid://dtcstt4vepa17" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/bootstrap.tscn" id="5_mxg1a"]
-[ext_resource type="PackedScene" uid="uid://lk45nf0tqm80" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/tabler.tscn" id="7_2jw0k"]
-[ext_resource type="PackedScene" uid="uid://wqlpitsynlfk" path="res://addons/icon_explorer/internal/ui/detail_panel/panels/font_awesome.tscn" id="8_1041k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1g3s"]
 
@@ -20,7 +15,7 @@ border_color = Color(0.439216, 0.729412, 0.980392, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_brt2g"]
 
-[node name="detail_panel" type="PanelContainer" node_paths=PackedStringArray("_detail_container", "_hint_container", "_detail_tabs", "_icon", "_preview_background", "_preview_panel", "_name", "_collection", "_size", "_toolbar_panel")]
+[node name="detail_panel" type="PanelContainer" node_paths=PackedStringArray("_detail_container", "_hint_container", "_toolbar", "_detail_tabs", "_icon", "_preview_background", "_preview_panel", "_name", "_collection", "_size", "_toolbar_panel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,7 +27,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_p1g3s")
 script = ExtResource("1_2iwjs")
 _detail_container = NodePath("detail_container")
 _hint_container = NodePath("hint_container")
-_toolbar_path = NodePath("detail_container/toolbar_panel/toolbar")
+_toolbar = NodePath("detail_container/toolbar_panel/toolbar")
 _detail_tabs = NodePath("detail_container/v_box_container/scroll_container/detail_tabs")
 _icon = NodePath("detail_container/v_box_container/preview/icon")
 _preview_background = NodePath("detail_container/v_box_container/preview/background")
@@ -117,27 +112,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_brt2g")
-current_tab = 2
+current_tab = 0
 tabs_visible = false
-
-[node name="bootstrap" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("5_mxg1a")]
-visible = false
-layout_mode = 2
-
-[node name="font_awesome" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("8_1041k")]
-visible = false
-layout_mode = 2
-
-[node name="material_design" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("2_ea6yg")]
-layout_mode = 2
-
-[node name="simple_icons" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("4_em72e")]
-visible = false
-layout_mode = 2
-
-[node name="tabler" parent="detail_container/v_box_container/scroll_container/detail_tabs" instance=ExtResource("7_2jw0k")]
-visible = false
-layout_mode = 2
 
 [node name="hint_container" type="CenterContainer" parent="."]
 visible = false
