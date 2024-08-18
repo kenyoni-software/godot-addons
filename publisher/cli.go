@@ -86,7 +86,7 @@ func newCli() *cli {
 	gdAssetCmd.MarkFlagRequired("password")
 	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Category, "category", "c", "", "Asset category.")
 	gdAssetCmd.MarkFlagRequired("category")
-	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Host, "host", "host", "https://godotengine.org/asset-library/api", "Asset Library Host URL.")
+	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Host, "host", "h", "https://godotengine.org/asset-library/api", "Asset Library Host URL.")
 
 	zipCmd := &cobra.Command{
 		Use:   "zip",
