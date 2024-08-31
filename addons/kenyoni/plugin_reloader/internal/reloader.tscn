@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dryoyuj4vl0l5"]
+
+[ext_resource type="Script" path="res://addons/kenyoni/plugin_reloader/internal/reloader.gd" id="1_kd7gg"]
+
+[node name="Reloader" type="MarginContainer" node_paths=PackedStringArray("_reload_button", "_option_button")]
+offset_right = 76.0
+offset_bottom = 24.0
+script = ExtResource("1_kd7gg")
+_reload_button = NodePath("HBoxContainer/reload_button")
+_option_button = NodePath("HBoxContainer/OptionButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="reload_button" type="CheckButton" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
