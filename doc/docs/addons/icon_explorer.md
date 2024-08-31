@@ -2,9 +2,11 @@
 
 Browse and save icons from popular icon collections.
 
+You will find the Icon Explorer under `Project -> Tools -> Icon Explorer...` or directly in the main screen.
+
 Install or update them via the options menu in the right upper corner. This can take several minutes.
 
-You can remove the main screen button in the options.
+You can remove the main screen button in the options, the editor has to be restarted to take it into effect.
 
 **Available collections**
 

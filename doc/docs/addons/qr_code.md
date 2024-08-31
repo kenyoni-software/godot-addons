@@ -1,7 +1,5 @@
 # QR Code
 
-{{ kny:badge-download "text" }}
-
 QR Code generation either with the included `QRCodeRect` node or use the encoding result of the `QRCode` class.
 
 ## Compatibility
