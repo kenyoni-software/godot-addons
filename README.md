@@ -35,7 +35,7 @@ If you import any plugin or open a Godot project for the first time, the plugins
   Manage license and copyright for third party graphics, software or libraries.
 - [Logging](https://kenyoni-software.github.io/godot-addons/addons/glogging)  
   Simple logger.
-- [Plugin Reloader](https://kenyoni-software.github.io/godot-addons/addons/plugin_reloader)
+- [Plugin Reloader](https://kenyoni-software.github.io/godot-addons/addons/plugin_reloader)  
   Enable or disable plugins from within the editor main screen.  
 - [QR Code](https://kenyoni-software.github.io/godot-addons/addons/qr_code)  
   QRCodeRect and QR Code generation.
