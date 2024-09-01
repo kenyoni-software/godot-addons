@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/pelletier/go-toml/v2"
 )
@@ -39,8 +40,15 @@ func NewAddon(id string, projectPath string) *Addon {
 	}
 }
 
+// Id contains the namespace directory and the addon directory name like "kenyoni/addon_name"
 func (addon *Addon) Id() string {
 	return addon.addonId
+}
+
+// IdName is only the addon directory name like "addon_name"
+func (addon *Addon) IdName() string {
+	splitted := strings.Split(addon.addonId, "/")
+	return splitted[len(splitted)-1]
 }
 
 func (addon *Addon) ProjectPath() string {
@@ -74,7 +82,7 @@ func (addon *Addon) Zip(outputFile string) error {
 	if err != nil {
 		return err
 	}
-	exampleDir := filepath.Join(addon.ProjectPath(), "examples", addon.Id())
+	exampleDir := filepath.Join(addon.ProjectPath(), "examples", addon.IdName())
 	// zip example directory only if it exists
 	if _, err := os.Stat(exampleDir); err == nil {
 		err = ZipDir(zw, exampleDir, filepath.Join("examples", addon.Id()))
