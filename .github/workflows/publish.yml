@@ -15,51 +15,67 @@ jobs:
         config:
           - {
             id: "aspect_ratio_resize_container",
+            id-name: "aspect_ratio_resize_container",
             name: "AspectRatioResizeContainer",
             asset-id: "2089",
           }
           - {
             id: "custom_theme_overrides",
+            id-name: "custom_theme_overrides",
             name: "Custom Theme Overrides",
             asset-id: "2091",
           }
           - {
             id: "git_sha_project_setting",
+            id-name: "git_sha_project_setting",
             name: "Git SHA Project Setting",
             asset-id: "1979",
           }
           - {
             id: "glogging",
+            id-name: "glogging",
             name: "GLogging",
             asset-id: "no-deploy",
           }
           - {
             id: "hide_private_properties",
+            id-name: "hide_private_properties",
             name: "Hide Private Properties",
             asset-id: "1989",
           }
           - {
             id: "icon_explorer",
+            id-name: "icon_explorer",
             name: "Icon Explorer",
             asset-id: "2511",
           }
           - {
             id: "icons_patcher",
+            id-name: "icons_patcher",
             name: "Icons Patcher",
             asset-id: "1980",
           }
           - {
             id: "licenses",
+            id-name: "licenses",
             name: "License Manager",
             asset-id: "1969",
           }
           - {
+            id: "kenyoni/plugin_reloader",
+            id-name: "plugin_reloader",
+            name: "Plugin Reloader",
+            asset-id: "no-deploy",
+          }
+          - {
             id: "qr_code",
+            id-name: "qr_code",
             name: "QR Code",
             asset-id: "2090",
           }
           - {
             id: "texture_button_colored",
+            id-name: "texture_button_colored",
             name: "TextureButtonColored",
             asset-id: "2092",
           }
@@ -92,20 +108,20 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.config.name }}
-          path: archives/${{ matrix.config.id }}-*.zip
+          path: archives/${{ matrix.config.id-name }}-*.zip
 
       - uses: mukunku/tag-exists-action@v1.2.0
         id: checkTag
         with:
-          tag: ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }}
+          tag: ${{ matrix.config.id-name }}-${{ steps.prepare-artifacts.outputs.version }}
 
       - name: Prepare Release
         if: ${{ steps.checkTag.outputs.exists == 'false' }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git tag ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }}
-          git push origin tag ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }}
+          git tag ${{ matrix.config.id-name }}-${{ steps.prepare-artifacts.outputs.version }}
+          git push origin tag ${{ matrix.config.id-name }}-${{ steps.prepare-artifacts.outputs.version }}
 
       # wait 5s that the pushed tag is available in the next step, sometimes the next step saw only the local tag
       - name: Wait 5s
@@ -117,7 +133,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh release create ${{ matrix.config.id }}-${{ steps.prepare-artifacts.outputs.version }} ./archives/* --title "${{ matrix.config.name }} ${{ steps.prepare-artifacts.outputs.version }}" --notes "${{ steps.prepare-artifacts.outputs.notes }}"
+          gh release create ${{ matrix.config.id-name }}-${{ steps.prepare-artifacts.outputs.version }} ./archives/* --title "${{ matrix.config.name }} ${{ steps.prepare-artifacts.outputs.version }}" --notes "${{ steps.prepare-artifacts.outputs.notes }}"
 
       #- name: Deploy to Godot Asset Library
       #  if: ${{ matrix.config.asset-id != 'no-deploy' }}
