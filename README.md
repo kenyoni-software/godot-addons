@@ -1,7 +1,8 @@
 # Godot Addons
 
-![maintained](https://img.shields.io/badge/status-maintained-brightgreen.svg)
+![maintained](https://img.shields.io/badge/Status-maintained-brightgreen.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/IceflowRE/go-multiprogressbar/blob/master/LICENSE.md)
+[![documentation](https://img.shields.io/badge/Documentation-D1D100.svg)](https://kenyoni-software.github.io/godot-addons)
 
 Download [here](https://github.com/kenyoni-software/godot-addons/addons/releases/tag/latest).
 

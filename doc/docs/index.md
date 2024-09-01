@@ -66,6 +66,12 @@ Find the releases [here](https://github.com/kenyoni-software/godot-addons/releas
 
     Manage license and copyright for third party graphics, software or libraries.
 
+-   [Plugin Reloader](addons/plugin_reloader.md){ .md-button .center-lg-button }
+
+    ---
+
+    Enable or disable plugins from within the editor main screen.
+
 -   [QR Code](addons/qr_code.md){ .md-button .center-lg-button }
 
     ---
