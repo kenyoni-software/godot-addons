@@ -4,7 +4,7 @@ const IconSimpleIcons := preload("res://addons/icon_explorer/internal/ext/simple
 const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/simple-icons/simple-icons/archive/master.zip"
-var _TITLE_TO_SLUG_REPLACEMENTS: Dictionary = {
+var _TITLE_TO_SLUG_REPLACEMENTS: Dictionary[String, String] = {
     "+": "plus",
     ".": "dot",
     "&": "and",

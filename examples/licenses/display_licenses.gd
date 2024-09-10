@@ -37,7 +37,7 @@ func _populate_tree() -> void:
 
     # populate the tree node
     # create a category cache to easily access already created category items
-    var category_cache: Dictionary = {}
+    var category_cache: Dictionary[String, TreeItem] = {}
     var root: TreeItem = self._tree.create_item(null)
     category_cache[""] = root
 
@@ -50,7 +50,7 @@ func _populate_tree() -> void:
         item.set_meta("idx", idx)
 
 ## create a category item in the tree
-func _create_category_item(category_cache: Dictionary, category: String, root: TreeItem) -> TreeItem:
+func _create_category_item(category_cache: Dictionary[String, TreeItem], category: String, root: TreeItem) -> TreeItem:
     if category in category_cache:
         return category_cache[category]
     var category_item: TreeItem
