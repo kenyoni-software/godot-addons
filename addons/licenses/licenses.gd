@@ -69,7 +69,7 @@ static func save(components: Array[Component], file_path: String) -> int:
     var file: FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
     if file == null:
         return FileAccess.get_open_error()
-    var raw: Array = []
+    var raw: Array[Dictionary] = []
     for component: Component in components:
         raw.append(component.serialize())
     file.store_line(JSON.stringify({"components": raw}))

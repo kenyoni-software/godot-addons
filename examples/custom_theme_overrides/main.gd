@@ -12,7 +12,7 @@ var my_font_size: int
 var my_icon: Texture2D
 var my_style_box: StyleBox
 
-var _theme_overrides = CustomThemeOverrides.new([
+var _theme_overrides: CustomThemeOverrides = CustomThemeOverrides.new([
     ["my_font_color", Theme.DATA_TYPE_COLOR],
     ["my_border_size", Theme.DATA_TYPE_CONSTANT],
     ["my_font", Theme.DATA_TYPE_FONT],

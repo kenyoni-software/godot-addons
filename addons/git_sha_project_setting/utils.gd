@@ -49,7 +49,7 @@ static func get_git_sha() -> GitResult:
 
     var rx: RegEx = RegEx.new()
     rx.compile('^ref:\\s(.*)$')
-    var git_head = rx.search(text)
+    var git_head: RegExMatch = rx.search(text)
     if git_head == null:
         return GitResult.new("", "could not parse git head file")
     file = FileAccess.open("res://.git/" + git_head.get_string(1), FileAccess.READ)

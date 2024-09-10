@@ -68,7 +68,7 @@ class Logger:
         return "CRITICAL"
 
     func _log(level: int, module: String, message: Variant, values: Array[Variant] = []) -> void:
-        var unix_time = Time.get_unix_time_from_system()
+        var unix_time: float = Time.get_unix_time_from_system()
         var time: Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
         time.merge(Time.get_time_dict_from_unix_time(unix_time))
         time["millisecond"] = int(str(unix_time).pad_decimals(3).split(".", true, 1)[1])

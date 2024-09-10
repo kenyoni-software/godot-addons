@@ -351,7 +351,7 @@ const _ALPHANUMERIC_CHARACTERS: Dictionary = {
 
 ## https://www.thonky.com/qr-code-tutorial/error-correction-table
 ## [total data codewords, EC codewords per block, number of blocks in group 1, number of data codewords in group 1 blocks, number of blocks in group 2, number of data codewords in group 2 blocks]
-const _ERROR_CORRECTION: Array = [
+const _ERROR_CORRECTION: Array[Dictionary] = [
     # 1
     {
         ErrorCorrection.LOW: [19, 7, 1, 19, 0, 0],
@@ -635,7 +635,7 @@ const _ERROR_CORRECTION: Array = [
 ]
 
 ## sorted by version
-const _ALIGNMENT_PATTERN_POSITIONS: Array = [
+const _ALIGNMENT_PATTERN_POSITIONS: Array[Array] = [
     [],
     [6, 18],
     [6, 22],
@@ -679,7 +679,7 @@ const _ALIGNMENT_PATTERN_POSITIONS: Array = [
 ]
 
 ## remainder bits after structured data bits
-const _REMAINDER_BITS: Array = [ 0, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4,4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0 ]
+const _REMAINDER_BITS: Array[int] = [ 0, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4,4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0 ]
 
 static var _number_rx: RegEx = RegEx.create_from_string("[^\\d]*")
 static var _alphanumeric_rx: RegEx = RegEx.create_from_string("[^0-9A-Z $%*+\\-.\\/:]*")
@@ -772,7 +772,6 @@ func set_mask_pattern(new_mask_pattern: int) -> void:
 ## return the data which was put in
 func get_input_data() -> Variant:
     return _input_data
-
 
 ## get module count of one axis
 func get_module_count() -> int:
@@ -960,7 +959,7 @@ func encode() -> PackedByteArray:
         self.version = self.calc_min_version()
 
     var data_stream: BitStream = self._encode_data()
-    var err_correction: Array = self._error_correction(data_stream)
+    var err_correction: Array[PackedByteArray] = self._error_correction(data_stream)
     var structured_data: BitStream = self._structure_data(data_stream, err_correction)
     var qr_data: PackedByteArray = self._place_modules(structured_data)
     qr_data = self._mask_qr(qr_data)

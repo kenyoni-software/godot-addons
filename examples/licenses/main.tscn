@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://examples/licenses/display_licenses.gd" id="1_bba6e"]
 [ext_resource type="Script" path="res://examples/licenses/license_container.gd" id="2_0yh67"]
 
-[node name="main" type="PanelContainer" node_paths=PackedStringArray("_tree", "_item_list", "_license_container", "_example_selector")]
+[node name="main" type="PanelContainer" node_paths=PackedStringArray("_tree", "_item_list", "_license_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,7 +13,6 @@ script = ExtResource("1_bba6e")
 _tree = NodePath("MarginContainer/HBoxContainer/TabContainer/Tree")
 _item_list = NodePath("MarginContainer/HBoxContainer/TabContainer/ItemList")
 _license_container = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer")
-_example_selector = NodePath("MarginContainer/HBoxContainer/TabContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

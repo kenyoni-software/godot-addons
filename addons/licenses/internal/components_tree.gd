@@ -136,7 +136,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
     var to_item: TreeItem = self.get_item_at_position(at_position)
-    var category = to_item.get_meta("category")
+    var category: String = to_item.get_meta("category")
     var cur_component: Component = self._get_selected_component()
     if cur_component.category == category:
         return

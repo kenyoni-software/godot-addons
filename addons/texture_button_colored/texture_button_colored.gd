@@ -12,7 +12,7 @@ var icon_disabled_color: Color
 
 var _is_hovered: bool = false
 
-var _theme_overrides = CustomThemeOverrides.new([
+var _theme_overrides: CustomThemeOverrides = CustomThemeOverrides.new([
     ["icon_normal_color", Theme.DATA_TYPE_COLOR],
     ["icon_pressed_color", Theme.DATA_TYPE_COLOR],
     ["icon_hover_color", Theme.DATA_TYPE_COLOR],
