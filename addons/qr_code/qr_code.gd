@@ -301,7 +301,7 @@ const _DATA_CAPACITY: Array[Dictionary] = [
     },
 ]
 
-const _ALPHANUMERIC_CHARACTERS: Dictionary = {
+const _ALPHANUMERIC_CHARACTERS: Dictionary[String, int] = {
     "0" : 0,
     "1" : 1,
     "2" : 2,

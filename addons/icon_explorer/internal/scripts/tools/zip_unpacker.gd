@@ -72,7 +72,7 @@ func unpack_mt(thread_count: int) -> bool:
     return true
 
 func _create_directories(paths: PackedStringArray) -> bool:
-    var created: Dictionary = {}
+    var created: Dictionary[String, Object] = {}
     for path: String in paths:
         var dir_path: String = path.get_base_dir()
         if (!self._has_filter() || self._is_in_filter(path)) && !(dir_path in created):
