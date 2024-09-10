@@ -60,7 +60,7 @@ class License:
         return self
 
     func duplicate():
-        var dup = new()
+        var dup: License = new()
         dup.name = self.name
         dup.identifier = self.identifier
         dup.text = self.text
@@ -90,7 +90,7 @@ var web: String
 var paths: PackedStringArray = []
 var licenses: Array[License] = []
 
-func _get_property_list() -> Array:
+func _get_property_list() -> Array[Dictionary]:
     return [
         {
             "name": "paths",

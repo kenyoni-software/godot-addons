@@ -37,7 +37,7 @@ var auto_mask_pattern: bool = true:
     set = set_auto_mask_pattern,
     get = get_auto_mask_pattern
 ## Used mask pattern.
-var mask_pattern = 0:
+var mask_pattern: int = 0:
     set = set_mask_pattern,
     get = get_mask_pattern
 var light_module_color: Color = Color.WHITE:

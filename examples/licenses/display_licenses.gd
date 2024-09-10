@@ -12,8 +12,6 @@ const LicenseContainer := preload("res://examples/licenses/license_container.gd"
 ## Container to display the license details.
 @export var _license_container: LicenseContainer
 
-@export var _example_selector: TabContainer
-
 var licenses: Array[Component] = []
 
 func _ready() -> void:

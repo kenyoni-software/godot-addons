@@ -69,7 +69,7 @@ func _on_item_edited(item: TreeItem = null) -> void:
         item = self.get_edited()
     var handler = item.get_meta("handler")
     handler.edited()
-    var parent = item.get_parent()
+    var parent: TreeItem = item.get_parent()
     if parent != null:
         parent.get_meta("handler").child_edited(item)
 

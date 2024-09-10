@@ -17,7 +17,7 @@ func _parse_property(object: Object, type: Variant.Type, name: String, hint_type
 func _has_property(object: Object, propertyName: String) -> bool:
     # Note: Checking if the property exists using the 'in' keyword also triggers 
     # the warning in 'core/config/project_settings.cpp:_get' (v4.2.1)
-    for property in object.get_property_list():
+    for property: Dictionary in object.get_property_list():
         if property.name == propertyName:
             return true
     return false
