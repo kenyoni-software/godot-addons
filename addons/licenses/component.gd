@@ -106,7 +106,7 @@ func _get_property_list() -> Array:
         {
             "name": "licenses",
             "type": TYPE_ARRAY,
-            "constructor": License.new,
+            "constructor": func() -> License: return License.new(),
         },
     ]
 
