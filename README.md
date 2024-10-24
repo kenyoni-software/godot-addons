@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/IceflowRE/go-multiprogressbar/blob/master/LICENSE.md)
 [![documentation](https://img.shields.io/badge/Documentation-D1D100.svg)](https://kenyoni-software.github.io/godot-addons)
 
-Download [here](https://github.com/kenyoni-software/godot-addons/addons/releases/tag/latest).
+Download [here](https://github.com/kenyoni-software/godot-addons/releases/tag/latest).
 
 You can find a documentation with examples and detailed information [here](https://kenyoni-software.github.io/godot-addons).
 
