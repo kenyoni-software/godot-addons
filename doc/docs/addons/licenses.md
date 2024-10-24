@@ -149,6 +149,10 @@ License class.
 
 ## Changelog
 
+### 1.8.1
+
+- Fix crash when running a project exported in release mode
+
 ### 1.8.0
 
 - Require Godot 4.3
