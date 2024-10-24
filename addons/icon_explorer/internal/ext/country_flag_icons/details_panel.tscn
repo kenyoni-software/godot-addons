@@ -1,20 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://lk45nf0tqm80"]
+[gd_scene load_steps=3 format=3 uid="uid://v3us6pm4mc4w"]
 
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ext/country_flag_icons/details_panel.gd" id="1_te45c"]
-[ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="2_u3ntg"]
+[ext_resource type="Script" path="res://addons/icon_explorer/internal/ext/country_flag_icons/details_panel.gd" id="1_33at2"]
+[ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="2_m2v8w"]
 
 [node name="country_flag_icons" type="VBoxContainer" node_paths=PackedStringArray("_country_code")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 136.0
 grow_horizontal = 2
-script = ExtResource("1_te45c")
+script = ExtResource("1_33at2")
 _country_code = NodePath("country_code")
 
-[node name="country_code" parent="." node_paths=PackedStringArray("_label", "_button", "_title") instance=ExtResource("2_u3ntg")]
+[node name="country_code" parent="." instance=ExtResource("2_m2v8w")]
 visible = false
 layout_mode = 2
-_label = NodePath("margin_container/h_box_container/label")
-_button = NodePath("margin_container/h_box_container/button")
 title = "Country Code"
-_title = NodePath("title_panel")
