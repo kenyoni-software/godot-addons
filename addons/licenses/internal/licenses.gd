@@ -45,22 +45,22 @@ func _ready() -> void:
     self._toolbar.add_component.connect(self._on_toolbar_add_component)
     self._toolbar.show_engine_components.connect(self._on_toolbar_show_engine_components)
 
-    self.reload()
+    self._update_set_license_filepath_button()
     self._li.components_changed.connect(self._on_components_changed)
 
 func reload() -> void:
     self._update_set_license_filepath_button()
-    var res: Licenses.LoadResult = Licenses.load(self._license_file_edit.text)
+    var res: Licenses.LoadResult = self._li.load_licenses(self._license_file_edit.text)
     if res.err_msg == "":
         self._license_file_edit.right_icon = null
         self._license_file_edit.tooltip_text = ""
     else:
         self._license_file_edit.right_icon = self.get_theme_icon(&"NodeWarning", &"EditorIcons")
         self._license_file_edit.tooltip_text = res.err_msg
-    
-    self._li.set_components(res.components)
-    self._li.sort_custom(Licenses.compare_components_ascending)
-    self._li.emit_components_changed()
+
+func show_component(comp: Component) -> void:
+    self._components_tree.select_component(comp)
+    self._component_detail_tree.set_component(comp)
 
 func _update_set_license_filepath_button() -> void:
     if Licenses.get_license_data_filepath() == self._license_file_edit.text:

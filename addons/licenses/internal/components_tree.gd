@@ -71,6 +71,15 @@ func reload(scroll_to: Component = null) -> void:
             self.scroll_to_item(item)
             item.select(0)
 
+func select_component(comp: Component) -> void:
+    var tree_item: TreeItem = self.get_root().get_next_in_tree()
+    while tree_item != null:
+        if tree_item.has_meta("idx") && comp == self._li.get_at(tree_item.get_meta("idx")):
+            tree_item.select(0)
+            self.scroll_to_item(tree_item)
+            break
+        tree_item = tree_item.get_next_in_tree()
+
 func _create_item_menu() -> void:
     self._item_menu = PopupMenu.new()
     self._item_menu.name = "item_menu"

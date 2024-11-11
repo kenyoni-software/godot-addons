@@ -1,12 +1,35 @@
 extends Node
 
+const LicensesDialogScene: PackedScene = preload("res://addons/licenses/internal/licenses_dialog.tscn")
 const Licenses := preload("res://addons/licenses/licenses.gd")
 const Component := preload("res://addons/licenses/component.gd")
+const LicensesDialog := preload("res://addons/licenses/internal/licenses_dialog.gd")
 
 signal components_changed()
 signal cfg_path_changed(new_path: String)
 
+var _licenses_dialog: LicensesDialog
+
 var _components: Array[Component] = []
+
+func _ready() -> void:
+    self._licenses_dialog = LicensesDialogScene.instantiate()
+    self.add_child(self._licenses_dialog)
+
+func show_popup(show_comp: Component = null) -> void:
+    if show_comp != null:
+        self._licenses_dialog.licenses.show_component(show_comp)
+    if self._licenses_dialog.visible:
+        self._licenses_dialog.grab_focus()
+    else:
+        self._licenses_dialog.popup_centered_ratio(0.4)
+
+func load_licenses(license_path: String) -> Licenses.LoadResult:
+    var res: Licenses.LoadResult = Licenses.load(license_path)
+    self._components = res.components
+    self.sort_custom(Licenses.compare_components_ascending)
+    self.emit_components_changed()
+    return res
 
 func emit_components_changed() -> void:
     self.components_changed.emit()
@@ -18,9 +41,6 @@ func set_cfg_path(new_path: String) -> void:
 func add_component(component: Component) -> void:
     self._components.append(component)
     self._components.sort_custom(Licenses.compare_components_ascending)
-
-func set_components(components_: Array[Component]) -> void:
-    self._components = components_
 
 func components() -> Array[Component]:
     return self._components
@@ -42,6 +62,15 @@ func sort_custom(fn: Callable) -> void:
 
 func count() -> int:
     return len(self._components)
+
+func get_components_in_path(path: String) -> Array[Component]:
+    var res: Array[Component] = []
+    for comp: Component in self._components:
+        for idx: int in range(comp.paths.size()):
+            if comp.paths[idx].begins_with(path):
+                res.append(comp)
+                break
+    return res
 
 static func create_interface() -> void:
     var li: Node = new()
