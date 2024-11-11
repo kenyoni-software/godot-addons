@@ -12,10 +12,12 @@ You can find a documentation with examples and detailed information [here](https
 
 [MIT License](./LICENSE.md)
 
-## Note about Godot 4.3. or lower
+---
 
-If you import any plugin or open a Godot project for the first time, the plugins will throw errors. To ensure correct operation, reload the project and the errors are gone.
-*Background: most plugins are using `preload`, but on first import there is nothing which can be preloaded.*
+> [!NOTE]  
+> **Godot 4.3. or lower**  
+> If you import any plugin or open a Godot project for the first time, the plugins will throw errors. To ensure correct operation, reload the project and the errors are gone.  
+> *Background: most plugins are using `preload`, but on first import there is nothing which can be preloaded.*
 
 ## Addons
 
