@@ -42,3 +42,15 @@ func sort_custom(fn: Callable) -> void:
 
 func count() -> int:
     return len(self._components)
+
+static func create_interface() -> void:
+    var li: Node = new()
+    li.name = "kenyoni_licenses_interface"
+    # EditorInterface.get_base_control() is not used to avoid dependency on Godot editor
+    (Engine.get_main_loop() as SceneTree).get_root().add_child(li)
+
+static func get_interface():
+    return (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_licenses_interface")
+
+static func remove_interface() -> void:
+    (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_licenses_interface").queue_free()

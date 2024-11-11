@@ -12,22 +12,18 @@ var _export_plugin: ExportPlugin
 var _licenses_dialog: LicensesDialog
 var _file_watcher: FileSystemWatcher
 
-var _li: LicensesInterface
-
 func _get_plugin_name() -> String:
     return "Licenses"
 
 func _enter_tree() -> void:
     set_project_setting(Licenses.DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
-    self._li = LicensesInterface.new()
-    self.add_child(self._li)
-    self._file_watcher = FileSystemWatcher.new(self._li)
+    LicensesInterface.create_interface()
+    self._file_watcher = FileSystemWatcher.new()
 
     self._export_plugin = ExportPlugin.new()
     self.add_export_plugin(self._export_plugin)
 
     self._licenses_dialog = LicensesDialogScene.instantiate()
-    self._licenses_dialog.set_licenses_interface(self._li)
     EditorInterface.get_base_control().add_child(self._licenses_dialog)
     self.add_tool_menu_item(self._get_plugin_name() + "...", self._show_popup)
 
@@ -35,7 +31,7 @@ func _exit_tree() -> void:
     self.remove_tool_menu_item(self._get_plugin_name() + "...")
     self._licenses_dialog.queue_free()
     self.remove_export_plugin(self._export_plugin)
-    self._li.queue_free()
+    LicensesInterface.remove_interface()
 
 func _show_popup() -> void:
     if _licenses_dialog.visible:

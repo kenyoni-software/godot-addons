@@ -32,13 +32,11 @@ func set_show_readonly_components(show_: bool) -> void:
         else:
             self.reload(sel_comp)
 
-func set_licenses_interface(li: LicensesInterface) -> void:
-    self._li = li
-    self.reload()
-
 func _ready() -> void:
     self._create_item_menu()
     self.gui_input.connect(self._on_gui_input)
+    self._li = LicensesInterface.get_interface()
+    self.reload()
 
 func reload(scroll_to: Component = null) -> void:
     self.clear()

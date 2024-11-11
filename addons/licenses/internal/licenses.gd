@@ -32,12 +32,9 @@ func _ready() -> void:
     self._license_file_edit.text_submitted.connect(self._on_data_file_edit_changed)
     self._license_file_edit.text = Licenses.get_license_data_filepath()
 
-func set_licenses_interface(li: LicensesInterface) -> void:
-    self._li = li
-
+    self._li = LicensesInterface.get_interface()
     self._li.cfg_path_changed.connect(self._on_cfg_file_changed)
 
-    self._components_tree.set_licenses_interface(self._li)
     self._components_tree.component_selected.connect(self._on_component_tree_selected)
     self._components_tree.component_remove.connect(self._on_component_tree_remove)
     self._components_tree.component_add.connect(self._on_component_tree_add)

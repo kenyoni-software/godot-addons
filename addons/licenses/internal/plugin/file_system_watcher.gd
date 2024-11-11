@@ -6,14 +6,13 @@ const Licenses := preload("res://addons/licenses/licenses.gd")
 
 var _li: LicensesInterface
 
-func _init(li: LicensesInterface):
-    self._li = li
+func _init():
+    self._li = LicensesInterface.get_interface()
     var fs_dock: FileSystemDock = EditorInterface.get_file_system_dock()
     fs_dock.files_moved.connect(self._on_file_moved)
     fs_dock.folder_moved.connect(self._on_folder_moved)
 
 func _on_file_moved(old_file: String, new_file: String) -> void:
-    print(old_file, new_file)
     if old_file == Licenses.get_license_data_filepath():
         self._li.set_cfg_path(new_file)
         return
