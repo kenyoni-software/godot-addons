@@ -2,7 +2,7 @@
 extends Tree
 
 const Component := preload("res://addons/licenses/component.gd")
-const ComponentsContainer := preload("res://addons/licenses/internal/components_container.gd")
+const LicensesInterface := preload("res://addons/licenses/internal/licenses_interface.gd")
 const Licenses := preload("res://addons/licenses/licenses.gd")
 
 const _BTN_ID_REMOVE: int = 2
@@ -13,7 +13,7 @@ signal component_add(comp: Component)
 
 var show_readonly_components: bool = false:
     set = set_show_readonly_components
-var _components: ComponentsContainer
+var _li: LicensesInterface
 ## cached value
 var _readonly_components: Array[Component] = []
 var _item_menu: PopupMenu
@@ -32,8 +32,8 @@ func set_show_readonly_components(show_: bool) -> void:
         else:
             self.reload(sel_comp)
 
-func set_components(comp: ComponentsContainer) -> void:
-    self._components = comp
+func set_licenses_interface(li: LicensesInterface) -> void:
+    self._li = li
     self.reload()
 
 func _ready() -> void:
@@ -51,18 +51,18 @@ func reload(scroll_to: Component = null) -> void:
     # count current added custom components
     var idx: int = 0
 
-    while idx < self._components.count() || readonly_idx < len(self._readonly_components):
+    while idx < self._li.count() || readonly_idx < len(self._readonly_components):
         var component: Component = null
         var cur_idx: int = 0
         var cmp: bool = false
         # compare readonly items with editable, to determine which one to show first
-        if idx < self._components.count() && readonly_idx < len(self._readonly_components):
-            cmp = Licenses.compare_components_ascending(self._components.get_at(idx), self._readonly_components[readonly_idx])
+        if idx < self._li.count() && readonly_idx < len(self._readonly_components):
+            cmp = Licenses.compare_components_ascending(self._li.get_at(idx), self._readonly_components[readonly_idx])
         if readonly_idx >= len(self._readonly_components) || cmp:
-            component = self._components.get_at(idx)
+            component = self._li.get_at(idx)
             cur_idx = idx
             idx = idx + 1
-        elif idx >= self._components.count() || not cmp:
+        elif idx >= self._li.count() || not cmp:
             component = self._readonly_components[readonly_idx]
             cur_idx = readonly_idx
             readonly_idx = readonly_idx + 1
@@ -134,15 +134,15 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
     return item
 
-func _drop_data(at_position: Vector2, data: Variant) -> void:
+func _drop_data(at_position: Vector2, _data: Variant) -> void:
     var to_item: TreeItem = self.get_item_at_position(at_position)
     var category: String = to_item.get_meta("category")
     var cur_component: Component = self._get_selected_component()
     if cur_component.category == category:
         return
     cur_component.category = category
-    self._components.sort_custom(Licenses.compare_components_ascending)
-    self._components.emit_changed()
+    self._li.sort_custom(Licenses.compare_components_ascending)
+    self._li.emit_components_changed()
 
 func _notification(what: int):
     if what == NOTIFICATION_DRAG_END:
@@ -161,7 +161,7 @@ func _get_selected_component() -> Component:
     if item.get_meta("readonly") as bool:
         component = self._readonly_components[item.get_meta("idx")]
     else:
-        component = self._components.get_at(item.get_meta("idx") as int)
+        component = self._li.get_at(item.get_meta("idx") as int)
     return component
 
 func _on_item_selected() -> void:
@@ -177,12 +177,12 @@ func _on_item_edited() -> void:
     var old_category: String = category_item.get_meta("category")
     var new_category: String = category_item.get_text(0)
     category_item.set_meta("category", new_category)
-    for component: Component in self._components.components():
+    for component: Component in self._li.components():
         if component.category == old_category:
             component.category = new_category
 
-    self._components.sort_custom(Licenses.compare_components_ascending)
-    self._components.emit_changed()
+    self._li.sort_custom(Licenses.compare_components_ascending)
+    self._li.emit_components_changed()
 
 func _on_gui_input(event: InputEvent) -> void:
     if !((event is InputEventMouseButton) && (event as InputEventMouseButton).pressed && (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT):

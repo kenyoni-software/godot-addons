@@ -1,14 +1,19 @@
 extends Node
 
-const Component := preload("res://addons/licenses/component.gd")
 const Licenses := preload("res://addons/licenses/licenses.gd")
+const Component := preload("res://addons/licenses/component.gd")
 
 signal components_changed()
+signal cfg_path_changed(new_path: String)
 
 var _components: Array[Component] = []
 
-func emit_changed() -> void:
+func emit_components_changed() -> void:
     self.components_changed.emit()
+
+func set_cfg_path(new_path: String) -> void:
+    Licenses.set_license_data_filepath(new_path)
+    self.cfg_path_changed.emit(new_path)
 
 func add_component(component: Component) -> void:
     self._components.append(component)
