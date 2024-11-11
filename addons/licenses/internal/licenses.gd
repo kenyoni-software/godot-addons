@@ -6,7 +6,7 @@ const Component := preload("res://addons/licenses/component.gd")
 const ComponentsTree := preload("res://addons/licenses/internal/components_tree.gd")
 const ComponentDetailTree := preload("res://addons/licenses/internal/component_detail_tree.gd")
 const Toolbar := preload("res://addons/licenses/internal/toolbar.gd")
-const LicensesInterface := preload("res://addons/licenses/internal/licenses_interface.gd")
+const LicensesInterface := preload("res://addons/licenses/internal/plugin/licenses_interface.gd")
 # handler
 const BaseHandler := preload("res://addons/licenses/internal/handler/base.gd")
 const ObjectHandler := preload("res://addons/licenses/internal/handler/object.gd")

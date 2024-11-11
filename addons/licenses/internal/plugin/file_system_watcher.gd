@@ -1,6 +1,6 @@
 extends RefCounted
 
-const LicensesInterface := preload("res://addons/licenses/internal/licenses_interface.gd")
+const LicensesInterface := preload("res://addons/licenses/internal/plugin/licenses_interface.gd")
 const Component := preload("res://addons/licenses/component.gd")
 const Licenses := preload("res://addons/licenses/licenses.gd")
 

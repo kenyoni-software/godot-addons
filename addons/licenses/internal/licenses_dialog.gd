@@ -2,7 +2,7 @@
 extends Window
 
 const LicensesContainer := preload("res://addons/licenses/internal/licenses.gd")
-const LicensesInterface := preload("res://addons/licenses/internal/licenses_interface.gd")
+const LicensesInterface := preload("res://addons/licenses/internal/plugin/licenses_interface.gd")
 
 @export var _licenses: LicensesContainer
 

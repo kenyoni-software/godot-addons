@@ -5,11 +5,10 @@ const LicensesDialogScene: PackedScene = preload("res://addons/licenses/internal
 const LicensesDialog := preload("res://addons/licenses/internal/licenses_dialog.gd")
 const Licenses := preload("res://addons/licenses/licenses.gd")
 const ExportPlugin := preload("res://addons/licenses/internal/plugin/export_plugin.gd")
-const LicensesInterface := preload("res://addons/licenses/internal/licenses_interface.gd")
+const LicensesInterface := preload("res://addons/licenses/internal/plugin/licenses_interface.gd")
 const FileSystemWatcher := preload("res://addons/licenses/internal/plugin/file_system_watcher.gd")
 
 var _export_plugin: ExportPlugin
-var _licenses_dialog: Window
 var _licenses_dialog: LicensesDialog
 var _file_watcher: FileSystemWatcher
 
