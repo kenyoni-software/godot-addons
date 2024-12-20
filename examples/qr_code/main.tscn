@@ -224,9 +224,6 @@ dark_module_color = Color(0, 0, 0, 1)
 auto_module_px_size = true
 quiet_zone_size = 4
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 2
-
 [connection signal="text_changed" from="MarginContainer2/VBoxContainer/InputDataText" to="." method="_on_input_data_text_text_changed"]
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/options/Encoding" to="." method="_on_encoding_item_selected"]
 [connection signal="item_selected" from="MarginContainer2/VBoxContainer/options/ErrorCorrection" to="." method="_on_error_correction_item_selected"]
