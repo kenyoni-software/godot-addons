@@ -95,7 +95,7 @@ func _load_item(file_name: String) -> Array:
 # OVERRIDE
 func install(http: HTTPRequest, _version: String) -> Error:
     DirAccess.make_dir_recursive_absolute(self.directory())
-    var zip_path: String = self.directory().path_join("icons.zip")
+    var zip_path: String = OS.get_temp_dir().path_join(self.name.validate_filename() + ".zip")
     http.download_file = zip_path
     var downloader: Io.Downloader = Io.Downloader.new(http)
     downloader.await_request(_DOWNLOAD_FILE)
