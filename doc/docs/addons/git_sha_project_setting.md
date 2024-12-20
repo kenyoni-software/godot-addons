@@ -13,6 +13,7 @@ The Git SHA will **not** be kept in `project.godot` to not clutter any version c
 
 | Godot | Version  |
 |-------|----------|
+| 4.4   | >= 2.1.0 |
 | 4.3   | >= 2.1.0 |
 | 4.2   | >= 2.1.0 |
 | 4.1   | <= 2.0.0 |

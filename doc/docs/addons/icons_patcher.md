@@ -14,6 +14,7 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 
 | Godot | Version  |
 |-------|----------|
+| 4.4   | >= 1.5.0 |
 | 4.3   | >= 1.5.0 |
 | 4.2   | >= 1.3.0 |
 | 4.1   | <= 1.2.1 |

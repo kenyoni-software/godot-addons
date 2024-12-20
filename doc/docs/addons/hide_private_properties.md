@@ -8,6 +8,7 @@ This plugin will hide exported private properties in the inspector for instantia
 
 | Godot | Version  |
 |-------|----------|
+| 4.4   | >= 1.1.0 |
 | 4.3   | >= 1.1.0 |
 | 4.2   | >= 1.1.0 |
 | 4.1   | <= 1.0.2 |
