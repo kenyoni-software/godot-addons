@@ -5,6 +5,7 @@ class_name __LicenseManager
 const Component := preload("res://addons/licenses/component.gd")
 
 const DATA_FILE: String = "plugins/licenses/data_file"
+const JSON_INDENT = "\t"
 
 static func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
     var lhs_cat_lower: String = lhs.category.to_lower()
@@ -72,7 +73,7 @@ static func save(components: Array[Component], file_path: String) -> int:
     var raw: Array = []
     for component: Component in components:
         raw.append(component.serialize())
-    file.store_line(JSON.stringify({"components": raw}))
+    file.store_line(JSON.stringify({"components": raw}, JSON_INDENT))
     file = null
     return OK
 
