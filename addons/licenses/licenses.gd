@@ -1,6 +1,4 @@
 extends RefCounted
-# TODO:  DO NOT USE THE CLASS NAME, it will be removed later
-class_name __LicenseManager
 
 const Component := preload("res://addons/licenses/component.gd")
 
@@ -54,7 +52,7 @@ static func get_engine_components() -> Array[Component]:
         if eg_comp != null:
             engine_components.append(eg_comp)
 
-    engine_components.sort_custom(__LicenseManager.compare_components_ascending)
+    engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
 static func get_required_engine_components() -> Array[Component]:
@@ -65,7 +63,7 @@ static func get_required_engine_components() -> Array[Component]:
         if eg_comp != null:
             engine_components.append(eg_comp)
 
-    engine_components.sort_custom(__LicenseManager.compare_components_ascending)
+    engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
 static func save(components: Array[Component], file_path: String, indent: String = "") -> int:
