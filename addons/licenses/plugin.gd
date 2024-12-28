@@ -13,6 +13,7 @@ func _get_plugin_name() -> String:
 
 func _enter_tree() -> void:
     set_project_setting(Licenses.DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
+    set_project_setting(Licenses.CFG_KEY_INDENTATION, 0, TYPE_INT, PROPERTY_HINT_ENUM, "None,Spaces,Tabs")
 
     self._export_plugin = ExportPlugin.new()
     self.add_export_plugin(self._export_plugin)
@@ -32,12 +33,15 @@ func _show_popup() -> void:
     else:
         self._licenses_dialog.popup_centered_ratio(0.4)
 
-static func set_project_setting(key: String, initial_value, type: int, type_hint: int) -> void:
+static func set_project_setting(key: String, initial_value, type: int, type_hint: int, hint_string: String = "") -> void:
     if not ProjectSettings.has_setting(key):
         ProjectSettings.set_setting(key, initial_value)
     ProjectSettings.set_initial_value(key, initial_value)
-    ProjectSettings.add_property_info({
+    var props: Dictionary = {
         "name": key,
         "type": type,
         "hint": type_hint,
-    })
+    }
+    if hint_string != "":
+        props["hint_string"] = hint_string
+    ProjectSettings.add_property_info(props)

@@ -149,6 +149,10 @@ License class.
 
 ## Changelog
 
+### 1.8.2
+
+- Add option to configure the license file indentation
+
 ### 1.8.1
 
 - Fix crash when running a project exported in release mode

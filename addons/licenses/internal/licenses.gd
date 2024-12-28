@@ -25,6 +25,7 @@ const StringMultiLineHandler := preload("res://addons/licenses/internal/handler/
 
 var _components: ComponentsContainer = ComponentsContainer.new()
 var _file_watcher: FileSystemWatcher
+var _current_indentation: String = ""
 
 func _ready() -> void:
     self._license_file_load_button.icon = self.get_theme_icon(&"Load", &"EditorIcons")
@@ -48,6 +49,8 @@ func _ready() -> void:
     self._toolbar.show_engine_components.connect(self._on_toolbar_show_engine_components)
 
     self.reload()
+    self._current_indentation = self._get_license_indentation()
+    ProjectSettings.settings_changed.connect(self._on_project_settings_changed)
     self._components.components_changed.connect(self._on_components_changed)
     if Engine.is_editor_hint():
         self._file_watcher = FileSystemWatcher.new(self._components)
@@ -127,7 +130,7 @@ func _on_component_detail_edited(component: Component) -> void:
     self._emit_changed.call_deferred()
 
 func _on_components_changed() -> void:
-    Licenses.save(self._components.components(), self._license_file_edit.text)
+    Licenses.save(self._components.components(), self._license_file_edit.text, _get_license_indentation())
     self._component_detail_tree.reload()
     self._components_tree.reload(self._component_detail_tree.get_component())
 
@@ -138,3 +141,31 @@ func _on_file_moved(old_file: String, new_file: String) -> void:
     if old_file == Licenses.get_license_data_filepath():
         Licenses.set_license_data_filepath(new_file)
         self._license_file_edit.text = Licenses.get_license_data_filepath()
+
+func _on_project_settings_changed() -> void:
+    var cur_indentation: String = _get_license_indentation()
+    if self._current_indentation != cur_indentation:
+        self._current_indentation = cur_indentation
+        Licenses.save(self._components.components(), self._license_file_edit.text, _get_license_indentation())
+
+enum IndentationType {
+    NONE,
+    SPACES,
+    TABS
+}
+
+static func _get_license_indentation() -> String:
+    var indentation: IndentationType = IndentationType.NONE
+    # does not work due to https://github.com/godotengine/godot/issues/56598
+    if ProjectSettings.has_setting(Licenses.CFG_KEY_INDENTATION):
+        indentation = ProjectSettings.get_setting(Licenses.CFG_KEY_INDENTATION)
+    else:
+        indentation = IndentationType.NONE
+    match indentation:
+        IndentationType.NONE:
+            return ""
+        IndentationType.SPACES:
+            return "    "
+        IndentationType.TABS:
+            return "\t"
+    return ""
