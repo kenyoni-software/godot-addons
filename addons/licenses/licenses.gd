@@ -5,6 +5,7 @@ class_name __LicenseManager
 const Component := preload("res://addons/licenses/component.gd")
 
 const DATA_FILE: String = "plugins/licenses/data_file"
+const CFG_KEY_INDENTATION: String = "plugins/licenses/indentation"
 
 static func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
     var lhs_cat_lower: String = lhs.category.to_lower()
@@ -65,14 +66,14 @@ static func get_required_engine_components() -> Array[Component]:
     engine_components.sort_custom(__LicenseManager.compare_components_ascending)
     return engine_components
 
-static func save(components: Array[Component], file_path: String) -> int:
+static func save(components: Array[Component], file_path: String, indent: String = "") -> int:
     var file: FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
     if file == null:
         return FileAccess.get_open_error()
     var raw: Array = []
     for component: Component in components:
         raw.append(component.serialize())
-    file.store_line(JSON.stringify({"components": raw}))
+    file.store_line(JSON.stringify({"components": raw}, indent))
     file = null
     return OK
 
