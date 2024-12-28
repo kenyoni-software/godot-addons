@@ -154,6 +154,7 @@ License class.
 
 - Add right click context menu to filesystem, to show the license of a file or folder
 - Internal editor restructure
+- Deprecated `Licenses.DATA_FILE` use `Licenses.CFG_KEY_DATA_FILE` instead
 
 ### 1.8.2
 

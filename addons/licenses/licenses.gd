@@ -4,7 +4,9 @@ class_name __LicenseManager
 
 const Component := preload("res://addons/licenses/component.gd")
 
+## @deprecated: Use `CFG_KEY_DATA_FILE` instead.
 const DATA_FILE: String = "plugins/licenses/data_file"
+const CFG_KEY_DATA_FILE: String = "plugins/licenses/data_file"
 const CFG_KEY_INDENTATION: String = "plugins/licenses/indentation"
 
 static func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
