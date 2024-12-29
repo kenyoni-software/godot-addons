@@ -40,9 +40,11 @@ As popup:
 
 ## Changelog
 
-### 1.2.1
+### 1.3.0
 
+- Support Tabler Icons 3 (you might need to reinstall this collection)
 - Support Simple Icons 14
+- Improve download speed and reduce installation time
 
 ### 1.2.0
 
