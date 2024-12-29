@@ -58,7 +58,6 @@ func load() -> Array:
     if res_version != OK:
         push_warning("could not parse simple icons package.json: '%s'", [parser_version.get_error_message()])
         return [[], PackedStringArray()]
-    self.version = parser_version.data["version"]
 
     var parser: JSON = JSON.new()
     var res: int = parser.parse(FileAccess.get_file_as_string(self.directory().path_join("simple-icons-master/_data/simple-icons.json")))
@@ -70,7 +69,7 @@ func load() -> Array:
     var buffers: PackedStringArray = PackedStringArray()
 
     var raw_icons: Array = []
-    if self.version.begins_with("14.0."):
+    if parser_version.data["version"].begins_with("14."):
         raw_icons = parser.data
     else:
         raw_icons = parser.data.get("icons", [])
@@ -88,6 +87,7 @@ func load() -> Array:
                 icons.append(arr_res[0])
                 buffers.append(arr_res[1])
 
+    self.version = parser_version.data["version"]
     return [icons, buffers]
 
 func _load_item(item: Dictionary) -> Array:
