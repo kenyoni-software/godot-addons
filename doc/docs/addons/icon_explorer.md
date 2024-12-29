@@ -40,6 +40,10 @@ As popup:
 
 ## Changelog
 
+### 1.2.1
+
+- Support Simple Icons 14
+
 ### 1.2.0
 
 - Require Godot 4.3
