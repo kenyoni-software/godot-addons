@@ -45,6 +45,7 @@ As popup:
 - Support Tabler Icons 3 (you might need to reinstall this collection)
 - Support Simple Icons 14
 - Improve download speed and reduce installation time
+- Improve Font Awesome icon loading
 
 ### 1.2.0
 
