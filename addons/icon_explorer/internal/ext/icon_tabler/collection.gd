@@ -3,7 +3,7 @@ extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 const IconTabler := preload("res://addons/icon_explorer/internal/ext/icon_tabler/icon.gd")
 const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
 
-const _DOWNLOAD_FILE: String = "https://github.com/tabler/tabler-icons/archive/master.zip"
+const _DOWNLOAD_FILE: String = "https://github.com/tabler/tabler-icons/archive/main.zip"
 
 func _init() -> void:
     self.name = "tabler Icons"
@@ -19,35 +19,37 @@ func color_icon(buffer: String, color: String) -> String:
 # OVERRIDE
 func load() -> Array:
     var parser: JSON = JSON.new()
-    var res: int = parser.parse(FileAccess.get_file_as_string(self.directory().path_join("tabler-icons-master/tags.json")))
+    var res: int = parser.parse(FileAccess.get_file_as_string(self.directory().path_join("icons.json")))
     if res != OK:
-        push_warning("could not parse tabler icons tags.json: '%s'", [parser.get_error_message()])
+        push_warning("could not parse tabler icons icons.json: '%s'", [parser.get_error_message()])
         return [[], PackedStringArray()]
 
     var icon_path: String = self.icon_directory()
     var icons: Array[Icon] = []
     var buffers: PackedStringArray = PackedStringArray()
     for item: Dictionary in parser.data.values():
-        var icon: IconTabler = IconTabler.new()
-        icon.collection = self
-        icon.svg_size = Vector2i(24, 24)
-        icon.colorable = true
-        icon.name = item["name"]
-        icon.icon_path = icon_path.path_join(icon.name + ".svg")
+        for style: String in item.get("styles", []):
+            var icon: IconTabler = IconTabler.new()
+            icon.collection = self
+            icon.svg_size = Vector2i(24, 24)
+            icon.colorable = true
+            icon.name = item["name"]
+            icon.icon_path = icon_path.path_join(style + "/" + item["name"] + ".svg")
 
-        icon.category = item.get("category", "")
-        icon.tags = item.get("tags", PackedStringArray())
-        icon.version = item.get("version", "")
+            icon.category = item.get("category", "")
+            icon.tags = item.get("tags", PackedStringArray())
+            icon.version = item.get("version", "")
+            icon.style = style
 
-        var buffer: String = FileAccess.get_file_as_string(icon.icon_path)
-        if buffer == "":
-            push_warning("could not load '" + icon.icon_path + "'")
-            continue
-        icons.append(icon)
-        buffers.append(self.color_icon(buffer, "FFFFFF"))
+            var buffer: String = FileAccess.get_file_as_string(icon.icon_path)
+            if buffer == "":
+                push_warning("could not load '" + icon.icon_path + "'")
+                continue
+            icons.append(icon)
+            buffers.append(self.color_icon(buffer, "FFFFFF"))
 
     var parser_version: JSON = JSON.new()
-    var res_version: int = parser_version.parse(FileAccess.get_file_as_string(self.directory().path_join("tabler-icons-master/package.json")))
+    var res_version: int = parser_version.parse(FileAccess.get_file_as_string(self.directory().path_join("tabler-icons-main/package.json")))
     if res_version != OK:
         push_warning("could not parse tabler icons package.json: '%s'", [parser_version.get_error_message()])
         return [[], PackedStringArray()]
@@ -65,11 +67,15 @@ func install(http: HTTPRequest, _version: String) -> Error:
     if downloader.result != HTTPRequest.RESULT_SUCCESS:
         return Error.FAILED
 
+    http.download_file = self.directory().path_join("icons.json")
+    downloader.await_request("https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons.json")
+    if downloader.result != HTTPRequest.RESULT_SUCCESS:
+        return Error.FAILED
+
     var unzipper: ZipUnpacker = ZipUnpacker.new(zip_path, self.directory(), [
-        "tabler-icons-master/package.json",
-        "tabler-icons-master/icons/",
-        "tabler-icons-master/tags.json",
-        "tabler-icons-master/LICENSE",
+        "tabler-icons-main/package.json",
+        "tabler-icons-main/icons/",
+        "tabler-icons-main/LICENSE",
     ])
     if !unzipper.unpack_mt(maxi(OS.get_processor_count() / 2, 1)):
         return Error.FAILED
@@ -97,4 +103,4 @@ func update_latest_version(http: HTTPRequest) -> void:
 
 # OVERRIDE
 func icon_directory() -> String:
-    return self.directory().path_join("tabler-icons-master/icons/")
+    return self.directory().path_join("tabler-icons-main/icons/")

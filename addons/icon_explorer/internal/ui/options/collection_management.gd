@@ -161,6 +161,8 @@ func _on_button_clicked(item: TreeItem, _column: int, id: int, _mouse_button_ind
             if self._http_request != null:
                 self._http_request.queue_free()
             self._http_request = HTTPRequest.new()
+            self._http_request.use_threads = true
+            self._http_request.download_chunk_size = 4 * 65536
             self.add_child(self._http_request, true)
             self.db.install(coll, self._http_request, "")
         ButtonId.REMOVE:

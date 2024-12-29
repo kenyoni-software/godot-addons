@@ -18,25 +18,16 @@ func color_icon(buffer: String, color: String) -> String:
 
 # OVERRIDE
 func load() -> Array:
-    var meta_string: String = FileAccess.get_file_as_string(self.directory().path_join("Font-Awesome-6.x/metadata/icons.json"))
+    var parser: JSON = JSON.new()
+    var res: int = parser.parse(FileAccess.get_file_as_string(self.directory().path_join("Font-Awesome-6.x/metadata/icons.json")))
+    if res != OK:
+        push_warning("could not parse font awesome meta: '%s'", [parser.get_error_message()])
+        return [[], PackedStringArray()]
+
     var icons: Array[Icon] = []
     var buffers: PackedStringArray = PackedStringArray()
-    var start_idx: int = meta_string.find("\n  \"")
-    var parser: JSON = JSON.new()
-    while start_idx > 0:
-        var end_idx: int = meta_string.find("\n  \"", start_idx + 1)
-        var meta: String
-        if end_idx != -1:
-            meta = "{" + meta_string.substr(start_idx, end_idx - start_idx - 1) + "}"
-        else:
-            meta = "{" + meta_string.substr(start_idx) + "}"
-        start_idx = end_idx
-        var res: int = parser.parse(meta)
-        if res != OK:
-            push_warning("could not parse font awesome meta: '%s'", [parser.get_error_message()])
-            continue
-        var icon_id: String = parser.data.keys()[0]
-        var item: Dictionary = parser.data.values()[0]
+    for icon_id: String in parser.data:
+        var item: Dictionary = parser.data[icon_id]
         for style: String in item.get("styles", []):
             var icon: IconFontAwesome = IconFontAwesome.new()
             icon.collection = self
