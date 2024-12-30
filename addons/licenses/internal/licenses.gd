@@ -81,6 +81,7 @@ func _on_data_file_load_button_clicked() -> void:
     self.add_child(dialog)
     dialog.file_mode = EditorFileDialog.FILE_MODE_OPEN_FILE
     dialog.current_path = self._license_file_edit.text
+    dialog.filters = ["*.json ; JSON files"]
     dialog.close_requested.connect(dialog.queue_free)
     dialog.file_selected.connect(self._on_data_file_selected)
     dialog.popup_centered_ratio(0.4)
