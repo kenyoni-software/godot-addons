@@ -28,6 +28,7 @@ var _current_indentation: String = ""
 func _ready() -> void:
     self._license_file_load_button.icon = self.get_theme_icon(&"FileBrowse", &"EditorIcons")
     self._license_file_load_button.pressed.connect(self._on_data_file_load_button_clicked)
+    self._license_file_load_button.tooltip_text = "Select a license file to load."
     self._set_license_filepath_button.icon = self.get_theme_icon(&"ImportCheck", &"EditorIcons")
     self._set_license_filepath_button.pressed.connect(self._on_set_license_filepath_clicked)
     self._license_file_edit.text_submitted.connect(self._on_data_file_edit_changed)
