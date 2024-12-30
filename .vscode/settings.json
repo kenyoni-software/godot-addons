@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "**/**.uid": true,
+        "**/**.import": true,
+    }
+}
