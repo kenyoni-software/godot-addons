@@ -12,7 +12,7 @@ enum BUTTON_ID {
 }
 
 @export var _nothing_selected_note: CenterContainer
-var _component: Component :
+var _component: Component:
     set = set_component,
     get = get_component
 var handlers: Array[GDScript] = []

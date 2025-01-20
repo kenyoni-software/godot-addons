@@ -296,12 +296,12 @@ func _get_property_list() -> Array[Dictionary]:
         {
             "name": "light_module_color",
             "type": TYPE_COLOR,
-            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE ,
+            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
         },
         {
             "name": "dark_module_color",
             "type": TYPE_COLOR,
-            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE ,
+            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
         },
         {
             "name": "auto_module_px_size",

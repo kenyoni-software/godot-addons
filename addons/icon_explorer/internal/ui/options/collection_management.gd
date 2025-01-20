@@ -143,12 +143,12 @@ func _process(delta: float) -> void:
         if self._processing != -1:
             for item: TreeItem in self._tree.get_root().get_children():
                 if (item.get_metadata(Column.INSTALLED) as Collection).id() == self._processing:
-                    item.set_icon(Column.INSTALLED, self.get_theme_icon("Progress"+str(self._process_spinner_frame + 1), &"EditorIcons"))
+                    item.set_icon(Column.INSTALLED, self.get_theme_icon("Progress" + str(self._process_spinner_frame + 1), &"EditorIcons"))
 
 func _gen_progress_texture() -> Array[Texture2D]:
     var anim: Array[Texture2D] = []
     for idx: int in range(8):
-        anim.append(self.get_theme_icon("Progress"+str(idx + 1), &"EditorIcons"))
+        anim.append(self.get_theme_icon("Progress" + str(idx + 1), &"EditorIcons"))
     return anim
 
 func _on_button_clicked(item: TreeItem, _column: int, id: int, _mouse_button_index: int) -> void:
