@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://chr26ux2vsrxq"]
 
-[ext_resource type="Script" path="res://examples/licenses/display_licenses.gd" id="1_bba6e"]
-[ext_resource type="Script" path="res://examples/licenses/license_container.gd" id="2_0yh67"]
+[ext_resource type="Script" uid="uid://cx4g78xvmtfea" path="res://examples/licenses/display_licenses.gd" id="1_bba6e"]
+[ext_resource type="Script" uid="uid://ds85h7fr73fpf" path="res://examples/licenses/license_container.gd" id="2_0yh67"]
 
 [node name="main" type="PanelContainer" node_paths=PackedStringArray("_tree", "_item_list", "_license_container")]
 anchors_preset = 15

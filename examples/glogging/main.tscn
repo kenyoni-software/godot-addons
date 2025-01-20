@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cbwcn30ireo62"]
 
-[ext_resource type="Script" path="res://examples/glogging/main.gd" id="1_tinti"]
+[ext_resource type="Script" uid="uid://bpi8v15wcp4x5" path="res://examples/glogging/main.gd" id="1_tinti"]
 
 [node name="main" type="PanelContainer" node_paths=PackedStringArray("_logger_options", "_log_level_options", "_log_at_level_options", "_log_text")]
 anchors_preset = 15

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://nrybkmxo33jk"]
 
 [ext_resource type="Texture2D" uid="uid://b88tq0lbpd3m4" path="res://examples/texture_button_colored/icon.svg" id="1_a3thv"]
-[ext_resource type="Script" path="res://addons/texture_button_colored/texture_button_colored.gd" id="1_q0uuq"]
+[ext_resource type="Script" uid="uid://oaogoeub28xf" path="res://addons/texture_button_colored/texture_button_colored.gd" id="1_q0uuq"]
 
 [node name="main" type="Control"]
 layout_mode = 3

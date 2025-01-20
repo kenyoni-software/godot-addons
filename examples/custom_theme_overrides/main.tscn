@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://blchgarph52bw"]
 
-[ext_resource type="Script" path="res://examples/custom_theme_overrides/main.gd" id="1_nqqag"]
+[ext_resource type="Script" uid="uid://dm7523dgo1b88" path="res://examples/custom_theme_overrides/main.gd" id="1_nqqag"]
 
 [node name="VBoxContainer" type="GridContainer"]
 anchors_preset = 15

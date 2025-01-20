@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://u78fl5760vh3"]
 
-[ext_resource type="Script" path="res://examples/qr_code/main.gd" id="1_55tdt"]
-[ext_resource type="Script" path="res://addons/qr_code/qr_code_rect.gd" id="1_t1m1p"]
+[ext_resource type="Script" uid="uid://w0qw7vc2yr4y" path="res://examples/qr_code/main.gd" id="1_55tdt"]
+[ext_resource type="Script" uid="uid://dynulhnyq5hpq" path="res://addons/qr_code/qr_code_rect.gd" id="1_t1m1p"]
 
 [node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("_input_data_text", "_encoding", "_error_correction", "_use_eci", "_eci_value", "_version", "_mask_pattern", "_module_px_size", "_qr_rect")]
 anchors_preset = 15
@@ -54,8 +54,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "Numeric"
 popup/item_0/id = 1
 popup/item_1/text = "Alphanumeric"
@@ -75,8 +75,8 @@ layout_mode = 2
 [node name="ErrorCorrection" type="OptionButton" parent="MarginContainer2/VBoxContainer/options"]
 layout_mode = 2
 alignment = 1
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "Low"
 popup/item_0/id = 1
 popup/item_1/text = "Medium"
@@ -100,8 +100,8 @@ layout_mode = 2
 layout_mode = 2
 disabled = true
 alignment = 1
-item_count = 5
 selected = 0
+item_count = 5
 popup/item_0/text = "ISO 8859-1"
 popup/item_0/id = 3
 popup/item_1/text = "Shift JIS"

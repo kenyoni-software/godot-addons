@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfj2mhwrs1oss"]
 
-[ext_resource type="Script" path="res://addons/licenses/internal/component_detail_tree.gd" id="1"]
-[ext_resource type="Script" path="res://addons/licenses/internal/components_tree.gd" id="2"]
-[ext_resource type="Script" path="res://addons/licenses/internal/toolbar.gd" id="2_a8iu8"]
-[ext_resource type="Script" path="res://addons/licenses/internal/licenses.gd" id="3"]
+[ext_resource type="Script" uid="uid://bx74nplc6r8fc" path="res://addons/licenses/internal/component_detail_tree.gd" id="1"]
+[ext_resource type="Script" uid="uid://7ucfaulkykgq" path="res://addons/licenses/internal/components_tree.gd" id="2"]
+[ext_resource type="Script" uid="uid://b6skqw0mtlntn" path="res://addons/licenses/internal/toolbar.gd" id="2_a8iu8"]
+[ext_resource type="Script" uid="uid://ceq2ssr80exo2" path="res://addons/licenses/internal/licenses.gd" id="3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cx7n"]
 
@@ -45,7 +45,6 @@ auto_translate_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 localize_numeral_system = false
-auto_translate = false
 placeholder_text = "res://licenses.json"
 
 [node name="set_license_filepath_button" type="Button" parent="VBoxContainer/license_file_config"]

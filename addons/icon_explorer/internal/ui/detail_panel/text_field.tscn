@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b64tcvn5sw03h"]
 
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd" id="1_fhni0"]
+[ext_resource type="Script" uid="uid://dg4ayutwyjxu1" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.gd" id="1_fhni0"]
 [ext_resource type="PackedScene" uid="uid://bonqki0uorlhq" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.tscn" id="2_vjbmh"]
 
 [node name="text_field" type="VBoxContainer" node_paths=PackedStringArray("_label", "_button", "_title")]
@@ -13,9 +13,8 @@ _label = NodePath("margin_container/h_box_container/label")
 _button = NodePath("margin_container/h_box_container/button")
 _title = NodePath("title_panel")
 
-[node name="title_panel" parent="." node_paths=PackedStringArray("_text_label") instance=ExtResource("2_vjbmh")]
+[node name="title_panel" parent="." instance=ExtResource("2_vjbmh")]
 layout_mode = 2
-_text_label = NodePath("title")
 
 [node name="margin_container" type="MarginContainer" parent="."]
 layout_mode = 2

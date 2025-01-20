@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bf2b6v68rufpn"]
 
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ext/material_design/details_panel.gd" id="1_7oq86"]
+[ext_resource type="Script" uid="uid://cgb8hwc6stdv7" path="res://addons/icon_explorer/internal/ext/material_design/details_panel.gd" id="1_7oq86"]
 [ext_resource type="PackedScene" uid="uid://b813qk6u7eveh" path="res://addons/icon_explorer/internal/ui/detail_panel/list_field.tscn" id="2_sgh8u"]
 [ext_resource type="PackedScene" uid="uid://b64tcvn5sw03h" path="res://addons/icon_explorer/internal/ui/detail_panel/text_field.tscn" id="3_7hl4l"]
 
@@ -30,24 +30,20 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2aicr")
 text = "Deprecated"
 horizontal_alignment = 1
 
-[node name="aliases" parent="." node_paths=PackedStringArray("_list") instance=ExtResource("2_sgh8u")]
+[node name="aliases" parent="." instance=ExtResource("2_sgh8u")]
 layout_mode = 2
-_list = NodePath("margin_container/item_list")
+items = []
 title = "Aliases"
 
-[node name="tags" parent="." node_paths=PackedStringArray("_list") instance=ExtResource("2_sgh8u")]
+[node name="tags" parent="." instance=ExtResource("2_sgh8u")]
 layout_mode = 2
-_list = NodePath("margin_container/item_list")
+items = []
 title = "Tags"
 
-[node name="author" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("3_7hl4l")]
+[node name="author" parent="." instance=ExtResource("3_7hl4l")]
 layout_mode = 2
-_label = NodePath("margin_container/h_box_container/label")
-_button = NodePath("margin_container/h_box_container/button")
 title = "Created by"
 
-[node name="version" parent="." node_paths=PackedStringArray("_label", "_button") instance=ExtResource("3_7hl4l")]
+[node name="version" parent="." instance=ExtResource("3_7hl4l")]
 layout_mode = 2
-_label = NodePath("margin_container/h_box_container/label")
-_button = NodePath("margin_container/h_box_container/button")
 title = "Version added"
