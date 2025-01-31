@@ -4,6 +4,10 @@ Private members (names starting with an underscore) should not be exposed.
 
 This plugin will hide exported private properties in the inspector for instantiated child scenes.
 
+!!! note
+
+    You do not need to add this plugin to your credits as it is used only inside the editor and not in the final product. You can still do it if you want to.
+
 ## Compatibility
 
 | Godot | Version  |
