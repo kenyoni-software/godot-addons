@@ -6,6 +6,8 @@ Registers (via `class_name`) the class `CustomThemeOverrides`.
 
 The custom theme override variables can be handled like every other theme override property.
 
+[**Download**](https://github.com/kenyoni-software/godot-addons/releases)
+
 ## Compatibility
 
 | Godot | Version |

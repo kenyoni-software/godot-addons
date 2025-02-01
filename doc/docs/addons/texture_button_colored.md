@@ -2,6 +2,8 @@
 
 Let you apply the icon color theme properties for the texture button. Uses `self_modulate`.
 
+[**Download**](https://github.com/kenyoni-software/godot-addons/releases)
+
 ## Compatibility
 
 | Godot | Version       |

@@ -13,6 +13,8 @@ If paths are added to license data, it will be automatically adjusted if you ren
 You can change the project license file either with a button at the upper right, in the license menu. Or modify this and the indentation of the license file at the
 project settings under the menu `Plugins` -> `Licenses`.
 
+[**Download**](https://github.com/kenyoni-software/godot-addons/releases)
+
 ## Compatibility
 
 | Godot | Version       |

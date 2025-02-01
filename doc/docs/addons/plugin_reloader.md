@@ -2,6 +2,8 @@
 
 Enable or disable plugins from within the editor main screen.
 
+[**Download**](https://github.com/kenyoni-software/godot-addons/releases)
+
 ## Compatibility
 
 | Godot | Version  |

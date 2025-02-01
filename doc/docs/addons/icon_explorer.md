@@ -8,6 +8,8 @@ Install or update them via the options menu in the right upper corner. This can 
 
 You can remove the main screen button in the options, the editor has to be restarted to take it into effect.
 
+[**Download**](https://github.com/kenyoni-software/godot-addons/releases)
+
 **Available collections**
 
 - [Bootstrap Icons](https://github.com/twbs/icons) (since `1.0.0`)
