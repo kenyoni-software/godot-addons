@@ -19,7 +19,7 @@ var _readonly_components: Array[Component] = []
 var _item_menu: PopupMenu
 
 func set_show_readonly_components(show_: bool) -> void:
-    var sel_comp: Component = self._get_selected_component()
+    var sel_comp: Component = self._get_component_from_item(self.get_selected())
     show_readonly_components = show_
     if show_:
         self._readonly_components = Licenses.get_required_engine_components()
@@ -137,7 +137,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 func _drop_data(at_position: Vector2, data: Variant) -> void:
     var to_item: TreeItem = self.get_item_at_position(at_position)
     var category = to_item.get_meta("category")
-    var cur_component: Component = self._get_selected_component()
+    var cur_component: Component = self._get_component_from_item(self.get_selected())
     if cur_component.category == category:
         return
     cur_component.category = category
@@ -153,24 +153,21 @@ func _notification(what: int):
                 item.clear_custom_color(0)
             item = item.get_next()
 
-func _get_selected_component() -> Component:
-    var item: TreeItem = self.get_selected()
+## if item is null or has not meta "idx" return null
+func _get_component_from_item(item: TreeItem) -> Component:
     if item == null || !item.has_meta("idx"):
         return null
-    var component: Component = null
     if item.get_meta("readonly") as bool:
-        component = self._readonly_components[item.get_meta("idx")]
-    else:
-        component = self._components.get_at(item.get_meta("idx") as int)
-    return component
+        return self._readonly_components[item.get_meta("idx")]
+    return self._li.get_at(item.get_meta("idx") as int)
 
 func _on_item_selected() -> void:
-    self.component_selected.emit(self._get_selected_component())
+    self.component_selected.emit(self._get_component_from_item(self.get_selected()))
 
 func _on_button_clicked(item: TreeItem, column: int, id: int, mouse_button_idx: int) -> void:
     match id:
         _BTN_ID_REMOVE:
-            self.component_remove.emit(self._get_selected_component())
+            self.component_remove.emit(self._get_component_from_item(item))
 
 func _on_item_edited() -> void:
     var category_item: TreeItem = self.get_edited()
@@ -195,7 +192,7 @@ func _on_gui_input(event: InputEvent) -> void:
     self._item_menu.popup_on_parent(Rect2(self.get_local_mouse_position() + Vector2(9, self._item_menu.size.y + 3), self._item_menu.size))
 
 func _on_item_menu_pressed(btn_idx: int) -> void:
-    var comp: Component = self._get_selected_component()
+    var comp: Component = self._get_component_from_item(self.get_selected())
     match btn_idx:
         0:
             var new_comp: Component = comp.duplicate()

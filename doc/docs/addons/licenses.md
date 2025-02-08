@@ -151,6 +151,10 @@ License class.
 
 ## Changelog
 
+### 1.8.3
+
+- Fix deleting the correct item when pressing the delete button
+
 ### 1.8.2
 
 - Add option to configure the license file indentation
