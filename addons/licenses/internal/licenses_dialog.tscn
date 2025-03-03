@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjrktrabkeadi"]
 
-[ext_resource type="Script" path="res://addons/licenses/internal/licenses_dialog.gd" id="1_0s46i"]
+[ext_resource type="Script" uid="uid://ds7und7wqysp1" path="res://addons/licenses/internal/licenses_dialog.gd" id="1_0s46i"]
 [ext_resource type="PackedScene" uid="uid://dfj2mhwrs1oss" path="res://addons/licenses/internal/licenses.tscn" id="1_f3ql8"]
 
-[node name="license_dialog" type="Window" node_paths=PackedStringArray("_licenses")]
+[node name="license_dialog" type="Window" node_paths=PackedStringArray("licenses")]
 disable_3d = true
 title = "Licenses"
 size = Vector2i(1920, 1080)
@@ -11,7 +11,7 @@ visible = false
 wrap_controls = true
 transient = true
 script = ExtResource("1_0s46i")
-_licenses = NodePath("licenses")
+licenses = NodePath("licenses")
 
 [node name="panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -20,9 +20,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="licenses" parent="." node_paths=PackedStringArray("_license_file_edit", "_license_file_load_button", "_set_license_filepath_button") instance=ExtResource("1_f3ql8")]
-_license_file_edit = NodePath("VBoxContainer/license_file_config/edit")
-_license_file_load_button = NodePath("VBoxContainer/license_file_config/file_button")
-_set_license_filepath_button = NodePath("VBoxContainer/license_file_config/set_license_filepath_button")
+[node name="licenses" parent="." instance=ExtResource("1_f3ql8")]
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]

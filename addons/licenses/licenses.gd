@@ -1,10 +1,10 @@
 extends RefCounted
-# TODO:  DO NOT USE THE CLASS NAME, it will be removed later
-class_name __LicenseManager
 
 const Component := preload("res://addons/licenses/component.gd")
 
+## @deprecated: Use `CFG_KEY_DATA_FILE` instead.
 const DATA_FILE: String = "plugins/licenses/data_file"
+const CFG_KEY_DATA_FILE: String = "plugins/licenses/data_file"
 const CFG_KEY_INDENTATION: String = "plugins/licenses/indentation"
 
 static func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
@@ -52,7 +52,7 @@ static func get_engine_components() -> Array[Component]:
         if eg_comp != null:
             engine_components.append(eg_comp)
 
-    engine_components.sort_custom(__LicenseManager.compare_components_ascending)
+    engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
 static func get_required_engine_components() -> Array[Component]:
@@ -63,17 +63,18 @@ static func get_required_engine_components() -> Array[Component]:
         if eg_comp != null:
             engine_components.append(eg_comp)
 
-    engine_components.sort_custom(__LicenseManager.compare_components_ascending)
+    engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
-static func save(components: Array[Component], file_path: String, indent: String = "") -> int:
+static func save(components: Array[Component], file_path: String, indent: String = "") -> Error:
     var file: FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
     if file == null:
         return FileAccess.get_open_error()
-    var raw: Array = []
+    var raw: Array[Dictionary] = []
     for component: Component in components:
         raw.append(component.serialize())
-    file.store_line(JSON.stringify({"components": raw}, indent))
+    if !file.store_line(JSON.stringify({"components": raw}, indent)):
+        return file.get_error()
     file = null
     return OK
 

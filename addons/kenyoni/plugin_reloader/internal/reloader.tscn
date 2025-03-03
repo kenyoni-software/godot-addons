@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dryoyuj4vl0l5"]
 
-[ext_resource type="Script" path="res://addons/kenyoni/plugin_reloader/internal/reloader.gd" id="1_kd7gg"]
+[ext_resource type="Script" uid="uid://b6eu3fxcktuu6" path="res://addons/kenyoni/plugin_reloader/internal/reloader.gd" id="1_kd7gg"]
 
 [node name="Reloader" type="MarginContainer" node_paths=PackedStringArray("_reload_button", "_option_button")]
 offset_right = 76.0

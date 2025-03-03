@@ -8,7 +8,7 @@ Kenyoni Godot Addons is a pack of useful Godot additions to make your life easie
 
 Find the releases [here](https://github.com/kenyoni-software/godot-addons/releases/tag/latest).
 
-!!! note
+!!! note "Note about Godot 4.3. or lower"
 
     If you import any plugin or open a Godot project for the first time, the plugins will throw errors. To ensure correct operation, reload the project and the errors are gone.
 
@@ -77,6 +77,12 @@ Find the releases [here](https://github.com/kenyoni-software/godot-addons/releas
     ---
 
     QR Code generator and nodes.
+
+-   [Remove Orphan UID](addons/remove_orphan_uid.md){ .md-button .center-lg-button }
+
+    ---
+
+    Remove orphan UIDs from the project.
 
 -   [TextureButtonColored](addons/texture_button_colored.md){ .md-button .center-lg-button }
 

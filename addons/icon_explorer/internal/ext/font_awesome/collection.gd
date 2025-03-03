@@ -1,7 +1,7 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
 const IconFontAwesome := preload("res://addons/icon_explorer/internal/ext/font_awesome/icon.gd")
-const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
+const ZipExtractorThreaded := preload("res://addons/icon_explorer/internal/scripts/tools/zip_extractor_threaded.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/FortAwesome/Font-Awesome/archive/6.x.zip"
 
@@ -38,7 +38,7 @@ func load() -> Array:
 
             icon.style = style
             icon.aliases = item.get("aliases", {}).get("names", PackedStringArray())
-            icon.search_terms =  item.get("search", {}).get("terms", PackedStringArray())
+            icon.search_terms = item.get("search", {}).get("terms", PackedStringArray())
             icons.append(icon)
             buffers.append(self.color_icon(item["svg"][style]["raw"], "FFFFFF"))
 
@@ -54,20 +54,23 @@ func load() -> Array:
 # OVERRIDE
 func install(http: HTTPRequest, _version: String) -> Error:
     DirAccess.make_dir_recursive_absolute(self.directory())
-    var zip_path: String = self.directory().path_join("icons.zip")
+    var zip_path: String = OS.get_temp_dir().path_join(self.name.validate_filename() + ".zip")
     http.download_file = zip_path
     var downloader: Io.Downloader = Io.Downloader.new(http)
     downloader.await_request(_DOWNLOAD_FILE)
     if downloader.result != HTTPRequest.RESULT_SUCCESS:
         return Error.FAILED
 
-    var unzipper: ZipUnpacker = ZipUnpacker.new(zip_path, self.directory(), [
+    var extractor: ZipExtractorThreaded = ZipExtractorThreaded.new()
+    extractor.thread_count = maxi(OS.get_processor_count() / 2, 1)
+    extractor.extract(zip_path, self.directory(), [
         "Font-Awesome-6.x/js-packages/@fortawesome/fontawesome-free/package.json",
         "Font-Awesome-6.x/svgs/",
         "Font-Awesome-6.x/metadata/icons.json",
         "Font-Awesome-6.x/LICENSE.txt",
     ])
-    if !unzipper.unpack_mt(maxi(OS.get_processor_count() / 2, 1)):
+    extractor.wait()
+    if extractor.error() != Error.OK:
         return Error.FAILED
     DirAccess.remove_absolute(zip_path)
     return Error.OK

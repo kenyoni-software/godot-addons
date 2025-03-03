@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Godot Addons"
 config/version="1.0.0"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -29,7 +29,7 @@ gdscript/warnings/unsafe_call_argument=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/aspect_ratio_resize_container/plugin.cfg", "res://addons/custom_theme_overrides/plugin.cfg", "res://addons/git_sha_project_setting/plugin.cfg", "res://addons/glogging/plugin.cfg", "res://addons/hide_private_properties/plugin.cfg", "res://addons/icon_explorer/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/kenyoni/plugin_reloader/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/qr_code/plugin.cfg", "res://addons/texture_button_colored/plugin.cfg")
+enabled=PackedStringArray("res://addons/aspect_ratio_resize_container/plugin.cfg", "res://addons/custom_theme_overrides/plugin.cfg", "res://addons/git_sha_project_setting/plugin.cfg", "res://addons/glogging/plugin.cfg", "res://addons/hide_private_properties/plugin.cfg", "res://addons/icon_explorer/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/kenyoni/plugin_reloader/plugin.cfg", "res://addons/kenyoni/remove_orphan_uid/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/qr_code/plugin.cfg", "res://addons/texture_button_colored/plugin.cfg")
 
 [plugins]
 

@@ -122,11 +122,16 @@ func _on_filepath_selected(path: String, colored: bool) -> void:
         var writer: FileAccess = FileAccess.open(path, FileAccess.WRITE)
         if writer == null:
             if Engine.is_editor_hint():
-                push_warning("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould not write to '" + path + "'")
+                push_warning("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould not open '" + path + "' (" + error_string(FileAccess.get_open_error()) + ")")
             else:
-                push_warning("could not save '" + path + "'")
+                push_warning("could not save '" + path + "' (" + error_string(FileAccess.get_open_error()) + ")")
             return
-        writer.store_string(buffer)
+        if !writer.store_string(buffer):
+            if Engine.is_editor_hint():
+                push_warning("[Icon Explorer] Could not save icon (" + self._cur_icon.name + ").\nCould not write to '" + path + "' (" + error_string(writer.get_error()) + ")")
+            else:
+                push_warning("could not write to '" + path + "' (" + error_string(writer.get_error()) + ")")
+            return
         writer = null
     else:
         var err: Error = DirAccess.copy_absolute(self._cur_icon.icon_path, path)

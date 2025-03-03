@@ -1,7 +1,7 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
 const IconMaterialDesign := preload("res://addons/icon_explorer/internal/ext/material_design/icon.gd")
-const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
+const ZipExtractorThreaded := preload("res://addons/icon_explorer/internal/scripts/tools/zip_extractor_threaded.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/Templarian/MaterialDesign-SVG/archive/master.zip"
 
@@ -60,20 +60,23 @@ func load() -> Array:
 # OVERRIDE
 func install(http: HTTPRequest, _version: String) -> Error:
     DirAccess.make_dir_recursive_absolute(self.directory())
-    var zip_path: String = self.directory().path_join("icons.zip")
+    var zip_path: String = OS.get_temp_dir().path_join(self.name.validate_filename() + ".zip")
     http.download_file = zip_path
     var downloader: Io.Downloader = Io.Downloader.new(http)
     downloader.await_request(_DOWNLOAD_FILE)
     if downloader.result != HTTPRequest.RESULT_SUCCESS:
         return Error.FAILED
 
-    var unzipper: ZipUnpacker = ZipUnpacker.new(zip_path, self.directory(), [
+    var extractor: ZipExtractorThreaded = ZipExtractorThreaded.new()
+    extractor.thread_count = maxi(OS.get_processor_count() / 2, 1)
+    extractor.extract(zip_path, self.directory(), [
         "MaterialDesign-SVG-master/package.json",
         "MaterialDesign-SVG-master/svg/",
         "MaterialDesign-SVG-master/meta.json",
         "MaterialDesign-SVG-master/LICENSE",
     ])
-    if !unzipper.unpack_mt(maxi(OS.get_processor_count() / 2, 1)):
+    extractor.wait()
+    if extractor.error() != Error.OK:
         return Error.FAILED
     DirAccess.remove_absolute(zip_path)
     return Error.OK

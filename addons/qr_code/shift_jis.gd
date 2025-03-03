@@ -91,7 +91,7 @@ static func get_string_from_jis_8(arr: PackedByteArray) -> String:
 ##     [Unicode3.2]    UCS codepoint defined by Unicode 3.2
 ##     Fullwidth    UCS fullwidth form (U+Fxxx)
 ##     Windows     Windows (CP932) mapping
-const _UNICODE_TO_SHIFT_JIS_TABLE: Dictionary = {
+const _UNICODE_TO_SHIFT_JIS_TABLE: Dictionary[int, int] = {
     0x0000: 0x00,  # <control>
     0x0001: 0x01,  # <control>
     0x0002: 0x02,  # <control>
@@ -11622,7 +11622,7 @@ const _UNICODE_TO_SHIFT_JIS_TABLE: Dictionary = {
     0x2A6B2: 0xFCF4,  # <cjk> [2000] [Unicode3.1]
 }
 
-const _SHIFT_JIS_TO_UNICODE_TABLE: Dictionary = {
+const _SHIFT_JIS_TO_UNICODE_TABLE: Dictionary[int, int] = {
     0x00: 0x0000,  # <control>
     0x01: 0x0001,  # <control>
     0x02: 0x0002,  # <control>

@@ -26,8 +26,9 @@ You can remove the main screen button in the options, the editor has to be resta
 ## Compatibility
 
 | Godot | Version  |
-|-------|----------|
-| 4.3   | >= 1.2.0 |
+| ----- | -------- |
+| 4.4   | >= 1.3.0 |
+| 4.3   | 1.2.0    |
 | 4.2   | <= 1.1.0 |
 
 ## Screenshot
@@ -41,6 +42,11 @@ As popup:
 ![Icon Explorer screenshot](icon_explorer/popup.png "As Popup")
 
 ## Changelog
+
+### 1.4.0
+
+- Require Godot 4.4
+- Use OS temporary directory for downloads
 
 ### 1.3.0
 

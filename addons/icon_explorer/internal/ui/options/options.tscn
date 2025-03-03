@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bfmh2kaf2qbrx"]
 
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/options/options.gd" id="1_hdn86"]
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/options/collection_management.gd" id="2_fsa3m"]
+[ext_resource type="Script" uid="uid://due16451i8alq" path="res://addons/icon_explorer/internal/ui/options/options.gd" id="1_hdn86"]
+[ext_resource type="Script" uid="uid://sfmb08gvnj6x" path="res://addons/icon_explorer/internal/ui/options/collection_management.gd" id="2_fsa3m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i38b2"]
 

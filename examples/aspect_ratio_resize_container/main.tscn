@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://b88gr0ate1nhy"]
 
-[ext_resource type="Script" path="res://examples/aspect_ratio_resize_container/main.gd" id="1_xp7e6"]
+[ext_resource type="Script" uid="uid://cohqhnwlnu2f3" path="res://examples/aspect_ratio_resize_container/main.gd" id="1_xp7e6"]
 [ext_resource type="Texture2D" uid="uid://bo4ok4qv5mbsx" path="res://examples/aspect_ratio_resize_container/icon.svg" id="2_utqnv"]
-[ext_resource type="Script" path="res://addons/aspect_ratio_resize_container/aspect_ratio_resize_container.gd" id="3_mf1ua"]
+[ext_resource type="Script" uid="uid://dxfctb0bdoysw" path="res://addons/aspect_ratio_resize_container/aspect_ratio_resize_container.gd" id="3_mf1ua"]
 
 [sub_resource type="Gradient" id="Gradient_oyvw6"]
 colors = PackedColorArray(1, 0.490196, 0, 1, 1, 0.490196, 0, 1)
@@ -141,7 +141,7 @@ size_flags_horizontal = 3
 theme_override_constants/autohide = 0
 theme_override_icons/grabber = SubResource("GradientTexture2D_7q1v8")
 
-[node name="Container" type="Container" parent="main/VSplitContainer"]
+[node name="Container" type="Control" parent="main/VSplitContainer"]
 layout_mode = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="main/VSplitContainer"]
@@ -149,7 +149,7 @@ layout_mode = 2
 theme_override_constants/autohide = 0
 theme_override_icons/grabber = SubResource("GradientTexture2D_yrl0f")
 
-[node name="Container2" type="Container" parent="main/VSplitContainer/HSplitContainer"]
+[node name="Container2" type="Control" parent="main/VSplitContainer/HSplitContainer"]
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="main/VSplitContainer/HSplitContainer"]
@@ -175,7 +175,7 @@ size_flags_horizontal = 3
 theme_override_constants/autohide = 0
 theme_override_icons/grabber = SubResource("GradientTexture2D_7q1v8")
 
-[node name="Container" type="Container" parent="main/VSplitContainer2"]
+[node name="Container" type="Control" parent="main/VSplitContainer2"]
 layout_mode = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="main/VSplitContainer2"]
@@ -183,7 +183,7 @@ layout_mode = 2
 theme_override_constants/autohide = 0
 theme_override_icons/grabber = SubResource("GradientTexture2D_yrl0f")
 
-[node name="Container2" type="Container" parent="main/VSplitContainer2/HSplitContainer"]
+[node name="Container2" type="Control" parent="main/VSplitContainer2/HSplitContainer"]
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="main/VSplitContainer2/HSplitContainer"]

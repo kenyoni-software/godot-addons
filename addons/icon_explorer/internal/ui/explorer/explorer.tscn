@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dnxwdqwt2eqfi"]
 
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/explorer/explorer.gd" id="1_2oqmk"]
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/explorer/filter_options.gd" id="2_dkuya"]
+[ext_resource type="Script" uid="uid://ck1n5unu5plts" path="res://addons/icon_explorer/internal/ui/explorer/explorer.gd" id="1_2oqmk"]
+[ext_resource type="Script" uid="uid://berv41imnqsr7" path="res://addons/icon_explorer/internal/ui/explorer/filter_options.gd" id="2_dkuya"]
 [ext_resource type="PackedScene" uid="uid://c3s1t8hiu6xll" path="res://addons/icon_explorer/internal/ui/detail_panel/detail_panel.tscn" id="3_w4j77"]
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/explorer/option_popup.gd" id="4_03l1v"]
+[ext_resource type="Script" uid="uid://be01xieuku686" path="res://addons/icon_explorer/internal/ui/explorer/option_popup.gd" id="4_03l1v"]
 [ext_resource type="PackedScene" uid="uid://bfmh2kaf2qbrx" path="res://addons/icon_explorer/internal/ui/options/options.tscn" id="5_wngaf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnh63"]
@@ -12,9 +12,9 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-focus_mode = 2
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 2
 script = ExtResource("1_2oqmk")
 _filter_icon = NodePath("icon_viewer/toolbar_panel/toolbar/filter_icon")
 _filter = NodePath("icon_viewer/toolbar_panel/toolbar/filter")
@@ -48,7 +48,6 @@ auto_translate_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 localize_numeral_system = false
-auto_translate = false
 placeholder_text = "search icons..."
 editable = false
 clear_button_enabled = true
@@ -112,20 +111,9 @@ layout_mode = 2
 color = Color(1, 1, 1, 1)
 edit_alpha = false
 
-[node name="detail_panel" parent="icon_viewer/HSplitContainer/v_box_container" node_paths=PackedStringArray("_detail_container", "_hint_container", "_toolbar", "_detail_tabs", "_icon", "_preview_background", "_preview_panel", "_name", "_collection", "_size", "_toolbar_panel") instance=ExtResource("3_w4j77")]
+[node name="detail_panel" parent="icon_viewer/HSplitContainer/v_box_container" instance=ExtResource("3_w4j77")]
 layout_mode = 2
 size_flags_stretch_ratio = 0.34
-_detail_container = NodePath("detail_container")
-_hint_container = NodePath("hint_container")
-_toolbar = NodePath("detail_container/toolbar_panel/toolbar")
-_detail_tabs = NodePath("detail_container/v_box_container/scroll_container/detail_tabs")
-_icon = NodePath("detail_container/v_box_container/preview/icon")
-_preview_background = NodePath("detail_container/v_box_container/preview/background")
-_preview_panel = NodePath("detail_container/v_box_container/preview")
-_name = NodePath("detail_container/v_box_container/name")
-_collection = NodePath("detail_container/toolbar_panel/toolbar/collection")
-_size = NodePath("detail_container/v_box_container/size")
-_toolbar_panel = NodePath("detail_container/toolbar_panel")
 
 [node name="option_popup" type="Window" parent="."]
 title = "Icon Explorer Options"
@@ -135,12 +123,4 @@ transient = true
 exclusive = true
 script = ExtResource("4_03l1v")
 
-[node name="options" parent="option_popup" node_paths=PackedStringArray("_load_on_startup", "_show_main_screen", "_reload_current_project", "_collection_management", "_options_panel", "_options_label", "_collections_panel", "_collections_label") instance=ExtResource("5_wngaf")]
-_load_on_startup = NodePath("options/options/v_box_container/load_on_startup")
-_show_main_screen = NodePath("options/options/v_box_container/show_main_screen")
-_reload_current_project = NodePath("options/options/restart_editor")
-_collection_management = NodePath("options/options/collection_management")
-_options_panel = NodePath("options/options/options_panel")
-_options_label = NodePath("options/options/options_panel/options")
-_collections_panel = NodePath("options/options/collection_management/collections_panel")
-_collections_label = NodePath("options/options/collection_management/collections_panel/h_box_container/collections_title")
+[node name="options" parent="option_popup" instance=ExtResource("5_wngaf")]

@@ -37,7 +37,7 @@ var auto_mask_pattern: bool = true:
     set = set_auto_mask_pattern,
     get = get_auto_mask_pattern
 ## Used mask pattern.
-var mask_pattern = 0:
+var mask_pattern: int = 0:
     set = set_mask_pattern,
     get = get_mask_pattern
 var light_module_color: Color = Color.WHITE:
@@ -296,12 +296,12 @@ func _get_property_list() -> Array[Dictionary]:
         {
             "name": "light_module_color",
             "type": TYPE_COLOR,
-            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE ,
+            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
         },
         {
             "name": "dark_module_color",
             "type": TYPE_COLOR,
-            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE ,
+            "usage": PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
         },
         {
             "name": "auto_module_px_size",

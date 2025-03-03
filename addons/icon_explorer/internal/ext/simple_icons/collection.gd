@@ -1,10 +1,10 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
 const IconSimpleIcons := preload("res://addons/icon_explorer/internal/ext/simple_icons/icon.gd")
-const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
+const ZipExtractorThreaded := preload("res://addons/icon_explorer/internal/scripts/tools/zip_extractor_threaded.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/simple-icons/simple-icons/archive/master.zip"
-var _TITLE_TO_SLUG_REPLACEMENTS: Dictionary = {
+var _TITLE_TO_SLUG_REPLACEMENTS: Dictionary[String, String] = {
     "+": "plus",
     ".": "dot",
     "&": "and",
@@ -124,20 +124,23 @@ func _load_item(item: Dictionary) -> Array:
 # OVERRIDE
 func install(http: HTTPRequest, _version: String) -> Error:
     DirAccess.make_dir_recursive_absolute(self.directory())
-    var zip_path: String = self.directory().path_join("icons.zip")
+    var zip_path: String = OS.get_temp_dir().path_join(self.name.validate_filename() + ".zip")
     http.download_file = zip_path
     var downloader: Io.Downloader = Io.Downloader.new(http)
     downloader.await_request(_DOWNLOAD_FILE)
     if downloader.result != HTTPRequest.RESULT_SUCCESS:
         return Error.FAILED
 
-    var unzipper: ZipUnpacker = ZipUnpacker.new(zip_path, self.directory(), [
+    var extractor: ZipExtractorThreaded = ZipExtractorThreaded.new()
+    extractor.thread_count = maxi(OS.get_processor_count() / 2, 1)
+    extractor.extract(zip_path, self.directory(), [
         "simple-icons-master/package.json",
         "simple-icons-master/icons/",
         "simple-icons-master/_data/simple-icons.json",
         "simple-icons-master/LICENSE.md",
     ])
-    if !unzipper.unpack_mt(maxi(OS.get_processor_count() / 2, 1)):
+    extractor.wait()
+    if extractor.error() != Error.OK:
         return Error.FAILED
     DirAccess.remove_absolute(zip_path)
     return Error.OK

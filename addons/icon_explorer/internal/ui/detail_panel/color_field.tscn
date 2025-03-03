@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cadjan8ev877o"]
 
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/color_field.gd" id="1_vl8db"]
+[ext_resource type="Script" uid="uid://dmox6bxx7ob8" path="res://addons/icon_explorer/internal/ui/detail_panel/color_field.gd" id="1_vl8db"]
 [ext_resource type="PackedScene" uid="uid://bonqki0uorlhq" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.tscn" id="2_2clk4"]
 
 [node name="color" type="VBoxContainer" node_paths=PackedStringArray("_color_rect", "_color_label", "_title")]
@@ -9,9 +9,8 @@ _color_rect = NodePath("margin_container/color_rect")
 _color_label = NodePath("margin_container/color")
 _title = NodePath("title_panel")
 
-[node name="title_panel" parent="." node_paths=PackedStringArray("_text_label") instance=ExtResource("2_2clk4")]
+[node name="title_panel" parent="." instance=ExtResource("2_2clk4")]
 layout_mode = 2
-_text_label = NodePath("title")
 
 [node name="margin_container" type="MarginContainer" parent="."]
 layout_mode = 2

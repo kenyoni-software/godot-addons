@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://df3jwwsfmx72i"]
 
-[ext_resource type="Script" path="res://examples/git_sha_project_setting/main.gd" id="1_sowp6"]
+[ext_resource type="Script" uid="uid://2lpp4x1fefrr" path="res://examples/git_sha_project_setting/main.gd" id="1_sowp6"]
 
 [node name="main" type="PanelContainer" node_paths=PackedStringArray("_version", "_git_sha", "_version_complete")]
 anchors_preset = 15

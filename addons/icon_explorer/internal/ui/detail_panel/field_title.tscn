@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bonqki0uorlhq"]
 
-[ext_resource type="Script" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.gd" id="1_unl3l"]
+[ext_resource type="Script" uid="uid://w1ijnlevjqp1" path="res://addons/icon_explorer/internal/ui/detail_panel/field_title.gd" id="1_unl3l"]
 
 [sub_resource type="FontVariation" id="FontVariation_aajth"]
 spacing_top = -1

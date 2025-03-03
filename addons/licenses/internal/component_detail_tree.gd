@@ -12,7 +12,7 @@ enum BUTTON_ID {
 }
 
 @export var _nothing_selected_note: CenterContainer
-var _component: Component :
+var _component: Component:
     set = set_component,
     get = get_component
 var handlers: Array[GDScript] = []
@@ -69,7 +69,7 @@ func _on_item_edited(item: TreeItem = null) -> void:
         item = self.get_edited()
     var handler = item.get_meta("handler")
     handler.edited()
-    var parent = item.get_parent()
+    var parent: TreeItem = item.get_parent()
     if parent != null:
         parent.get_meta("handler").child_edited(item)
 

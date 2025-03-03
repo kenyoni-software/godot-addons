@@ -10,8 +10,7 @@ yourself. If you provide license files instead of a text, they are also exported
 
 If paths are added to license data, it will be automatically adjusted if you rename a file or folder inside the editor.
 
-You can change the project license file either with a button at the upper right, in the license menu. Or modify this and the indentation of the license file at the
-project settings under the menu `Plugins` -> `Licenses`.
+You can change the project license file either with a button at the upper right, in the license menu. Or modify this and the indentation of the license file at the project settings under the menu `Plugins` -> `Licenses`.
 
 [**Download**](https://github.com/kenyoni-software/godot-addons/releases)
 
@@ -19,7 +18,8 @@ project settings under the menu `Plugins` -> `Licenses`.
 
 | Godot | Version       |
 | ----- | ------------- |
-| 4.3   | >= 1.8.0      |
+| 4.4   | >= 1.9.0      |
+| 4.3   | 1.8.0 - 1.8.1 |
 | 4.2   | 1.6.0 - 1.7.8 |
 | 4.1   | <= 1.5.0      |
 
@@ -53,7 +53,7 @@ Providing static utility and static functions to save and load licenses.
 {{ kny:godot Array }}[[Component](#component)] get_required_engine_components () static {: .kny-mono-font }
 :     Get engine components which are marked as required to mention.
 
-{{ kny:godot int }} save ( {{ kny:godot Array }}[[Component](#component)] components, {{ kny:godot String }} file_path, {{ kny:godot String }} indent = "") -> static {: .kny-mono-font }
+{{ kny:godot int }} save ( {{ kny:godot Array }}[[Component](#component)] components, {{ kny:godot String }} file_path, {{ kny:godot String }} indent = "" ) -> static {: .kny-mono-font }
 :     Save array of components to file.
 
 [LoadResult](#licensesloadresult) load ( {{ kny:godot String }} file_path ) static {: .kny-mono-font }
@@ -150,6 +150,12 @@ License class.
 :     Returns a duplicate of itself.
 
 ## Changelog
+
+### 1.9.0
+
+- Add right click context menu to filesystem, to show the license of a file or folder
+- Internal editor restructure
+- Deprecated `Licenses.DATA_FILE` use `Licenses.CFG_KEY_DATA_FILE` instead
 
 ### 1.8.3
 
