@@ -826,7 +826,7 @@ func _get_ec_block_codeword_count(group: int) -> int:
 static func _calc_module_count(version: int) -> int:
     return 21 + 4 * (version - 1)
 
-func _get_allignment_pattern_positions() -> Array[Vector2i]:
+func _get_alignment_pattern_positions() -> Array[Vector2i]:
     var module_count: int = self.get_module_count()
     var positions: Array[Vector2i] = []
     for row: int in _ALIGNMENT_PATTERN_POSITIONS[self.version - 1]:
@@ -1375,7 +1375,7 @@ func _place_modules(structured_data: BitStream) -> PackedByteArray:
     _place_finder(qr_data, module_count, Vector2i(module_count - 7, 0))
     _place_separators(qr_data, module_count)
 
-    var alignment_pattern_pos: Array[Vector2i] = self._get_allignment_pattern_positions()
+    var alignment_pattern_pos: Array[Vector2i] = self._get_alignment_pattern_positions()
     for pos: Vector2i in alignment_pattern_pos:
         _place_align_pattern(qr_data, module_count, pos)
 
@@ -1414,7 +1414,7 @@ func _get_best_qr_mask(masked_qrs: Array[PackedByteArray], module_count: int) ->
 
 func _mask_qr(qr_data: PackedByteArray) -> PackedByteArray:
     var module_count: int = self.get_module_count()
-    var alignment_pattern_pos: Array[Vector2i] = self._get_allignment_pattern_positions()
+    var alignment_pattern_pos: Array[Vector2i] = self._get_alignment_pattern_positions()
 
     # apply mask pattern
     if !self.auto_mask_pattern:
