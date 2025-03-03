@@ -1,7 +1,7 @@
 extends "res://addons/icon_explorer/internal/scripts/collection.gd"
 
 const IconTabler := preload("res://addons/icon_explorer/internal/ext/icon_tabler/icon.gd")
-const ZipUnpacker := preload("res://addons/icon_explorer/internal/scripts/tools/zip_unpacker.gd")
+const ZipExtractorThreaded := preload("res://addons/icon_explorer/internal/scripts/tools/zip_extractor_threaded.gd")
 
 const _DOWNLOAD_FILE: String = "https://github.com/tabler/tabler-icons/archive/main.zip"
 
@@ -72,12 +72,15 @@ func install(http: HTTPRequest, _version: String) -> Error:
     if downloader.result != HTTPRequest.RESULT_SUCCESS:
         return Error.FAILED
 
-    var unzipper: ZipUnpacker = ZipUnpacker.new(zip_path, self.directory(), [
+    var extractor: ZipExtractorThreaded = ZipExtractorThreaded.new()
+    extractor.thread_count = maxi(OS.get_processor_count() / 2, 1)
+    extractor.extract(zip_path, self.directory(), [
         "tabler-icons-main/package.json",
         "tabler-icons-main/icons/",
         "tabler-icons-main/LICENSE",
     ])
-    if !unzipper.unpack_mt(maxi(OS.get_processor_count() / 2, 1)):
+    extractor.wait()
+    if extractor.error() != Error.OK:
         return Error.FAILED
     DirAccess.remove_absolute(zip_path)
     return Error.OK
