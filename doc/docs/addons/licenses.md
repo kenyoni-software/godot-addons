@@ -53,7 +53,7 @@ Providing static utility and static functions to save and load licenses.
 {{ kny:godot Array }}[[Component](#component)] get_required_engine_components () static {: .kny-mono-font }
 :     Get engine components which are marked as required to mention.
 
-{{ kny:godot int }} save ( {{ kny:godot Array }}[[Component](#component)] components, {{ kny:godot String }} file_path, {{ kny:godot String }} indent = "" ) -> static {: .kny-mono-font }
+[Error](https://docs.godotengine.org/en/stable/classes/class_%40globalscope.html#enum-globalscope-error) save ( {{ kny:godot Array }}[[Component](#component)] components, {{ kny:godot String }} file_path, {{ kny:godot String }} indent = "" ) -> static {: .kny-mono-font }
 :     Save array of components to file.
 
 [LoadResult](#licensesloadresult) load ( {{ kny:godot String }} file_path ) static {: .kny-mono-font }
@@ -156,6 +156,7 @@ License class.
 - Add right click context menu to filesystem, to show the license of a file or folder
 - Internal editor restructure
 - Deprecated `Licenses.DATA_FILE` use `Licenses.CFG_KEY_DATA_FILE` instead
+- Change `Licenses.save` signature it is now returning `Error` instead of `int`
 
 ### 1.8.3
 
