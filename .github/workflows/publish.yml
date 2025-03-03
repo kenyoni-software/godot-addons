@@ -68,6 +68,12 @@ jobs:
             asset-id: "no-deploy",
           }
           - {
+            id: "kenyoni/remove_orphan_uid",
+            id-name: "remove_orphan_uid",
+            name: "Remove Orphan UID",
+            asset-id: "no-deploy",
+          }
+          - {
             id: "qr_code",
             id-name: "qr_code",
             name: "QR Code",

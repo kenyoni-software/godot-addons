@@ -78,6 +78,12 @@ Find the releases [here](https://github.com/kenyoni-software/godot-addons/releas
 
     QR Code generator and nodes.
 
+-   [Remove Orphan UID](addons/remove_orphan_uid.md){ .md-button .center-lg-button }
+
+    ---
+
+    Remove orphan UIDs from the project.
+
 -   [TextureButtonColored](addons/texture_button_colored.md){ .md-button .center-lg-button }
 
     ---
