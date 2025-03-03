@@ -35,8 +35,12 @@ func extract(zip_path: String, output_path: String, unpack_only: PackedStringArr
         self._set_error(err, "failed to start main thread")
     return err
 
+## Alias for wait
+func close() -> void:
+    self.wait()
+
 func wait() -> void:
-    if self._main_thread != null && self._main_thread.is_alive():
+    if self._main_thread != null && self._main_thread.is_started():
         self._main_thread.wait_to_finish()
 
 func _extract_main() -> void:
@@ -48,6 +52,10 @@ func _extract_main() -> void:
         return
 
     var files: PackedStringArray = reader.get_files()
+    err = reader.close()
+    if err != Error.OK:
+        self._set_error(err, "failed to close zip file")
+        self.completed.emit.call_deferred()
     self._progress_guard.lock()
     self._processed = 0
     self._total = files.size()
@@ -75,7 +83,7 @@ func _extract_main() -> void:
             break
 
         threads[thread_idx] = Thread.new()
-        err = threads[thread_idx].start(self._extract_files.bind(reader, files.slice(start_idx, end_idx)))
+        err = threads[thread_idx].start(self._extract_files.bind(files.slice(start_idx, end_idx)))
         if err != Error.OK:
             self._cancel()
             self._set_error(err, "failed to start worker thread")
@@ -83,16 +91,20 @@ func _extract_main() -> void:
             break
 
     for thread: Thread in threads:
-        if thread != null && thread.is_alive():
+        if thread != null && thread.is_started():
             thread.wait_to_finish()
     self._cancel()
-    err = reader.close()
-    if err != Error.OK:
-        self._set_error(err, "failed to close zip file")
-        self.completed.emit.call_deferred()
     self.completed.emit.call_deferred()
 
-func _extract_files(reader: ZIPReader, files: PackedStringArray) -> void:
+func _extract_files(files: PackedStringArray) -> void:
+    var reader: ZIPReader = ZIPReader.new()
+    var err: Error = reader.open(self._zip_path)
+    if err != Error.OK:
+        self._cancel()
+        self._set_error(err, "failed to open zip file")
+        self.completed.emit.call_deferred()
+        return
+
     for path: String in files:
         if !self._cancel_sem.try_wait():
             return
@@ -116,6 +128,11 @@ func _extract_files(reader: ZIPReader, files: PackedStringArray) -> void:
             self.completed.emit.call_deferred()
             return
         self._add_processed(1)
+    err = reader.close()
+    if err != Error.OK:
+        self._cancel()
+        self._set_error(err, "failed to close zip file")
+        self.completed.emit.call_deferred()
 
 func _cancel() -> void:
     while self._cancel_sem.try_wait():
