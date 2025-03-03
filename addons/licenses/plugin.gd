@@ -15,7 +15,7 @@ func _get_plugin_name() -> String:
     return "Licenses"
 
 func _enter_tree() -> void:
-    set_project_setting(Licenses.DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
+    set_project_setting(Licenses.CFG_KEY_DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
     set_project_setting(Licenses.CFG_KEY_INDENTATION, 0, TYPE_INT, PROPERTY_HINT_ENUM, "None,Spaces,Tabs")
     LicensesInterface.create_interface()
     LicensesInterface.get_interface().load_licenses(Licenses.get_license_data_filepath())

@@ -3,7 +3,7 @@ extends RefCounted
 const Component := preload("res://addons/licenses/component.gd")
 
 ## @deprecated: Use `CFG_KEY_DATA_FILE` instead.
-const DATA_FILE: String = "plugins/licenses/data_file"
+const DATA_FILE: String = CFG_KEY_DATA_FILE
 const CFG_KEY_DATA_FILE: String = "plugins/licenses/data_file"
 const CFG_KEY_INDENTATION: String = "plugins/licenses/indentation"
 
@@ -110,10 +110,10 @@ static func load(file_path: String) -> LoadResult:
     return LoadResult.new(components)
 
 static func set_license_data_filepath(path: String) -> void:
-    ProjectSettings.set_setting(DATA_FILE, path)
+    ProjectSettings.set_setting(CFG_KEY_DATA_FILE, path)
 
 static func get_license_data_filepath() -> String:
     # does not work due to https://github.com/godotengine/godot/issues/56598
-    if ProjectSettings.has_setting(DATA_FILE):
-        return ProjectSettings.get_setting(DATA_FILE)
+    if ProjectSettings.has_setting(CFG_KEY_DATA_FILE):
+        return ProjectSettings.get_setting(CFG_KEY_DATA_FILE)
     return "res://licenses.json"
