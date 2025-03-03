@@ -23,6 +23,10 @@ Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
 
 ## Changelog
 
+### 1.6.0
+
+- Add UIDs for Godot 4.4
+
 ### 1.5.0
 
 - Remove editor toast notification (access was removed)

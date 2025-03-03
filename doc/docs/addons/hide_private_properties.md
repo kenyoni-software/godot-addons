@@ -25,6 +25,10 @@ This plugin will hide exported private properties in the inspector for instantia
 
 ## Changelog
 
+### 1.2.0
+
+- Add UIDs for Godot 4.4
+
 ### 1.1.2
 
 - Fix: property not found warning

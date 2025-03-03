@@ -19,7 +19,7 @@ You can change the project license file either with a button at the upper right,
 | Godot | Version       |
 | ----- | ------------- |
 | 4.4   | >= 1.9.0      |
-| 4.3   | 1.8.0 - 1.8.1 |
+| 4.3   | 1.8.0 - 1.8.3 |
 | 4.2   | 1.6.0 - 1.7.8 |
 | 4.1   | <= 1.5.0      |
 
@@ -153,6 +153,8 @@ License class.
 
 ### 1.9.0
 
+- Require Godot 4.4
+- Add UIDs for Godot 4.4
 - Add right click context menu to filesystem, to show the license of a file or folder
 - Internal editor restructure
 - Deprecated `Licenses.DATA_FILE` use `Licenses.CFG_KEY_DATA_FILE` instead

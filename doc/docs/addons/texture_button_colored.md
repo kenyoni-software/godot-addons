@@ -42,6 +42,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 ## Changelog
 
+### 1.5.0
+
+- Add UIDs for Godot 4.4
+
 ### 1.4.0
 
 - Remove editor toast notification (access was removed)

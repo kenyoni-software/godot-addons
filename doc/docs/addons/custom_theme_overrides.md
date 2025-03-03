@@ -68,6 +68,10 @@ func _property_get_revert(_property: StringName) -> Variant:
 
 ## Changelog
 
+### 1.2.0
+
+- Add UIDs for Godot 4.4
+
 ### 1.1.0
 
 - Require Godot 4.2

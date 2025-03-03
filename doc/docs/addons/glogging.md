@@ -119,6 +119,10 @@ void log ( {{ kny:godot int }} level, {{ kny:godot Variant }} message, {{ kny:go
 
 ## Changelog
 
+### 1.6.0
+
+- Add UIDs for Godot 4.4
+
 ### 1.5.1
 
 - Code improvement

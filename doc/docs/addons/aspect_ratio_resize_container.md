@@ -25,6 +25,10 @@ This works except for `STRETCH_MODE_COVER`.
 
 ## Changelog
 
+### 3.3.0
+
+- Add UIDs for Godot 4.4
+
 ### 3.2.2
 
 - Add more static typing

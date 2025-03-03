@@ -152,6 +152,12 @@ Shift JIS encoding utility.
 
 ## Changelog
 
+### 1.2.0
+
+- Require Godot 4.4
+- Add UIDs for Godot 4.4
+- Update static typing
+
 ### 1.1.3
 
 - Code improvements

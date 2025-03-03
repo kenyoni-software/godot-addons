@@ -25,11 +25,11 @@ You can remove the main screen button in the options, the editor has to be resta
 
 ## Compatibility
 
-| Godot | Version  |
-| ----- | -------- |
-| 4.4   | >= 1.3.0 |
-| 4.3   | 1.2.0    |
-| 4.2   | <= 1.1.0 |
+| Godot | Version       |
+| ----- | ------------- |
+| 4.4   | >= 1.4.0      |
+| 4.3   | 1.2.0 - 1.3.0 |
+| 4.2   | <= 1.1.0      |
 
 ## Screenshot
 
@@ -46,7 +46,9 @@ As popup:
 ### 1.4.0
 
 - Require Godot 4.4
+- Add UIDs for Godot 4.4
 - Use OS temporary directory for downloads
+- Refactored ZIP extraction
 
 ### 1.3.0
 
