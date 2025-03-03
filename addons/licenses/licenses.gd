@@ -66,14 +66,15 @@ static func get_required_engine_components() -> Array[Component]:
     engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
-static func save(components: Array[Component], file_path: String, indent: String = "") -> int:
+static func save(components: Array[Component], file_path: String, indent: String = "") -> Error:
     var file: FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
     if file == null:
         return FileAccess.get_open_error()
     var raw: Array[Dictionary] = []
     for component: Component in components:
         raw.append(component.serialize())
-    file.store_line(JSON.stringify({"components": raw}, indent))
+    if !file.store_line(JSON.stringify({"components": raw}, indent)):
+        return file.get_error()
     file = null
     return OK
 
