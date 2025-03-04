@@ -41,7 +41,7 @@ You can find a documentation with examples and detailed information [here](https
   Enable or disable plugins from within the editor main screen.  
 - [QR Code](https://kenyoni-software.github.io/godot-addons/addons/qr_code)  
   QRCodeRect and QR Code generation.
-- [Remove Orphan UID](https://kenyoni-software.github.io/godot-addons/addons/remove_orphan_uid)
+- [Remove Orphan UID](https://kenyoni-software.github.io/godot-addons/addons/remove_orphan_uid)  
   Remove orphan UIDs from the project.
 - [TextureButtonColored](https://kenyoni-software.github.io/godot-addons/addons/texture_button_colored)  
   Extension of `TextureButton` with color options.
