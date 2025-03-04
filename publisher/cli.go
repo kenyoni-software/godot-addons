@@ -188,7 +188,7 @@ func doActionAssetLibrary(baseDir string, addonId string, cfg assetLibraryAction
 	assetData := internal.AssetData{
 		AssetId:          cfg.AssetId,
 		Title:            plgCfg.Plugin.Name,
-		Description:      fmt.Sprintf("%s\n\n%s", plgCfg.Plugin.Description, fmt.Sprintf("More detailed information and documentation is available at https://kenyoni-software.github.io/godot-addons/addons/%s", addon.IdName())),
+		Description:      fmt.Sprintf("%s\n\n%s", plgCfg.Plugin.Description, fmt.Sprintf("More detailed information and documentation is available at https://kenyoni-software.github.io/godot-addons/addons/%s", addon.IDName())),
 		VersionString:    plgCfg.Plugin.Version,
 		GodotVersion:     gdMinversion,
 		CategoryId:       cfg.Category,
@@ -228,7 +228,7 @@ func doActionZip(baseDir string, addonId string, cfg zipActionCfg) {
 	if outputDir == "" {
 		outputDir = filepath.Join(addon.ProjectPath(), "archives")
 	}
-	outputFile := filepath.Join(outputDir, addon.IdName()+"-"+strings.ReplaceAll(plgCfg.Plugin.Version, ".", "_")+".zip")
+	outputFile := filepath.Join(outputDir, addon.IDName()+"-"+strings.ReplaceAll(plgCfg.Plugin.Version, ".", "_")+".zip")
 	err = addon.Zip(outputFile)
 	if err != nil {
 		log.Fatalln(err)

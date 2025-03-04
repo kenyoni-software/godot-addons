@@ -29,26 +29,26 @@ type PluginCfg struct {
 }
 
 type Addon struct {
-	addonId     string
+	addonID     string
 	projectPath string
 }
 
 func NewAddon(id string, projectPath string) *Addon {
 	return &Addon{
-		addonId:     id,
+		addonID:     id,
 		projectPath: projectPath,
 	}
 }
 
-// Id contains the namespace directory and the addon directory name like "kenyoni/addon_name"
-func (addon *Addon) Id() string {
-	return addon.addonId
+// ID contains the namespace directory and the addon directory name like "kenyoni/addon_name"
+func (addon *Addon) ID() string {
+	return addon.addonID
 }
 
-// IdName is only the addon directory name like "addon_name"
-func (addon *Addon) IdName() string {
-	splitted := strings.Split(addon.addonId, "/")
-	return splitted[len(splitted)-1]
+// IDName is only the addon directory name like "addon_name"
+func (addon *Addon) IDName() string {
+	split := strings.Split(addon.addonID, "/")
+	return split[len(split)-1]
 }
 
 func (addon *Addon) ProjectPath() string {
@@ -56,11 +56,11 @@ func (addon *Addon) ProjectPath() string {
 }
 
 func (addon *Addon) Path() string {
-	return filepath.Join(addon.projectPath, "addons", addon.Id())
+	return filepath.Join(addon.projectPath, "addons", addon.ID())
 }
 
 func (addon *Addon) DocPath() string {
-	return filepath.Join(addon.projectPath, "doc", "docs", "addons", addon.IdName()+".md")
+	return filepath.Join(addon.projectPath, "doc", "docs", "addons", addon.IDName()+".md")
 }
 
 func (addon *Addon) PluginCfgPath() string {
@@ -82,24 +82,24 @@ func (addon *Addon) Zip(outputFile string) error {
 	defer zw.Close()
 
 	// copy files
-	err = ZipDir(zw, addon.Path(), filepath.Join("addons", addon.Id()))
+	err = ZipDir(zw, addon.Path(), filepath.Join("addons", addon.ID()))
 	if err != nil {
 		return err
 	}
-	exampleDir := filepath.Join(addon.ProjectPath(), "examples", addon.IdName())
+	exampleDir := filepath.Join(addon.ProjectPath(), "examples", addon.IDName())
 	// zip example directory only if it exists
 	if _, err := os.Stat(exampleDir); err == nil {
-		err = ZipDir(zw, exampleDir, filepath.Join("examples", addon.Id()))
+		err = ZipDir(zw, exampleDir, filepath.Join("examples", addon.ID()))
 		if err != nil {
 			return err
 		}
 	}
 
-	err = ZipFile(zw, filepath.Join(addon.ProjectPath(), "LICENSE.md"), filepath.Join("addons", addon.Id(), "LICENSE.md"))
+	err = ZipFile(zw, filepath.Join(addon.ProjectPath(), "LICENSE.md"), filepath.Join("addons", addon.ID(), "LICENSE.md"))
 	if err != nil {
 		return err
 	}
-	err = ZipFile(zw, filepath.Join(addon.ProjectPath(), "README.md"), filepath.Join("examples", addon.Id(), "README.md"))
+	err = ZipFile(zw, filepath.Join(addon.ProjectPath(), "README.md"), filepath.Join("examples", addon.ID(), "README.md"))
 	if err != nil {
 		return err
 	}
