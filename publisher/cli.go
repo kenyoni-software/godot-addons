@@ -128,9 +128,16 @@ func doActionGithub(baseDir string, addonId string, cfg githubActionCfg) {
 	if plg.Plugin.Dependencies.Godot != "" {
 		descStr += "Godot Compatibility: " + plg.Plugin.Dependencies.Godot + "\n"
 	}
+	changelog, err := internal.GetChangelog(addon, plg.Plugin.Version)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	if changelog != "" {
+		descStr += "\n## Changelog:\n\n" + changelog + "\n"
+	}
 	outputStr += fmt.Sprintf("notes<<%s\n%s%s\n", io.EOF, descStr, io.EOF)
 
-	oFile, err := os.OpenFile(cfg.OutputFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	oFile, err := os.OpenFile(cfg.OutputFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -200,7 +207,6 @@ func doActionAssetLibrary(baseDir string, addonId string, cfg assetLibraryAction
 	if err != nil {
 		log.Fatalf("asset update failed: %v\n", err)
 	}
-
 }
 
 func doActionZip(baseDir string, addonId string, cfg zipActionCfg) {

@@ -59,6 +59,10 @@ func (addon *Addon) Path() string {
 	return filepath.Join(addon.projectPath, "addons", addon.Id())
 }
 
+func (addon *Addon) DocPath() string {
+	return filepath.Join(addon.projectPath, "doc", "docs", "addons", addon.IdName()+".md")
+}
+
 func (addon *Addon) PluginCfgPath() string {
 	return filepath.Join(addon.Path(), "plugin.cfg")
 }
