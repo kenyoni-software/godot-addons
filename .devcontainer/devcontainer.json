@@ -1,0 +1,29 @@
+{
+  "name": "Kenyoni Godot Addons",
+  "image": "mcr.microsoft.com/devcontainers/go:1.23",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "streetsidesoftware.code-spell-checker",
+        "jerrygoyal.shortcut-menu-bar",
+        "lacroixdavid1.vscode-format-context-menu",
+        "spmeesseman.vscode-taskexplorer",
+        "tyriar.sort-lines"
+      ],
+      "settings": {
+        "go.lintTool": "golangci-lint",
+        "go.lintFlags": [
+          "--fast"
+        ],
+        "gopls": {
+          "formatting.local": "github.com/kenyoni-software/godot-addons/publisher",
+          "formatting.gofumpt": true
+        }
+      }
+    }
+  },
+  "postCreateCommand": {
+    "download dependencies": "cd publisher && go mod download"
+  }
+}
