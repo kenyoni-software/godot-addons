@@ -42,6 +42,10 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 ## Changelog
 
+### 1.5.1
+
+- Apply correct Godot version in metadata (4.3)
+
 ### 1.5.0
 
 - Add UIDs for Godot 4.4
