@@ -15,19 +15,6 @@ import (
 	"github.com/kenyoni-software/godot-addons/publisher/internal"
 )
 
-const (
-	actionGithub = "github"
-	actionZip    = "zip"
-)
-
-type githubActionCfg struct {
-	OutputFile string
-}
-
-type zipActionCfg struct {
-	OutputDir string
-}
-
 type assetLibraryActionCfg struct {
 	Username string
 	Password string
@@ -36,82 +23,56 @@ type assetLibraryActionCfg struct {
 	Host     string
 }
 
-type cli struct {
-	rootCmd *cobra.Command
+func newCli() *cobra.Command {
+	rootCmd := &cobra.Command{}
+	var baseDir string
 
-	Addon   string
-	BaseDir string
-
-	GithubAction githubActionCfg
-	ZipAction    zipActionCfg
-	AssetLibrary assetLibraryActionCfg
-}
-
-func newCli() *cli {
-	c := cli{
-		GithubAction: githubActionCfg{},
-		AssetLibrary: assetLibraryActionCfg{},
-		ZipAction:    zipActionCfg{},
-	}
-
-	c.rootCmd = &cobra.Command{
+	rootCmd = &cobra.Command{
 		Short: "Kenyoni Godot Addon publishing helper",
 	}
-	c.rootCmd.PersistentFlags().StringVarP(&c.BaseDir, "baseDir", "b", "./", "Base directory of the project.")
-	c.rootCmd.MarkFlagRequired("baseDir")
-	c.rootCmd.PersistentFlags().StringVarP(&c.Addon, "Addon", "a", "", "Addon to proceed.")
-	c.rootCmd.MarkFlagRequired("Addon")
+	rootCmd.PersistentFlags().StringVarP(&baseDir, "baseDir", "b", "./", "Base directory of the project.")
 
 	ghCmd := &cobra.Command{
-		Use:   "github",
+		Use:   "github [addon id] [output file]",
 		Short: "Save information about an Addon to the given file, to be used with $GITHUB_OUTPUT",
 		Run: func(cmd *cobra.Command, args []string) {
-			doActionGithub(c.BaseDir, c.Addon, c.GithubAction)
+			doActionGithub(baseDir, args[0], args[1])
 		},
+		Args: cobra.ExactArgs(2),
 	}
-	ghCmd.Flags().StringVarP(&c.GithubAction.OutputFile, "output", "o", "", "Output file to write the result into.")
-	ghCmd.MarkFlagRequired("output")
 
+	var assetLibrary assetLibraryActionCfg
 	gdAssetCmd := &cobra.Command{
 		Use:   "asset-library",
 		Short: "Publish given Addon to an Asset Library.",
 		Run: func(cmd *cobra.Command, args []string) {
-			doActionAssetLibrary(c.BaseDir, c.Addon, c.AssetLibrary)
+			doActionAssetLibrary(baseDir, args[0], assetLibrary)
 		},
+		Args: cobra.ExactArgs(1),
 	}
-	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.AssetId, "asset-id", "", "", "Asset ID.")
-	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Username, "username", "u", "", "Asset Library username.")
+	gdAssetCmd.Flags().StringVarP(&assetLibrary.AssetId, "asset-id", "", "", "Asset ID.")
+	gdAssetCmd.Flags().StringVarP(&assetLibrary.Username, "username", "u", "", "Asset Library username.")
 	gdAssetCmd.MarkFlagRequired("username")
-	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Password, "password", "p", "", "Asset Library password.")
+	gdAssetCmd.Flags().StringVarP(&assetLibrary.Password, "password", "p", "", "Asset Library password.")
 	gdAssetCmd.MarkFlagRequired("password")
-	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Category, "category", "c", "", "Asset category.")
+	gdAssetCmd.Flags().StringVarP(&assetLibrary.Category, "category", "c", "", "Asset category.")
 	gdAssetCmd.MarkFlagRequired("category")
-	gdAssetCmd.Flags().StringVarP(&c.AssetLibrary.Host, "host", "h", "https://godotengine.org/asset-library/api", "Asset Library Host URL.")
+	gdAssetCmd.Flags().StringVarP(&assetLibrary.Host, "host", "h", "https://godotengine.org/asset-library/api", "Asset Library Host URL.")
 
 	zipCmd := &cobra.Command{
-		Use:   "zip",
+		Use:   "zip [addon id] [output directory]",
 		Short: "Zip specified Addon release ready.",
 		Run: func(cmd *cobra.Command, args []string) {
-			doActionZip(c.BaseDir, c.Addon, c.ZipAction)
+			doActionZip(baseDir, args[0], args[1])
 		},
 	}
-	zipCmd.Flags().StringVarP(&c.ZipAction.OutputDir, "output", "o", "", "Output directory to place the archive into.")
-	zipCmd.MarkFlagRequired("output")
 
-	c.rootCmd.AddCommand(ghCmd, gdAssetCmd, zipCmd)
+	rootCmd.AddCommand(ghCmd, gdAssetCmd, zipCmd)
 
-	return &c
+	return rootCmd
 }
 
-func (c *cli) Execute() {
-	err := c.rootCmd.Execute()
-	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
-	}
-}
-
-func doActionGithub(baseDir string, addonId string, cfg githubActionCfg) {
+func doActionGithub(baseDir string, addonId string, outputFile string) {
 	addon := internal.NewAddon(addonId, baseDir)
 	plg, err := addon.GetPluginCfg()
 	if err != nil {
@@ -137,7 +98,7 @@ func doActionGithub(baseDir string, addonId string, cfg githubActionCfg) {
 	}
 	outputStr += fmt.Sprintf("notes<<%s\n%s%s\n", io.EOF, descStr, io.EOF)
 
-	oFile, err := os.OpenFile(cfg.OutputFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
+	oFile, err := os.OpenFile(outputFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -209,7 +170,7 @@ func doActionAssetLibrary(baseDir string, addonId string, cfg assetLibraryAction
 	}
 }
 
-func doActionZip(baseDir string, addonId string, cfg zipActionCfg) {
+func doActionZip(baseDir string, addonId string, outputDir string) {
 	addonDir := filepath.Join(baseDir, "addons", addonId)
 	_, err := os.Stat(addonDir)
 	if errors.Is(err, os.ErrNotExist) {
@@ -224,7 +185,6 @@ func doActionZip(baseDir string, addonId string, cfg zipActionCfg) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	outputDir := cfg.OutputDir
 	if outputDir == "" {
 		outputDir = filepath.Join(addon.ProjectPath(), "archives")
 	}
