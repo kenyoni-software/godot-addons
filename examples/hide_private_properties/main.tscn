@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dophempjkk2uu"]
+[gd_scene load_steps=3 format=3 uid="uid://dophempjkk2uu"]
 
 [ext_resource type="PackedScene" uid="uid://bfmvmff1ofi70" path="res://examples/hide_private_properties/sub_scene.tscn" id="2_wg4dj"]
+[ext_resource type="Script" uid="uid://ut6aj5n8uysa" path="res://examples/hide_private_properties/control.gd" id="3_d4voe"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -12,3 +13,14 @@ grow_vertical = 2
 
 [node name="sub_scene" parent="." instance=ExtResource("2_wg4dj")]
 layout_mode = 1
+_private_text_with_warning = "edited"
+
+[node name="sub_scene_as_placeholder" parent="." instance_placeholder="res://examples/hide_private_properties/sub_scene.tscn"]
+layout_mode = 1
+_private_text_with_warning = "edited"
+
+[node name="node_with_script" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_d4voe")

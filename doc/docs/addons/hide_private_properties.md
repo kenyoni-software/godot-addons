@@ -2,18 +2,22 @@
 
 Private members (names starting with an underscore) should not be exposed.
 
-This plugin will hide exported private properties in the inspector for instantiated child scenes.
+This plugin hides exported private properties from instantiated scenes, that they cannot be accidentally overridden.
 
-!!! note
+{{ kny:badge-version "1.3.0" }}  
+You can change this behavior in the editor settings under `Interface -> Inspector -> Hide Private Properties`. It will be enabled by default.  
+To search for overridden properties, this plugin will give you a dialog under `Project -> Tools -> Scan for private property overrides...`
 
-    You do not need to add this plugin to your credits as it is used only inside the editor and not in the final product. You can still do it if you want to.
+!!! note "Credits"
+
+    You are not required to credit this plugin in your in-app credits, as it is only used within the editor and not in the final product. However, you may do so if you wish.
 
 [**Download**](https://github.com/kenyoni-software/godot-addons/releases)
 
 ## Compatibility
 
 | Godot | Version  |
-|-------|----------|
+| ----- | -------- |
 | 4.4   | >= 1.1.0 |
 | 4.3   | >= 1.1.0 |
 | 4.2   | >= 1.1.0 |
@@ -24,6 +28,11 @@ This plugin will hide exported private properties in the inspector for instantia
 {{ kny:source "/examples/hide_private_properties/" }}
 
 ## Changelog
+
+### 1.3.0
+
+- Add Editor setting to enable/disable hiding private properties
+- Add dialog to search for overridden properties
 
 ### 1.2.0
 

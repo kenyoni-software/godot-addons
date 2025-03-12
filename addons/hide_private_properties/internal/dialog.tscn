@@ -1,0 +1,107 @@
+[gd_scene load_steps=3 format=3 uid="uid://drq4dvmvv73n3"]
+
+[ext_resource type="Script" uid="uid://dqcesucdar1k2" path="res://addons/hide_private_properties/internal/dialog.gd" id="1_8oym1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjxym"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.365, 0.365, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_detail = 1
+
+[node name="dialog" type="Window" node_paths=PackedStringArray("_scan_button", "_progress", "_background_panel", "_warn_label", "_label_panel", "_info_label", "_tree", "_tree_container")]
+disable_3d = true
+title = "Hide Private Properties"
+size = Vector2i(1920, 1080)
+visible = false
+wrap_controls = true
+transient = true
+script = ExtResource("1_8oym1")
+_scan_button = NodePath("menu/panel_container/h_box_container/scan")
+_progress = NodePath("menu/panel_container/h_box_container/scan/progress_bar")
+_background_panel = NodePath("background_panel")
+_warn_label = NodePath("menu/panel_container/h_box_container/warn_label")
+_label_panel = NodePath("menu/label_panel")
+_info_label = NodePath("menu/label_panel/info_label")
+_tree = NodePath("menu/tree_container/tree")
+_tree_container = NodePath("menu/tree_container")
+
+[node name="background_panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sjxym")
+
+[node name="menu" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="panel_container" type="PanelContainer" parent="menu"]
+layout_mode = 2
+
+[node name="h_box_container" type="HBoxContainer" parent="menu/panel_container"]
+layout_mode = 2
+
+[node name="warn_label" type="Label" parent="menu/panel_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_type_variation = &"HeaderSmall"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Private Properties are not hidden while this window is open!"
+
+[node name="scan" type="Button" parent="menu/panel_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Scan Project"
+
+[node name="progress_bar" type="ProgressBar" parent="menu/panel_container/h_box_container/scan"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+indeterminate = true
+editor_preview_indeterminate = true
+
+[node name="tree_container" type="VBoxContainer" parent="menu"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="menu/tree_container"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Overriden Private Properties"
+
+[node name="tree" type="Tree" parent="menu/tree_container"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
+[node name="label_panel" type="PanelContainer" parent="menu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="info_label" type="Label" parent="menu/label_panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Not scanned yet."
+horizontal_alignment = 1
