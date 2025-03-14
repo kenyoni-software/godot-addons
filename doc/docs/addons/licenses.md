@@ -151,6 +151,10 @@ License class.
 
 ## Changelog
 
+### 1.9.1
+
+- Improve error checking and cleanup code
+
 ### 1.9.0
 
 - Require Godot 4.4
