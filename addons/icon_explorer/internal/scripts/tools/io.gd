@@ -4,10 +4,12 @@ static func rrm_dir(dir_path: String) -> Error:
     if !dir:
         return DirAccess.get_open_error()
     
-    dir.list_dir_begin()
+    var err: Error = dir.list_dir_begin()
+    if err != Error.OK:
+        return err
     var file_name: String = dir.get_next()
     while file_name != "":
-        var err: Error = Error.OK
+        err = Error.OK
         if dir.current_is_dir():
             err = rrm_dir(dir_path.path_join(file_name))
         else:
@@ -18,7 +20,7 @@ static func rrm_dir(dir_path: String) -> Error:
         file_name = dir.get_next()
     dir.list_dir_end()
     dir = null
-    var err: Error = DirAccess.remove_absolute(dir_path)
+    err = DirAccess.remove_absolute(dir_path)
     if err != Error.OK:
         return err
     return Error.OK
