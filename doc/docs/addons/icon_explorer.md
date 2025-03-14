@@ -47,6 +47,11 @@ As popup:
 
 ## Changelog
 
+### 1.4.1
+
+- Improve error checking
+- Make `preview_size_exp` an internal setting
+
 ### 1.4.0
 
 - Require Godot 4.4

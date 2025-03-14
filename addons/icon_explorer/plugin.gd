@@ -25,6 +25,7 @@ func _enter_tree() -> void:
     set_project_setting("plugins/icon_explorer/show_main_screen", true, TYPE_BOOL, PROPERTY_HINT_NONE)
     ProjectSettings.set_restart_if_changed("plugins/icon_explorer/show_main_screen", true)
     set_project_setting("plugins/icon_explorer/preview_size_exp", 6, TYPE_INT, PROPERTY_HINT_RANGE, "4,8,1")
+    ProjectSettings.set_as_internal("plugins/icon_explorer/preview_size_exp", true)
 
     self._explorer_dialog = ExplorerDialogScene.instantiate()
     EditorInterface.get_base_control().add_child(self._explorer_dialog)
