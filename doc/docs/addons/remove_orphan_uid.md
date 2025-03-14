@@ -22,6 +22,10 @@ Use `Project` -> `Tools` -> `Remove Orphan UID` to remove.
 
 ## Changelog
 
+### 1.1.0
+
+- Show a notification when the process is done
+
 ### 1.0.0
 
-- Initial release.
+- Initial release
