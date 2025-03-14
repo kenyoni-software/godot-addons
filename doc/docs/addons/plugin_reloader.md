@@ -18,6 +18,10 @@ Enable or disable plugins from within the editor main screen.
 
 ## Changelog
 
+### 1.2.1
+
+- Reload plugin list if changed in Godot's plugin dialog
+
 ### 1.2.0
 
 - Find plugins recursively with infinite depth (was limited to 2 levels)
