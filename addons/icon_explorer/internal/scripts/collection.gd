@@ -42,7 +42,7 @@ func install(http: HTTPRequest, version: String) -> Error:
 # VIRTUAL
 # called in a thread
 func remove() -> Error:
-    if Io.rrm_dir(self.directory()):
+    if Io.rrm_dir(self.directory()) == Error.OK:
         return Error.OK
     return Error.FAILED
 

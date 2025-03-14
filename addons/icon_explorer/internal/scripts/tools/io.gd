@@ -1,25 +1,28 @@
 ## recursive remove directory
-static func rrm_dir(dir_path: String) -> bool:
+static func rrm_dir(dir_path: String) -> Error:
     var dir: DirAccess = DirAccess.open(dir_path)
     if !dir:
-        return false
+        return DirAccess.get_open_error()
     
     dir.list_dir_begin()
     var file_name: String = dir.get_next()
     while file_name != "":
+        var err: Error = Error.OK
         if dir.current_is_dir():
-            if !rrm_dir(dir_path.path_join(file_name)):
-                dir.list_dir_end()
-                return false
+            err = rrm_dir(dir_path.path_join(file_name))
         else:
-            if dir.remove(file_name) != Error.OK:
-                dir.list_dir_end()
-                return false
+            err = dir.remove(file_name)
+        if err != Error.OK:
+            dir.list_dir_end()
+            return err
         file_name = dir.get_next()
     dir.list_dir_end()
     dir = null
-    DirAccess.remove_absolute(dir_path)
-    return true
+    var err: Error = DirAccess.remove_absolute(dir_path)
+    if err != Error.OK:
+        return err
+    return Error.OK
+
 
 class Downloader:
     extends RefCounted
@@ -45,7 +48,11 @@ class Downloader:
 
     # call on main thread
     func request(uri: String) -> void:
-        self._http.request(uri)
+        var err: Error = self._http.request(uri)
+        if err != Error.OK:
+            self.from_array([err, 0, [], []])
+            self._sema.post()
+            return
         var res: Array = await self._http.request_completed
         self.from_array(res)
         self._sema.post()
