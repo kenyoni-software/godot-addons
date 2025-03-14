@@ -8,6 +8,10 @@ Install or update them via the options menu in the right upper corner. This can 
 
 You can remove the main screen button in the options, the editor has to be restarted to take it into effect.
 
+!!! note "Credits"
+
+    You are not required to credit this plugin in your in-app credits, as it is only used within the editor and not in the final product. However, you may do so if you wish.
+
 [**Download**](https://github.com/kenyoni-software/godot-addons/releases)
 
 **Available collections**
