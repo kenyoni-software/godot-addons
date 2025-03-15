@@ -113,11 +113,13 @@ func _is_in_filter(path: String) -> bool:
     return false
 
 func _create_directories(paths: PackedStringArray) -> Error:
+    var created: Dictionary[String, Object] = {}
     for path: String in paths:
-        if path.ends_with("/") && self._is_in_filter(path):
-            var err: int = DirAccess.make_dir_recursive_absolute(self._output_path.path_join(path))
+        if self._is_in_filter(path) && !created.has(path.get_base_dir()):
+            var err: int = DirAccess.make_dir_recursive_absolute(self._output_path.path_join(path.get_base_dir()))
             if err != Error.OK:
                 return err as Error
+            created[path.get_base_dir()] = null
     return Error.OK
 
 func _set_error(err: Error, msg: String) -> void:

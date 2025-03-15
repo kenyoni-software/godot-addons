@@ -51,6 +51,7 @@ As popup:
 
 - Improve error checking
 - Make `preview_size_exp` an internal setting
+- Fix zip extraction to generate all directories
 
 ### 1.4.0
 
