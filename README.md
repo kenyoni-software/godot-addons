@@ -30,8 +30,6 @@ You can find a documentation with examples and detailed information [here](https
   Hide private properties of instantiated child scenes.
 - [Icon Explorer](https://kenyoni-software.github.io/godot-addons/addons/icon_explorer)  
   Browse different icons and save them.
-- [Icons Patcher](https://kenyoni-software.github.io/godot-addons/addons/icons_patcher)  
-  Patch Pictogrammers icons to white.
 - [License Manager](https://kenyoni-software.github.io/godot-addons/addons/licenses)  
   Manage license and copyright for third party graphics, software or libraries.
 - [Logging](https://kenyoni-software.github.io/godot-addons/addons/glogging)  

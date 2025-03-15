@@ -52,12 +52,6 @@ Find the releases [here](https://github.com/kenyoni-software/godot-addons/releas
 
     Explore icon collections with thousands of icons and add them easily to your project.
 
--   [Icons Patcher](addons/icons_patcher.md){ .md-button .center-lg-button }
-
-    ---
-
-    Will convert Pictogrammers icons to white.
-
 -   [License Manager](addons/licenses.md){ .md-button .center-lg-button }
 
     ---
