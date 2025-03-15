@@ -8,11 +8,9 @@ Kenyoni Godot Addons is a pack of useful Godot additions to make your life easie
 
 Find the releases [here](https://github.com/kenyoni-software/godot-addons/releases/tag/latest).
 
-!!! note "Note about Godot 4.3. or lower"
+!!! note "Godot 4.3. or lower"
 
-    If you import any plugin or open a Godot project for the first time, the plugins will throw errors. To ensure correct operation, reload the project and the errors are gone.
-
-    *Most plugins are using `preload`, but on first import there is nothing which can be preloaded.*
+    When you import a plugin or open a Godot project for the first time, you may encounter errors due to plugin behavior. This occurs because most plugins rely on preload functionality, which cannot load assets during the initial import. To resolve this issue and ensure proper functionality, simply reload the project. Once reloaded, the errors will disappear.
 
 ## :material-puzzle: Addons
 
@@ -54,12 +52,6 @@ Find the releases [here](https://github.com/kenyoni-software/godot-addons/releas
 
     Explore icon collections with thousands of icons and add them easily to your project.
 
--   [Icons Patcher](addons/icons_patcher.md){ .md-button .center-lg-button }
-
-    ---
-
-    Will convert Pictogrammers icons to white.
-
 -   [License Manager](addons/licenses.md){ .md-button .center-lg-button }
 
     ---
@@ -71,6 +63,12 @@ Find the releases [here](https://github.com/kenyoni-software/godot-addons/releas
     ---
 
     Enable or disable plugins from within the editor main screen.
+
+-   [POT Generation](addons/pot_generation.md){ .md-button .center-lg-button }
+
+    ---
+
+    POT generation with files, directories and filters.
 
 -   [QR Code](addons/qr_code.md){ .md-button .center-lg-button }
 

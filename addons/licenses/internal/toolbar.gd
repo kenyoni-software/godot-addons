@@ -80,7 +80,10 @@ func _create_plugin_menu_items() -> void:
     if dir == null:
         return
 
-    dir.list_dir_begin()
+    var err: Error = dir.list_dir_begin()
+    if err != OK:
+        push_error("[Licenses] Failed to list directory: " + error_string(err))
+        return
     var elem: String = dir.get_next()
     var idx: int = 0
     while elem != "":

@@ -2,6 +2,7 @@ extends "res://addons/icon_explorer/internal/scripts/tools/zip_extractor.gd"
 ## Extracts a zip file to a directory.
 ## The threaded version might not be faster than the non-threaded version, if there are lot of directories.
 ## The directories are created in a single thread.
+## Always call either wait() or close() to ensure the thread is correctly cleaned up.
 
 var thread_count: int = 1
 
@@ -42,6 +43,9 @@ func close() -> void:
 func wait() -> void:
     if self._main_thread != null && self._main_thread.is_started():
         self._main_thread.wait_to_finish()
+
+func is_running() -> bool:
+    return self._main_thread != null && self._main_thread.is_alive()
 
 func _extract_main() -> void:
     var reader: ZIPReader = ZIPReader.new()

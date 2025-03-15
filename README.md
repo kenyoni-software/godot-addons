@@ -16,8 +16,7 @@ You can find a documentation with examples and detailed information [here](https
 
 > [!NOTE]  
 > **Godot 4.3. or lower**  
-> If you import any plugin or open a Godot project for the first time, the plugins will throw errors. To ensure correct operation, reload the project and the errors are gone.  
-> *Background: most plugins are using `preload`, but on first import there is nothing which can be preloaded.*
+> When you import a plugin or open a Godot project for the first time, you may encounter errors due to plugin behavior. This occurs because most plugins rely on preload functionality, which cannot load assets during the initial import. To resolve this issue and ensure proper functionality, simply reload the project. Once reloaded, the errors will disappear.
 
 ## Addons
 
@@ -31,14 +30,14 @@ You can find a documentation with examples and detailed information [here](https
   Hide private properties of instantiated child scenes.
 - [Icon Explorer](https://kenyoni-software.github.io/godot-addons/addons/icon_explorer)  
   Browse different icons and save them.
-- [Icons Patcher](https://kenyoni-software.github.io/godot-addons/addons/icons_patcher)  
-  Patch Pictogrammers icons to white.
 - [License Manager](https://kenyoni-software.github.io/godot-addons/addons/licenses)  
   Manage license and copyright for third party graphics, software or libraries.
 - [Logging](https://kenyoni-software.github.io/godot-addons/addons/glogging)  
   Simple logger.
 - [Plugin Reloader](https://kenyoni-software.github.io/godot-addons/addons/plugin_reloader)  
   Enable or disable plugins from within the editor main screen.  
+- [POT Generation](https://kenyoni-software.github.io/godot-addons/addons/pot_generation)  
+  POT generation with files, directories and filters.
 - [QR Code](https://kenyoni-software.github.io/godot-addons/addons/qr_code)  
   QRCodeRect and QR Code generation.
 - [Remove Orphan UID](https://kenyoni-software.github.io/godot-addons/addons/remove_orphan_uid)  

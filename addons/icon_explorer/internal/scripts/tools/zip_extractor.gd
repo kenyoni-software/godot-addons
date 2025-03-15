@@ -91,7 +91,10 @@ func extract(zip_path: String, output_path: String, unpack_only: PackedStringArr
             return file.get_error()
         file = null
         self._add_processed(1)
-    reader.close()
+    err = reader.close()
+    if err != Error.OK:
+        self._set_error(err, "failed to close zip file")
+        self.completed.emit()
     self._set_error(Error.OK, "")
     self.completed.emit()
     return Error.OK
@@ -112,12 +115,11 @@ func _is_in_filter(path: String) -> bool:
 func _create_directories(paths: PackedStringArray) -> Error:
     var created: Dictionary[String, Object] = {}
     for path: String in paths:
-        var dir_path: String = path.get_base_dir()
-        if self._is_in_filter(path) && !created.has(dir_path):
-            var err: int = DirAccess.make_dir_recursive_absolute(self._output_path.path_join(dir_path))
+        if self._is_in_filter(path) && !created.has(path.get_base_dir()):
+            var err: int = DirAccess.make_dir_recursive_absolute(self._output_path.path_join(path.get_base_dir()))
             if err != Error.OK:
                 return err as Error
-            created[dir_path] = null
+            created[path.get_base_dir()] = null
     return Error.OK
 
 func _set_error(err: Error, msg: String) -> void:

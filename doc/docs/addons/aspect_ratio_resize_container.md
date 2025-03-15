@@ -6,7 +6,7 @@ This works except for `STRETCH_MODE_COVER`.
 
 !!! warning
 
-    You cannot use the property `custom_minimum_size` anymore as it is used to set the minimum size.
+    The `custom_minimum_size` property is no longer available, as it is now used to define the minimum size.
 
 [**Download**](https://github.com/kenyoni-software/godot-addons/releases)
 

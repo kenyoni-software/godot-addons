@@ -24,7 +24,10 @@ func load() -> Array:
     
     var icons: Array[Icon] = []
     var buffers: PackedStringArray = PackedStringArray()
-    dir.list_dir_begin()
+    var err: Error = dir.list_dir_begin()
+    if err != OK:
+        push_error("[Icon Explorer] Failed to list directory: " + error_string(err))
+        return [[], PackedStringArray()]
     var file_name: String = dir.get_next()
     while file_name != "":
         if dir.current_is_dir():

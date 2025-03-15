@@ -74,12 +74,12 @@ func get_components_in_path(path: String) -> Array[Component]:
 
 static func create_interface() -> void:
     var li: Node = new()
-    li.name = "kenyoni_licenses_interface"
+    li.name = "kenyoni_license_manager_interface"
     # EditorInterface.get_base_control() is not used to avoid dependency on Godot editor
     (Engine.get_main_loop() as SceneTree).get_root().add_child(li)
 
 static func get_interface():
-    return (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_licenses_interface")
+    return (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_license_manager_interface")
 
 static func remove_interface() -> void:
-    (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_licenses_interface").queue_free()
+    (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_license_manager_interface").queue_free()

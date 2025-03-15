@@ -42,7 +42,7 @@ func install(http: HTTPRequest, version: String) -> Error:
 # VIRTUAL
 # called in a thread
 func remove() -> Error:
-    if Io.rrm_dir(self.directory()):
+    if Io.rrm_dir(self.directory()) == Error.OK:
         return Error.OK
     return Error.FAILED
 
@@ -73,7 +73,10 @@ static func get_default_collection_paths() -> PackedStringArray:
     if dir == null:
         return []
         
-    dir.list_dir_begin()
+    var err: Error = dir.list_dir_begin()
+    if err != OK:
+        push_error("[Icon Explorer] Failed to list directory: " + error_string(err))
+        return [[], PackedStringArray()]
     var elem: String = dir.get_next()
     var paths: PackedStringArray = []
     while elem != "":

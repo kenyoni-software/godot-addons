@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl34qau7cltg1"]
+
+[ext_resource type="Script" uid="uid://cqp5s3xv71l0c" path="res://addons/kenyoni/pot_generation/tree.gd" id="1_dfhtb"]
+[ext_resource type="Script" uid="uid://dcv04xduvbli" path="res://addons/kenyoni/pot_generation/menu.gd" id="1_t1j0v"]
+
+[node name="menu" type="VBoxContainer" node_paths=PackedStringArray("_tree", "_add_dir", "_add_files", "_generate_pot", "_add_built_in_strings", "_show_filtered_files")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t1j0v")
+_tree = NodePath("tree")
+_add_dir = NodePath("toolbar/add_dir")
+_add_files = NodePath("toolbar/add_files")
+_generate_pot = NodePath("toolbar/generate")
+_add_built_in_strings = NodePath("h_box_container/add_built_in_strings")
+_show_filtered_files = NodePath("h_box_container/show_filtered_files")
+
+[node name="toolbar" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="toolbar"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Path with translation strings:"
+
+[node name="add_files" type="Button" parent="toolbar"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Add Files..."
+
+[node name="add_dir" type="Button" parent="toolbar"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Add Directory..."
+
+[node name="generate" type="Button" parent="toolbar"]
+layout_mode = 2
+text = "Generate POT"
+
+[node name="tree" type="Tree" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+column_titles_visible = true
+hide_root = true
+script = ExtResource("1_dfhtb")
+
+[node name="h_box_container" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="add_built_in_strings" type="CheckBox" parent="h_box_container"]
+layout_mode = 2
+text = "Add Built-in Strings to POT"
+
+[node name="show_filtered_files" type="CheckBox" parent="h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Show Filtered Files"
