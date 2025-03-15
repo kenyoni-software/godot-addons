@@ -38,6 +38,8 @@ You can find a documentation with examples and detailed information [here](https
   Simple logger.
 - [Plugin Reloader](https://kenyoni-software.github.io/godot-addons/addons/plugin_reloader)  
   Enable or disable plugins from within the editor main screen.  
+- [POT Generation](https://kenyoni-software.github.io/godot-addons/addons/pot_generation)  
+  POT generation with files, directories and filters.
 - [QR Code](https://kenyoni-software.github.io/godot-addons/addons/qr_code)  
   QRCodeRect and QR Code generation.
 - [Remove Orphan UID](https://kenyoni-software.github.io/godot-addons/addons/remove_orphan_uid)  

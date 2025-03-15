@@ -68,6 +68,12 @@ jobs:
             asset-id: "no-deploy",
           }
           - {
+            id: "kenyoni/pot_generation",
+            id-name: "pot_generation",
+            name: "POT Generation",
+            asset-id: "no-deploy",
+          }
+          - {
             id: "kenyoni/remove_orphan_uid",
             id-name: "remove_orphan_uid",
             name: "Remove Orphan UID",

@@ -70,6 +70,12 @@ Find the releases [here](https://github.com/kenyoni-software/godot-addons/releas
 
     Enable or disable plugins from within the editor main screen.
 
+-   [POT Generation](addons/pot_generation.md){ .md-button .center-lg-button }
+
+    ---
+
+    POT generation with files, directories and filters.
+
 -   [QR Code](addons/qr_code.md){ .md-button .center-lg-button }
 
     ---
