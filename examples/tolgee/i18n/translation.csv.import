@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://xb38ctk4u3eg"
+
+[deps]
+
+files=["res://examples/tolgee/i18n/translation.en.translation", "res://examples/tolgee/i18n/translation.de.translation", "res://examples/tolgee/i18n/translation.fr.translation"]
+
+source_file="res://examples/tolgee/i18n/translation.csv"
+dest_files=["res://examples/tolgee/i18n/translation.en.translation", "res://examples/tolgee/i18n/translation.de.translation", "res://examples/tolgee/i18n/translation.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

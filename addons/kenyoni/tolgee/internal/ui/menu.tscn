@@ -1,0 +1,141 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5s45rd8cofr3"]
+
+[ext_resource type="Script" uid="uid://c6ri0q7twuijs" path="res://addons/kenyoni/tolgee/internal/ui/menu.gd" id="1_er5ew"]
+[ext_resource type="Script" uid="uid://bompyslnr28xl" path="res://addons/kenyoni/tolgee/internal/ui/loading_circle.gd" id="2_qvrjx"]
+
+[sub_resource type="Image" id="Image_qvrjx"]
+data = {
+"data": PackedByteArray(255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 92, 92, 127, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 255, 255, 92, 92, 127, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 92, 92, 127, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 92, 92, 127, 255, 92, 92, 0, 255, 92, 92, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 231, 255, 90, 90, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 90, 90, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 0, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 42, 255, 90, 90, 0, 255, 94, 94, 0, 255, 91, 91, 42, 255, 93, 93, 233, 255, 92, 92, 232, 255, 93, 93, 41, 255, 90, 90, 0, 255, 94, 94, 0, 255, 91, 91, 42, 255, 93, 93, 233, 255, 92, 92, 232, 255, 92, 92, 0, 255, 92, 92, 0, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 45, 255, 93, 93, 44, 255, 91, 91, 0, 255, 91, 91, 42, 255, 91, 91, 42, 255, 93, 93, 0, 255, 91, 91, 45, 255, 93, 93, 44, 255, 91, 91, 0, 255, 91, 91, 42, 255, 91, 91, 42, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 45, 255, 92, 92, 235, 255, 92, 92, 234, 255, 89, 89, 43, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 45, 255, 92, 92, 235, 255, 92, 92, 234, 255, 89, 89, 43, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 0, 255, 91, 91, 0, 255, 92, 92, 0, 255, 92, 92, 0, 255, 92, 92, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 91, 91, 59, 255, 92, 92, 61, 255, 92, 92, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 91, 91, 59, 255, 92, 92, 61, 255, 92, 92, 0, 255, 92, 92, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0, 255, 93, 93, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_emjal"]
+image = SubResource("Image_qvrjx")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5s4p6"]
+
+[node name="tolgee" type="VBoxContainer" node_paths=PackedStringArray("_status_errors", "_project_name", "_check_status_button", "_status_checking", "_workflow", "_push_keys", "_pull_translations", "_push_translations")]
+offset_right = 1152.0
+offset_bottom = 231.0
+script = ExtResource("1_er5ew")
+_status_errors = NodePath("margin_container_2/panel_container/v_box_container/errors")
+_project_name = NodePath("margin_container_2/panel_container/v_box_container/grid_container/project_name")
+_check_status_button = NodePath("h_box_container/check_status")
+_status_checking = NodePath("h_box_container/checking")
+_workflow = NodePath("margin_container_2/panel_container/v_box_container/grid_container/localization")
+_push_keys = NodePath("panel_container/v_box_container/push_keys")
+_pull_translations = NodePath("panel_container/v_box_container/pull_translations")
+_push_translations = NodePath("panel_container/v_box_container/push_translations")
+
+[node name="info_label" type="Label" parent="."]
+layout_mode = 2
+text = "You can modify any configuration in the project settings under Plugins > Tolgee."
+
+[node name="h_separator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="h_box_container" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="status_label" type="Label" parent="h_box_container"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Status"
+
+[node name="checking" type="TextureRect" parent="h_box_container"]
+visible = false
+layout_mode = 2
+texture = SubResource("ImageTexture_emjal")
+stretch_mode = 5
+script = ExtResource("2_qvrjx")
+
+[node name="check_status" type="Button" parent="h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="margin_container_2" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="panel" type="Panel" parent="margin_container_2"]
+layout_mode = 2
+
+[node name="panel_container" type="PanelContainer" parent="margin_container_2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5s4p6")
+
+[node name="v_box_container" type="VBoxContainer" parent="margin_container_2/panel_container"]
+layout_mode = 2
+
+[node name="errors" type="Label" parent="margin_container_2/panel_container/v_box_container"]
+visible = false
+layout_mode = 2
+
+[node name="warnings" type="Label" parent="margin_container_2/panel_container/v_box_container"]
+visible = false
+layout_mode = 2
+
+[node name="ok" type="Label" parent="margin_container_2/panel_container/v_box_container"]
+visible = false
+layout_mode = 2
+text = "All good. Ready to go!"
+
+[node name="grid_container" type="GridContainer" parent="margin_container_2/panel_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+columns = 2
+
+[node name="project_name_label" type="Label" parent="margin_container_2/panel_container/v_box_container/grid_container"]
+layout_mode = 2
+text = "Linked to"
+
+[node name="project_name" type="LinkButton" parent="margin_container_2/panel_container/v_box_container/grid_container"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="localization_label" type="Label" parent="margin_container_2/panel_container/v_box_container/grid_container"]
+layout_mode = 2
+text = "Localization"
+
+[node name="localization" type="Label" parent="margin_container_2/panel_container/v_box_container/grid_container"]
+layout_mode = 2
+
+[node name="last_sync_label" type="Label" parent="margin_container_2/panel_container/v_box_container/grid_container"]
+visible = false
+layout_mode = 2
+text = "Last Sync"
+
+[node name="last_sync" type="Label" parent="margin_container_2/panel_container/v_box_container/grid_container"]
+visible = false
+layout_mode = 2
+
+[node name="actions_label" type="Label" parent="."]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Actions"
+
+[node name="panel_container" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="panel_container"]
+layout_mode = 2
+
+[node name="pull_translations" type="Button" parent="panel_container/v_box_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Pull Translations"
+
+[node name="push_keys" type="Button" parent="panel_container/v_box_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Push Keys"
+
+[node name="h_separator" type="HSeparator" parent="panel_container/v_box_container"]
+layout_mode = 2
+
+[node name="push_translations" type="Button" parent="panel_container/v_box_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Push Translations"

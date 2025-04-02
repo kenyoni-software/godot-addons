@@ -1,0 +1,13 @@
+keys,en,de,fr
+greeting,Hello,Hallo,Bonjour
+farewell,Goodbye,Auf Wiedersehen,Au revoir
+thank_you,Thank you,Danke,Merci
+please,Please,Bitte,S'il vous plaît
+yes,Yes,Ja,Oui
+no,No,Nein,Non
+morning,Good morning,Guten Morgen,Bonjour
+night,Good night,Gute Nacht,Bonne nuit
+sorry,Sorry,Entschuldigung,Pardon
+welcome,Welcome,Willkommen,Bienvenue
+speed_{value},Speed {value},Geschwindigkeit {value},Vitesse {value}
+age_{value},Age {value},Alter {value},Âge {value}
