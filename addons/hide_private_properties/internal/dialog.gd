@@ -16,9 +16,9 @@ const Utils := preload("res://addons/hide_private_properties/utils.gd")
 var _scan_thread: Thread
 
 func _ready() -> void:
-    self._warn_label.add_theme_color_override("font_color", self.get_theme_color("warning_color", "Editor"))
-    self._background_panel.add_theme_stylebox_override("panel", get_theme_stylebox("Content", "EditorStyles"))
-    self._label_panel.add_theme_stylebox_override("panel", get_theme_stylebox("Background", "EditorStyles"))
+    self._warn_label.add_theme_color_override(&"font_color", self.get_theme_color(&"warning_color", &"Editor"))
+    self._background_panel.add_theme_stylebox_override(&"panel", self.get_theme_stylebox(&"Content", &"EditorStyles"))
+    self._label_panel.add_theme_stylebox_override(&"panel", self.get_theme_stylebox(&"Background", &"EditorStyles"))
 
     self._tree.columns = 4
     self._tree.set_column_title(0, "Scene")
@@ -56,7 +56,7 @@ func _scan_finished(warnings: Array[PackedStringArray]) -> void:
         item.set_tooltip_text(0, warning[0])
         item.set_tooltip_text(1, warning[1])
         item.set_tooltip_text(2, warning[2])
-        item.add_button(3, self._tree.get_theme_icon("GuiVisibilityVisible", "EditorIcons"), 0)
+        item.add_button(3, self._tree.get_theme_icon(&"GuiVisibilityVisible", &"EditorIcons"), 0)
         item.set_button_tooltip_text(3, 0, "Show Node in Inspector")
 
 func _on_scan_button_pressed() -> void:
