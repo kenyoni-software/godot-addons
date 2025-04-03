@@ -82,7 +82,7 @@ func _on_collection_changed(id: int, status: Error, is_installation: bool):
             msg += "removing failed."
     print(msg)
 
-static func set_project_setting(key: String, initial_value, type: int, type_hint: int, hint_string: String = "") -> void:
+static func set_project_setting(key: String, initial_value, type: Variant.Type, type_hint: PropertyHint, hint_string: String = "") -> void:
     if not ProjectSettings.has_setting(key):
         ProjectSettings.set_setting(key, initial_value)
     ProjectSettings.set_initial_value(key, initial_value)
