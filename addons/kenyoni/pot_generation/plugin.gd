@@ -9,6 +9,17 @@ var _menu: Control
 func _get_plugin_name() -> String:
     return "POT Generation"
 
+func _enable_plugin() -> void:
+    if ProjectSettings.has_setting("plugins/kenyoni/pot_generation/paths"):
+        ProjectSettings.set_as_internal("plugins/kenyoni/pot_generation/paths", true)
+        return
+    var paths: PackedStringArray = ProjectSettings.get_setting("internationalization/locale/translations_pot_files", PackedStringArray())
+    var tr_paths: Array[PackedStringArray] = []
+    for path: String in paths:
+        tr_paths.push_back([path, ""])
+    ProjectSettings.set_setting("plugins/kenyoni/pot_generation/paths", tr_paths)
+    ProjectSettings.set_as_internal("plugins/kenyoni/pot_generation/paths", true)
+
 func _enter_tree() -> void:
     Utils._init()
     self._menu = MenuScene.instantiate()
