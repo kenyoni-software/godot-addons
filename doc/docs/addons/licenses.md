@@ -151,6 +151,10 @@ License class.
 
 ## Changelog
 
+### 1.9.2
+
+- Make configuration file a basic project setting
+
 ### 1.9.1
 
 - Improve error checking and cleanup code
