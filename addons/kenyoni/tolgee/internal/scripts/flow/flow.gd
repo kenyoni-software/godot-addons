@@ -1,7 +1,7 @@
 extends RefCounted
 ## FLow have complete access to Tolgee object and will also access private properties.
-## It is required to call finish() to free this object.
-## _init will increase the reference counter and finish will decrease it. In this way the object has not tbe be saved in any way.
+## this object can be fired with run and forget. It will increase the reference count of Tolgee object and decrease it when finished.
+## Therefore DO NOT CALL RUN TWICE without keeping an own reference to it.
 
 const Tolgee := preload("res://addons/kenyoni/tolgee/internal/scripts/tolgee.gd")
 
@@ -11,10 +11,10 @@ var _tolgee: Tolgee = null
 
 func _init(tolgee: Tolgee) -> void:
     self._tolgee = tolgee
-    self.reference()
 
 func run() -> void:
-    pass
+    self.reference()
+    self.completed.connect(func(_err: Error) -> void: self._destruct(), CONNECT_ONE_SHOT)
 
-func finish() -> void:
+func _destruct() -> void:
     self.unreference()

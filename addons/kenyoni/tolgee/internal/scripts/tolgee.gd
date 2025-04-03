@@ -4,8 +4,8 @@ extends Node
 ## Interface for Tolgee
 
 const ValidateFlow := preload("res://addons/kenyoni/tolgee/internal/scripts/flow/validate.gd")
-const UpdateLanguagesFlow := preload("res://addons/kenyoni/tolgee/internal/scripts/flow/update_languages.gd")
-const PushCsvFlow := preload("res://addons/kenyoni/tolgee/internal/scripts/flow/push_csv.gd")
+const UploadCsvFlow := preload("res://addons/kenyoni/tolgee/internal/scripts/flow/upload_csv.gd")
+const DownloadCsvFlow := preload("res://addons/kenyoni/tolgee/internal/scripts/flow/download_csv.gd")
 
 const Client := preload("res://addons/kenyoni/tolgee/internal/scripts/client.gd")
 
@@ -107,60 +107,28 @@ func validate(callback: Variant = null) -> void:
     if callback == null:
         callback = self._on_validated
 
-    var flow: ValidateFlow = ValidateFlow.new(self, callback as Callable)
-    flow.completed.connect(func(_err: Error) -> void: flow.finish())
-    flow.run()
+    ValidateFlow.new(self, callback as Callable).run()
 
-func push_translation_keys() -> void:
+func upload_translations() -> void:
     match self.localization():
         LOCALIZATION_NONE:
             EditorInterface.get_editor_toaster().push_toast("[Tolgee] No localization is selected.", EditorToaster.SEVERITY_WARNING)
         LOCALIZATION_CSV:
-            self._push_csv_translation_keys()
+            UploadCsvFlow.new(self).run()
+        LOCALIZATION_GETTEXT:
+            EditorInterface.get_editor_toaster().push_toast("[Tolgee] gettext localization is not supported yet.", EditorToaster.SEVERITY_WARNING)
+
+func download_translations() -> void:
+    match self.localization():
+        LOCALIZATION_NONE:
+            EditorInterface.get_editor_toaster().push_toast("[Tolgee] No localization is selected.", EditorToaster.SEVERITY_WARNING)
+        LOCALIZATION_CSV:
+            DownloadCsvFlow.new(self).run()
         LOCALIZATION_GETTEXT:
             EditorInterface.get_editor_toaster().push_toast("[Tolgee] gettext localization is not supported yet.", EditorToaster.SEVERITY_WARNING)
 
 func _use_namespaces() -> bool:
     return self._project.get("useNamespaces", false)
-
-func _push_csv_translation_keys() -> void:
-    var languages: Array[String] = []
-    var file_data_arr: Array[PackedByteArray] = []
-    var files: Array[String] = []
-    files.assign(ProjectSettings.get_setting(CFG_KEY_CSV_FILES, []))
-    for file_path: String in files:
-        var file_data: PackedByteArray = FileAccess.get_file_as_bytes(file_path)
-        if file_data.size() == 0 && FileAccess.get_open_error() != OK:
-            var err_msg: String = "Failed to open file: '%s' - %s" % [file_path, error_string(FileAccess.get_open_error())]
-            push_error("[Tolgee] " + err_msg)
-            EditorInterface.get_editor_toaster().push_toast("[Tolgee] Could not push translation keys.", EditorToaster.SEVERITY_ERROR, err_msg)
-            return
-        file_data_arr.append(file_data)
-        # get languages
-        var file: FileAccess = FileAccess.open(file_path, FileAccess.READ)
-        if file == null:
-            var err_msg: String = "Failed to open file: '%s' - %s" % [file_path, error_string(FileAccess.get_open_error())]
-            push_error("[Tolgee] " + err_msg)
-            EditorInterface.get_editor_toaster().push_toast("[Tolgee] Could not push translation keys.", EditorToaster.SEVERITY_ERROR, err_msg)
-            return
-        var cur_languages: PackedStringArray = file.get_csv_line()
-        file.close()
-        cur_languages.remove_at(0)
-        for cur_lang: String in cur_languages:
-            if !languages.has(cur_lang):
-                languages.append(cur_lang)
-
-    var flow_lang: UpdateLanguagesFlow = UpdateLanguagesFlow.new(self, languages)
-    flow_lang.completed.connect(
-        func(err: Error) -> void:
-            if err != OK:
-                flow_lang.finish()
-                return
-            var flow: PushCsvFlow = PushCsvFlow.new(self, file_data_arr, files, self.placeholder())
-            flow.completed.connect(func(_err2: Error) -> void: flow_lang.finish(); flow.finish())
-            flow.run()
-    )
-    flow_lang.run()
 
 func _clear_project() -> void:
     self._project = {}
@@ -179,10 +147,26 @@ func _on_settings_changed() -> void:
 
 func _on_validated(err_msg: String) -> void:
     if err_msg != "":
-        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to initialize Tolgee: " + err_msg, EditorToaster.SEVERITY_ERROR)
+        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to initialize: " + err_msg, EditorToaster.SEVERITY_ERROR)
 
 static func init():
     _interface = _Tolgee.new()
 
 static func interface() -> _Tolgee:
     return _interface
+
+static func placeholder_to_message_format(placeholder: String) -> String:
+    match placeholder:
+        PLACEHOLDER_ICU:
+            return "ICU"
+        PLACEHOLDER_JAVA:
+            return "JAVA_STRING_FORMAT"
+        PLACEHOLDER_PHP:
+            return "PHP_SPRINTF"
+    return "ICU"
+
+## if uid is not an UID it will return the string without changes
+static func uid_to_path(uid: String) -> String:
+    if uid.begins_with("uid://"):
+        return ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
+    return uid

@@ -10,9 +10,8 @@ const Tolgee := preload("res://addons/kenyoni/tolgee/internal/scripts/tolgee.gd"
 @export var _status_checking: Control
 @export var _workflow: Label
 
-@export var _push_keys: Button
-@export var _pull_translations: Button
-@export var _push_translations: Button
+@export var _download_translations: Button
+@export var _upload_translations: Button
 
 func _ready() -> void:
     self._status_errors.add_theme_color_override(&"font_color", self.get_theme_color(&"error_color", &"Editor"))
@@ -20,16 +19,16 @@ func _ready() -> void:
 
     self._update_ui()
 
-    self._push_keys.pressed.connect(Tolgee.interface().push_translation_keys)
+    self._download_translations.pressed.connect(Tolgee.interface().download_translations)
+    self._upload_translations.pressed.connect(Tolgee.interface().upload_translations)
 
     self._check_status_button.pressed.connect(self._on_check_status_button_pressed)
     Tolgee.interface().linked.connect(self._on_client_linked)
     ProjectSettings.settings_changed.connect(self._update_ui)
 
 func _update_ui() -> void:
-    self._push_keys.disabled = !Tolgee.interface().is_operating()
-    self._pull_translations.disabled = !Tolgee.interface().is_operating()
-    self._push_translations.disabled = !Tolgee.interface().is_operating()
+    self._download_translations.disabled = !Tolgee.interface().is_operating()
+    self._upload_translations.disabled = !Tolgee.interface().is_operating()
     self._workflow.text = Tolgee.interface().localization()
     if Tolgee.interface().is_operating():
         self._project_name.text = Tolgee.interface().project_name()

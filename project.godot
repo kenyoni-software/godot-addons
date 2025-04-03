@@ -40,3 +40,12 @@ enabled=PackedStringArray("res://addons/aspect_ratio_resize_container/plugin.cfg
 
 licenses/data_file="res://examples/licenses/licenses.json"
 icons_patcher/material_design_directory="res://examples/icons_patcher/icons"
+kenyoni/pot_generation/paths=Array[PackedStringArray]([PackedStringArray("res://addons/kenyoni/pot_generation/", "*.gd,*.tscn")])
+tolgee/host="http://127.0.0.1:8080"
+tolgee/api_key="tgpak_gjpwm3ldnntts4lbgbwtenjqgr2hg3dnnfuhmz3smmygs"
+tolgee/po_out_directory="res://examples/tolgee/i18n"
+tolgee/localization="csv"
+tolgee/gettext/po_out_directory="res://examples/tolgee/i18n"
+tolgee/csv/files=["uid://xb38ctk4u3eg"]
+licenses/data_file="res://examples/licenses/licenses.json"
+tolgee/live_sync=false

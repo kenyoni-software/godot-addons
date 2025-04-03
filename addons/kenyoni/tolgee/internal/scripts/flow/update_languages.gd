@@ -14,10 +14,11 @@ func _init(tolgee: Tolgee, languages: Array[String]) -> void:
 
 ## OVERRIDE
 func run() -> void:
+    super.run()
     var lang_options: Client.GetAllLanguagesOptions = Client.GetAllLanguagesOptions.new()
     lang_options.page = 0
     lang_options.size = 1000
-    self._tolgee._client.get_all_languages(self._tolgee.project_id(), lang_options, self._on_create_languages_1)
+    self._tolgee._client.get_all_languages(self._tolgee.project_id(), lang_options, self._on_get_all_languages)
 
 static func locale_to_bcp_47(locale: String) -> String:
     var parts: Array[String] = locale.split("_", true, 3)
@@ -42,13 +43,17 @@ func _update_languages() -> void:
         return
     self.completed.emit(OK)
 
-func _on_create_languages_1(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, body_json: Variant) -> void:
+func _on_get_all_languages(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, body_json: Variant) -> void:
     if result != OK:
-        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Could not get languages: " + str(result), EditorToaster.SEVERITY_ERROR)
+        var err_msg: String = str(result)
+        push_error("[Tolgee] Failed to get languages: " + err_msg)
+        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to get languages.", EditorToaster.SEVERITY_ERROR, err_msg)
         self.completed.emit(FAILED)
         return
     if response_code != HTTPClient.RESPONSE_OK:
-        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Could not get languages: " + str(response_code) + " | " + body.get_string_from_utf8(), EditorToaster.SEVERITY_ERROR)
+        var err_msg: String = "%s - %s" % [str(response_code), body.get_string_from_utf8()]
+        push_error("[Tolgee] Failed to get languages: " + err_msg)
+        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to get languages.", EditorToaster.SEVERITY_ERROR, err_msg)
         self.completed.emit(FAILED)
         return
 
@@ -60,18 +65,22 @@ func _on_create_languages_1(result: int, response_code: int, _headers: PackedStr
         if tag != "" && lang.has("id") && !self._languages.has(tag):
             self._delete_languages[tag] = int(lang.get("id", 0))
     for lang: String in self._languages:
-        if cur_languages.find_custom(func (val: Dictionary) -> bool: return val.get("tag", "") == lang) == -1:
+        if cur_languages.find_custom(func(val: Dictionary) -> bool: return val.get("tag", "") == lang) == -1:
             self._missing_languages.append(lang)
 
     self._update_languages()
 
 func _on_language_created(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, body_json: Variant, language: String) -> void:
     if result != OK:
-        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to create language: " + str(result) + " | " + language, EditorToaster.SEVERITY_ERROR)
+        var err_msg: String = str(result)
+        push_error("[Tolgee] Failed to create language '%s': %s" % [language, err_msg])
+        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to create language '%s'." % language, EditorToaster.SEVERITY_ERROR, err_msg)
         self.completed.emit(FAILED)
         return
     if response_code != HTTPClient.RESPONSE_OK:
-        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to update languages: " + str(response_code) + " | " + body.get_string_from_utf8(), EditorToaster.SEVERITY_ERROR)
+        var err_msg: String = "%s - %s" % [str(response_code), body.get_string_from_utf8()]
+        push_error("[Tolgee] Failed to create language '%s': " % [language, err_msg])
+        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to create language ''%s." % language, EditorToaster.SEVERITY_ERROR, err_msg)
         self.completed.emit(FAILED)
         return
     self._missing_languages.remove_at(self._missing_languages.find(language))
@@ -79,11 +88,15 @@ func _on_language_created(result: int, response_code: int, _headers: PackedStrin
 
 func _on_language_removed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, body_json: Variant, language: String):
     if result != OK:
-        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to remove language: " + str(result) + " | " + language, EditorToaster.SEVERITY_ERROR)
+        var err_msg: String = str(result)
+        push_error("[Tolgee] Failed to remove language '%s': %s" % [language, err_msg])
+        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to remove language '%s'." % language, EditorToaster.SEVERITY_ERROR, err_msg)
         self.completed.emit(FAILED)
         return
     if response_code != HTTPClient.RESPONSE_OK:
-        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to update languages: " + str(response_code) + " | " + body.get_string_from_utf8(), EditorToaster.SEVERITY_ERROR)
+        var err_msg: String = "%s - %s" % [str(response_code), body.get_string_from_utf8()]
+        push_error("[Tolgee] Failed to remove language '%s': " % [language, err_msg])
+        EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to remove language ''%s." % language, EditorToaster.SEVERITY_ERROR, err_msg)
         self.completed.emit(FAILED)
         return
     self._delete_languages.erase(language)

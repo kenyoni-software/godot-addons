@@ -17,7 +17,7 @@ image = SubResource("Image_qvrjx")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5s4p6"]
 
-[node name="tolgee" type="VBoxContainer" node_paths=PackedStringArray("_status_errors", "_project_name", "_check_status_button", "_status_checking", "_workflow", "_push_keys", "_pull_translations", "_push_translations")]
+[node name="tolgee" type="VBoxContainer" node_paths=PackedStringArray("_status_errors", "_project_name", "_check_status_button", "_status_checking", "_workflow", "_download_translations", "_upload_translations")]
 offset_right = 1152.0
 offset_bottom = 231.0
 script = ExtResource("1_er5ew")
@@ -26,9 +26,8 @@ _project_name = NodePath("margin_container_2/panel_container/v_box_container/gri
 _check_status_button = NodePath("h_box_container/check_status")
 _status_checking = NodePath("h_box_container/checking")
 _workflow = NodePath("margin_container_2/panel_container/v_box_container/grid_container/localization")
-_push_keys = NodePath("panel_container/v_box_container/push_keys")
-_pull_translations = NodePath("panel_container/v_box_container/pull_translations")
-_push_translations = NodePath("panel_container/v_box_container/push_translations")
+_download_translations = NodePath("panel_container/v_box_container/download_translations")
+_upload_translations = NodePath("panel_container/v_box_container/upload_translations")
 
 [node name="info_label" type="Label" parent="."]
 layout_mode = 2
@@ -122,20 +121,12 @@ layout_mode = 2
 [node name="v_box_container" type="VBoxContainer" parent="panel_container"]
 layout_mode = 2
 
-[node name="pull_translations" type="Button" parent="panel_container/v_box_container"]
+[node name="download_translations" type="Button" parent="panel_container/v_box_container"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Pull Translations"
+text = "Download Translations"
 
-[node name="push_keys" type="Button" parent="panel_container/v_box_container"]
+[node name="upload_translations" type="Button" parent="panel_container/v_box_container"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Push Keys"
-
-[node name="h_separator" type="HSeparator" parent="panel_container/v_box_container"]
-layout_mode = 2
-
-[node name="push_translations" type="Button" parent="panel_container/v_box_container"]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Push Translations"
+text = "Upload Translations"

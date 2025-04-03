@@ -130,7 +130,7 @@ class PostSingleStepImportParams:
     var tag_new_keys: PackedStringArray = PackedStringArray()
 
 ## https://docs.tolgee.io/api/do-import
-func post_single_step_import(project_id: int, params: PostSingleStepImportParams, completed: Variant = null) -> Error:
+func single_step_import(project_id: int, params: PostSingleStepImportParams, completed: Variant = null) -> Error:
     var multipart: HTTPMultiPartFormData = HTTPMultiPartFormData.new()
 
     for file: PostSingleStepImportFile in params.files:
@@ -176,14 +176,45 @@ func post_single_step_import(project_id: int, params: PostSingleStepImportParams
 
     return req.request_raw(self.host + "/v2/projects/" + str(project_id) + "/single-step-import", headers, HTTPClient.METHOD_POST, multipart.body())
 
+class ExportDataOptions:
+    extends RefCounted
+
+    var file_structure_template: String = ""
+    var filter_namespace: Array[String] = []
+    var filter_state: Array[String] = []
+    var languages: Array[String] = []
+    var message_format: String = ""
+
+func export_data(project_id: int, format: String, supportArrays: bool, zip: bool, options: ExportDataOptions = null, download_file: String = "", completed: Variant = null) -> Error:
+    var body: Dictionary = {
+        "format": format,
+        "supportArrays": supportArrays,
+        "zip": zip,
+    }
+    if options != null:
+        if options.file_structure_template != "":
+            body["fileStructureTemplate"] = options.file_structure_template
+        if options.filter_namespace.size() > 0:
+            body["filterNamespace"] = options.filter_namespace
+        if options.filter_state.size() > 0:
+            body["filterState"] = options.filter_state
+        if options.languages.size() > 0:
+            body["languages"] = options.languages
+        if options.message_format != "":
+            body["messageFormat"] = options.message_format
+    var req: Request = self._new_request(completed, false)
+    if download_file != "":
+        req.download_file = download_file
+    return req.request(self.host + "/v2/projects/" + str(project_id) + "/export", self._default_headers(), HTTPClient.METHOD_POST, JSON.stringify(body))
+
 func _default_headers() -> PackedStringArray:
     return [
         "User-Agent: Kenyoni Tolgee Godot Integration",
         API_KEY_HEADER_KEY + ": " + self.api_key,
     ]
 
-func _new_request(completed: Variant = null) -> Request:
-    var req: Request = Request.new()
+func _new_request(completed: Variant = null, decode_json: bool = true) -> Request:
+    var req: Request = Request.new(decode_json)
     self.add_child(req, false, INTERNAL_MODE_BACK)
     if completed != null:
         req.completed.connect(completed as Callable)
