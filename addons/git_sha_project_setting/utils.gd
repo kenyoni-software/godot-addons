@@ -1,6 +1,6 @@
 const GIT_SHA_PATH: String = "application/config/git_sha"
 
-static func init_project_setting(key: String, default_value: Variant, type: int, type_hint: int) -> void:
+static func init_project_setting(key: String, default_value: Variant, type: Variant.Type, type_hint: PropertyHint) -> void:
     if not ProjectSettings.has_setting(key):
         ProjectSettings.set_setting(key, default_value)
     ProjectSettings.set_initial_value(key, default_value)
