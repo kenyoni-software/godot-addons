@@ -154,6 +154,7 @@ License class.
 ### 1.9.2
 
 - Make configuration file a basic project setting
+- Fix leaked instances on editor exit
 
 ### 1.9.1
 
