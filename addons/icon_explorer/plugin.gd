@@ -47,9 +47,9 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
     if self._main_screen != null:
         EditorInterface.get_editor_main_screen().remove_child(self._main_screen)
-        self._main_screen.queue_free()
+        self._main_screen.free()
     self.remove_tool_menu_item(self._get_plugin_name() + "...")
-    self._explorer_dialog.queue_free()
+    self._explorer_dialog.free()
 
 func _has_main_screen() -> bool:
     return ProjectSettings.get_setting("plugins/icon_explorer/show_main_screen", true)

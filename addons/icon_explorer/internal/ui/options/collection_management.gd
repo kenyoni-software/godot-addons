@@ -159,7 +159,7 @@ func _on_button_clicked(item: TreeItem, _column: int, id: int, _mouse_button_ind
             # lock buttons
             self.update()
             if self._http_request != null:
-                self._http_request.queue_free()
+                self._http_request.free()
             self._http_request = HTTPRequest.new()
             self._http_request.use_threads = true
             self._http_request.download_chunk_size = 4 * 65536
