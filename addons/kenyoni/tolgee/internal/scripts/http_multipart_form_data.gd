@@ -1,7 +1,7 @@
 extends RefCounted
 
 ## standard line ending for HTTP multipart
-const CRLF = "\r\n"
+const CRLF: String = "\r\n"
 
 class Part:
     extends RefCounted
@@ -49,7 +49,7 @@ func _build_payload() -> Error:
     var crlf_bytes: PackedByteArray = CRLF.to_utf8_buffer()
 
     # process each part in the array
-    for idx in range(self._parts.size()):
+    for idx: int in range(self._parts.size()):
         var part: Part = self._parts[idx]
 
         if part.name == "":
@@ -65,7 +65,7 @@ func _build_payload() -> Error:
             payload.append_array(crlf_bytes)
 
             # content-disposition header for file
-            var disposition: String = 'Content-Disposition: form-data; name="%s"; filename="%s"' % [part.name, part.filename]
+            var disposition: String = "Content-Disposition: form-data; name=\"%s\"; filename=\"%s\"" % [part.name, part.filename]
             payload.append_array(disposition.to_utf8_buffer())
             payload.append_array(crlf_bytes)
 
@@ -87,7 +87,7 @@ func _build_payload() -> Error:
             payload.append_array(crlf_bytes)
 
             # content-disposition header for text field
-            var disposition: String = 'Content-Disposition: form-data; name="' + part.name + '"'
+            var disposition: String = "Content-Disposition: form-data; name=\"" + part.name + "\""
             payload.append_array(disposition.to_utf8_buffer())
             payload.append_array(crlf_bytes)
 

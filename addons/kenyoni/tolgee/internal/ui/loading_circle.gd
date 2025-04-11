@@ -8,6 +8,7 @@ func _ready() -> void:
     self.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
     self.texture = self.get_theme_icon(&"Progress1", &"EditorIcons")
     self.visibility_changed.connect(self._on_visibility_changed)
+    self.set_process(self.visible)
 
 func _process(delta: float) -> void:
     self._process_spinner_msec += delta

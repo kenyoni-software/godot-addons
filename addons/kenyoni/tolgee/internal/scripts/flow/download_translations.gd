@@ -15,8 +15,8 @@ func run() -> void:
 
     self._file_paths.clear()
     self._done_paths.clear()
-    for file: String in ProjectSettings.get_setting(Tolgee.CFG_KEY_CSV_FILES, []):
-        self._file_paths.append(Tolgee.uid_to_path(file))
+    for tr_cfg: Dictionary in self._tolgee.files():
+        self._file_paths.append(tr_cfg.get("output_path", ""))
     self._download_next()
 
 func _download_next() -> void:

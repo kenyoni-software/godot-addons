@@ -34,7 +34,7 @@ naming/node_name_casing=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/aspect_ratio_resize_container/plugin.cfg", "res://addons/custom_theme_overrides/plugin.cfg", "res://addons/git_sha_project_setting/plugin.cfg", "res://addons/glogging/plugin.cfg", "res://addons/hide_private_properties/plugin.cfg", "res://addons/icon_explorer/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/kenyoni/plugin_reloader/plugin.cfg", "res://addons/kenyoni/remove_orphan_uid/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/qr_code/plugin.cfg", "res://addons/texture_button_colored/plugin.cfg")
+enabled=PackedStringArray("res://addons/aspect_ratio_resize_container/plugin.cfg", "res://addons/custom_theme_overrides/plugin.cfg", "res://addons/explore-editor-theme/plugin.cfg", "res://addons/git_sha_project_setting/plugin.cfg", "res://addons/glogging/plugin.cfg", "res://addons/hide_private_properties/plugin.cfg", "res://addons/icon_explorer/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/kenyoni/plugin_reloader/plugin.cfg", "res://addons/kenyoni/pot_generation/plugin.cfg", "res://addons/kenyoni/remove_orphan_uid/plugin.cfg", "res://addons/kenyoni/tolgee/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/qr_code/plugin.cfg", "res://addons/texture_button_colored/plugin.cfg")
 
 [plugins]
 
@@ -42,10 +42,9 @@ licenses/data_file="res://examples/licenses/licenses.json"
 icons_patcher/material_design_directory="res://examples/icons_patcher/icons"
 kenyoni/pot_generation/paths=Array[PackedStringArray]([PackedStringArray("res://addons/kenyoni/pot_generation/", "*.gd,*.tscn")])
 tolgee/host="http://127.0.0.1:8080"
-tolgee/api_key="tgpak_gjpwm3ldnntts4lbgbwtenjqgr2hg3dnnfuhmz3smmygs"
-tolgee/po_out_directory="res://examples/tolgee/i18n"
-tolgee/localization="csv"
-tolgee/gettext/po_out_directory="res://examples/tolgee/i18n"
-tolgee/csv/files=["uid://xb38ctk4u3eg"]
-licenses/data_file="res://examples/licenses/licenses.json"
-tolgee/live_sync=false
+tolgee/api_key="tgpak_gfptiolsne3tkntfgrudqmdsobyhkobsmjxhg23ngv3hk"
+tolgee/files=Array[Dictionary]([{
+"input_path": "res://examples/tolgee/i18n/translation.csv",
+"output_path": "res://examples/tolgee/i18n/translation.csv",
+"placeholder": "icu"
+}])

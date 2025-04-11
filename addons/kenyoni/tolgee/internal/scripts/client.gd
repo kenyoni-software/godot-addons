@@ -34,10 +34,10 @@ func get_project(project_id: int, completed: Variant = null) -> Error:
     return self._new_request(completed).request(self.host + "/v2/projects/" + str(project_id), self._default_headers(), HTTPClient.METHOD_GET)
 
 ## https://docs.tolgee.io/api/edit-project
-func update_project(project_id: int, icu_placeholders: bool, name: String, use_namespaces: bool, options: GetProjectsOptions = null, completed: Variant = null) -> Error:
+func update_project(project_id: int, icu_placeholders: bool, project_name: String, use_namespaces: bool, options: GetProjectsOptions = null, completed: Variant = null) -> Error:
     var body: Dictionary = {
         "icuPlaceholders": icu_placeholders,
-        "name": name,
+        "name": project_name,
         "useNamespaces": use_namespaces,
     }
     if options != null:
