@@ -29,8 +29,17 @@ func get_component() -> Component:
     return _component
 
 func _init() -> void:
-    self.set_column_custom_minimum_width(0, 152)
     self.set_column_expand(0, false)
+    var min_width: float = \
+        self.get_theme_font(&"font").get_string_size("Identifier", 0, -1, self.get_theme_font_size(&"font_size")).x \
+        + self.get_theme_constant(&"inner_item_margin_left") \
+        + self.get_theme_constant(&"inner_item_margin_right") \
+        + self.get_theme_constant(&"item_margin") \
+        # around 2x arrow and one button size
+        + self.get_theme_icon(&"arrow").get_size().x * 3
+    # add 5% space to be safe
+    min_width = 1.05 * min_width
+    self.set_column_custom_minimum_width(0, min_width)
     self.set_column_clip_content(1, true)
 
 func reload() -> void:

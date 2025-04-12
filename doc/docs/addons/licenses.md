@@ -155,6 +155,7 @@ License class.
 
 - Make configuration file a basic project setting
 - Fix leaked instances on editor exit
+- Calculate min width of first elements in details avoiding text being cut off
 
 ### 1.9.1
 
