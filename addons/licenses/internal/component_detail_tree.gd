@@ -36,7 +36,7 @@ func _init() -> void:
         + self.get_theme_constant(&"inner_item_margin_right") \
         + self.get_theme_constant(&"item_margin") \
         # around 2x arrow and one button size
-        + self.get_theme_icon(&"arrow").get_size().x * 3
+        + 3 * self.get_theme_icon(&"arrow").get_size().x
     # add 5% space to be safe
     min_width = 1.05 * min_width
     self.set_column_custom_minimum_width(0, min_width)
