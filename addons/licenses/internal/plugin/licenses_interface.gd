@@ -1,6 +1,5 @@
 extends Node
 
-const LicensesDialogScene: PackedScene = preload("res://addons/licenses/internal/licenses_dialog.tscn")
 const Licenses := preload("res://addons/licenses/licenses.gd")
 const Component := preload("res://addons/licenses/component.gd")
 const LicensesDialog := preload("res://addons/licenses/internal/licenses_dialog.gd")
@@ -13,7 +12,7 @@ var _licenses_dialog: LicensesDialog
 var _components: Array[Component] = []
 
 func _ready() -> void:
-    self._licenses_dialog = LicensesDialogScene.instantiate()
+    self._licenses_dialog = load("res://addons/licenses/internal/licenses_dialog.tscn").instantiate()
     self.add_child(self._licenses_dialog)
 
 func show_popup(show_comp: Component = null) -> void:
@@ -82,4 +81,4 @@ static func get_interface():
     return (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_license_manager_interface")
 
 static func remove_interface() -> void:
-    (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_license_manager_interface").queue_free()
+    (Engine.get_main_loop() as SceneTree).get_root().get_node("kenyoni_license_manager_interface").free()

@@ -18,6 +18,11 @@ POT generation with files, directories and filters.
 
 ## Changelog
 
+### 1.1.0
+
+- Keep translation files from the Godot POT generation, if the plugin has not yet any configuration
+- Disable filter input on files
+
 ### 1.0.0
 
 - Initial release

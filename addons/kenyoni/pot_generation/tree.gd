@@ -35,7 +35,7 @@ func add_gen_item(path: String, filter: String):
     item.set_text(1, filter)
     item.set_tooltip_text(0, path)
     item.set_tooltip_text(1, "\n".join(Utils.get_filter_from_string(filter)))
-    item.set_editable(1, true)
+    item.set_editable(1, path.ends_with("/"))
     item.add_button(2, self.get_theme_icon(&"Remove", &"EditorIcons"), _Buttons.Remove)
     if self.show_filtered_files && path.ends_with("/"):
         self._add_filtered_files(item)

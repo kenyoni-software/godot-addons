@@ -47,9 +47,9 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
     if self._main_screen != null:
         EditorInterface.get_editor_main_screen().remove_child(self._main_screen)
-        self._main_screen.queue_free()
+        self._main_screen.free()
     self.remove_tool_menu_item(self._get_plugin_name() + "...")
-    self._explorer_dialog.queue_free()
+    self._explorer_dialog.free()
 
 func _has_main_screen() -> bool:
     return ProjectSettings.get_setting("plugins/icon_explorer/show_main_screen", true)
@@ -82,7 +82,7 @@ func _on_collection_changed(id: int, status: Error, is_installation: bool):
             msg += "removing failed."
     print(msg)
 
-static func set_project_setting(key: String, initial_value, type: int, type_hint: int, hint_string: String = "") -> void:
+static func set_project_setting(key: String, initial_value, type: Variant.Type, type_hint: PropertyHint, hint_string: String = "") -> void:
     if not ProjectSettings.has_setting(key):
         ProjectSettings.set_setting(key, initial_value)
     ProjectSettings.set_initial_value(key, initial_value)

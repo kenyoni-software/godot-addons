@@ -26,6 +26,10 @@ The Git SHA will **not** be kept in `project.godot` to not clutter any version c
 
 ## Changelog
 
+### 2.2.1
+
+- Code improvements
+
 ### 2.2.0
 
 - Add UIDs for Godot 4.4

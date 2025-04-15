@@ -16,6 +16,7 @@ func _get_plugin_name() -> String:
 
 func _enter_tree() -> void:
     set_project_setting(Licenses.CFG_KEY_DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
+    ProjectSettings.set_as_basic(Licenses.CFG_KEY_DATA_FILE, true)
     set_project_setting(Licenses.CFG_KEY_INDENTATION, 0, TYPE_INT, PROPERTY_HINT_ENUM, "None,Spaces,Tabs")
     LicensesInterface.create_interface()
     LicensesInterface.get_interface().load_licenses(Licenses.get_license_data_filepath())
@@ -35,7 +36,7 @@ func _exit_tree() -> void:
     self._file_watcher = null
     LicensesInterface.remove_interface()
 
-static func set_project_setting(key: String, initial_value, type: int, type_hint: int, hint_string: String = "") -> void:
+static func set_project_setting(key: String, initial_value, type: Variant.Type, type_hint: PropertyHint, hint_string: String = "") -> void:
     if not ProjectSettings.has_setting(key):
         ProjectSettings.set_setting(key, initial_value)
     ProjectSettings.set_initial_value(key, initial_value)

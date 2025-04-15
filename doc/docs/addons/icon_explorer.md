@@ -47,6 +47,10 @@ As popup:
 
 ## Changelog
 
+### 1.4.2
+
+- Code improvements
+
 ### 1.4.1
 
 - Improve error checking

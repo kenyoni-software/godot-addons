@@ -23,7 +23,8 @@ func _ready() -> void:
     self._file_dialog.dialog_hide_on_ok = true
     self._file_dialog.filters = ["*.gd", "*.tscn", "*.scn", "*.tres", "*.res"]
 
-    var paths: Array[PackedStringArray] = ProjectSettings.get_setting("plugins/kenyoni/pot_generation/paths", [])
+    var paths: Array[PackedStringArray] = []
+    paths.assign(ProjectSettings.get_setting("plugins/kenyoni/pot_generation/paths", []))
     for path: PackedStringArray in paths:
         self._tree.add_gen_item(path[0], path[1])
 

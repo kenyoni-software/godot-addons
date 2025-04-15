@@ -151,6 +151,12 @@ License class.
 
 ## Changelog
 
+### 1.9.2
+
+- Make configuration file a basic project setting
+- Fix leaked instances on editor exit
+- Calculate min width of first elements in details avoiding text being cut off
+
 ### 1.9.1
 
 - Improve error checking and cleanup code

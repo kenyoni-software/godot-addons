@@ -29,6 +29,10 @@ To search for overridden properties, this plugin will give you a dialog under `P
 
 ## Changelog
 
+### 1.3.1
+
+- Code improvements
+
 ### 1.3.0
 
 - Add Editor setting to enable/disable hiding private properties

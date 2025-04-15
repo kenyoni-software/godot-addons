@@ -17,4 +17,4 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
     self.remove_control_from_container(CustomControlContainer.CONTAINER_TOOLBAR, self._reloader)
-    self._reloader.queue_free()
+    self._reloader.free()
