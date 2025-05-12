@@ -26,6 +26,11 @@ const PLACEHOLDER_ICU: String = "icu"
 const PLACEHOLDER_PHP: String = "php"
 const PLACEHOLDERS: Array[String] = [PLACEHOLDER_ICU, PLACEHOLDER_PHP]
 
+const FILES_KEY_INPUT_PATH: String = "input_path"
+const FILES_KEY_OUTPUT_PATH: String = "output_path"
+const FILES_KEY_PLACEHOLDER: String = "placeholder"
+const FILES_KEY_NAMESPACE: String = "namespace"
+
 ## emitted right before validation
 signal pre_validation()
 ## send after the API key and project was validated, to check if the project is linked use is_linked()
@@ -98,23 +103,23 @@ func config_warnings() -> PackedStringArray:
     var files: Array[Dictionary] = self.files()
     for idx: int in range(files.size()):
         var tr_cfg: Dictionary = files[idx]
-        if !tr_cfg.has("input_path"):
+        if !tr_cfg.has(FILES_KEY_INPUT_PATH):
             warnings.append("%d: Input path is not set." % idx)
-        elif !FileAccess.file_exists(tr_cfg["input_path"]):
+        elif !FileAccess.file_exists(tr_cfg[FILES_KEY_INPUT_PATH]):
             warnings.append("%d: Input path does not exist." % idx)
-        if !tr_cfg.has("output_path"):
+        if !tr_cfg.has(FILES_KEY_OUTPUT_PATH):
             warnings.append("%d: Output path is not set." % idx)
-        elif tr_cfg.has("input_path"):
-            match tr_cfg["input_path"].get_extension():
+        elif tr_cfg.has(FILES_KEY_INPUT_PATH):
+            match tr_cfg[FILES_KEY_INPUT_PATH].get_extension():
                 "csv":
-                    if tr_cfg["output_path"].get_extension() != "csv":
+                    if tr_cfg[FILES_KEY_OUTPUT_PATH].get_extension() != "csv":
                         warnings.append("%d: Output path is not a CSV file." % idx)
                 "pot":
-                    if FileAccess.file_exists(tr_cfg["output_path"]):
+                    if FileAccess.file_exists(tr_cfg[FILES_KEY_OUTPUT_PATH]):
                         warnings.append("%d: Output path is not a directory." % idx)
-        if !tr_cfg.has("placeholder"):
+        if !tr_cfg.has(FILES_KEY_PLACEHOLDER):
             warnings.append("%d: Placeholder is not set." % idx)
-        elif tr_cfg["placeholder"] not in PLACEHOLDERS:
+        elif tr_cfg[FILES_KEY_PLACEHOLDER] not in PLACEHOLDERS:
             warnings.append("%d: Placeholder is invalid." % idx)
 
     return warnings
@@ -129,19 +134,19 @@ func validate() -> void:
 
 ## returns true if added
 func add_translation_file(tr_cfg: Dictionary) -> bool:
-    if !tr_cfg.has("input_path"):
+    if !tr_cfg.has(FILES_KEY_INPUT_PATH):
         push_error("[Tolgee] Missing required field 'input_path'.")
         return false
-    elif !tr_cfg.has("output_path"):
+    elif !tr_cfg.has(FILES_KEY_OUTPUT_PATH):
         push_error("[Tolgee] Missing required field 'output_path'.")
         return false
-    elif !tr_cfg.has("placeholder"):
+    elif !tr_cfg.has(FILES_KEY_PLACEHOLDER):
         push_error("[Tolgee] Missing required field 'placeholder'.")
         return false
 
     var files: Array = self.files()
     var idx: int = files.find_custom(func(item: Dictionary) -> bool:
-        return item.get("input_path") == tr_cfg.get("input_path")
+        return item.get(FILES_KEY_INPUT_PATH) == tr_cfg.get(FILES_KEY_INPUT_PATH)
     )
     if idx != -1:
         files[idx] = tr_cfg
@@ -154,7 +159,7 @@ func add_translation_file(tr_cfg: Dictionary) -> bool:
 func remove_translation_file(input_path: String) -> void:
     var files: Array = self.files()
     var idx: int = files.find_custom(func(item: Dictionary) -> bool:
-        return item.get("input_path") == input_path
+        return item.get(FILES_KEY_INPUT_PATH) == input_path
     )
     if idx != -1:
         files.remove_at(idx)
@@ -204,3 +209,50 @@ static func uid_to_path(uid: String) -> String:
     if uid.begins_with("uid://"):
         return ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
     return uid
+
+static func locale_to_bcp_47(locale: String) -> String:
+    var parts: Array[String] = locale.split("_", true, 3)
+    var bcp_47: Array[String] = []
+    if parts.size() > 0:
+        bcp_47.append(parts[0].to_lower())
+    if parts.size() > 1:
+        bcp_47.append(parts[1].capitalize())
+    if parts.size() > 2:
+        bcp_47.append(parts[2].to_upper())
+    if parts.size() > 3:
+        bcp_47.append(parts[3].replace("_", "-"))
+    return "-".join(bcp_47)
+
+static func format_bcp47_tag(bcp47_tag: String) -> String:
+    var parts: PackedStringArray = bcp47_tag.split("-")
+    var formatted_parts: PackedStringArray = []
+
+    if parts.size() > 0:
+        formatted_parts.append(parts[0].to_lower())
+
+    var found_script: bool = false
+    var found_country: bool = false
+
+    for idx in range(1, parts.size()):
+        var part: String = parts[idx]
+
+        if !found_script && part.length() == 4 && part[0] >= "A" && part[0] <= "Z" && part.substr(1).to_lower() == part.substr(1):
+            formatted_parts.append(part.capitalize())
+            found_script = true
+            continue
+
+        var is_two_letter_country = part.length() == 2 && part[0] >= "A" && part[0] <= "Z" && part[1] >= "A" && part[1] <= "Z"
+        var is_three_digit_region = part.length() == 3 && part[0] >= "0" && part[0] <= "9" && part[1] >= "0" && part[1] <= "9" && part[2] >= "0" && part[2] <= "9"
+
+        if !found_country && (is_two_letter_country || is_three_digit_region):
+            formatted_parts.append(part.to_upper())
+            found_country = true
+            continue
+
+        var variant_parts: PackedStringArray = []
+        for kdx in range(idx, parts.size()):
+            variant_parts.append(parts[kdx].to_lower())
+        formatted_parts.append("_".join(variant_parts))
+        break
+
+    return "_".join(formatted_parts)

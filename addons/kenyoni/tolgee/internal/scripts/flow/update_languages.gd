@@ -20,19 +20,6 @@ func run() -> void:
     lang_options.size = 1000
     self._tolgee._client.get_all_languages(self._tolgee.project_id(), lang_options, self._on_get_all_languages)
 
-static func locale_to_bcp_47(locale: String) -> String:
-    var parts: Array[String] = locale.split("_", true, 3)
-    var bcp_47: Array[String] = []
-    if parts.size() > 0:
-        bcp_47.append(parts[0].to_lower())
-    if parts.size() > 1:
-        bcp_47.append(parts[1].capitalize())
-    if parts.size() > 2:
-        bcp_47.append(parts[2].to_upper())
-    if parts.size() > 3:
-        bcp_47.append(parts[3].replace("_", "-"))
-    return "-".join(bcp_47)
-
 func _update_languages() -> void:
     for lang: String in self._missing_languages:
         var std_locale: String = TranslationServer.standardize_locale(lang)

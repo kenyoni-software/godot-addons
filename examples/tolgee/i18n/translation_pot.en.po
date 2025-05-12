@@ -1,0 +1,40 @@
+# LANGUAGE translation for Godot Addons for the following files:
+# res://examples/tolgee/translations.gd
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Godot Addons\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#: examples/tolgee/translations.gd
+msgctxt "ui"
+msgid "age"
+msgstr "Age"
+
+#: examples/tolgee/translations.gd
+msgctxt "ui"
+msgid "hello_world"
+msgstr "Hello World"
+
+#: examples/tolgee/translations.gd
+msgid "ui.hello_world"
+msgstr "Hello World!"
+
+#: examples/tolgee/translations.gd
+msgctxt "ui"
+msgid "apple"
+msgid_plural "apples"
+msgstr[0] "Apple"
+msgstr[1] ""

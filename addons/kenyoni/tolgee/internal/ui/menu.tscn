@@ -227,7 +227,7 @@ text = "Add Translation..."
 [node name="files" type="Tree" parent="tab_container/settings/settings"]
 layout_mode = 2
 size_flags_vertical = 3
-columns = 4
+columns = 5
 column_titles_visible = true
 hide_root = true
 select_mode = 1

@@ -116,6 +116,16 @@ class PostSingleStepImportFileMapping:
     func _init(filename_: String) -> void:
         self.filename = filename_
 
+class PostSingleStepImportLanguageMapping:
+    extends RefCounted
+
+    var import_language: String = ""
+    var platform_language_tag: String = ""
+
+    func _init(import_language_: String, platform_language_tag_: String) -> void:
+        self.import_language = import_language_
+        self.platform_language_tag = platform_language_tag_
+
 class PostSingleStepImportParams:
     extends RefCounted
 
@@ -125,6 +135,7 @@ class PostSingleStepImportParams:
     var create_new_keys: bool = false
     var file_mappings: Array[PostSingleStepImportFileMapping] = []
     var force_mode: String = ""
+    var language_mappings: Array[PostSingleStepImportLanguageMapping] = []
     var override_key_descriptions: bool = false
     var remove_other_keys: bool = false
     var tag_new_keys: PackedStringArray = PackedStringArray()
@@ -147,11 +158,12 @@ func single_step_import(project_id: int, params: PostSingleStepImportParams, com
         "createNewKeys": params.create_new_keys,
         "fileMappings": [],
         "forceMode": params.force_mode,
+        "languageMappings": [],
         "overrideKeyDescriptions": params.override_key_descriptions,
         "removeOtherKeys": params.remove_other_keys,
         "tagNewKeys": params.tag_new_keys,
     }
-    var file_mappings: Array = []
+    var file_mappings: Array[Dictionary] = []
     for file_mapping: PostSingleStepImportFileMapping in params.file_mappings:
         var mapping: Dictionary = {
             "fileName": file_mapping.filename,
@@ -166,6 +178,14 @@ func single_step_import(project_id: int, params: PostSingleStepImportParams, com
             mapping["namespace"] = file_mapping.namespace_str
         file_mappings.append(mapping)
     data["fileMappings"] = file_mappings
+    var language_mappings: Array[Dictionary] = []
+    for language_mapping: PostSingleStepImportLanguageMapping in params.language_mappings:
+        var mapping: Dictionary = {
+            "importLanguage": language_mapping.import_language,
+            "platformLanguageTag": language_mapping.platform_language_tag,
+        }
+        language_mappings.append(mapping)
+    data["languageMappings"] = language_mappings
     params_part.data = JSON.stringify(data)
     multipart.add(params_part)
     multipart.generate()
