@@ -61,14 +61,14 @@ func install(http: HTTPRequest, _version: String) -> Error:
     if downloader.result != HTTPRequest.RESULT_SUCCESS:
         return Error.FAILED
 
-    var extractor: ZipExtractorThreaded = ZipExtractorThreaded.new()
-    extractor.thread_count = maxi(OS.get_processor_count() / 2, 1)
-    extractor.extract(zip_path, self.directory(), [
+    var extractor: ZipExtractorThreaded = ZipExtractorThreaded.new(_create_extract_path.bind([
         "Font-Awesome-6.x/js-packages/@fortawesome/fontawesome-free/package.json",
         "Font-Awesome-6.x/svgs/",
         "Font-Awesome-6.x/metadata/icons.json",
         "Font-Awesome-6.x/LICENSE.txt",
-    ])
+    ]))
+    extractor.thread_count = maxi(OS.get_processor_count() / 2, 1)
+    extractor.extract(zip_path, self.directory())
     extractor.wait()
     if extractor.error() != Error.OK:
         return Error.FAILED

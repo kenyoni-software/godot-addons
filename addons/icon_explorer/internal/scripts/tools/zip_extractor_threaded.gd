@@ -16,7 +16,7 @@ var _cancel_sem: Semaphore = Semaphore.new()
 ## - ERR_BUSY if already processing an extraction
 ## - Error.OK if successful created
 ## The completed signal is called deferred. And is only called if extract returns Error.OK and the process was started.
-func extract(zip_path: String, output_path: String, unpack_only: PackedStringArray = PackedStringArray()) -> Error:
+func extract(zip_path: String, output_path: String) -> Error:
     if !self._running_guard.try_lock():
         return ERR_BUSY
     if self._main_thread != null && self._main_thread.is_alive():
@@ -27,7 +27,6 @@ func extract(zip_path: String, output_path: String, unpack_only: PackedStringArr
     if !output_path.is_absolute_path():
         output_path = OS.get_executable_path().get_base_dir().path_join(output_path)
     self._output_path = output_path
-    self._unpack_only = unpack_only
     self._set_error(Error.OK, "")
 
     self._main_thread = Thread.new()
@@ -114,21 +113,23 @@ func _extract_files(files: PackedStringArray) -> void:
             return
         # add itself again
         self._cancel_sem.post()
-        if !self._is_in_filter(path):
-            self._add_processed(1)
-            continue
+        # directories are already created
         if path.ends_with("/"):
             self._add_processed(1)
             continue
-        var file: FileAccess = FileAccess.open(self._output_path.path_join(path), FileAccess.WRITE)
+        var file_out_path: String = self._get_output_path(path)
+        if file_out_path == "":
+            self._add_processed(1)
+            continue
+        var file: FileAccess = FileAccess.open(file_out_path, FileAccess.WRITE)
         if file == null:
             self._cancel()
-            self._set_error(FileAccess.get_open_error(), "failed to open file " + self._output_path.path_join(path))
+            self._set_error(FileAccess.get_open_error(), "failed to open file " + file_out_path)
             self.completed.emit.call_deferred()
             return
         if !file.store_buffer(reader.read_file(path)):
             self._cancel()
-            self._set_error(file.get_error(), "failed to write file " + self._output_path.path_join(path))
+            self._set_error(file.get_error(), "failed to write file " + file_out_path)
             self.completed.emit.call_deferred()
             return
         self._add_processed(1)
