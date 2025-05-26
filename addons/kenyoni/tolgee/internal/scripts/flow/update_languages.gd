@@ -11,6 +11,7 @@ var _delete_languages: Dictionary[String, int] = {}
 func _init(tolgee: Tolgee, languages: Array[String]) -> void:
     super._init(tolgee)
     self._languages = languages
+    print(languages)
 
 ## OVERRIDE
 func run() -> void:
@@ -52,7 +53,7 @@ func _on_get_all_languages(result: int, response_code: int, _headers: PackedStri
         if tag != "" && lang.has("id") && !self._languages.has(tag):
             self._delete_languages[tag] = int(lang.get("id", 0))
     for lang: String in self._languages:
-        if cur_languages.find_custom(func(val: Dictionary) -> bool: return val.get("tag", "") == lang) == -1:
+        if cur_languages.find_custom(func(val: Dictionary) -> bool: return val.get("tag", "").to_lower() == lang.to_lower()) == -1:
             self._missing_languages.append(lang)
 
     self._update_languages()
@@ -66,7 +67,7 @@ func _on_language_created(result: int, response_code: int, _headers: PackedStrin
         return
     if response_code != HTTPClient.RESPONSE_OK:
         var err_msg: String = "%s - %s" % [str(response_code), body.get_string_from_utf8()]
-        push_error("[Tolgee] Failed to create language '%s': " % [language, err_msg])
+        push_error("[Tolgee] Failed to create language '%s': %s" % [language, err_msg])
         EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to create language ''%s." % language, EditorToaster.SEVERITY_ERROR, err_msg)
         self.completed.emit(FAILED)
         return

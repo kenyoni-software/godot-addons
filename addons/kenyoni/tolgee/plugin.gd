@@ -7,6 +7,7 @@ const Tolgee := preload("res://addons/kenyoni/tolgee/internal/scripts/tolgee.gd"
 var _menu: Control
 
 func _enter_tree() -> void:
+    print(Tolgee.bcp47_to_locale("fr-CA"))
     self._init_project_settings(Tolgee.CFG_KEY_HOST, TYPE_STRING, "https://app.tolgee.io")
     ProjectSettings.set_as_basic(Tolgee.CFG_KEY_HOST, true)
     self._init_project_settings(Tolgee.CFG_KEY_API_KEY, TYPE_STRING, "", PROPERTY_HINT_PASSWORD)

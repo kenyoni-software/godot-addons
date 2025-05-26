@@ -14,6 +14,7 @@ config/name="Godot Addons"
 config/version="1.0.0"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+config/git_sha="2e1436ae96800248b22ad7217f96bb3de59e5d99"
 
 [autoload]
 
@@ -36,15 +37,28 @@ naming/node_name_casing=2
 
 enabled=PackedStringArray("res://addons/aspect_ratio_resize_container/plugin.cfg", "res://addons/custom_theme_overrides/plugin.cfg", "res://addons/explore-editor-theme/plugin.cfg", "res://addons/git_sha_project_setting/plugin.cfg", "res://addons/glogging/plugin.cfg", "res://addons/hide_private_properties/plugin.cfg", "res://addons/icon_explorer/plugin.cfg", "res://addons/icons_patcher/plugin.cfg", "res://addons/kenyoni/plugin_reloader/plugin.cfg", "res://addons/kenyoni/pot_generation/plugin.cfg", "res://addons/kenyoni/remove_orphan_uid/plugin.cfg", "res://addons/kenyoni/tolgee/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/qr_code/plugin.cfg", "res://addons/texture_button_colored/plugin.cfg")
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://examples/tolgee/i18n/translation_pot.fr_ca.po")
+locale/translations_pot_files=PackedStringArray("res://examples/tolgee/translations.gd")
+
 [plugins]
 
 licenses/data_file="res://examples/licenses/licenses.json"
 icons_patcher/material_design_directory="res://examples/icons_patcher/icons"
-kenyoni/pot_generation/paths=Array[PackedStringArray]([PackedStringArray("res://addons/kenyoni/pot_generation/", "*.gd,*.tscn")])
+kenyoni/pot_generation/paths=Array[PackedStringArray]([PackedStringArray("res://addons/kenyoni/pot_generation/", ""), PackedStringArray("res://examples/tolgee/translations.gd", "")])
 tolgee/host="http://127.0.0.1:8080"
 tolgee/api_key="tgpak_gfptiolsne3tkntfgrudqmdsobyhkobsmjxhg23ngv3hk"
 tolgee/files=Array[Dictionary]([{
-"input_path": "res://examples/tolgee/i18n/translation.csv",
-"output_path": "res://examples/tolgee/i18n/translation.csv",
+&"file_path": "res://examples/tolgee/i18n/translation_csv.csv",
+"input_path": "res://examples/tolgee/i18n/translation_csv.csv",
+&"namespace": "CSV",
+"output_path": "res://examples/tolgee/i18n/translation_csv.csv",
+"placeholder": "icu"
+}, {
+&"file_path": "res://examples/tolgee/i18n/translation_pot.pot",
+"input_path": "res://examples/tolgee/i18n/translation_pot.pot",
+&"namespace": "POT",
+"output_path": "res://examples/tolgee/i18n",
 "placeholder": "icu"
 }])

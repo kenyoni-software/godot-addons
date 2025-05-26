@@ -53,7 +53,6 @@ func run() -> void:
 func _collect_csv(input_file_id: String, tr_cfg: Dictionary) -> Error:
     var file_mapping: Client.PostSingleStepImportFileMapping = Client.PostSingleStepImportFileMapping.new(input_file_id)
     file_mapping.format = "CSV_" + (tr_cfg.get(Tolgee.FILES_KEY_PLACEHOLDER, "") as String).to_upper()
-    file_mapping.language_tag = "_"
     file_mapping.namespace_str = tr_cfg.get(Tolgee.FILES_KEY_NAMESPACE, "")
     self._params.file_mappings.append(file_mapping)
 
@@ -66,12 +65,14 @@ func _collect_csv(input_file_id: String, tr_cfg: Dictionary) -> Error:
         EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to collect translations.", EditorToaster.SEVERITY_ERROR, err_msg)
         self.completed.emit(FAILED)
         return FAILED
-    var cur_languages: PackedStringArray = file.get_csv_line()
+    var cur_locales: PackedStringArray = file.get_csv_line()
     file.close()
-    cur_languages.remove_at(0)
-    for cur_lang: String in cur_languages:
-        if !self._languages.has(cur_lang):
-            self._languages.append(cur_lang)
+    cur_locales.remove_at(0)
+    for cur_loc: String in cur_locales:
+        var lang: String = Tolgee.locale_to_bcp_47(cur_loc)
+        self._params.language_mappings.append(Client.PostSingleStepImportLanguageMapping.new(cur_loc, lang))
+        if !self._languages.has(lang):
+            self._languages.append(lang)
     return OK
 
 func _collect_pot(input_file_id: String, tr_cfg: Dictionary) -> Error:
@@ -82,7 +83,7 @@ func _collect_pot(input_file_id: String, tr_cfg: Dictionary) -> Error:
     # TODO: POT files are not supported by Tolgee (only PO files)
     # so we have to define a language placeholder
     if !self._languages.has("en"):
-            self._languages.append("en")
+        self._languages.append("en")
     file_mapping.language_tag = "en"
     self._params.file_mappings.append(file_mapping)
 
@@ -115,9 +116,10 @@ func _collect_pot(input_file_id: String, tr_cfg: Dictionary) -> Error:
             EditorInterface.get_editor_toaster().push_toast("[Tolgee] Failed to collect translations.", EditorToaster.SEVERITY_ERROR, err_msg)
             self.completed.emit(FAILED)
             return FAILED
-        if !self._languages.has(tra.locale):
-            self._languages.append(tra.locale)
-        po_file_mapping.language_tag = tra.locale
+        var lang: String = Tolgee.locale_to_bcp_47(tra.locale)
+        if !self._languages.has(lang):
+            self._languages.append(lang)
+        po_file_mapping.language_tag = lang
         po_file_mapping.namespace_str = tr_cfg.get(Tolgee.FILES_KEY_NAMESPACE, "")
         self._params.file_mappings.append(po_file_mapping)
     return OK

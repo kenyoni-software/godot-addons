@@ -167,7 +167,7 @@ func remove_translation_file(input_path: String) -> void:
         ProjectSettings.save()
 
 func download_translations() -> void:
-    pass
+    DownloadTranslationsFlow.new(self).run()
 
 func upload_translations() -> void:
     UploadTranslationsFlow.new(self).run()
@@ -211,42 +211,52 @@ static func uid_to_path(uid: String) -> String:
     return uid
 
 static func locale_to_bcp_47(locale: String) -> String:
-    var parts: Array[String] = locale.split("_", true, 3)
+    var parts: PackedStringArray = locale.split("_", true, 3)
     var bcp_47: Array[String] = []
-    if parts.size() > 0:
+    if parts.size() >= 1:
         bcp_47.append(parts[0].to_lower())
-    if parts.size() > 1:
-        bcp_47.append(parts[1].capitalize())
-    if parts.size() > 2:
-        bcp_47.append(parts[2].to_upper())
-    if parts.size() > 3:
+    if parts.size() >= 2:
+            if parts[1].length() == 4:
+                # optional script
+                bcp_47.append(parts[1].capitalize())
+            elif parts[1].length() == 2:
+                # optional country
+                bcp_47.append(parts[1].to_upper())
+            else:
+                # optional variant
+                bcp_47.append(parts[1].replace("_", "-"))
+    if parts.size() >= 3:
+        if parts[2].length() == 2:
+            # optional country
+            bcp_47.append(parts[2].to_upper())
+        else:
+            # optional variant
+            bcp_47.append(parts[2].replace("_", "-"))
+    if parts.size() >= 4:
+        # optional variant
         bcp_47.append(parts[3].replace("_", "-"))
+
     return "-".join(bcp_47)
 
-static func format_bcp47_tag(bcp47_tag: String) -> String:
+static func bcp47_to_locale(bcp47_tag: String) -> String:
     var parts: PackedStringArray = bcp47_tag.split("-")
     var formatted_parts: PackedStringArray = []
 
     if parts.size() > 0:
         formatted_parts.append(parts[0].to_lower())
 
-    var found_script: bool = false
-    var found_country: bool = false
-
     for idx in range(1, parts.size()):
         var part: String = parts[idx]
 
-        if !found_script && part.length() == 4 && part[0] >= "A" && part[0] <= "Z" && part.substr(1).to_lower() == part.substr(1):
+        if part.length() == 4 && part[0] >= "A" && part[0] <= "Z" && part.substr(1).to_lower() == part.substr(1):
             formatted_parts.append(part.capitalize())
-            found_script = true
             continue
 
         var is_two_letter_country = part.length() == 2 && part[0] >= "A" && part[0] <= "Z" && part[1] >= "A" && part[1] <= "Z"
-        var is_three_digit_region = part.length() == 3 && part[0] >= "0" && part[0] <= "9" && part[1] >= "0" && part[1] <= "9" && part[2] >= "0" && part[2] <= "9"
+        var is_three_digit_region = part.length() == 3 && part.is_valid_int()
 
-        if !found_country && (is_two_letter_country || is_three_digit_region):
+        if is_two_letter_country || is_three_digit_region:
             formatted_parts.append(part.to_upper())
-            found_country = true
             continue
 
         var variant_parts: PackedStringArray = []
