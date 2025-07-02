@@ -59,8 +59,12 @@ func load() -> Array:
         push_warning("could not parse simple icons package.json: '%s'", [parser_version.get_error_message()])
         return [[], PackedStringArray()]
 
+    var icons_file: String = self.directory().path_join("simple-icons-master/_data/simple-icons.json")
+    if !FileAccess.file_exists(icons_file):
+        # new file path since v15.0
+        icons_file = self.directory().path_join("simple-icons-master/data/simple-icons.json")
     var parser: JSON = JSON.new()
-    var res: int = parser.parse(FileAccess.get_file_as_string(self.directory().path_join("simple-icons-master/_data/simple-icons.json")))
+    var res: int = parser.parse(FileAccess.get_file_as_string(icons_file))
     if res != OK:
         push_warning("could not parse simple icons simple-icons.json: '%s'", [parser.get_error_message()])
         return [[], PackedStringArray()]
@@ -69,10 +73,10 @@ func load() -> Array:
     var buffers: PackedStringArray = PackedStringArray()
 
     var raw_icons: Array = []
-    if parser_version.data["version"].begins_with("14."):
-        raw_icons = parser.data
-    else:
+    if parser_version.data["version"].begins_with("13."):
         raw_icons = parser.data.get("icons", [])
+    else:
+        raw_icons = parser.data
     for item: Dictionary in raw_icons:
         var arr_res: Array = self._load_item(item)
         if arr_res.size() == 0:
@@ -134,7 +138,10 @@ func install(http: HTTPRequest, _version: String) -> Error:
     var extractor: ZipExtractorThreaded = ZipExtractorThreaded.new(_create_extract_path.bind([
         "simple-icons-master/package.json",
         "simple-icons-master/icons/",
+        # 14.x
         "simple-icons-master/_data/simple-icons.json",
+        # 15.x
+        "simple-icons-master/data/simple-icons.json",
         "simple-icons-master/LICENSE.md",
     ]))
     extractor.thread_count = maxi(OS.get_processor_count() / 2, 1)

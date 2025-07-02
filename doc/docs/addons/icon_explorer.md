@@ -47,6 +47,10 @@ As popup:
 
 ## Changelog
 
+### 1.4.4
+
+- Fix Simple Icons 15.0 support
+
 ### 1.4.3
 
 - Code improvements
