@@ -47,6 +47,10 @@ As popup:
 
 ## Changelog
 
+### 1.4.3
+
+- Code improvements
+
 ### 1.4.2
 
 - Code improvements

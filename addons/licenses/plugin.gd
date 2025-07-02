@@ -14,6 +14,9 @@ var _file_watcher: FileSystemWatcher
 func _get_plugin_name() -> String:
     return "Licenses"
 
+func _get_plugin_icon() -> Texture2D:
+    return preload("res://addons/licenses/icon.svg")
+
 func _enter_tree() -> void:
     set_project_setting(Licenses.CFG_KEY_DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
     ProjectSettings.set_as_basic(Licenses.CFG_KEY_DATA_FILE, true)

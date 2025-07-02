@@ -67,6 +67,12 @@ func directory() -> String:
 func directory_name() -> String:
     return self.name.to_snake_case()
 
+static func _create_extract_path(path: String, filter_paths: PackedStringArray) -> String:
+    for filter: String in filter_paths:
+        if path.begins_with(filter):
+            return path
+    return ""
+
 static func get_default_collection_paths() -> PackedStringArray:
     const ext_path: String = "res://addons/icon_explorer/internal/ext/"
     var dir: DirAccess = DirAccess.open(ext_path)

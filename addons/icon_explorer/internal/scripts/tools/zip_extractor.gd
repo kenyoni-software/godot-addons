@@ -5,7 +5,9 @@ signal completed()
 
 var _zip_path: String
 var _output_path: String
-var _unpack_only: PackedStringArray
+## Callable[[String], String]
+## The extract hook can return a relative path to the output path or an absolute path. Returning an empty string will skip the file.
+var _extract_hook: Variant = null
 
 var _processed: int = 0:
     get = processed_files
@@ -18,6 +20,12 @@ var _err: Error:
 var _err_msg: String:
     get = error_message
 var _error_guard: Mutex = Mutex.new()
+
+func zip_path() -> String:
+    return self._zip_path
+
+func output_path() -> String:
+    return self._output_path
 
 func processed_files() -> int:
     self._progress_guard.lock()
@@ -43,11 +51,13 @@ func error_message() -> String:
     self._error_guard.unlock()
     return value
 
+func _init(extract_hook: Variant = null) -> void:
+    self._extract_hook = extract_hook
+
 ## The completed signal is called right before it returns.
-func extract(zip_path: String, output_path: String, unpack_only: PackedStringArray = PackedStringArray()) -> Error:
+func extract(zip_path: String, output_path: String) -> Error:
     self._zip_path = zip_path
     self._output_path = output_path
-    self._unpack_only = unpack_only
     self._set_error(Error.OK, "")
 
     var reader: ZIPReader = ZIPReader.new()
@@ -69,24 +79,24 @@ func extract(zip_path: String, output_path: String, unpack_only: PackedStringArr
         self.completed.emit()
         return err
     for path: String in files:
-        if !self._is_in_filter(path):
-            self._add_processed(1)
-            continue
         # directories are already created
         if path.ends_with("/"):
             self._add_processed(1)
             continue
+        var file_out_path: String = self._get_output_path(path)
+        if file_out_path == "":
+            self._add_processed(1)
+            continue
         var buffer: PackedByteArray = reader.read_file(path)
-        var out_path: String = self._output_path.path_join(path)
-        var file: FileAccess = FileAccess.open(out_path, FileAccess.WRITE)
+        var file: FileAccess = FileAccess.open(file_out_path, FileAccess.WRITE)
         if file == null:
             reader.close()
-            self._set_error(FileAccess.get_open_error(), "failed to open file " + out_path)
+            self._set_error(FileAccess.get_open_error(), "failed to open file " + file_out_path)
             self.completed.emit()
             return FileAccess.get_open_error()
         if !file.store_buffer(buffer):
             reader.close()
-            self._set_error(file.get_error(), "failed to write file " + out_path)
+            self._set_error(file.get_error(), "failed to write file " + file_out_path)
             self.completed.emit()
             return file.get_error()
         file = null
@@ -104,22 +114,28 @@ func _add_processed(val: int) -> void:
     self._processed += val
     self._progress_guard.unlock()
 
-func _is_in_filter(path: String) -> bool:
-    if self._unpack_only.size() == 0:
-        return true
-    for filter: String in self._unpack_only:
-        if path.begins_with(filter):
-            return true
-    return false
+func _get_output_path(path: String) -> String:
+    if self._extract_hook == null:
+        return self._output_path.path_join(path)
+    var file_out_path: String = (self._extract_hook as Callable).call(path)
+    if file_out_path == "":
+        return ""
+    if file_out_path.is_absolute_path():
+        return file_out_path
+    return self._output_path.path_join(file_out_path)
 
 func _create_directories(paths: PackedStringArray) -> Error:
     var created: Dictionary[String, Object] = {}
     for path: String in paths:
-        if self._is_in_filter(path) && !created.has(path.get_base_dir()):
-            var err: int = DirAccess.make_dir_recursive_absolute(self._output_path.path_join(path.get_base_dir()))
+        var file_out_path: String = self._get_output_path(path)
+        if file_out_path == "":
+            continue
+        var output_dir: String = file_out_path.get_base_dir()
+        if !created.has(output_dir):
+            var err: int = DirAccess.make_dir_recursive_absolute(output_dir)
             if err != Error.OK:
                 return err as Error
-            created[path.get_base_dir()] = null
+            created[output_dir] = null
     return Error.OK
 
 func _set_error(err: Error, msg: String) -> void:
