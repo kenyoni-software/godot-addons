@@ -151,6 +151,10 @@ License class.
 
 ## Changelog
 
+### 1.9.3
+
+- Fix filesystem context menu showing license file
+
 ### 1.9.2
 
 - Make configuration file a basic project setting

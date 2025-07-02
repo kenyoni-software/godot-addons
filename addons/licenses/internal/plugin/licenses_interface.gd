@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func show_popup(show_comp: Component = null) -> void:
     if show_comp != null:
-        self._licenses_dialog.licenses.show_component(show_comp)
+        self._licenses_dialog.show_component(show_comp)
     if self._licenses_dialog.visible:
         self._licenses_dialog.grab_focus()
     else:
