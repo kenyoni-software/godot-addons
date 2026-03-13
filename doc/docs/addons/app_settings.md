@@ -2,9 +2,9 @@
 
 A flexible settings management system with support for staged values, readonly mode, validation, and per-frame batched signals.
 
-It is built around three core classes: a `Registry` that owns and organizes `Setting` objects by hierarchical keys, and an `AppSettings` node that wraps the registry and adds convenient per-frame batched signals for change detection. Settings support staged mode (queue changes before committing them all at once), readonly mode, custom validation and apply callbacks, and metadata. Configuration can be serialized to and loaded from Godot's built-in `ConfigFile` format, making save/load workflows straightforward.
+It is built around three core classes: a `Registry` that owns and organizes `Setting` objects by hierarchical keys and an `AppSettings` node that wraps the registry and adds convenient per-frame batched signals for change detection. Settings support staged mode (queue changes before committing them all at once), readonly mode, custom validation and apply callbacks, and metadata. Configuration can be serialized to and loaded from Godot's built-in `ConfigFile` format, making save/load workflows straightforward.
 
-The best is to create an autoload `AppSettings` or `GameSetting`s that extends the provided `AppSettings` node. This allows you to easily access your settings from anywhere in your code and ensures that the per-frame signals are emitted correctly.
+The best is to create an autoload `AppSettings` or `GameSettings` that extends the provided `AppSettings` node. This allows you to easily access your settings from anywhere in your code and ensures that the per-frame signals are emitted correctly.
 
 [AppSettings](#appsettings): App settings manager class  
 [Registry](#registry): App settings manager class.  
