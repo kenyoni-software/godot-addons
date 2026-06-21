@@ -18,6 +18,7 @@ This works except for `STRETCH_MODE_COVER`.
 
 | Godot | Version  |
 | ----- | -------- |
+| 4.7   | >= 3.1.0 |
 | 4.6   | >= 3.1.0 |
 | 4.5   | >= 3.1.0 |
 | 4.4   | >= 3.1.0 |

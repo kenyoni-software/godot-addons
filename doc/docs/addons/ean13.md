@@ -12,6 +12,7 @@ EAN-13 barcode generation and rendering addon for Godot. Provides a `EAN13Rect` 
 
 | Godot | Version |
 | ----- | ------- |
+| 4.7   | all     |
 | 4.6   | all     |
 | 4.5   | all     |
 | 4.4   | all     |

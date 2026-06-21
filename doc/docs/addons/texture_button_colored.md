@@ -12,6 +12,7 @@ Let you apply the icon color theme properties for the texture button. Uses `self
 
 | Godot | Version       |
 | ----- | ------------- |
+| 4.7   | >= 1.4.0      |
 | 4.6   | >= 1.4.0      |
 | 4.5   | >= 1.4.0      |
 | 4.4   | >= 1.4.0      |

@@ -22,6 +22,7 @@ You can change the project license file either with a button at the upper right,
 
 | Godot | Version        |
 | ----- | -------------- |
+| 4.7   | >= 1.9.0       |
 | 4.6   | >= 1.9.0       |
 | 4.5   | >= 1.9.0       |
 | 4.4   | 1.9.0 - 1.10.0 |

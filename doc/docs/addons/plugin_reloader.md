@@ -12,6 +12,7 @@ Enable or disable plugins from within the editor main screen.
 
 | Godot | Version       |
 | ----- | ------------- |
+| 4.7   | >= 1.0.0      |
 | 4.6   | >= 1.0.0      |
 | 4.5   | 1.0.0 - 1.2.2 |
 | 4.4   | 1.0.0 - 1.2.2 |

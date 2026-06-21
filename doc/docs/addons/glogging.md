@@ -15,6 +15,7 @@ Logging into a file is not supported. The output will be always done via print.
 
 | Godot | Version       |
 | ----- | ------------- |
+| 4.7   | >= 2.0.0      |
 | 4.6   | >= 2.0.0      |
 | 4.5   | >= 2.0.0      |
 | 4.4   | 1.5.0 - 1.6.1 |

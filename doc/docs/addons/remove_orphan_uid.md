@@ -18,6 +18,7 @@ Use `Project` -> `Tools` -> `Remove Orphan UID` to remove.
 
 | Godot | Version  |
 | ----- | -------- |
+| 4.7   | >= 1.0.0 |
 | 4.6   | >= 1.0.0 |
 | 4.5   | >= 1.0.0 |
 | 4.4   | >= 1.0.0 |

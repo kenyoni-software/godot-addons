@@ -16,6 +16,7 @@ The custom theme override variables can be handled like every other theme overri
 
 | Godot | Version |
 | ----- | ------- |
+| 4.7  | all     |
 | 4.6   | all     |
 | 4.5   | all     |
 | 4.4   | all     |
