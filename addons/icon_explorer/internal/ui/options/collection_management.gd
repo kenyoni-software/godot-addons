@@ -105,7 +105,7 @@ func update() -> void:
         if coll.is_installed():
             item.add_button(Column.ACTIONS, self.get_theme_icon(&"Reload", &"EditorIcons"), ButtonId.INSTALL, is_one_processed || coll.latest_version == "" || coll.latest_version <= coll.version, "Update")
         else:
-            item.add_button(Column.ACTIONS, self.get_theme_icon(&"AssetLib", &"EditorIcons"), ButtonId.INSTALL, is_one_processed, "Install")
+            item.add_button(Column.ACTIONS, self.get_theme_icon(&"AssetStore", &"EditorIcons"), ButtonId.INSTALL, is_one_processed, "Install")
         item.add_button(Column.ACTIONS, self.get_theme_icon(&"Remove", &"EditorIcons"), ButtonId.REMOVE, is_one_processed || !coll.is_installed(), "Remove")
         item.add_button(Column.ACTIONS, self.get_theme_icon(&"Filesystem", &"EditorIcons"), ButtonId.OPEN_DIR, !coll.is_installed(), "Show in File Explorer")
 
