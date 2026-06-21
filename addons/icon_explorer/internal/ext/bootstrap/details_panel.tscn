@@ -15,13 +15,13 @@ _tags = NodePath("aliases")
 _version_added = NodePath("version_added")
 
 [node name="categories" parent="." unique_id=1559846328 instance=ExtResource("2_n1r08")]
-visible = false
 layout_mode = 2
+items = []
 title = "Categories"
 
 [node name="aliases" parent="." unique_id=1018928598 instance=ExtResource("2_n1r08")]
-visible = false
 layout_mode = 2
+items = []
 title = "Aliases"
 
 [node name="version_added" parent="." unique_id=1063248571 instance=ExtResource("3_5y6bb")]

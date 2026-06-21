@@ -31,23 +31,19 @@ text = "Deprecated"
 horizontal_alignment = 1
 
 [node name="aliases" parent="." unique_id=71980882 instance=ExtResource("2_sgh8u")]
-visible = false
 layout_mode = 2
-items = PackedStringArray()
+items = []
 title = "Aliases"
 
 [node name="tags" parent="." unique_id=317496054 instance=ExtResource("2_sgh8u")]
-visible = false
 layout_mode = 2
-items = PackedStringArray()
+items = []
 title = "Tags"
 
 [node name="author" parent="." unique_id=83679176 instance=ExtResource("3_7hl4l")]
-visible = false
 layout_mode = 2
 title = "Created by"
 
 [node name="version" parent="." unique_id=772127824 instance=ExtResource("3_7hl4l")]
-visible = false
 layout_mode = 2
 title = "Version added"

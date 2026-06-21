@@ -13,7 +13,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wb7ty")
-items = PackedStringArray()
 _list = NodePath("margin_container/item_list")
 _title = NodePath("title_panel")
 

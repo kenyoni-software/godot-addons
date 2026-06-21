@@ -12,6 +12,5 @@ script = ExtResource("1_33at2")
 _country_code = NodePath("country_code")
 
 [node name="country_code" parent="." unique_id=469113870 instance=ExtResource("2_m2v8w")]
-visible = false
 layout_mode = 2
 title = "Country Code"

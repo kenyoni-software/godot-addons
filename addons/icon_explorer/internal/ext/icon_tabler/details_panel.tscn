@@ -16,22 +16,18 @@ _version = NodePath("version_added")
 _style = NodePath("style")
 
 [node name="category" parent="." unique_id=1125026192 instance=ExtResource("2_u3ntg")]
-visible = false
 layout_mode = 2
 title = "Category"
 
 [node name="tags" parent="." unique_id=121491721 instance=ExtResource("1_muhea")]
-visible = false
 layout_mode = 2
-items = PackedStringArray()
+items = []
 title = "Tags"
 
 [node name="style" parent="." unique_id=787977950 instance=ExtResource("2_u3ntg")]
-visible = false
 layout_mode = 2
 title = "Style"
 
 [node name="version_added" parent="." unique_id=76675875 instance=ExtResource("2_u3ntg")]
-visible = false
 layout_mode = 2
 title = "Version added"

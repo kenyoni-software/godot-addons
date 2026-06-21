@@ -14,12 +14,10 @@ _style = NodePath("style")
 _aliases = NodePath("aliases")
 
 [node name="style" parent="." unique_id=33327956 instance=ExtResource("2_8xir3")]
-visible = false
 layout_mode = 2
 title = "Style"
 
 [node name="aliases" parent="." unique_id=249947668 instance=ExtResource("3_fm2h0")]
-visible = false
 layout_mode = 2
-items = PackedStringArray()
+items = []
 title = "Aliases"

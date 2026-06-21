@@ -22,22 +22,18 @@ layout_mode = 2
 title = "Color"
 
 [node name="aliases" parent="." unique_id=1659880725 instance=ExtResource("3_ps7ly")]
-visible = false
 layout_mode = 2
-items = PackedStringArray()
+items = []
 title = "Aliases"
 
 [node name="guidelines" parent="." unique_id=671688665 instance=ExtResource("4_soj3e")]
-visible = false
 layout_mode = 2
 title = "Brand Guidelines"
 
 [node name="license" parent="." unique_id=723044798 instance=ExtResource("4_soj3e")]
-visible = false
 layout_mode = 2
 title = "License"
 
 [node name="source" parent="." unique_id=1802286114 instance=ExtResource("4_soj3e")]
-visible = false
 layout_mode = 2
 title = "Source"
