@@ -4,13 +4,13 @@ description: "Browse and save icons from popular icon collections."
 
 # Icon Explorer
 
+Download: [**Godot Asset Store**](https://store.godotengine.org/asset/kenyoni/icon-explorer) | [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 Browse and save icons from popular icon collections.
 
 You will find the Icon Explorer under `Project -> Tools -> Icon Explorer...` or directly in the main screen. You can install or update the icon collections via the options menu in the upper right corner. This process may take several minutes. If you prefer a cleaner workspace, you can disable the main screen button in the options. Note that the editor needs to be restarted for this change to take effect.
 
 The tool supports filtering by collection and searching icons by name. You can save icons in white or with their original colors, change the preview color and size and choose whether to browse icons as a popup or from the main screen.
-
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
 
 **Available collections**
 

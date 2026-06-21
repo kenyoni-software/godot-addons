@@ -4,19 +4,19 @@ description: "Utility to make custom theme overrides for any node possible."
 
 # Custom Theme Overrides
 
+Download: [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 Utility to make custom theme overrides for any node possible.
 
 Registers (via `class_name`) the class `CustomThemeOverrides`.
 
 The custom theme override variables can be handled like every other theme override property.
 
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
-
 ## Compatibility
 
 | Godot | Version |
 | ----- | ------- |
-| 4.7  | all     |
+| 4.7   | all     |
 | 4.6   | all     |
 | 4.5   | all     |
 | 4.4   | all     |

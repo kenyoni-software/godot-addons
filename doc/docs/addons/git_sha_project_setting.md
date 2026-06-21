@@ -4,6 +4,8 @@ description: "Adds a project setting that contains the current Git SHA."
 
 # Git SHA Project Setting
 
+Download: [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 !!! note
 
     Previously named `Metadata`.
@@ -12,8 +14,6 @@ Adds the project setting `application/config/git_sha`, which contains the curren
 It will be automatically set and updated when you run any scene or export the project.
 
 The Git SHA will **not** be kept in `project.godot` to not clutter any version control system. It will be removed from the settings on closing the Godot Editor.
-
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
 
 ## Compatibility
 

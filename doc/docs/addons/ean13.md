@@ -4,9 +4,9 @@ description: ""
 
 # EAN-13 Barcode
 
-EAN-13 barcode generation and rendering addon for Godot. Provides a `EAN13Rect` node that can be used to display EAN-13 barcodes, as well as utility classes for encoding and rendering EAN-13 codes.
+Download: [**Godot Asset Store**](https://store.godotengine.org/asset/kenyoni/ean-13) | [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
 
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
+EAN-13 barcode generation and rendering addon for Godot. Provides a `EAN13Rect` node that can be used to display EAN-13 barcodes, as well as utility classes for encoding and rendering EAN-13 codes.
 
 ## Compatibility
 

@@ -4,12 +4,12 @@ description: "Simple logging utility."
 
 # Logging
 
+Download: [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 Simple logger. An autoload `GLogging` will be created on installation.
 Logging methods support formatting, values won't be stringified if they are not logged.
 
 Logging into a file is not supported. The output will be always done via print.
-
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
 
 ## Compatibility
 

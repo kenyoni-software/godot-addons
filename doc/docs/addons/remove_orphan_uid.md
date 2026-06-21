@@ -4,6 +4,8 @@ description: "Removes orphan UIDs from the project."
 
 # Remove Orphan UID
 
+Download: [**Godot Asset Store**](https://store.godotengine.org/asset/kenyoni/remove-orphan-uid) | [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 Removes orphan UIDs from the project. Orphan UIDs can happen if you delete files outside the editor and do not remove the related uid file.
 
 Use `Project` -> `Tools` -> `Remove Orphan UID` to remove.
@@ -11,8 +13,6 @@ Use `Project` -> `Tools` -> `Remove Orphan UID` to remove.
 !!! note
 
     UIDs are only generated since Godot 4.4.
-
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
 
 ## Compatibility
 

@@ -4,6 +4,8 @@ description: "An AspectRatioContainer that can resize itself smaller than its ch
 
 # AspectRatioResizeContainer
 
+Download: [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 The `AspectRatioContainer` allows his own size to be smaller than the children, which causes neighboring UI elements to be covered.
 This new node type will extend the existing `AspectRatioContainer` and update it's own minimum size based on the children.
 This works except for `STRETCH_MODE_COVER`.
@@ -11,8 +13,6 @@ This works except for `STRETCH_MODE_COVER`.
 !!! warning
 
     The `custom_minimum_size` property is no longer available, as it is now used to define the minimum size.
-
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
 
 ## Compatibility
 

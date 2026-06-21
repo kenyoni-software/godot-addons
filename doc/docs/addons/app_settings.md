@@ -1,6 +1,14 @@
 # App Settings
 
+Download: [**Godot Asset Store**](https://store.godotengine.org/asset/kenyoni/app-settings) | [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 A flexible settings management system with support for staged values, readonly mode, validation, and per-frame batched signals.
+
+- **Staged or immediate settings** with optional custom apply logic
+- **Hierarchical keys** for organized grouping of settings and easy section queries.  
+- **ConfigFile integration** for saving and loading settings.  
+- **Signal-driven updates** to respond to changes in settings efficiently.  
+- **Utilities** for filtering, section extraction, and internal setting management.
 
 It is built around three core classes: a `Registry` that owns and organizes `Setting` objects by hierarchical keys and an `AppSettings` node that wraps the registry and adds convenient per-frame batched signals for change detection. Settings support staged mode (queue changes before committing them all at once), readonly mode, custom validation and apply callbacks, and metadata. Configuration can be serialized to and loaded from Godot's built-in `ConfigFile` format, making save/load workflows straightforward.
 
@@ -34,8 +42,6 @@ AppSettings.apply_staged_values()
 # save
 AppSettings.to_config().save("user://settings.cfg")
 ```
-
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases)
 
 ## Compatibility
 

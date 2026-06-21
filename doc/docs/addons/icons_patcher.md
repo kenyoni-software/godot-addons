@@ -4,6 +4,8 @@ description: "Patch Material Design icons to white color."
 
 # Icons Patcher
 
+Download: [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 !!! danger "Deprecated"
 
     Use [Icon Explorer](icon_explorer.md) and save icons in white color.
@@ -13,8 +15,6 @@ If you use Material Design icons from [Pictogrammers](https://pictogrammers.com/
 Set the icon directory in the Project Settings under the menu `Plugins` -> `Icons Patcher`.
 
 Then use `Project` -> `Tools` -> `Icons Patcher` to patch the icons.
-
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
 
 ## Compatibility
 

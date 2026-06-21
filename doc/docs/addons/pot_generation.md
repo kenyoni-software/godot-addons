@@ -4,9 +4,9 @@ description: "POT generation with files, directories and filters."
 
 # POT Generation
 
-POT generation with files, directories and filters.
+Download: [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
 
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
+POT generation with files, directories and filters.
 
 The filters are applied as glob patterns, for example:
 

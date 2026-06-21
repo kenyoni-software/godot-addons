@@ -4,9 +4,9 @@ description: "Let you apply the icon color theme properties for the texture butt
 
 # TextureButtonColored
 
-Let you apply the icon color theme properties for the texture button. Uses `self_modulate`.
+Download: [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
 
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
+Let you apply the icon color theme properties for the texture button. Uses `self_modulate`.
 
 ## Compatibility
 

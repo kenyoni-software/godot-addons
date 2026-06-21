@@ -4,9 +4,9 @@ description: "Enable or disable plugins from within the editor main screen."
 
 # Plugin Reloader
 
-Enable or disable plugins from within the editor main screen.
+Download: [**Godot Asset Store**](https://store.godotengine.org/asset/kenyoni/plugin-reloader) | [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
 
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
+Enable or disable plugins from within the editor main screen.
 
 ## Compatibility
 

@@ -4,6 +4,8 @@ description: "Manage license and copyright for third party graphics, software or
 
 # License Manager
 
+Download: [**Godot Asset Store**](https://store.godotengine.org/asset/kenyoni/license-manager) | [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
+
 Manage license and copyright for third party graphics, software or libraries.
 Group them into categories, add descriptions or web links.
 
@@ -15,8 +17,6 @@ yourself. If you provide license files instead of a text, they are also exported
 If paths are added to license data, it will be automatically adjusted if you rename a file or folder inside the editor.
 
 You can change the project license file either with a button at the upper right, in the license menu. Or modify this and the indentation of the license file at the project settings under the menu `Plugins` -> `Licenses`.
-
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
 
 ## Compatibility
 

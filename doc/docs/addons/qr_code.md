@@ -4,9 +4,9 @@ description: "QR Code generation either with the included QRCodeRect node or use
 
 # QR Code
 
-QR Code generation either with the included `QRCodeRect` node or use the encoding result of the `QRCode` class.
+Download: [**Godot Asset Store**](https://store.godotengine.org/asset/kenyoni/qr-code) | [**GitHub**](https://github.com/kenyoni-software/godot-addons/releases)
 
-[**Download**](https://github.com/kenyoni-software/godot-addons/releases/tag/latest)
+QR Code generation either with the included `QRCodeRect` node or use the encoding result of the `QRCode` class.
 
 ## Compatibility
 
