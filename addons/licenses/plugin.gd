@@ -31,8 +31,10 @@ func _enter_tree() -> void:
     self.add_tool_menu_item(self._get_plugin_name() + "...", LicensesInterface.get_interface().show_popup)
     self._context_menu_filesystem = ContextMenuFilesystem.new()
     self.add_context_menu_plugin(EditorContextMenuPlugin.CONTEXT_SLOT_FILESYSTEM, self._context_menu_filesystem)
+    EditorInterface.get_command_palette().add_command("Open Licenses", "docks/kenyoni/licenses/open", LicensesInterface.get_interface().show_popup)
 
 func _exit_tree() -> void:
+    EditorInterface.get_command_palette().remove_command("docks/kenyoni/licenses/open")
     self.remove_context_menu_plugin(self._context_menu_filesystem)
     self.remove_tool_menu_item(self._get_plugin_name() + "...")
     self.remove_export_plugin(self._export_plugin)

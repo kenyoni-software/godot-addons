@@ -158,6 +158,10 @@ License class.
 
 ## Changelog
 
+### 1.11.1
+
+- Add an editor command to open the licenses window
+
 ### 1.11.0
 
 - Upgrade scenes to Godot 4.6
