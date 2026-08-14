@@ -145,7 +145,7 @@ func _on_project_settings_changed() -> void:
     var cur_indentation: String = _get_license_indentation()
     if self._current_indentation != cur_indentation:
         self._current_indentation = cur_indentation
-        Licenses.save(self._components.components(), self._license_file_edit.text, _get_license_indentation())
+        Licenses.save(self._li.components(), self._license_file_edit.text, _get_license_indentation())
 
 enum IndentationType {
     NONE,
