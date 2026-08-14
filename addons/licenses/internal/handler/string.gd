@@ -2,13 +2,13 @@ extends "res://addons/licenses/internal/handler/base.gd"
 
 func _init(tree_: ComponentDetailTree, item_: TreeItem, value_: Variant, property_: Dictionary) -> void:
     super._init(tree_, item_, value_, property_)
-    self.item.set_text(0, self.property["name"].capitalize())
-    self.item.set_text(1, value_)
+    self.item.set_text(0, (self.property["name"] as String).capitalize())
+    self.item.set_text(1, value_ as String)
     self.item.set_editable(1, true)
     self._update_reset_button()
 
-static func can_handle(property: Dictionary) -> bool:
-    return property["type"] == TYPE_STRING
+static func can_handle(prop: Dictionary) -> bool:
+    return prop["type"] == TYPE_STRING
 
 func _update_reset_button() -> void:
     var button_id: int = self.item.get_button_by_id(0, 0)
@@ -17,7 +17,7 @@ func _update_reset_button() -> void:
     elif self.value == "" && button_id != -1:
         self.item.erase_button(0, button_id)
 
-func button_clicked(column: int, id: int, mouse_button_idx: int) -> void:
+func button_clicked(_column: int, _id: int, _mouse_button_idx: int) -> void:
     self.value = ""
     self.item.set_text(1, "")
     self._update_reset_button()

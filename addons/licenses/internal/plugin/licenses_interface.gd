@@ -12,7 +12,7 @@ var _licenses_dialog: LicensesDialog
 var _components: Array[Component] = []
 
 func _ready() -> void:
-    self._licenses_dialog = load("res://addons/licenses/internal/licenses_dialog.tscn").instantiate()
+    self._licenses_dialog = (load("res://addons/licenses/internal/licenses_dialog.tscn") as PackedScene).instantiate()
     self.add_child(self._licenses_dialog)
 
 func show_popup(show_comp: Component = null) -> void:
