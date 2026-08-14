@@ -20,7 +20,7 @@ func _get_plugin_icon() -> Texture2D:
 func _enter_tree() -> void:
     set_project_setting(Licenses.CFG_KEY_DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
     ProjectSettings.set_as_basic(Licenses.CFG_KEY_DATA_FILE, true)
-    set_project_setting(Licenses.CFG_KEY_INDENTATION, 0, TYPE_INT, PROPERTY_HINT_ENUM, "None,Spaces,Tabs")
+    set_project_setting(Licenses.CFG_KEY_INDENTATION, 1, TYPE_INT, PROPERTY_HINT_ENUM, "None,Spaces,Tabs")
     LicensesInterface.create_interface()
     LicensesInterface.get_interface().load_licenses(Licenses.get_license_data_filepath())
     self._file_watcher = FileSystemWatcher.new()
