@@ -18,7 +18,7 @@ If paths are added to license data, it will be automatically adjusted if you ren
 
 You can change the project license file either with a button at the upper right, in the license menu. Or modify this and the indentation of the license file at the project settings under the menu `Plugins` -> `Licenses`.
 
-To change the indentation of the license file, you can set it in the project setting under `Plugins -> Licenses -> Indentation`. The default is 4 spaces. You can also set it to an empty string, which will result in no indentation at all.
+To change the indentation of the license file, you can set it in the project setting under `Plugins -> Licenses -> Indentation`. The default is 4 spaces. You can also set it to None, which will result in no indentation at all.
 
 ## Compatibility
 
